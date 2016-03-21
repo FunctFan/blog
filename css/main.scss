@@ -20,10 +20,11 @@ $on-laptop:        800px;
 $color-link: #036;
 $color-link-hover: #069;
 
-$header-bg: #607D8B;
-$header-bg-hover: #78909C;
+$header-bg: #007bb6;
+$header-bg-hover: #069;
 $header-link: #CFD8DC;
 $header-fg: #FFF;
+$date_text_color: #999999;
 
 @mixin media-query($device) {
     @media screen and (max-width: $device) {
@@ -38,5 +39,6 @@ $header-fg: #FFF;
         "base",
         "layout",
         "syntax-highlighting",
-        "easybook"
+        "easybook",
+        "blackfox"
 ;

@@ -1,25 +1,20 @@
 # Site settings
-title: Another Blog
-url: "http://laobubu.github.io"    # the protocol and hostname of your site, eg. `http://laobubu.github.io`
-baseurl: "/jekyll-theme-EasyBook" # the prefix of your site uri, eg. `/jekyll-theme-EasyBook` or just one slash `/`
-#timezone: Asia/Chongqing
+title: 小一辈无产阶级码农
+url: "r9it.com"  
+baseurl: "" 
+timezone: "Asia/Chongqing"
 description: >
-  One or more sentences introducing this blog.
+    小一辈无产阶级码农
 
 # Your information
-email: your_email@example.com
-author: your_name
-avatar: "//www.gravatar.com/avatar/your_email_md5?d=mm&s=135"
-profile: One sentence introducing yourself.
+email: yangjian102621@gmail.com
+author: blackfox
+avatar: "/images/avatar.png"
+profile: 独学而无友，则孤陋而寡闻.
 #twitter_username: twitter_username
-#github_username:  github_username
+github_username:  yangjian102621
 
-# Comment Service (Disqus or 多说)
-#  choose one and un-comment the line to active it
-#disqus_shortname: xxx   # get one: https://disqus.com/admin/signup/
-#duoshuo_shortname: xxx  # get one: http://duoshuo.com/create-site/
-
-permalink: /archivers/:title
+#permalink: /archivers/:title
 gems:
  - jekyll-paginate
  - jekyll-gist
@@ -29,8 +24,18 @@ gems:
 paginate: 5
 paginate_path: "page:num"
 
+sass:
+    style: :compressed
+    sass_dir: _sass
+
+# path
+categories_path: categories/
+tags_path: tags/
+tags_path: links/
+
+
 highlighter: rouge
-markdown: kramdown
+markdown: kramdown 
 
 kramdown:
   input: GFM
