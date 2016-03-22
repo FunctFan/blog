@@ -20,6 +20,10 @@ print_hi('Tom')
 #=> prints 'Hi, Tom' to STDOUT.
 ```
 
+```php
+  $php = "asdasdassda";
+```
+
 ## EasyBook Advanced Functions ##
 
 You are using [EasyBook][github-easybook] the template from [laobubu.net](http://laobubu.net). Therefore some features are supported now:

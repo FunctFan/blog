@@ -33,10 +33,9 @@ categories_path: categories/
 tags_path: tags/
 tags_path: links/
 
-
 highlighter: rouge
-markdown: kramdown 
-
+markdown: kramdown
 kramdown:
-  input: GFM
-  syntax_highlighter: rouge
+        syntax_highlighter: rouge
+        input: GFM
+        extensions: ["fenced_code_blocks", "autolink", "tables", "smart"]
