@@ -3,12 +3,12 @@ layout: post
 title: "「转」为什么你应该（从现在开始就）写博客"
 date: 2015-02-06 17:22:18.000000000 +08:00
 categories: 学习和思考
-tags: [博客, blog]
+tags: [博客]
 status: publish
 type: post
 published: true
 author: blackfox
-permalink: /archivers/1
+permalink: /2015-03-07-001.html
 description: '用博客的形式来记录下你有价值的思考，会带来很多好处，却没有任何明显的坏处'
 ---
 
