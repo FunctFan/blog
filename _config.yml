@@ -3,16 +3,18 @@ title: 小一辈无产阶级码农
 url: "r9it.com"  
 baseurl: "" 
 timezone: "Asia/Chongqing"
-description: >
-    小一辈无产阶级码农
+description: 小一辈无产阶级码农
 
 # Your information
 email: yangjian102621@gmail.com
 author: blackfox
+nickname: 一品鸟人
 avatar: "/images/avatar.png"
 profile: 独学而无友，则孤陋而寡闻.
 #twitter_username: twitter_username
 github_username:  yangjian102621
+
+duoshuo_shortname: blackfox
 
 #permalink: /archivers/:title
 gems:

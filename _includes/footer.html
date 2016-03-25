@@ -1,7 +1,29 @@
+
+<a href="javascript:void(0);" id="to-top-image" title="回到顶部"></a>
 <footer class="footer">
 <div class="wrapper">
 &copy; 2016 {{ site.author }}
 </div>
 </footer>
 
-<script src="{{ "/js/easybook.js" | prepend: site.baseurl }}"></script>
+<script src="{{ '/js/easybook.js' | prepend: site.baseurl }}"></script>
+<script>
+	window.onscroll = function() {
+
+		var top = document.documentElement.scrollTop || document.body.scrollTop;
+		var height = window.innerHeight;
+		var topImage = document.getElementById("to-top-image");
+		if ( top > 20 ) {
+			console.log(height);
+			topImage.style.display = "block";
+			topImage.style.top = (top + height - 120) + "px";
+		} else {
+			topImage.style.display = "none";
+		}
+	}
+	//点击回到顶部
+	document.getElementById("to-top-image").onclick = function() {
+		document.documentElement.scrollTop = 0;
+		document.body.scrollTop = 0;
+	}
+</script>
