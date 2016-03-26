@@ -22,7 +22,7 @@ nocomments: true
 			{% else %}
 			{% for category in catsList %}
 			<li>
-				<a href="{{ site.BASE_PATH }}/{{ site.categories_path }}#{{ category[0] | replace:' ','-' }}-ref" data-toggle="tab">
+				<a href="#{{ category[0] | replace:' ','-' }}-ref" data-toggle="tab">
 					{{ category[0] | capitalize }} <span class="badge">({{ category[1].size }})</span>
 				</a>
 			</li>

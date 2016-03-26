@@ -7,16 +7,16 @@ layout: default
 	<header class="post-header">
 		<h1 class="post-title">{{ page.title }}</h1>
 		<div class="article-meta">
-			BY <strong>{{ page.author }}</strong> •
+			BY <strong><a href="/about/">{{ page.author }}</a></strong> •
 			{{ page.date | date: "%Y-%m-%d" }}
-			{% if page.categories %} • Category:
+			{% if page.categories %} • 分类:
 			{% for category in page.categories %}
-			<a href="/{{site.categories_path}}/#{{category}}-ref" >{{ category|capitalize }}</a>
+			<a href="/{{site.categories_path}}/#{{category}}-ref" class="tags">{{ category|capitalize }}</a>
 			{% endfor%}
 			{% endif %}
-			{% if page.tags %} • Tag:
+			{% if page.tags %} • 标签:
 			{% for tag in page.tags %}
-			<a href="/{{site.tags_path}}/#{{tag}}-ref" >{{ tag|capitalize }}</a>
+			<a href="/{{site.tags_path}}/#{{tag}}-ref" class="tags">{{ tag|capitalize }}</a>
 			{% endfor%}
 			{% endif %}
 		</div>

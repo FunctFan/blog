@@ -44,7 +44,7 @@ a:hover {text-decoration: underline;}
     padding: 0; margin: 0 0 20px 0;
   }
   li {
-    list-style: none; float:left; margin: 0px 5px;
+    list-style: none; float:left; margin: 5px;
     a {
       background: $tag_bg_color;
       text-decoration: none;
@@ -83,4 +83,8 @@ a:hover {text-decoration: underline;}
 .article-meta {
   padding: 10px 0px;
   font-size:14px;
+  .tags {
+    background: #e1e1e1;
+    padding: 3px 5px;
+  }
 }

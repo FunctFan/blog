@@ -1,14 +1,14 @@
 ---
 layout: post
 title: liquid学习笔记
-date: 2015-02-06 17:22:18.000000000 +08:00
-categories: 学习和思考
+date: 2016-03-09
+categories: [学习和思考]
 tags: [liquid, jekyll]
 status: publish
 type: post
 published: true
 author: blackfox
-permalink: /2016-03-09-001.html
+permalink: /2016-03-09/liquid-study-note.html
 description: liquid学习笔记
 ---
 
