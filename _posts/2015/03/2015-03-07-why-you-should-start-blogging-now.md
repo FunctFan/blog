@@ -8,7 +8,7 @@ status: publish
 type: post
 published: true
 author: blackfox
-permalink: /2016-03-07/start-bloging-now.html
+permalink: /2015-03-07/start-bloging-now.html
 description: '用博客的形式来记录下你有价值的思考，会带来很多好处，却没有任何明显的坏处'
 ---
 
