@@ -11,7 +11,7 @@ layout: default
 			{{ page.date | date: "%Y-%m-%d" }}
 			{% if page.categories %} • 分类:
 			{% for category in page.categories %}
-			<a href="/{{site.categories_path}}/#{{category}}-ref" class="tags">{{ category|capitalize }}</a>
+			<a href="/{{site.categories_path}}#{{category}}-ref" class="tags">{{ category|capitalize }}</a>
 			{% endfor%}
 			{% endif %}
 			{% if page.tags %} • 标签:

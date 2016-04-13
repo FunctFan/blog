@@ -32,7 +32,7 @@ sass:
     sass_dir: _sass
 
 # path
-categories_path: categories/
+categories_path: category/
 tags_path: tags/
 tags_path: links/
 
