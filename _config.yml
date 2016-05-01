@@ -15,6 +15,9 @@ index_motto: 学无先后，达着为师.
 #twitter_username: twitter_username
 github_username:  yangjian102621
 
+#the switch to use or not use the comment plugin
+use_comment : true
+
 #permalink: /archivers/:title
 gems:
  - jekyll-paginate
