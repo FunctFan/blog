@@ -1,14 +1,13 @@
 ---
 layout: post
 title: ubuntu server中文乱码
-date: 2016-04-16
 categories: [服务器运维]
 tags: [服务器运维,ubuntu, 乱码]
 status: publish
 type: post
 published: true
 author: blackfox
-permalink: /2016-04-16/ununtu-server-garbled.html
+permalink: /20160416/ununtu-server-garbled.html
 description: ubuntu server 中文乱码
 ---
 

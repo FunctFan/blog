@@ -1,14 +1,13 @@
 ---
 layout: post
 title: "使用存储过程删除字段和索引"
-date: 2015-05-19
 categories: 数据库技术
 tags: [存储过程,删除字段,删除索引,mysql]
 status: publish
 type: post
 published: true
 author: blackfox
-permalink: /2015-05-19/delete-index-by-procedure.html
+permalink: /20150519/delete-index-by-procedure.html
 description: 'ubuntu 安装 flashplayer'
 ---
 

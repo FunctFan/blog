@@ -1,14 +1,13 @@
 ---
 layout: post
 title: lastPass-在线密码管理神器
-date: 2016-03-25
 categories: [Funny]
 tags: [lastPass]
 status: publish
 type: post
 published: true
 author: blackfox
-permalink: /2016-03-26/lastpass.html
+permalink: /20160326/lastpass.html
 description: lastPass在线密码管理神器, 妈妈再也不用担心你忘记网络密码了
 ---
 

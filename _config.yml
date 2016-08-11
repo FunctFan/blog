@@ -37,9 +37,10 @@ categories_path: category/
 tags_path: tags/
 tags_path: links/
 
-highlighter: rouge
+#highlighter: rouge
+#pygments: true
 markdown: kramdown
 kramdown:
-        syntax_highlighter: rouge
+        syntax_highlighter: pygments
         input: GFM
         extensions: ["fenced_code_blocks", "autolink", "tables", "smart"]

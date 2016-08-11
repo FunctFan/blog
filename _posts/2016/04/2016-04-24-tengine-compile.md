@@ -1,14 +1,13 @@
 ---
 layout: post
 title: ubuntu编译安装tengine
-date: 2016-04-24
 categories: [linux]
 tags: [linux,ubuntu,tengine]
 status: publish
 type: post
 published: true
 author: blackfox
-permalink: /2016-04-27/tengine-compile.html
+permalink: /20160427/tengine-compile.html
 description: ubuntu 编译安装tengine
 ---
 

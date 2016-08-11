@@ -1,14 +1,13 @@
 ---
 layout: post
 title: linux命令学习：chattr
-date: 2016-11-12
 categories: 操作系统
 tags: [ubuntu, fcitx, idea, phpstrom]
 status: publish
 type: post
 published: true
 author: blackfox
-permalink: /2016-11-12/chattr.html
+permalink: /20151112/chattr.html
 description: 解决搜狗输入法在linux系统不能输入中文,idea phpstorm 无法出入中文
 ---
 

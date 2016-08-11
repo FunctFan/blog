@@ -1,18 +1,23 @@
 ---
 layout: post
 title: docker学习笔记（二）
-date: 2016-05-02
 categories: [linux,服务器运维]
 tags: [linux,docker, dockerfile]
 status: publish
 type: post
 published: true
 author: blackfox
-permalink: /2016-05-02/docker-study-2.html
+permalink: /20160502/docker-study-2.html
 description: docker 入门学习笔记（二）
 ---
 
-最近在研究docker，发现dockerfile很强大，初步学习了一下，这里贴上一个自己的写dockerfile
+Dockerfile是用来自动化创建容器的语法命令，你可以先把你要创建的容器的脚本写成dockerfile,比如创建容器，然后执行一些初始化的命令，安装初始化的的软件等等，其实就是相当一个
+录播功能，你先把你要做的操作用dockerfile记录下来，不用每次创建容器都要敲一大堆的命令，省事。
+
+Dockerfile包含创建镜像所需要的全部指令。基于在Dockerfile中的指令，我们可以使用<code>Docker build</code>命令来创建镜像。通过减少镜像和容器的创建过程来简化部署。
+Dockerfile指令不区分大小写。但是，命名约定为全部大写。
+
+这里贴上一个自己的写dockerfile
 
 ```bash
 #选择镜像源

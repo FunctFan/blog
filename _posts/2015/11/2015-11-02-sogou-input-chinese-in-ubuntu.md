@@ -1,14 +1,13 @@
 ---
 layout: post
 title: 解决搜狗输入法在linux系统不能输入中文
-date: 2015-11-02
 categories: 操作系统
 tags: [ubuntu, fcitx, idea, phpstrom]
 status: publish
 type: post
 published: true
 author: blackfox
-permalink: /2015-11-02/sogou-input-chinese.html
+permalink: /20151102/sogou-input-chinese.html
 description: 解决搜狗输入法在linux系统不能输入中文,idea phpstorm 无法出入中文
 ---
 

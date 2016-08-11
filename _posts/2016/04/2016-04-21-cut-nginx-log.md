@@ -1,14 +1,13 @@
 ---
 layout: post
 title: 切割nginx日志
-date: 2016-04-21
 categories: [服务器运维]
 tags: [linux,服务器运维,nginx,切割日志]
 status: publish
 type: post
 published: true
 author: blackfox
-permalink: /2016-04-21/cut-nginx-log.html
+permalink: /20160421/cut-nginx-log.html
 description: 
 ---
 

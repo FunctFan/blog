@@ -1,14 +1,13 @@
 ---
 layout: post
 title: jekyll 环境的搭建
-date: 2016-03-02
 categories: [学习和思考]
 tags: [jekyll,ruby]
 status: publish
 type: post
 published: true
 author: blackfox
-permalink: /2016-03-02/jekyll-install.html
+permalink: /20160302/jekyll-install.html
 description: liquid学习笔记
 ---
 

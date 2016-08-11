@@ -1,14 +1,13 @@
 ---
 layout: post
 title: "linux 安装flashplayer"
-date: 2015-05-11
 categories: 操作系统
 tags: [linux,flashpalyer]
 status: publish
 type: post
 published: true
 author: blackfox
-permalink: /2015-05-11/install-flash-player.html
+permalink: /20150511/install-flash-player.html
 description: 'ubuntu 安装 flashplayer'
 ---
 

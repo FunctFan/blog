@@ -1,14 +1,13 @@
 ---
 layout: post
 title: docker学习笔记（一）
-date: 2016-05-01
 categories: [linux,服务器运维]
 tags: [linux,docker]
 status: publish
 type: post
 published: true
 author: blackfox
-permalink: /2016-05-01/docker-study-1.html
+permalink: /20160501/docker-study-1.html
 description: docker 入门学习笔记（一）
 ---
 
@@ -44,30 +43,58 @@ sudo apt-get install lxc-docker
 ====
 获取官方镜像(默认)
 
-> sudo docker pull ubuntu:14.04
+```bash
+sudo docker pull ubuntu:14.04
+```
 
 获取指定镜像仓库的镜像，如获取阿里云docker镜像
 
-> sudo docker pull registry.mirrors.aliyuncs.com/library/centos
+```bash
+sudo docker pull registry.mirrors.aliyuncs.com/library/centos
+```
 
-容器操作
-=====
 创建容器
+====
 
-> sudo docker run -it ubuntu:14.04 /bin/bash
+```bash
+sudo docker run -d --name php ubuntu:14.04 /usr/sbin/sshd -D
+```
 
 删除容器
+====
+```bash
+sudo docker rm  container_name #这里传入容器名称或者容器id
+sudo docker rm $(sudo docker ps -a -q)  #删除所有已终止的容器
+```
 
-> sudo docker rm  \<container_name\>\|\<container_id\>（容器名称或者ID）
+启动|终止容器
+====
 
-删除所有已终止的容器
-
-> sudo docker rm $(sudo docker ps -a -q)
+```bash
+sudo docker start container_name | container_id
+sudo docker stop container_name | container_id
+```
 
 进入容器
+====
 
-> sudo docker attach \<container_name>\|\<container_id> <br />
-	sudo docker exec -it \<container_name\> /bin/bash 
+```bash
+sudo docker attach <container_name>|<container_id>
+sudo docker exec -it <container_name> /bin/bash
+```
+
+打包和导入镜像
+====
+
+```bash
+ sudo docker commit 046331bdbb90 new-image  #提交容器
+
+ sudo docker save new-image > /tmp/new-image.tar #保存容器
+ sudo docker save -o centos.tar centos #也可以用这种方法保存容器
+
+ sudo docker load < /tmp/new-image.tar #导入容器
+ sudo docker load --input /tmp/new-image.tar
+```
 
 
 端口映射
@@ -77,17 +104,22 @@ sudo apt-get install lxc-docker
 
 -P 使用时需要指定 --expose 选项，指定需要对外提供服务的端口
 
-> sudo docker run -t -P --expose 22 --name container_name  ubuntu:14.04
+```bash
+sudo docker run -t -P --expose 22 --name container_name  ubuntu:14.04
+```
 
 <strong>2. 绑定端口到指定接口</strong>
 
-> sudo docker run -it -p 8080:80 -p 22:22 container_name ubuntu:14.04 /bin/bash 
+```bash
+sudo docker run -it -p 8080:80 -p 22:22 container_name ubuntu:14.04 /bin/bash
+```
 
 挂载宿主文件
 =======
 
-> sudo docker run -it -v /share:/usr/local/myshare --name container_name ubuntu:14.04 /bin/bash 
-
+```bash
+sudo docker run -it -v /share:/usr/local/myshare --name container_name ubuntu:14.04 /bin/bash
+```
 
 
 可能碰到的问题
@@ -95,6 +127,9 @@ sudo apt-get install lxc-docker
 一、 网络超级慢，运行一个apt-get update要半天
 
 1. 切换源
+2. docker 默认的dns是8.8.8.8和8.8.4.4这个一般在天朝是比较慢的，所以最好换成所在城市的dns
+
+这里贴上一个阿里云的源，亲测很快
 
 ```bash
 deb http://mirrors.aliyun.com/ubuntu/ trusty main restricted universe multiverse
@@ -109,6 +144,6 @@ deb-src http://mirrors.aliyun.com/ubuntu/ trusty-proposed main restricted univer
 deb-src http://mirrors.aliyun.com/ubuntu/ trusty-backports main restricted universe multiverseV
 ```
 
-2. docker 默认的dns是8.8.8.8和8.8.4.4这个一般在天朝是比较慢的，所以最好换成所在城市的dns
+
 
 

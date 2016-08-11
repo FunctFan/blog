@@ -1,14 +1,13 @@
 ---
 layout: post
 title: ubuntu编译安装php5.5.26
-date: 2016-04-25
 categories: [linux, php]
 tags: [linux,ubuntu,php]
 status: publish
 type: post
 published: true
 author: blackfox
-permalink: /2016-04-25/php-compile.html
+permalink: /20160425/php-compile.html
 description: ubuntu编译安装php5.5.26
 ---
 
