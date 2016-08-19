@@ -1,11 +1,11 @@
 <header class="header">
   <div class="wrapper">
-	{% assign current = page.title %}
+	{% assign current = page.menu %}
     <a class="site-title" href="{{ site.baseurl }}/">{{ site.title }}</a>
     <nav class="site-nav">
       {% for page in site.pages %}
-        {% if page.title and page.public %}
-		<a class="page-link{% if current == page.title %} active{% endif %}" href="{{ page.url | prepend: site.baseurl }}">{{ page.title }}</a>
+        {% if page.menu and page.public %}
+		<a class="page-link{% if current == page.name %} active{% endif %}" href="{{ page.url | prepend: site.baseurl }}">{{ page.menu }}</a>
         {% endif %}
       {% endfor %}
     </nav>

@@ -1,6 +1,7 @@
 ---
 layout: default
 title: Links
+menu: Links
 permalink: /links/
 public: true
 ---

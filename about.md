@@ -1,6 +1,7 @@
 ---
 layout: page
-title: About
+title: 一品鸟人
+menu : About
 permalink: /about/
 nocomments: true
 public: true
