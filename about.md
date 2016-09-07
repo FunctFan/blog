@@ -42,3 +42,8 @@ public: true
 1. 顶住上面的压力，尽量给开发人员创造轻松自由的工作氛围。
 2. 创造良好的学习环境和分为，提高开发效率。
 3. 对事，对人，对团队负责，而不是对自己职位负责。
+
+【博客源码】
+=========
+如果喜欢这个轮子，就拿去用，模板地址：<a href="https://git.oschina.net/blackfox/jekyll-blog">GitOS</a>，<a href="https://github.com/yangjian102621/yangjian102621.github.com">GitHub</a>
+
