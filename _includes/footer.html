@@ -30,4 +30,17 @@
 	}
 	//初始化代码高亮
 	hljs.initHighlightingOnLoad();
+
+	if ( location.host.indexOf('r9it.com') !== -1 ) {
+
+		//百度统计代码
+		var _hmt = _hmt || [];
+		(function() {
+			 var hm = document.createElement("script");
+			 hm.src = "//hm.baidu.com/hm.js?fa1700c08f6ac35179270783fc63a18f";
+			 var s = document.getElementsByTagName("script")[0]; 
+			s.parentNode.insertBefore(hm, s);
+		})();
+	}
+
 </script>
