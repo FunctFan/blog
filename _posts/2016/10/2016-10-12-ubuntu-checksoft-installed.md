@@ -9,7 +9,8 @@ type: post
 published: true
 author: blackfox
 permalink: /20161012/check-soft-installed.html
-keyword : 
+keyword : ubuntu,dpkg,检测软件包
+desc : ubuntu上如何检测某个软件包是否安装
 
 ---
 
