@@ -2,7 +2,7 @@
 layout: post
 title: ubuntu server中文乱码
 categories: [服务器运维]
-tags: [服务器运维,ubuntu, 乱码]
+tags: [运维,ubuntu]
 status: publish
 type: post
 published: true

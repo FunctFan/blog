@@ -1,46 +1,146 @@
-# Site settings
-title: 小一辈无产阶级码农
-url: "r9it.com"  
-baseurl: "" 
-timezone: "Asia/Chongqing"
-description: 小一辈无产阶级码农
+# This is the default format. 
+# For more see: https://github.com/mojombo/jekyll/wiki/Permalinks
+permalink: /:categories/:title.html
 
-# Your information
-email: yangjian102621@gmail.com
-author: blackfox
-nickname: 一品鸟人
-avatar: "/images/avatar.png"
-profile: 独学而无友，则孤陋而寡闻.
-index_motto: 学无先后，达者为师.
-#twitter_username: twitter_username
-github_username:  yangjian102621
+safe: false
+gems: ["jekyll-paginate"]
+exclude: ["README.md", "Rakefile"]
+paginate: 10
+encoding: utf-8
+highlighter: rouge
+markdown: redcarpet
+redcarpet:
+  extensions: ["no_intra_emphasis", "fenced_code_blocks", "autolink", "strikethrough", "superscript", "with_toc_data", "tables"]
 
-#the switch to use or not use the comment plugin
-use_comment : true
+# Themes are encouraged to use these universal variables 
+# so be sure to set them if your theme uses them.
+#
+title : 小一辈无产阶级码农
+tagline: 学无先后，达者为师.
+author :
+  name : 阳建
+  email : yangjian102621@gmail.com
+  github : yangjian102621
+  facebook : smallstone2017
+  twitter : smallstone2017
+  googleplus : 116761736844742660869
 
-#permalink: /archivers/:title
-gems:
- - jekyll-paginate
- - jekyll-gist
- - jemoji
+# The production_url is only used when full-domain names are needed
+# such as sitemap.txt 
+# Most places will/should use BASE_PATH to make the urls
+#
+# If you have set a CNAME (pages.github.com) set your custom domain here.
+# Else if you are pushing to username.github.io, replace with your username.
+# Finally if you are pushing to a GitHub project page, include the project name at the end.
+#
+production_url : http://www.r9it.com 
+domain : r9it.com
 
-# Build settings
-paginate: 5
-paginate_path: "page:num"
+# All Jekyll-Bootstrap specific configurations are namespaced into this hash
+#
+JB :
+  version : 0.3.0
 
-sass:
-    style: :compressed
-    sass_dir: _sass
+  # All links will be namespaced by BASE_PATH if defined.
+  # Links in your website should always be prefixed with {{BASE_PATH}}
+  # however this value will be dynamically changed depending on your deployment situation.
+  #
+  # CNAME (http://yourcustomdomain.com)
+  #   DO NOT SET BASE_PATH 
+  #   (urls will be prefixed with "/" and work relatively)
+  #
+  # GitHub Pages (http://username.github.io)
+  #   DO NOT SET BASE_PATH 
+  #   (urls will be prefixed with "/" and work relatively)
+  #
+  # GitHub Project Pages (http://username.github.io/project-name)
+  #
+  #   A GitHub Project site exists in the `gh-pages` branch of one of your repositories.
+  #  REQUIRED! Set BASE_PATH to: http://username.github.io/project-name
+  #
+  # CAUTION:
+  #   - When in Localhost, your site will run from root "/" regardless of BASE_PATH
+  #   - Only the following values are falsy: ["", null, false]
+  #   - When setting BASE_PATH it must be a valid url.
+  #     This means always setting the protocol (http|https) or prefixing with "/"
+  BASE_PATH : false 
 
-# path
-categories_path: category/
-tags_path: tags/
-tags_path: links/
+  # By default, the asset_path is automatically defined relative to BASE_PATH plus the enabled theme.
+  # ex: [BASE_PATH]/assets/themes/[THEME-NAME]
+  #
+  # Override this by defining an absolute path to assets here.
+  # ex: 
+  #   http://s3.amazonaws.com/yoursite/themes/watermelon
+  #   /assets
+  #
+  ASSET_PATH : false
+  IMAGE_PATH : false
 
-#highlighter: rouge
-#pygments: true
-markdown: kramdown
-kramdown:
-        syntax_highlighter: pygments
-        input: GFM
-        extensions: ["fenced_code_blocks", "autolink", "tables", "smart"]
+  # These paths are to the main pages Jekyll-Bootstrap ships with.
+  # Some JB helpers refer to these paths; change them here if needed.
+  #
+  archive_path: /archive.html
+  categories_path : /categories.html
+  tags_path : /tags.html
+  links_path : /links.html
+  atom_path : /atom.xml
+  rss_path : /rss.xml
+  messages_path : /messages.html
+  about_path : /about.html
+
+  # Settings for comments helper
+  # Set 'provider' to the comment provider you want to use.
+  # Set 'provider' to false to turn commenting off globally.
+  #
+  comments :
+    provider : changyan
+    changyan :
+      appid : cysmNxmia
+      conf : prod_a49688836dc6cfb80dfc53f48bb864ab
+    duoshuo :
+      short_name : liberize
+    disqus :
+      short_name : liberize
+    livefyre :
+      site_id : 123
+    intensedebate :
+      account : 123abc
+    facebook :
+      appid : 123
+      num_posts: 5
+      width: 580
+      colorscheme: light
+    
+  # Settings for analytics helper
+  # Set 'provider' to the analytics provider you want to use.
+  # Set 'provider' to false to turn analytics off globally.
+  #        
+  analytics :
+    provider : baidu
+    baidu :
+      tracking_id : 'fa1700c08f6ac35179270783fc63a18f' 
+    google : 
+      tracking_id : 'UA-41189818-1'
+    getclicky :
+      site_id : 
+    mixpanel :
+      token : '_MIXPANEL_TOKEN_'
+
+  # Settings for sharing helper. 
+  # Sharing is for things like tweet, plusone, like, reddit buttons etc.
+  # Set 'provider' to the sharing provider you want to use.
+  # Set 'provider' to false to turn sharing off globally.
+  #
+  sharing :
+    provider : direct
+
+  # Settings for all other include helpers can be defined by creating 
+  # a hash with key named for the given helper. ex:
+  #
+  #   pages_list :
+  #     provider : "custom"   
+  #
+  # Setting any helper's provider to 'custom' will bypass the helper code
+  # and include your custom code. Your custom file must be defined at:
+  #   ./_includes/custom/[HELPER]
+  # where [HELPER] is the name of the helper you are overriding.

@@ -8,7 +8,7 @@ status: publish
 type: post
 published: true
 author: blackfox
-permalink: 201702/react-native.html
+permalink: 20170220/react-native.html
 keyword : react-native, react, nodejs
 desc : react-native 开发原生APP
 
@@ -16,13 +16,13 @@ desc : react-native 开发原生APP
 
 &nbsp;&nbsp;&nbsp;&nbsp;前段时间一直想开发一个记录时间开销的app，但是又不想去学android开发，于是就是想使用facebook开源的React-Native 来尝试开发。在自学过程中踩过一些坑，记录下来。
 
-1. 搭建环境
+1.搭建环境
 ========
 这个比较简单，先安装nodejs，然后再安装react-native-cli，
 具体步骤可以参考官方的文档<a
 href="http://reactnative.cn/docs/0.41/getting-started.html#content">搭建开发环境</a>, 这篇文档写的很清楚
 
-2. 编写Hello World
+2.编写Hello World
 =======
 搭建好环境之后，就可以建一个项目测试一下了。
 
@@ -76,7 +76,7 @@ android avd
 
 <div style="text-align:left;"><img src="/images/2017/02/react-native-02.png" /> </div>
 
-3. 打包APK项目
+3.打包APK项目
 =======
 在项目开发完成之后就要将项目打包成APK了，这个react-native官方也有详细的教程
 <a href="http://reactnative.cn/docs/0.41/signed-apk-android.html">打包APK</a>

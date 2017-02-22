@@ -8,7 +8,7 @@ status: publish
 type: post
 published: true
 author: blackfox
-permalink: 2017/ubuntu-install-qq2013.html
+permalink: 20170219/ubuntu-install-qq2013.html
 keyword : longene,QQ2013,QQ7.8
 desc : "ubuntu 安装Wine longene QQ 7.8"
 
@@ -26,7 +26,7 @@ WineQQ7.8-20151109-Longene：<a href="WineQQ7.8-20151109-Longene：http://www.lo
 
 安装完之后你会发现无法启动，这是因为你还有依赖没有安装。
 
-2. 安装依赖
+2.安装依赖
 ========
 
 很显然，你首先要安装wine,
@@ -63,7 +63,7 @@ sudo apt-get install libgtk2.0-0:i386
 <img style="max-width:100%" src="/images/2017/02/qq-01.png" />
 
 
-显示状态栏
+3.显示状态栏
 ========
 一个令人尴尬的问题是，登陆qq之后，在顶部的状态栏并没有显示qq图标，这意味着你关闭qq窗口之后再也找不到它了。这是因为Ubuntu
 Unity
@@ -85,7 +85,7 @@ systemtray 中设置显示图标的位置，下面贴出我的配置, 仅供参�
 
 至此，安装过程结束。
 
-<完>
+<strong>《完》</strong>
 
 
 

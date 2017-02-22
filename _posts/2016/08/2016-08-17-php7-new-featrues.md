@@ -2,8 +2,8 @@
 
 layout: post
 title: "简单了解php7的新特性"
-categories: [php,学习和思考]
-tags: [php,php7,php7新特性]
+categories: [php]
+tags: [php]
 status: publish
 type: post
 published: true

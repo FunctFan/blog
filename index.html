@@ -1,42 +1,85 @@
 ---
 layout: default
+title: "Blackfox's Blog"
+tagline: "学无先后，达者为师."
+desc: "一个程序员的技术博客，分享折腾的点点滴滴"
 ---
-<div class="home">
-	<a class="rss-link" href="{{ "/feed.xml" | prepend: site.baseurl }}">RSS Feed</a>
-	<h1 class="page-heading">{{ site.index_motto }}</h1>
+{% include JB/setup %}
 
-	<ul class="post-list">
-		{% for post in paginator.posts %}
-		<li>
-			<h2>
-				<a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
-			</h2>
+<!-- Recent Posts  -->
+<section>
+  {% for post in paginator.posts %}
+  <article class="nested">
 
-			<div class="post-meta">{{ post.author | capitalize }} • {{ post.date | date: "%b %-d, %Y" }}</div>
+    <header>
+      <h2><a href="{{ post.url }}" title="查看《{{ post.title }}》">{{ post.title }}</a></h2>
+    </header>
 
-			<div class="post-excerpt">
-				{{ post.excerpt }}
-				<p>
-					<a class="post-link" href="{{ post.url | prepend: site.baseurl }}">Read More &raquo;</a>
-				</p>
-			</div>
-		</li>
-		{% endfor %}
-	</ul>
+    <section>
+      <p>
+        {{ post.content | strip_html | truncate:150 }}
+      </p>
+    </section>
 
-	<!-- Pagination links -->
-	<div class="pagination">
-		{% if paginator.previous_page %}
-		<a href="{{ paginator.previous_page_path | prepend: site.baseurl }}" class="previous">PREV</a>
-		{% else %}
-		<span class="previous">PREV</span>
-		{% endif %}
-		<span class="page_number ">{{ paginator.page }} of {{ paginator.total_pages }}</span>
-		{% if paginator.next_page %}
-		<a href="{{ paginator.next_page_path | prepend: site.baseurl }}" class="next">NEXT</a>
-		{% else %}
-		<span class="next ">NEXT</span>
-		{% endif %}
-	</div>
+    <footer>
+      <p>
+        发表日期：<a href="{{ site.JB.archive_path }}#{{ post.date | date: '%B-%Y' }}" title="查看此月所有文章">{{ post.date | date: "%d %B %Y" }}</a>，
+        作者：<a href="mailto:{{ site.author.email }}" title="向作者发送邮件">{{ site.author.name }}</a>，
+        类别：<a href="{{ site.JB.categories_path }}#{{ post.category }}-ref" title="查看此类别下的所有文章">{{ post.categories }}</a>
+      </p>
+    </footer>
 
-</div>
+  </article>
+  {% endfor %}
+
+  {% if site.JB.comments.provider == 'duoshuo' %}
+    {% include JB/comments-providers/duoshuo type='count' %}
+  {% elsif site.JB.comments.provider == 'disqus' %}
+    {% include JB/comments-providers/disqus type='count' %}
+  {% endif %}
+
+</section>
+
+<!-- Pagination Links -->
+<section class="pagination pagination-centered">
+  <ul>
+    <!-- First Page -->
+    {% if paginator.previous_page %}
+    <li><a href="/index.html">&laquo;&laquo;</a></li>
+    {% else %}
+    <li class="disabled"><a href="#">&laquo;&laquo;</a></li>
+    {% endif %}
+
+    <!-- Previous Page -->
+    {% if paginator.previous_page %}
+    <li>
+      {% if paginator.previous_page == 1 %}
+      <a href="/index.html">&laquo;</a>
+      {% else %}
+      <a href="/page{{ paginator.previous_page }}">&laquo;</a>
+      {% endif %}
+    </li>
+    {% else %}
+    <li class="disabled"><a href="#">&laquo;</a></li>
+    {% endif %}
+
+    <!-- Current Page -->
+    <li class="active">
+      <span class="page_number ">第 {{ paginator.page }}/{{ paginator.total_pages }} 页</span>
+    </li>
+
+    <!-- Next Page -->
+    {% if paginator.next_page %}
+    <li><a href="/page{{paginator.next_page}}">&raquo;</a></li>
+    {% else %}
+    <li class="disabled"><a href="#">&raquo;</a></li>
+    {% endif %}
+
+    <!-- Last Page -->
+    {% if paginator.next_page %}
+    <li><a href="/page{{ paginator.total_pages }}">&raquo;&raquo;</a></li>
+    {% else %}
+    <li class="disabled"><a href="#">&raquo;&raquo;</a></li>
+    {% endif %}
+  </ul>
+</section>

@@ -3,7 +3,7 @@
 layout: post
 title: "细说mongodb 分组查询"
 categories: [mongodb,数据库技术]
-tags: [mongodb,分组查询]
+tags: [mongodb]
 status: publish
 type: post
 published: true

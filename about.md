@@ -1,11 +1,12 @@
 ---
 layout: page
-title: 一品鸟人
-menu : About
-permalink: /about/
-nocomments: true
-public: true
+title: "关于我"
+description: "information about me"
+group: navigation
+permalink: /about.html
+comments: false
 ---
+{% include JB/setup %}
 
 【基本信息】
 ====
@@ -13,7 +14,7 @@ public: true
 
 2012年毕业于湖南理工学院电子信息工程专业，大二下学期开始学习编程，从此走上码农这条不归路，也是从那之后再也没有拿过奖学金，慢慢的喜欢上了计算机编程。
 
-程序学习的路程很坎坷，从设计开始，到前端，到php，到java，然后到C，一路尝试之后发现还是最喜欢php，但是java和前端也不错的。当然作为一个有理想的码农，我也去折腾一段时间的服务器。
+程序学习的路程很坎坷，从设计开始，到前端，到php，到java，然后到C，一路尝试之后发现还是最喜欢php，但是java和前端也不错的。当然作为一个有理想的码农，我也去折腾过一段时间的服务器。
 
 大三下学期自主创业，开过培训版，做过php和设计培训讲师，小小的折腾了一下，虽然结果不令人满意，但是还是收获了不少东西。比如和大神狮子的魂，冬芽就是在那个时候建立起深厚的革命友谊的，至今从他们身上受益良多。
 
@@ -42,8 +43,4 @@ public: true
 1. 顶住上面的压力，尽量给开发人员创造轻松自由的工作氛围。
 2. 创造良好的学习环境和分为，提高开发效率。
 3. 对事，对人，对团队负责，而不是对自己职位负责。
-
-【博客源码】
-=========
-如果喜欢这个轮子，就拿去用，模板地址：<a href="https://git.oschina.net/blackfox/jekyll-blog">GitOS</a>，<a href="https://github.com/yangjian102621/yangjian102621.github.com">GitHub</a>
 

@@ -2,8 +2,8 @@
 
 layout: post
 title: "妹子操作系统和编程语言"
-categories: [思考人生, 杂谈]
-tags: [妹子,操作系统,编程语言]
+categories: [杂谈]
+tags: []
 status: publish
 type: post
 published: true
