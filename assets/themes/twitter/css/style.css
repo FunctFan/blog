@@ -279,9 +279,9 @@ article footer {
 .post .post-content h1, .post .post-content h2, .post .post-content h3 {
     border-bottom: 1px solid #CCC;
 }
-.post .post-content h1 {font-size:188%;}
-.post .post-content h2 {font-size:168%;}
+.post .post-content h1 {font-size:168%;}
 .post .post-content h2 {font-size:148%;}
+.post .post-content h2 {font-size:128%;}
 .post .post-content h1, .post .post-content h2 {
     margin-bottom: 10px;
     margin-top: 20px;

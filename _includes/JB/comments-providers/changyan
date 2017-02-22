@@ -1,5 +1,5 @@
 {% if include.type == 'comment' %}
-<div class="post-comments">
+<div class="post-comments" style="overflow:hidden;">
 
 	<!--畅言评论高速版-->
 	<div id="SOHUCS" sid="{{ page.id }}"></div>
