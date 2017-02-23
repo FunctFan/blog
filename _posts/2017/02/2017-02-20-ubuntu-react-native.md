@@ -64,7 +64,7 @@ android avd
 ```
 进入模拟器管理界面，如下：
 
-<div style="text-align:left;"><img src="/images/2017/02/react-native-01.png" /> </div>
+<div style="text-align:left;"><img class="img-view" data-src="/images/2017/02/react-native-01.png" src="/images/1px.png" /> </div>
 
 点击 <code class="scode">Create</code>
 按钮创建一个新的模拟器，然后再点击 <code class="scode">Start</code>
@@ -74,7 +74,7 @@ android avd
 
 我的测试项目启动预览图如下
 
-<div style="text-align:left;"><img src="/images/2017/02/react-native-02.png" /> </div>
+<div style="text-align:left;"><img class="img-view" data-src="/images/2017/02/react-native-02.png" src="/images/1px.png" /> </div>
 
 3.打包APK项目
 =======

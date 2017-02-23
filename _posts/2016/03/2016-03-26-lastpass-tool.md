@@ -57,7 +57,7 @@ lastPass 支持主流的浏览器，包括IE。安装方式很简单，它是通
 
 <strong>一种是去官方网站去下载安装包</strong>， 建议下载 chrome版，支持二进制
 
-<img src="/images/2016/03/2016-03-25-003.png">
+<img class="img-view" data-src="/images/2016/03/2016-03-25-003.png" src="/images/1px.png" />
 
 下载地址： <a href="https://lastpass.com/misc_download2.php">https://lastpass.com/</a>
 
@@ -68,18 +68,18 @@ https://chrome.google.com/webstore/detail/lastpass-free-password-ma/hdokiejnpima
 
 安装好插件之后打开浏览器在地址栏右边会有lastPass插件图标
 
-<img src="/images/2016/03/2016-03-25-002.png">
+<img class="img-view" data-src="/images/2016/03/2016-03-25-002.png" src="/images/1px.png" />
 
 然后打开你要登陆的网站，点击开插件 sites -> add site
 
-<img src="/images/2016/03/2016-03-25-004.png">
+<img class="img-view" data-src="/images/2016/03/2016-03-25-004.png" src="/images/1px.png" />
 
 登录的时候直接选中账号就可以自动填充用户名和密码了
 
-<img src="/images/2016/03/2016-03-25-005.png">
+<img class="img-view" data-src="/images/2016/03/2016-03-25-005.png" src="/images/1px.png" />
 
 当然你也可以进入 "My LastPass Vault" 去管理你的用户名和密码，以及进行一些 account setting
 
-<img src="/images/2016/03/2016-03-25-001.png">
+<img class="img-view" data-src="/images/2016/03/2016-03-25-001.png" src="/images/1px.png" />
 
 好吧，心动不如行动，赶紧去折腾你的lastPass密码神器啊，相信你会爱上它。

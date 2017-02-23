@@ -1,7 +1,7 @@
 ---
 
 layout: post
-title: "ubuntu 安装Wine longene QQ 7.8"
+title: "ubuntu 安装Wine longene QQ 7.8 和微信"
 categories: [操作系统]
 tags: [longeneqq]
 status: publish
@@ -22,7 +22,13 @@ desc : "ubuntu 安装Wine longene QQ 7.8"
 
 WineQQ7.8-20151109-Longene：<a href="WineQQ7.8-20151109-Longene：http://www.longene.org/download/WineQQ7.8-20151109-Longene.deb">http://www.longene.org/download/WineQQ7.8-20151109-Longene.deb</a>
 
-下载完之后直接 dkpg -i WineQQ7.8-20151109-Longene.deb 
+下载完之后直接 dpkg -i WineQQ7.8-20151109-Longene.deb 
+
+如果是16.04LTS版本的系统，就执行
+
+```bash
+sudo gdebi WineQQ7.8-20151109-Longene.deb
+```
 
 安装完之后你会发现无法启动，这是因为你还有依赖没有安装。
 
@@ -60,7 +66,7 @@ sudo apt-get install libgtk2.0-0:i386
 
 接下来就可以启动qq了。
 
-<img style="max-width:100%" src="/images/2017/02/qq-01.png" />
+<img data-src="/images/2017/02/qq-01.png" class="img-view" src="/images/1px.png" />
 
 
 3.显示状态栏
@@ -81,9 +87,41 @@ sudo apt-get install dconf-editor
 安装完毕之后，搜索软件Dconf-Editori (或者直接再终端输入 dconf-editor 命令)，在net > launchpad > indicator >
 systemtray 中设置显示图标的位置，下面贴出我的配置, 仅供参考:
 
-<img style="max-width:100%" src="/images/2017/02/qq-install-02.png" />
+<img class="img-view" data-src="/images/2017/02/qq-install-02.png" src="/images/1px.png" />
 
 至此，安装过程结束。
+
+重启系统，启动qq，这时你就回发现顶部的状态栏上面出现qq图标了。
+
+本人亲测，这个版本的qq使用起来很流畅，发表情，截图，文件都没有问题，完全可以跟windows系统qq相媲美了。
+
+4.添加微信app
+=====
+有了qq之后你可能还会想，要是有微信就更好了。这个其实很容易，在google chrome浏览器添加一个微信app就好了。
+
+首先在google应用中心搜索 <code class="scode">wechat</code>, 如图：
+
+<img class="img-view" data-src="/images/2017/02/qq-install-04.png" src="/images/1px.png" />
+
+然后点击微信app旁边的添加按钮。
+
+添加完之后在<code class="scode">App</code> 中心就可以看到微信了，点击打开就好了
+
+<img class="img-view" data-src="/images/2017/02/qq-install-03.png" src="/images/1px.png" />
+
+如果你找不到应用中心的话，那就直接在浏览器地址栏输入：
+
+```bash
+chrome://apps/
+```
+
+最后，贴上一个我安装完之后的效果图：
+
+<img class="img-view" data-src="/images/2017/02/qq-install-05.png" src="/images/1px.png" />
+
+那么问题来了，看完这篇文章你是不是觉得又多了一个彻底抛弃windows的理由了呢。O(∩_∩)O~
+
+欢迎在留言区写下你的想法.
 
 <strong>《完》</strong>
 

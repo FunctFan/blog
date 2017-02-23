@@ -1,0 +1,7 @@
+<script src="/assets/themes/twitter/js/jpreview.js"></script>
+<script src="/assets/themes/twitter/js/JLazyLoader.js"></script>
+<script type="text/javascript">
+	//初始化图片预览插件, 图片延时加载
+	$(".img-view").jpreview();
+</script>
+
