@@ -5,6 +5,7 @@ header: Post Archive
 group: navigation
 comments: false
 ---
+
 {% include JB/setup %}
 
 {% assign posts_collate = site.posts %}
