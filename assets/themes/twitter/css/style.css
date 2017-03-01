@@ -72,6 +72,16 @@ a:hover, a:active { outline: none; }
 
 .img-view {max-width:100%; min-width:100%; max-height:100px; background:url(../img/loading.gif) no-repeat center center;}
 
+blockquote {
+	padding: 20px;
+	margin: 20px 0;
+	border: 1px solid #eee;
+	border-left-width: 5px;
+	border-left-color:#ce4844;
+	border-radius: 3px;
+}
+
+
 /*  General Classes  */
 .small { width: 33%; }
 .medium { width: 66%; }
