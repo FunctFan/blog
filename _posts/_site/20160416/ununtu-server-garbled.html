@@ -1,0 +1,50 @@
+<p>安装中文语言包</p>
+
+<blockquote>
+  <p>sudo apt-get install language-pack-zh-hans</p>
+</blockquote>
+
+<p>获取语言包支持</p>
+
+<blockquote>
+  <p>sudo locale-gen zh_CN.UTF-8</p>
+</blockquote>
+
+<p>添加语言支持</p>
+
+<blockquote>
+  <p>sudo vim /var/lib/locales/supported.d/local</p>
+</blockquote>
+
+<p>添加如下内容（如果已经有了就不用再添加）：</p>
+
+<blockquote>
+  <p>zh_CN.UTF-8 UTF-8 <br />
+en_US.UTF-8 UTF-8</p>
+</blockquote>
+
+<p>重新配置 locales</p>
+
+<blockquote>
+  <p>sudo dpkg-reconfigure locales</p>
+</blockquote>
+
+<p>设置默认语言
+&gt; vim /etc/environment</p>
+
+<p>在文件末尾添加以下代码</p>
+
+<blockquote>
+  <p>LANG=”zh_CN.UTF-8” <br />
+LANGUAGE=”zh_CN:zh:en_US:en”</p>
+</blockquote>
+
+<p>配置vim，解决vim显示中文乱码问题</p>
+
+<blockquote>
+  <p>vim ~/.vimrc <br />
+##添加以下配置 <br />
+set fileencodings=utf-8,ucs-bom,gb18030,gbk,gb2312,cp936 <br />
+set termencoding=utf-8 <br />
+set encoding=utf-8 <br /></p>
+</blockquote>

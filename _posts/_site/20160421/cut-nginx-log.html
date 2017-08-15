@@ -1,0 +1,34 @@
+<p>nginx运行时间久了日志会比较大，经常会需要将日志按天切割，方便查看。不多说，直接上脚本</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>
+<span class="c">#!/bin/bash</span>
+<span class="c"># this script cut nginx logs</span>
+
+<span class="c"># nginx日志根目录</span>
+<span class="nv">LOGS_PATH</span><span class="o">=</span><span class="s2">"/var/log/nginx"</span>
+<span class="nv">PID</span><span class="o">=</span><span class="s2">"/var/run/nginx.pid"</span>
+
+<span class="c">## get the date of yesterday  yyyy-MM-dd</span>
+<span class="nv">YESTERDAY</span><span class="o">=</span><span class="k">$(</span>date -d last-day +%Y-%m-%d<span class="k">)</span>
+
+<span class="c">## 生成路径</span>
+<span class="nv">DATE_PATH</span><span class="o">=</span><span class="k">$(</span>date -d last-day +%Y<span class="k">)</span>/<span class="k">$(</span>date -d last-day +%m<span class="k">)</span>
+
+<span class="c">## 项目日志的路径</span>
+<span class="nv">APP</span><span class="o">=</span><span class="k">${</span><span class="nv">LOGS_PATH</span><span class="k">}</span>/myapp
+
+<span class="c">## 创建日志路径</span>
+mkdir -p <span class="k">${</span><span class="nv">LOGS_PATH</span><span class="k">}</span>/<span class="k">${</span><span class="nv">DATE_PATH</span><span class="k">}</span>/
+mkdir -p <span class="k">${</span><span class="nv">APP</span><span class="k">}</span>/<span class="k">${</span><span class="nv">DATE_PATH</span><span class="k">}</span>/
+
+<span class="c">## 移动日志</span>
+mv <span class="k">${</span><span class="nv">LOGS_PATH</span><span class="k">}</span>/access.log <span class="k">${</span><span class="nv">LOGS_PATH</span><span class="k">}</span>/<span class="k">${</span><span class="nv">DATE_PATH</span><span class="k">}</span>/access_<span class="k">${</span><span class="nv">YESTERDAY</span><span class="k">}</span>.log
+mv <span class="k">${</span><span class="nv">APP</span><span class="k">}</span>/access.log <span class="k">${</span><span class="nv">APP</span><span class="k">}</span>/<span class="k">${</span><span class="nv">DATE_PATH</span><span class="k">}</span>/access_<span class="k">${</span><span class="nv">YESTERDAY</span><span class="k">}</span>.log
+
+<span class="c">## 向 Nginx 主进程发送 USR1 信号。USR1 信号是重新打开日志文件</span>
+<span class="nb">kill</span> -USR1 <span class="sb">`</span>cat <span class="k">${</span><span class="nv">PID</span><span class="k">}</span><span class="sb">`</span>
+
+</code></pre>
+</div>
+
+<p>这样日志就会按天分割了。</p>

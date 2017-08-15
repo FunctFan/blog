@@ -101,7 +101,7 @@ var imgLazyLoad = {
 					if ( _tagName === "img" && attrSrc !== null ) {
 						o.setAttribute("src", attrSrc);	//设置图片的真实地址
 						//o.removeAttribute(this.imgConfig.src);	 //移除自定义属性
-						o.removeAttribute('class');	 //移除class属性
+						//o.removeAttribute('class');	 //移除class属性
 
                         if ( typeof $ == 'function') {  //添加渐显示效果
                             o.style.display = "none";

@@ -1,0 +1,64 @@
+<p>    前段时间一直想开发一个记录时间开销的app，但是又不想去学android开发，于是就是想使用facebook开源的React-Native 来尝试开发。在自学过程中踩过一些坑，记录下来。</p>
+
+<h1 id="section">1.搭建环境</h1>
+<p>这个比较简单，先安装nodejs，然后再安装react-native-cli，
+具体步骤可以参考官方的文档<a href="http://reactnative.cn/docs/0.41/getting-started.html#content">搭建开发环境</a>, 这篇文档写的很清楚</p>
+
+<h1 id="hello-world">2.编写Hello World</h1>
+<p>搭建好环境之后，就可以建一个项目测试一下了。</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>react-native init <span class="nb">test
+cd test
+</span>react-native run-android
+</code></pre>
+</div>
+
+<p>很遗憾，在你按照官网的教程运行<code class="scode">react-native run-android</code> 可能会遇到类似下面的报错</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>FAILURE: Build failed with an exception.
+
+<span class="k">*</span> What went wrong:
+Execution failed <span class="k">for </span>task <span class="s1">':app:installDebug'</span>.
+<span class="gp">&gt; </span>com.android.builder.testing.api.DeviceException: No connected
+<span class="gp">&gt; </span>devices!
+
+</code></pre>
+</div>
+
+<p>找不到模拟器设备，而官网上并没有告诉你怎么去启动模拟器。首先，你需要添加环境变量, <code class="scode">vim ~/.profile</code>, 加上如下代码（如果已经添加请略过此步）</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="c"># ～/Android 是你Android SDK的根目录，如果你的目录不是这样的请自行更改。</span>
+<span class="nv">PATH</span><span class="o">=</span><span class="s2">"~/Android/Sdk/tools:~/Android/Sdk/platform-tools:</span><span class="k">${</span><span class="nv">PATH</span><span class="k">}</span><span class="s2">"</span>
+<span class="nb">export </span>PATH
+</code></pre>
+</div>
+
+<p>当然你需要注销重新登陆系统或者执行</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="nb">source</span> ~/.profile 
+</code></pre>
+</div>
+<p>来使配置生效。接下来，执行</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>android avd
+</code></pre>
+</div>
+<p>进入模拟器管理界面，如下：</p>
+
+<div style="text-align:left;"><img class="img-view" data-src="/images/2017/02/react-native-01.png" src="/images/1px.png" /> </div>
+
+<p>点击 <code class="scode">Create</code>
+按钮创建一个新的模拟器，然后再点击 <code class="scode">Start</code>
+按钮启动就好了。</p>
+
+<p>然后再切换到 test 项目目录，执行 <code class="scode">react-native run-android</code> 就可以在模拟器中测试项目了。</p>
+
+<p>我的测试项目启动预览图如下</p>
+
+<div style="text-align:left;"><img class="img-view" data-src="/images/2017/02/react-native-02.png" src="/images/1px.png" /> </div>
+
+<h1 id="apk">3.打包APK项目</h1>
+<p>在项目开发完成之后就要将项目打包成APK了，这个react-native官方也有详细的教程
+<a href="http://reactnative.cn/docs/0.41/signed-apk-android.html">打包APK</a></p>
+
+<p><strong>《完》</strong></p>

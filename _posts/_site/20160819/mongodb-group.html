@@ -1,0 +1,211 @@
+<p>最近在给<code>herosphp</code>框架添加mongodb支持，考虑到后期可能要切换模型，所以就把Model层把mysql和mongodb的查询语法做了兼容，屏蔽差异性。简单的增删查改都没有问题，可以很方便的做兼容，但是在处理分组查询的时候，发现mongodb的分组查询跟mysql的差别还是蛮大的。</p>
+
+<p>mongodb的原生查询shell语法是这样的</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>db.collection.group<span class="o">({</span>keys, initial, reduce, conditions <span class="o">})</span>
+</code></pre>
+</div>
+
+<p>包含四个参数</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>参数名</th>
+      <th>参数说明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>keys</td>
+      <td>分组字段</td>
+    </tr>
+    <tr>
+      <td>initial</td>
+      <td>分组初始条件</td>
+    </tr>
+    <tr>
+      <td>reduce</td>
+      <td>分组计算方式，是一个javascript函数表达式</td>
+    </tr>
+    <tr>
+      <td>conditions</td>
+      <td>分组条件，相当与mysql中的having</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>下面看php的demo</p>
+
+<div class="language-php highlighter-rouge"><pre class="highlight"><code>$address = array('东莞','深圳','广州','北京','上海','杭州');
+for ( $i = 0; $i <span class="nt">&lt; 100</span><span class="err">;</span> <span class="err">$</span><span class="na">i</span><span class="err">++</span> <span class="err">)</span> <span class="err">{</span>
+	<span class="err">$</span><span class="na">data =</span><span class="err"> </span><span class="s">array(</span>
+		<span class="err">"</span><span class="na">id</span><span class="err">"</span> <span class="err">=</span><span class="nt">&gt;</span> uniqid()+$i,
+		"name" =&gt; "user_{$i}",
+		"age" =&gt; $i,
+		"address" =&gt; $address[mt_rand(0,5)]
+	);
+
+	$collection-&gt;insert($data);
+}
+
+$keys = array("address" =&gt; 1);
+$initial = array("items" =&gt; array());
+$reduce = "function (obj, prev) { prev.items.push({id:obj.id, name:obj.name, age:obj.age}); }";
+$conditions = array('age' =&gt; '&gt;30');
+$items = $collection-&gt;($keys, $initial, $reduce, $conditions);
+print_r($items);
+</code></pre>
+</div>
+
+<p>类似输出</p>
+
+<div class="language-html highlighter-rouge"><pre class="highlight"><code>Array
+(
+    [0] =&gt; Array
+        (
+            [address] =&gt; 广州
+            [items] =&gt; Array
+                (
+                    [0] =&gt; Array
+                        (
+                            [id] =&gt; B21A-57B2EA6F-02773128-DD27-721CC2CD
+                            [name] =&gt; user_31
+                            [age] =&gt; 31
+                        )
+
+                    [1] =&gt; Array
+                        (
+                            [id] =&gt; B21A-57B2EA6F-02DBC660-7DDB-C88F1629
+                            [name] =&gt; user_44
+                            [age] =&gt; 44
+                        )
+
+                    [2] =&gt; Array
+                        (
+                            [id] =&gt; B21A-57B2EA6F-02EAB698-A2FC-C18B29C7
+                            [name] =&gt; user_48
+                            [age] =&gt; 48
+                        )
+
+
+                )
+
+        )
+
+    [1] =&gt; Array
+        (
+            [address] =&gt; 深圳
+            [items] =&gt; Array
+                (
+                    [0] =&gt; Array
+                        (
+                            [id] =&gt; B21A-57B2EA6F-027ED43C-C635-8614CA6F
+                            [name] =&gt; user_32
+                            [age] =&gt; 32
+                        )
+
+                    [1] =&gt; Array
+                        (
+                            [id] =&gt; B21A-57B2EA6F-0286BECC-A1FA-83664B53
+                            [name] =&gt; user_33
+                            [age] =&gt; 33
+                        )
+
+                    [2] =&gt; Array
+                        (
+                            [id] =&gt; B21A-57B2EA6F-02FCC0F4-1068-CA3956FA
+                            [name] =&gt; user_53
+                            [age] =&gt; 53
+                        )
+
+                    [3] =&gt; Array
+                        (
+                            [id] =&gt; B21A-57B2EA6F-0305C334-74E8-FEAED1C5
+                            [name] =&gt; user_56
+                            [age] =&gt; 56
+                        )
+
+                    [4] =&gt; Array
+                        (
+                            [id] =&gt; B21A-57B2EA6F-03A1C194-C9E2-7DA08D30
+                            [name] =&gt; user_83
+                            [age] =&gt; 83
+                        )
+
+                    [5] =&gt; Array
+                        (
+                            [id] =&gt; B21A-57B2EA6F-03BAEBC4-1D32-DAE7B6F6
+                            [name] =&gt; user_91
+                            [age] =&gt; 91
+                        )
+
+                    [6] =&gt; Array
+                        (
+                            [id] =&gt; B21A-57B2EA6F-03C5C8A0-756F-4431B377
+                            [name] =&gt; user_94
+                            [age] =&gt; 94
+                        )
+
+                    [7] =&gt; Array
+                        (
+                            [id] =&gt; B21A-57B2EA6F-03CC3BCC-5369-5640621D
+                            [name] =&gt; user_96
+                            [age] =&gt; 96
+                        )
+
+                )
+
+        )
+
+    [2] =&gt; Array
+        (
+            [address] =&gt; 东莞
+            [items] =&gt; Array
+                (
+                    [0] =&gt; Array
+                        (
+                            [id] =&gt; B21A-57B2EA6F-028EAAEC-F943-739CB194
+                            [name] =&gt; user_34
+                            [age] =&gt; 34
+                        )
+
+                    [1] =&gt; Array
+                        (
+                            [id] =&gt; B21A-57B2EA6F-02964824-991A-02042310
+                            [name] =&gt; user_35
+                            [age] =&gt; 35
+                        )
+
+                    [2] =&gt; Array
+                        (
+                            [id] =&gt; B21A-57B2EA6F-02A5AD28-7FC6-E3467535
+                            [name] =&gt; user_37
+                            [age] =&gt; 37
+                        )
+
+                    [3] =&gt; Array
+                        (
+                            [id] =&gt; B21A-57B2EA6F-02AD62FC-C660-1041D78D
+                            [name] =&gt; user_38
+                            [age] =&gt; 38
+                        )
+
+                    [4] =&gt; Array
+                        (
+                            [id] =&gt; B21A-57B2EA6F-02D396AC-065B-C482232D
+                            [name] =&gt; user_43
+                            [age] =&gt; 43
+                        )
+
+                )
+
+        )
+
+
+)
+</code></pre>
+</div>
+
+<p>令人眼前一亮的是mongodb的分组计算方式 reduce, 是一个javascript函数表达式，这样我们可以很方便的自定义分组方式，并且得到我们想要的数据。不像mysql一样要先查出分组，然后再根据分组查询，麻烦不说，而且效率也很低。</p>
+

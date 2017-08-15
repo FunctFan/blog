@@ -1,0 +1,190 @@
+<p>MongoDB 是由C++语言编写的，是一个基于分布式文件存储的开源数据库系统。
+在高负载的情况下，添加更多的节点，可以保证服务器性能。
+MongoDB 旨在为WEB应用提供可扩展的高性能数据存储解决方案。</p>
+
+<h1 id="section">安装</h1>
+<p>mongodb 安装很简单，不管windows还是linux直接去官方下载压缩包解压就行了。本人使用的linux</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>wget https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-amazon-3.2.8.tgz
+tar xvpzf mongodb-linux-x86_64-amazon-3.2.8.tgz
+mv mongodb-linux-x86_64-ubuntu1204-3.0.3 /usr/local/mongodb
+</code></pre>
+</div>
+
+<h1 id="section-1">添加配置文档</h1>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>vim /usr/local/mongodb/mongodb.conf
+</code></pre>
+</div>
+<p>添加配置 <code>dbpath=/data/mongodb</code>
+创建软连接,并创建目录，<code>{mongo_dir}</code> 表示mongodb的安装目录</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="nb">cd</span> /usr/local/bin
+ln -s <span class="o">{</span>mongo_dir<span class="o">}</span>/bin/mongod
+ln -s <span class="o">{</span>mongo_dir<span class="o">}</span>/bin/mongo
+
+mkdir -p /data/mongodb
+</code></pre>
+</div>
+
+<h1 id="section-2">启动</h1>
+<p>启动很简单</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>mongod -f /usr/local/mongodb/mongodb.conf
+</code></pre>
+</div>
+<p>启动成功之后，用<code>mongo</code>客户端连接服务器</p>
+
+<h1 id="section-3">用户管理</h1>
+<p>mongodb创建用户老版本和新版不同，新版屏蔽了<code>addUser</code>方法</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>use admin
+
+db.addUser<span class="o">(</span><span class="s2">"root"</span>, <span class="s2">"123456"</span>, <span class="nb">false</span><span class="o">)</span>; <span class="c">#老版本数据库</span>
+
+db.createUser<span class="o">({</span>user: <span class="s2">"root"</span>,pwd: <span class="s2">"123456"</span>,roles: <span class="o">[{</span> role: <span class="s2">"root"</span>, db: <span class="s2">"admin"</span> <span class="o">}]})</span>; <span class="c">#新版数据库</span>
+
+db.system.users.find<span class="o">()</span>.pretty<span class="o">()</span>; <span class="c">#查询用户</span>
+
+db.removeUser<span class="o">(</span><span class="s2">"root"</span><span class="o">)</span>; <span class="c">#删除用户</span>
+
+</code></pre>
+</div>
+<p><code>addUser</code>方法的三个参数分别是用户名，密码，第三个参数是表示是否是只读用户，默认是false</p>
+
+<p><code>createUser</code>是新版的创建用户的方法</p>
+
+<blockquote>
+  <p>user : 用户名 <br />
+pwd : 密码 <br />
+roles : 指定用户的角色，可以用一个空数组给新用户设定空角色；在roles字段,可以指定内置角色和用户定义的角色</p>
+</blockquote>
+
+<p><strong>角色可选值如下</strong></p>
+
+<ul>
+  <li>Read：允许用户读取指定数据库</li>
+  <li>readWrite：允许用户读写指定数据库</li>
+  <li>dbAdmin：允许用户在指定数据库中执行管理函数，如索引创建、删除，查看统计或访问system.profile</li>
+  <li>userAdmin：允许用户向system.users集合写入，可以找指定数据库里创建、删除和管理用户</li>
+  <li>clusterAdmin：只在admin数据库中可用，赋予用户所有分片和复制集相关函数的管理权限。</li>
+  <li>readAnyDatabase：只在admin数据库中可用，赋予用户所有数据库的读权限</li>
+  <li>readWriteAnyDatabase：只在admin数据库中可用，赋予用户所有数据库的读写权限</li>
+  <li>userAdminAnyDatabase：只在admin数据库中可用，赋予用户所有数据库的userAdmin权限</li>
+  <li>dbAdminAnyDatabase：只在admin数据库中可用，赋予用户所有数据库的dbAdmin权限。</li>
+  <li>root：只在admin数据库中可用。超级账号，超级权限</li>
+</ul>
+
+<h1 id="section-4">插入文档</h1>
+<p>mongodb不需要单独创建数据库和数据表(mongo中叫集合)，很方便，由于时nosql，数据的格式也是很灵活，是一个json对象
+当执行插入的时候，使用的驱动程序会将数据保存成BSON（关于BSON，这个后续文章会讲到，这里暂且不表）的形式，然后将其送入数据库，数据库解析BSON，会做简单的验证，主要检验是否包含”_id”,并且文档不超过4MB，然后就简单的将文档插入数据库中。不过个人认为这样会带来一些好处或者坏的影响，最明显的副作用就是允许插入无效数据，好处就是这样貌似你也没有办法对mongodb进行注入攻击了，也就是说mongodb对注入攻击时天生免疫的（听起来很牛逼）。</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>use user;   <span class="c">#切换数据库，如果不存在则创建</span>
+
+<span class="gp">&gt; </span>show tables;
+system.indexes
+system.users
+system.version
+<span class="gp">&gt; </span>db.blog.insert<span class="o">({</span>id:1, title:<span class="s2">"this is a test"</span>, hits:1<span class="o">})</span>; <span class="c">#往blog数据表中插入一个文档，如果blog表不存在则自动创建</span>
+WriteResult<span class="o">({</span> <span class="s2">"nInserted"</span> : 1 <span class="o">})</span>
+</code></pre>
+</div>
+
+<h1 id="section-5">更新文档</h1>
+<p>MongoDB 使用 update() 和 save() 方法来更新集合中的文档。这里需要特别注明的是：更新的操作时原子性的，若是两个更新同时发生，则先到达服务器的先执行，接着执行另外一个，相互有冲突的更新可以火速传递，并不会产生干扰。</p>
+
+<blockquote>
+  <p>update(query, data, upsert, multi);</p>
+</blockquote>
+
+<p><strong>参数说明：</strong></p>
+
+<ul>
+  <li>query : update的查询条件，类似sql update查询内where后面的。</li>
+  <li>data : 要更新的数据</li>
+  <li>upsert : 可选，这个参数的意思是，如果不存在update的记录，是否插入objNew,true为插入，默认是false，不插入。</li>
+  <li>multi : 可选，mongodb 默认是false,只更新找到的第一条记录，如果这个参数为true,就把按条件查出来多条记录全部更新。</li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>db.blog.update<span class="o">({</span>id:1<span class="o">}</span>, <span class="o">{</span>id:2, title:<span class="s2">"new title"</span>, hits:2<span class="o">}</span>, <span class="nb">false</span>, <span class="nb">true</span><span class="o">)</span>; //文档替换
+db.blog.update<span class="o">({</span>id:1<span class="o">}</span>, <span class="o">{</span><span class="nv">$set</span> : <span class="o">{</span>id:2, title:<span class="s2">"new title"</span><span class="o">}</span>, <span class="nb">false</span>, <span class="nb">true</span><span class="o">)</span>; //使用修改器修改
+</code></pre>
+</div>
+
+<p>有一个问题是：update其实正确的解释是替换文档，并不是真正意义上的更新，因为通常文档只会有一部分需要更新的，
+这个时候你就需要用到原子的更新修改器，这可以使得这部分更新极为高效，更新修改器时一种特殊的键，用来制定复杂的更新操作，比如调整，增加或者删除文档的key，还可能是操作数据或者内嵌文档。
+mongo 有很多修改器的，下面列举几个</p>
+
+<ul>
+  <li>$inc 增加某个字段的值  {$inc : {hits:10}} 把点击率加10</li>
+  <li>$set 修改或者新增部分字段，而不是整个文档替换，这个用的比较经常，毕竟一般我们只改某个文档的部分内容，很少有整个替换的。</li>
+  <li>$push 修改数组的值</li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="gp">&gt; </span>db.blog.insert<span class="o">({</span>id:2, title:<span class="s2">"new blog"</span>, tags:[<span class="s2">"fuck"</span>, <span class="s2">"shit"</span><span class="o">]})</span>;
+WriteResult<span class="o">({</span> <span class="s2">"nInserted"</span> : 1 <span class="o">})</span>
+<span class="gp">&gt; </span>db.blog.find<span class="o">({</span>id:2<span class="o">})</span>;
+<span class="o">{</span> <span class="s2">"_id"</span> : ObjectId<span class="o">(</span><span class="s2">"57ac4b860776d82c21a31d77"</span><span class="o">)</span>, <span class="s2">"id"</span> : 2, <span class="s2">"title"</span> : <span class="s2">"new blog"</span>, <span class="s2">"tags"</span> : <span class="o">[</span> <span class="s2">"fuck"</span>, <span class="s2">"shit"</span> <span class="o">]</span> <span class="o">}</span>
+<span class="gp">&gt; </span>db.blog.update<span class="o">({</span>id:2<span class="o">}</span>, <span class="o">{</span><span class="nv">$push</span> : <span class="o">{</span>tags:<span class="s2">"oh mygod"</span><span class="o">}})</span>;
+WriteResult<span class="o">({</span> <span class="s2">"nMatched"</span> : 1, <span class="s2">"nUpserted"</span> : 0, <span class="s2">"nModified"</span> : 1 <span class="o">})</span>
+<span class="gp">&gt; </span>db.blog.find<span class="o">({</span>id:2<span class="o">})</span>;
+<span class="o">{</span> <span class="s2">"_id"</span> : ObjectId<span class="o">(</span><span class="s2">"57ac4b860776d82c21a31d77"</span><span class="o">)</span>, <span class="s2">"id"</span> : 2, <span class="s2">"title"</span> : <span class="s2">"new blog"</span>, <span class="s2">"tags"</span> : <span class="o">[</span> <span class="s2">"fuck"</span>, <span class="s2">"shit"</span>, <span class="s2">"oh mygod"</span> <span class="o">]</span> <span class="o">}</span>
+</code></pre>
+</div>
+
+<h1 id="section-6">查询文档</h1>
+<p>mongo的查询功能很强大，几乎可以跟sql数据库相媲美，尤其是还提供了很多操作符查询的
+“$gt” 、”$gte”、 “$lt”、 “$lte”、”null查询”、”$all”、”$size”、”$in”、”$nin”、
+“$and”、”$nor”、”$not”、”$or”、”$exists”、”$mod”、”$regex”、”$where”、”$slice”、”$elemMatch”…</p>
+
+<p>下面举几个例子</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>db.blog.find<span class="o">()</span>;  <span class="c">#查找所有文档</span>
+db.blog.find<span class="o">({</span>id:1<span class="o">})</span>; <span class="c">#查找id=1的文档</span>
+db.user.find<span class="o">({</span>name:/jack/i<span class="o">})</span>; <span class="c">#正则查询，相当于sql中like查询</span>
+db.user.find<span class="o">({</span>age:<span class="o">{</span><span class="nv">$gte</span>: 16, <span class="nv">$lt</span>:18<span class="o">}})</span>; <span class="c">#where age &gt; 16 AND age &lt; 18</span>
+db.user.find<span class="o">({</span><span class="nv">$or</span>:<span class="o">{</span>name:<span class="s2">"xiaoming"</span>, sex:<span class="s2">"M"</span><span class="o">}})</span>; <span class="c">#where name=xiaoyang OR sex=M</span>
+db.user.find<span class="o">({</span>name : <span class="o">{</span><span class="nv">$in</span>:[<span class="s2">"xiaoming"</span>,<span class="s2">"xiaoyang"</span>, <span class="s2">"xiaowang"</span><span class="o">]}})</span>; <span class="c">#where name IN('xiaoming', 'xiaoyang', 'xiaowang')</span>
+db.user.find<span class="o">({</span>name:<span class="s2">"xiaoyang"</span><span class="o">})</span>.skip<span class="o">(</span>10<span class="o">)</span>.limit<span class="o">(</span>20<span class="o">)</span>.sort<span class="o">({</span>id:-1<span class="o">})</span>; <span class="c">#分页查询，并且order by id desc</span>
+...
+</code></pre>
+</div>
+
+<h1 id="section-7">删除文档</h1>
+<blockquote>
+  <p>db.remove(query, justOne);</p>
+</blockquote>
+
+<p><strong>参数说明：</strong></p>
+
+<ul>
+  <li>query : update的查询条件，类似sql update查询内where后面的。</li>
+  <li>justOne : 默认为true，之删除匹配到的第一文档，如果设置为true，则会删除匹配到的所有文档</li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>db.blog.remove<span class="o">({</span>id:1<span class="o">})</span>;
+db.user.remove<span class="o">({</span>status:0<span class="o">}</span>, <span class="nb">false</span><span class="o">)</span>; <span class="c">#删除所有未审核的用户</span>
+</code></pre>
+</div>
+<p>删除文档速度时很快的，几乎在一瞬间完成的，但是如果你要清空整个文档，并且文档的数据量又大，建议你直接删除集合（然后重建索引）会更快。比如一个含有100w个文档的集合，你一条一条删除可能要花费近50秒的时间，但是直接删除集合却只要0.01秒不到。</p>
+
+<h1 id="mongodb">MongoDB优缺点分析</h1>
+<p><strong> 通过这两天的简单学习，发现mongodb的优势还是很明显的</strong></p>
+
+<ol>
+  <li>速度比较快，我使用php的Mongodb扩展进行测试，插入100w条记录平均耗时65秒，每秒钟插入15000条左右，这速度甩mysql几条街</li>
+  <li>文档的格式相当自由，这对于关系行数据库优势还是比较大的，对于一些不规则的数据结构比如商品的属性什么的，每个中商品的属性都不一样，各类的都有，这要是用关系型数据库去实现得建N个表，折腾半天才能勉强实现，但是如果用<code>mongo</code>的话，一个表就可以解决，而且逻辑非常建档，相当方便。</li>
+  <li>相对于<code>mysql</code>的读写分离主从配置，分表分库什么的，<code>mongo</code>的分片还是简单的多，所以说<code>mongo</code>的扩展性和高可用也是有保障的。</li>
+  <li>内置了<code>GridFS</code> GridFS是一个出色的分布式文件系统，可以支持海量的数据存储，能够满足对大数据集的快速范围查询。</li>
+  <li>内置了强大的查询功能，支持各种复杂查询，尤其时$where操作符查询，使得查询几乎能做任何事情了，可以跟sql数据库达到相同的效果，甚至能实现更复杂的查询。</li>
+</ol>
+
+<p><strong>当然，缺点也是有的</strong></p>
+
+<ol>
+  <li>对于已经习惯了写sql来查询的小伙伴来说mongo的查询条件确实有点复杂，没有sql那么简单直接，尤其一些分组查询之类的，虽然能实现，但是确实是比较麻烦的。</li>
+  <li>不支持事务，这个确实是个蛋疼的问题，这就注定了一些业务的数据肯定是不能用mongo来存储了，如果非要的话可能时要自己在应用层实现事务了。不过这也不是太大的问题，大不了把那些数据存回mysql之类的关系型数据库了。</li>
+  <li>mongodb占用的空间比较大，其实mongo的效率是用空间换来的，首先BSON这种文档格式就不是很省空间，而且mongo的一些操作也是有点浪费空间，比如mongo在删除数据的时候其实并没有真正的释放磁盘空间，为避免记录删除后的数据的大规模挪动，原记录空间不删除，只标记“已删除”即可，以后还可以重复利用。</li>
+  <li>目前我还没有发现，以后再慢慢找。。。</li>
+</ol>
+

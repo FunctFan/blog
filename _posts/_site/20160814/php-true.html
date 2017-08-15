@@ -1,0 +1,248 @@
+<p>最近在写php代码的时候突然很纠结一个问题，就是php里面的那些预定义常量也预定义变量到底有什么区别。比如说<code>true</code>和<code>TRUE</code>,
+<code>false</code>和<code>FALSE</code>，<code>null</code>和<code>NULL</code>…
+那么这些变量对到底有什么区别呢，作为一名热衷技术热衷死磕的码农，果断要测试一下</p>
+
+<div class="language-php highlighter-rouge"><pre class="highlight"><code>var_dump(true === TRUE);
+</code></pre>
+</div>
+<p>结果为<code>bool(true)</code>，那意味着他们是没有区别的。那么问题来了，php为什么要放2个一毛一样的预定义变量呢？是有什么用意呢，还是本身语言设计的历史遗留问题？百度google一大圈
+没有找到合适的答案，于是果断去看php的编译源代码，php的整个编译程序只有一个文件，都在<code>zend/zend_compile.c</code>里面，大概7000多行，看着眼花，没办法，也要慢慢看，结果还是找到了想要的答案，这里记录过程，以便查阅。</p>
+
+<p>这里看看php字面量常量的编译</p>
+
+<div class="language-php highlighter-rouge"><pre class="highlight"><code>static int zend_add_const_name_literal(zend_op_array *op_array, zend_string *name, zend_bool unqualified) 
+{
+	zend_string *tmp_name;
+
+	int ret = zend_add_literal_string(op_array, <span class="ni">&amp;name);</span>
+
+	size_t ns_len = 0, after_ns_len = ZSTR_LEN(name);
+	const char *after_ns = zend_memrchr(ZSTR_VAL(name), '\\', ZSTR_LEN(name));
+	if (after_ns) { 
+		after_ns += 1;
+		ns_len = after_ns - ZSTR_VAL(name) - 1;
+		after_ns_len = ZSTR_LEN(name) - ns_len - 1;
+
+		/* lowercased namespace name <span class="err">&amp;</span> original constant name */
+		tmp_name = zend_string_init(ZSTR_VAL(name), ZSTR_LEN(name), 0);
+		zend_str_tolower(ZSTR_VAL(tmp_name), ns_len);
+		zend_add_literal_string(op_array, <span class="ni">&amp;tmp_name);</span>
+
+		/* lowercased namespace name <span class="err">&amp;</span> lowercased constant name */
+		tmp_name = zend_string_tolower(name);
+		zend_add_literal_string(op_array, <span class="ni">&amp;tmp_name);</span>
+
+		if (!unqualified) {
+			return ret;
+		}
+	} else {
+		after_ns = ZSTR_VAL(name);
+	}
+
+	/* original unqualified constant name */
+	tmp_name = zend_string_init(after_ns, after_ns_len, 0);
+	zend_add_literal_string(op_array, <span class="ni">&amp;tmp_name);</span>
+
+	/* lowercased unqualified constant name */ 
+	tmp_name = zend_string_alloc(after_ns_len, 0);
+	zend_str_tolower_copy(ZSTR_VAL(tmp_name), after_ns, after_ns_len);
+	zend_add_literal_string(op_array, <span class="ni">&amp;tmp_name);</span>
+
+	return ret;
+}
+</code></pre>
+</div>
+<p>看到其中一个片段</p>
+
+<div class="language-php highlighter-rouge"><pre class="highlight"><code>/* lowercased namespace name <span class="err">&amp;</span> lowercased constant name */
+tmp_name = zend_string_tolower(name);
+zend_add_literal_string(op_array, <span class="ni">&amp;tmp_name);</span>
+</code></pre>
+</div>
+
+<p><code>tmp_name = zend_string_tolower(name)</code>，这里全部转换成小写了</p>
+
+<p>接着往下看，发现php的好多地方都是不区分大小写的，包括IF和if， 函数名，方法名…都是不区分大小写的</p>
+
+<div class="language-php highlighter-rouge"><pre class="highlight"><code>void zend_begin_method_decl(zend_op_array *op_array, zend_string *name, zend_bool has_body) {
+	op_array-&gt;scope = ce;
+	op_array-&gt;function_name = zend_string_copy(name);
+
+	lcname = zend_string_tolower(name);
+	lcname = zend_new_interned_string(lcname);
+	....
+</code></pre>
+</div>
+
+<p>方法名称也全部在编译的时候转换成小写了！</p>
+
+<div class="language-php highlighter-rouge"><pre class="highlight"><code>static void zend_begin_func_decl(znode *result, zend_op_array *op_array, zend_ast_decl *decl) {
+	unqualified_name = decl-&gt;name;
+	op_array-&gt;function_name = name = zend_prefix_with_ns(unqualified_name);
+	lcname = zend_string_tolower(name);
+	...
+</code></pre>
+</div>
+<p>函数名称在编译的时候也全部转换成小写了！</p>
+
+<div class="language-php highlighter-rouge"><pre class="highlight"><code>key = zend_build_runtime_definition_key(lcname, decl-&gt;lex_pos);
+zend_hash_update_ptr(CG(function_table), key, op_array);
+
+</code></pre>
+</div>
+<p>这里表示把编译好的函数通过key,op_array代码送入进CG(function_table)的全局函数符号表！</p>
+
+<div class="language-php highlighter-rouge"><pre class="highlight"><code>void zend_compile_class_decl(zend_ast *ast) {
+	name = zend_new_interned_string(name);
+	lcname = zend_string_tolower(name);
+
+	name = zend_generate_anon_class_name(decl-&gt;lex_pos);
+	lcname = zend_string_tolower(name);
+	...
+</code></pre>
+</div>
+<p>编译类的定义，也全部把类名称转换成小写了，所以类的名字大小写也没关系！</p>
+
+<p>继续往下看…</p>
+
+<div class="language-php highlighter-rouge"><pre class="highlight"><code>void zend_compile_use(zend_ast *ast) 
+{
+	zend_ast_list *list = zend_ast_get_list(ast);
+	uint32_t i;
+	zend_string *current_ns = FC(current_namespace);
+	uint32_t type = ast-&gt;attr;
+	HashTable *current_import = zend_get_import_ht(type);
+	zend_bool case_sensitive = type == T_CONST;
+	...
+	
+	if (case_sensitive) {
+		lookup_name = zend_string_copy(new_name);
+	} else {
+		lookup_name = zend_string_tolower(new_name);
+
+	}
+	...
+</code></pre>
+</div>
+
+<p>这段代码可以得出2个结论：
+1. use 语法是不区分大小写的
+2. define常量是严格区分大小写的</p>
+
+<p>继续看…</p>
+
+<div class="language-php highlighter-rouge"><pre class="highlight"><code>if (type == T_CLASS <span class="err">&amp;&amp;</span> zend_is_reserved_class_name(new_name)) {
+	zend_error_noreturn(E_COMPILE_ERROR, "Cannot use %s as %s because '%s' "
+			"is a special class name", ZSTR_VAL(old_name), ZSTR_VAL(new_name), ZSTR_VAL(new_name));
+}
+</code></pre>
+</div>
+<p>类名字定义，不能是预定义类名字的限制逻辑！</p>
+
+<p><code>reserved_class_name</code>的定义如下：</p>
+
+<div class="language-php highlighter-rouge"><pre class="highlight"><code>static const struct reserved_class_name reserved_class_names[] = {
+	{ZEND_STRL("bool")},
+	{ZEND_STRL("false")},
+	{ZEND_STRL("float")},
+	{ZEND_STRL("int")},
+	{ZEND_STRL("null")},
+	{ZEND_STRL("parent")},
+	{ZEND_STRL("self")},
+	{ZEND_STRL("static")},
+	{ZEND_STRL("string")},
+	{ZEND_STRL("true")},
+	{ZEND_STRL("void")},
+	{ZEND_STRL("iterable")},
+	{NULL, 0}
+};
+
+</code></pre>
+</div>
+
+<p>所以，类名都不能是，上述预定义字符串！</p>
+
+<p>接下来看看类的编译</p>
+
+<div class="language-php highlighter-rouge"><pre class="highlight"><code>
+static int zend_add_class_name_literal(zend_op_array *op_array, zend_string *name) {
+{
+	/* Original name */
+	int ret = zend_add_literal_string(op_array, <span class="ni">&amp;name);</span>
+
+	/* Lowercased name */
+	zend_string *lc_name = zend_string_tolower(name);
+	zend_add_literal_string(op_array, <span class="ni">&amp;lc_name);</span>
+
+	zend_alloc_cache_slot(ret);
+
+	return ret;
+}
+
+void zend_begin_method_decl(zend_op_array *op_array, zend_string *name, zend_bool has_body) 
+{
+	zend_class_entry *ce = CG(active_class_entry);
+	zend_bool in_interface = (ce-&gt;ce_flags <span class="err">&amp;</span> ZEND_ACC_INTERFACE) != 0;
+	zend_bool in_trait = (ce-&gt;ce_flags <span class="err">&amp;</span> ZEND_ACC_TRAIT) != 0;
+	zend_bool is_public = (op_array-&gt;fn_flags <span class="err">&amp;</span> ZEND_ACC_PUBLIC) != 0;
+	zend_bool is_static = (op_array-&gt;fn_flags <span class="err">&amp;</span> ZEND_ACC_STATIC) != 0;
+
+	zend_string *lcname;
+
+	if (in_interface) {
+		if (!is_public || (op_array-&gt;fn_flags <span class="err">&amp;</span> (ZEND_ACC_FINAL|ZEND_ACC_ABSTRACT))) {
+			zend_error_noreturn(E_COMPILE_ERROR, "Access type for interface method "
+					"%s::%s() must be omitted", ZSTR_VAL(ce-&gt;name), ZSTR_VAL(name));
+		}
+		op_array-&gt;fn_flags |= ZEND_ACC_ABSTRACT;
+	}
+
+	if (op_array-&gt;fn_flags <span class="err">&amp;</span> ZEND_ACC_ABSTRACT) {
+		if (op_array-&gt;fn_flags <span class="err">&amp;</span> ZEND_ACC_PRIVATE) {
+			zend_error_noreturn(E_COMPILE_ERROR, "%s function %s::%s() cannot be declared private",
+					in_interface ? "Interface" : "Abstract", ZSTR_VAL(ce-&gt;name), ZSTR_VAL(name));
+		}
+
+		if (has_body) {
+			zend_error_noreturn(E_COMPILE_ERROR, "%s function %s::%s() cannot contain body",
+					in_interface ? "Interface" : "Abstract", ZSTR_VAL(ce-&gt;name), ZSTR_VAL(name));
+		}
+
+		ce-&gt;ce_flags |= ZEND_ACC_IMPLICIT_ABSTRACT_CLASS;
+	} else if (!has_body) {
+		zend_error_noreturn(E_COMPILE_ERROR, "Non-abstract method %s::%s() must contain body",
+				ZSTR_VAL(ce-&gt;name), ZSTR_VAL(name));
+	}
+
+	op_array-&gt;scope = ce;
+	op_array-&gt;function_name = zend_string_copy(name);
+
+	lcname = zend_string_tolower(name);
+	lcname = zend_new_interned_string(lcname);
+</code></pre>
+</div>
+
+<p>这段代码有意思，php的什么和抽象类的修饰权限，全是在编译的时候检测的，而且，检测与否其实就是一个if</p>
+
+<div class="language-php highlighter-rouge"><pre class="highlight"><code>if (in_interface) {		
+	if (!is_public || (op_array-&gt;fn_flags <span class="err">&amp;</span> (ZEND_ACC_FINAL|ZEND_ACC_ABSTRACT))) {			
+		zend_error_noreturn(E_COMPILE_ERROR, "Access type for interface method "				
+				"%s::%s() must be omitted", ZSTR_VAL(ce-&gt;name), ZSTR_VAL(name));		
+	}		
+	op_array-&gt;fn_flags |= ZEND_ACC_ABSTRACT;	
+}
+</code></pre>
+</div>
+
+<p>如果是接口，但是修饰flag不是<code>public</code>就报错了！</p>
+
+<p><strong>这也可以说明在php里面，写个<code>interface</code>，然后写很多实现，这种模式不是很有必要，也就是欺骗一下编译器，运行的时候还是到<code>CG(function_table)</code>或者<code>CG(active_class_entry)</code>中取查找，会让编译过程变慢，所以特么<code>opcache</code>这么有用的很大原因之一！</strong></p>
+
+<p>最后献上PHP之父<code>Rasmus</code>在php巴黎会议的一段话</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>Rasmus in a PHP conference in Paris saying more or less: "I'm definitely not a good programmer, in terms of following strict coding rules or standards, 
+	   but I can say that if you rely on case sensitivity to recognize one function name from another, you're in kind of serious trouble
+</code></pre>
+</div>
+<p>这里简单翻译一下：“我绝对不是一个好的程序员，至少在遵循严格的编码规则和标准方面， 但是我不得不说，如果你要依靠大小写来区分自己写的另一个函数，那你将会非常麻烦”
+到此为止，这估计是php不区分大小写的最好的理由了。</p>
