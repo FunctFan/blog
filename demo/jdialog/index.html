@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>JDialog 插件测试</title>
+
+	<script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+	<script language="javascript" charset="utf-8" src="JDialog.min.js" ></script>
+</head>
+
+<body>
+<div class="container">
+
+	<h3>
+		<button class="btn btn-primary" onclick="lockScreen();">锁定屏幕</button>
+	</h3>
+
+	<h3>JDialog.msg</h3>
+	<div>
+		<button class="btn btn-success" onclick="tipsuccess();">成功（SUCCESS）</button>
+		<button class="btn btn-info" onclick="tipinfo();">一般信息（INFO）</button>
+		<button class="btn btn-danger" onclick="tiperror();">错误信息（ERROR）</button>
+		<button class="btn btn-warning" onclick="tiploading();">加载等待（LOADING）</button>
+	</div>
+
+	<h3>JDialog.open</h3>
+	<div>
+		<button class="btn btn-primary" onclick="popwin();">弹出对话框（普通）</button>
+		<button class="btn btn-info" onclick="popIframe();">弹出对话框（iframe）</button>
+	</div>
+
+	<h3>JDialog.alert</h3>
+	<div>
+		<button class="btn btn-primary" onclick="__alert();">弹出Alert</button>
+	</div>
+
+	<h3>JDialog.confirm</h3>
+	<div>
+		<button class="btn btn-primary" onclick="popConfirm();">弹出确认对话框</button>
+	</div>
+
+	<h3>JDialog.loader</h3>
+	<div>
+		<button class="btn btn-primary" onclick="loader();">加载数据</button>
+		<button class="btn btn-primary" onclick="loaderInContainer();">在指定容器中加载</button>
+		<div id="loader-container" style="border: 1px solid #00b7ee; width: 600px; height: 200px; margin:10px 0px 0px 100px;"></div>
+	</div>
+
+	<h3>项目Git地址</h3>
+	<div>
+		<a href="http://git.oschina.net/blackfox/JDialog" target="_blank">http://git.oschina.net/blackfox/JDialog</a>
+	</div>
+</div>
+
+<script language="javascript">
+
+	var __offset = ['cc', 'lt', 'tc', 'rt', 'lc', 'rc', 'lb', 'bc', 'rb'];
+	var __effect = ['zoomIn', 'zoomInDown', 'bounceInDown', 'shake', 'flip', 'slideInDown'];
+	var __icons = ['warn','ok','edit','bag','ask','minus','italic','unlock','smile','angry','down','remove','msg','mail'];
+
+	//锁定屏幕
+	function lockScreen() {
+		JDialog.lock({timer : 2000});
+	}
+
+	function tipsuccess() {
+		JDialog.msg({
+			type:'ok',
+			content : '恭喜您，注册成功，即将跳转至登录界面',
+			lock : false,
+			offset : __offset[Math.floor(Math.random() * __offset.length)],
+			effect : __effect[Math.floor(Math.random() * __effect.length)]
+		});
+	}
+
+	function tipinfo() {
+		//JDialog.msg("你好，我是默认提示样式");
+		JDialog.msg({
+			type:'warn',
+			content : '一般提示信息',
+			offset : [200, 200],
+			effect:'bounceInDown'
+		});
+	}
+
+	function tiperror() {
+		JDialog.msg({type:'error', content : '对不起，注册失败，请重试', effect:'shake', offset:'tc'});
+	}
+
+	function tiploading() {
+		JDialog.msg({type:'loading',  content : '正在努力加载数据，请稍后...', lock : true, effect:'flip'});
+	}
+
+	//弹出对话框
+	function popwin() {
+
+		JDialog.open({
+			title : "普通对话框",
+			width : 600,
+		    height : 0, //heigth = 0,表示根据内容的高度自适应
+			offset : __offset[Math.floor(Math.random() * __offset.length)],
+			effect : __effect[Math.floor(Math.random() * __effect.length)],
+			content : '<div>这是对话框内容<br/>这是对话框内容<br/>这是对话框内容<br/>这是对话框内容<br/>这是对话框内容<br/>这是对话框内容<br/>这是对话框内容<br/></div>'
+		});
+	}
+
+	function popIframe() {
+		JDialog.open({
+			title : "个人博客",
+			effect : "zoomIn",
+			height : 80,
+			maxEnable : true,
+			width : 80,
+			content :
+			'<iframe frameborder="0" height="'+($(window).height() * 0.8)+'" width="100%" src="http://www.r9it.com"></iframe>'
+		});
+	}
+
+	function __alert() {
+		JDialog.alert({
+			title : '提示标题',
+			content : '你好，您的提现已经成功。',
+			icon : __icons[Math.floor(Math.random() * __icons.length)],
+		});
+	}
+
+	function popConfirm() {
+
+		var win = JDialog.confirm({
+			title : "对话框标题",
+			width : 600,
+			lock : false,
+			effect : 1,
+//		maxEnable : true,
+			content : '<div style="padding-top:13px; font-size:14px;">该操作会删除所有的商品，继续操作吗？强烈建议您将其移动至其他栏目.</div>',
+			icon : __icons[Math.floor(Math.random() * __icons.length)],
+			offset : __offset[Math.floor(Math.random() * __offset.length)],
+			effect : __effect[Math.floor(Math.random() * __effect.length)],
+
+			button : {
+				'确认' : function() {
+					win.lock();
+					setTimeout(function() {
+						JDialog.msg({
+							type:"ok",
+							content:"处理成功.",
+							container:"#"+win.getId(),
+							timer:1000,
+							callback: function() {
+								win.close();
+							}
+						});
+					}, 2000)
+				},
+				'取消' : function() {
+					JDialog.msg({type:'error', content : 'fuck ,  你为什么要取消！！', container : ".jdialog_win_box", timer : 2000});
+				},
+
+				'不确定' : function() {
+					window.alert('shit, 你居然不确定！');
+				},
+				'很好' : function() {
+					window.alert('好什么好啊。SB');
+				}
+			}
+		});
+	}
+
+	function loader() {
+		JDialog.loader({
+			timer : 3000,
+			lock : false,
+			//offset : __offset[Math.floor(Math.random() * __offset.length)],
+			skin : 4
+		});
+	}
+
+	function loaderInContainer() {
+		JDialog.loader({
+			timer : 3000,
+			lock : false,
+			offset : __offset[Math.floor(Math.random() * __offset.length)],
+			container : '#loader-container',
+			skin : Math.ceil(Math.random()*4)
+		});
+	}
+
+</script>
+</body>
+
+</html>
+
