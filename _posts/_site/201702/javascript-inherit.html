@@ -1,0 +1,214 @@
+<p>今天介绍javascript的五种实现继承的方法。</p>
+
+<p>比如，现在有一个”动物”对象的构造函数。</p>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">Animal</span><span class="p">(){</span>
+	<span class="k">this</span><span class="p">.</span><span class="nx">species</span> <span class="o">=</span> <span class="s2">"动物"</span><span class="p">;</span>
+<span class="p">}</span>
+
+</code></pre>
+</div>
+
+<p>还有一个”猫”对象的构造函数。</p>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">Cat</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span><span class="nx">color</span><span class="p">){</span>
+	<span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="nx">name</span><span class="p">;</span>
+	<span class="k">this</span><span class="p">.</span><span class="nx">color</span> <span class="o">=</span> <span class="nx">color</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p>怎样才能使”猫”继承”动物”呢？</p>
+
+<h1 id="section">一、 构造函数绑定</h1>
+
+<p>第一种方法也是最简单的方法，使用call或apply方法，将父对象的构造函数绑定在子对象上，即在子对象构造函数中加一行：</p>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">Cat</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span><span class="nx">color</span><span class="p">){</span>
+	<span class="nx">Animal</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="nx">arguments</span><span class="p">);</span>
+	<span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="nx">name</span><span class="p">;</span>
+	<span class="k">this</span><span class="p">.</span><span class="nx">color</span> <span class="o">=</span> <span class="nx">color</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kd">var</span> <span class="nx">cat1</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Cat</span><span class="p">(</span><span class="s2">"大毛"</span><span class="p">,</span><span class="s2">"黄色"</span><span class="p">);</span>
+<span class="nx">alert</span><span class="p">(</span><span class="nx">cat1</span><span class="p">.</span><span class="nx">species</span><span class="p">);</span> <span class="c1">// 动物</span>
+</code></pre>
+</div>
+
+<h1 id="prototype">二、 prototype模式</h1>
+<p>第二种方法更常见，使用prototype属性。</p>
+
+<p>如果”猫”的prototype对象，指向一个Animal的实例，那么所有”猫”的实例，就能继承Animal了。</p>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="nx">Cat</span><span class="p">.</span><span class="nx">prototype</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Animal</span><span class="p">();</span>
+<span class="nx">Cat</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">constructor</span> <span class="o">=</span> <span class="nx">Cat</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">cat1</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Cat</span><span class="p">(</span><span class="s2">"大毛"</span><span class="p">,</span><span class="s2">"黄色"</span><span class="p">);</span>
+<span class="nx">alert</span><span class="p">(</span><span class="nx">cat1</span><span class="p">.</span><span class="nx">species</span><span class="p">);</span> <span class="c1">// 动物</span>
+</code></pre>
+</div>
+
+<p>代码的第一行，我们将Cat的prototype对象指向一个Animal的实例。</p>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="nx">Cat</span><span class="p">.</span><span class="nx">prototype</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Animal</span><span class="p">();</span>
+</code></pre>
+</div>
+
+<p>它相当于完全删除了prototype
+对象原先的值，然后赋予一个新值。但是，第二行又是什么意思呢？</p>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="nx">Cat</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">constructor</span> <span class="o">=</span> <span class="nx">Cat</span><span class="p">;</span>
+</code></pre>
+</div>
+
+<p>原来，任何一个prototype对象都有一个constructor属性，指向它的构造函数。如果没有”Cat.prototype
+= new
+Animal();”这一行，Cat.prototype.constructor是指向Cat的；加了这一行以后，Cat.prototype.constructor指向Animal。</p>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="nx">alert</span><span class="p">(</span><span class="nx">Cat</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">constructor</span> <span class="o">==</span> <span class="nx">Animal</span><span class="p">);</span> <span class="c1">//true</span>
+</code></pre>
+</div>
+
+<p>更重要的是，每一个实例也有一个constructor属性，默认调用prototype对象的constructor属性。</p>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="nx">alert</span><span class="p">(</span><span class="nx">cat1</span><span class="p">.</span><span class="nx">constructor</span> <span class="o">==</span> <span class="nx">Cat</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">constructor</span><span class="p">);</span> <span class="c1">// true</span>
+</code></pre>
+</div>
+
+<p>因此，在运行”Cat.prototype = new Animal();”这一行之后，cat1.constructor也指向Animal！</p>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="nx">alert</span><span class="p">(</span><span class="nx">cat1</span><span class="p">.</span><span class="nx">constructor</span> <span class="o">==</span> <span class="nx">Animal</span><span class="p">);</span> <span class="c1">// true</span>
+</code></pre>
+</div>
+
+<p>这显然会导致继承链的紊乱（cat1明明是用构造函数Cat生成的），因此我们必须手动纠正，将Cat.prototype对象的constructor值改为Cat。这就是第二行的意思。</p>
+
+<p>这是很重要的一点，编程时务必要遵守。下文都遵循这一点，即如果替换了prototype对象，</p>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="nx">o</span><span class="p">.</span><span class="nx">prototype</span> <span class="o">=</span> <span class="p">{};</span>
+</code></pre>
+</div>
+
+<p>那么，下一步必然是为新的prototype对象加上constructor属性，并将这个属性指回原来的构造函数。</p>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="nx">o</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">constructor</span> <span class="o">=</span> <span class="nx">o</span><span class="p">;</span>
+</code></pre>
+</div>
+
+<h1 id="prototype-1">三、 直接继承prototype</h1>
+
+<p>第三种方法是对第二种方法的改进。由于Animal对象中，不变的属性都可以直接写入Animal.prototype。所以，我们也可以让Cat()跳过Animal()，直接继承Animal.prototype。</p>
+
+<p>现在，我们先将Animal对象改写：</p>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">Animal</span><span class="p">(){</span> <span class="p">}</span>
+<span class="nx">Animal</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">species</span> <span class="o">=</span> <span class="s2">"动物"</span><span class="p">;</span>
+</code></pre>
+</div>
+
+<p>然后，将Cat的prototype对象，然后指向Animal的prototype对象，这样就完成了继承。</p>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="nx">Cat</span><span class="p">.</span><span class="nx">prototype</span> <span class="o">=</span> <span class="nx">Animal</span><span class="p">.</span><span class="nx">prototype</span><span class="p">;</span>
+<span class="nx">Cat</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">constructor</span> <span class="o">=</span> <span class="nx">Cat</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">cat1</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Cat</span><span class="p">(</span><span class="s2">"大毛"</span><span class="p">,</span><span class="s2">"黄色"</span><span class="p">);</span>
+<span class="nx">alert</span><span class="p">(</span><span class="nx">cat1</span><span class="p">.</span><span class="nx">species</span><span class="p">);</span> <span class="c1">// 动物</span>
+</code></pre>
+</div>
+
+<p>与前一种方法相比，这样做的优点是效率比较高（不用执行和建立Animal的实例了），比较省内存。缺点是
+Cat.prototype和Animal.prototype现在指向了同一个对象，那么任何对Cat.prototype的修改，都会反映到Animal.prototype。</p>
+
+<p>所以，上面这一段代码其实是有问题的。请看第二行</p>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="nx">Cat</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">constructor</span> <span class="o">=</span> <span class="nx">Cat</span><span class="p">;</span>
+</code></pre>
+</div>
+
+<p>这一句实际上把Animal.prototype对象的constructor属性也改掉了！</p>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="nx">alert</span><span class="p">(</span><span class="nx">Animal</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">constructor</span><span class="p">);</span> <span class="c1">// Cat</span>
+</code></pre>
+</div>
+
+<h1 id="section-1">四、 利用空对象作为中介</h1>
+
+<p>由于”直接继承prototype”存在上述的缺点，所以就有第四种方法，利用一个空对象作为中介。</p>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">F</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){};</span>
+<span class="nx">F</span><span class="p">.</span><span class="nx">prototype</span> <span class="o">=</span> <span class="nx">Animal</span><span class="p">.</span><span class="nx">prototype</span><span class="p">;</span>
+<span class="nx">Cat</span><span class="p">.</span><span class="nx">prototype</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">F</span><span class="p">();</span>
+<span class="nx">Cat</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">constructor</span> <span class="o">=</span> <span class="nx">Cat</span><span class="p">;</span>
+</code></pre>
+</div>
+
+<p>F是空对象，所以几乎不占内存。这时，修改Cat的prototype对象，就不会影响到Animal的prototype对象。</p>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="nx">alert</span><span class="p">(</span><span class="nx">Animal</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">constructor</span><span class="p">);</span> <span class="c1">// Animal</span>
+</code></pre>
+</div>
+
+<p>我们将上面的方法，封装成一个函数，便于使用。</p>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">extend</span><span class="p">(</span><span class="nx">Child</span><span class="p">,</span> <span class="nx">Parent</span><span class="p">)</span> <span class="p">{</span>
+	<span class="kd">var</span> <span class="nx">F</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){};</span>
+	<span class="nx">F</span><span class="p">.</span><span class="nx">prototype</span> <span class="o">=</span> <span class="nx">Parent</span><span class="p">.</span><span class="nx">prototype</span><span class="p">;</span>
+	<span class="nx">Child</span><span class="p">.</span><span class="nx">prototype</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">F</span><span class="p">();</span>
+	<span class="nx">Child</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">constructor</span> <span class="o">=</span> <span class="nx">Child</span><span class="p">;</span>
+	<span class="nx">Child</span><span class="p">.</span><span class="nx">uber</span> <span class="o">=</span> <span class="nx">Parent</span><span class="p">.</span><span class="nx">prototype</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p>使用的时候，方法如下</p>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="nx">extend</span><span class="p">(</span><span class="nx">Cat</span><span class="p">,</span><span class="nx">Animal</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">cat1</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Cat</span><span class="p">(</span><span class="s2">"大毛"</span><span class="p">,</span><span class="s2">"黄色"</span><span class="p">);</span>
+<span class="nx">alert</span><span class="p">(</span><span class="nx">cat1</span><span class="p">.</span><span class="nx">species</span><span class="p">);</span> <span class="c1">// 动物</span>
+</code></pre>
+</div>
+
+<p>这个extend函数，就是YUI库如何实现继承的方法。</p>
+
+<p>另外，说明一点，函数体最后一行</p>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="nx">Child</span><span class="p">.</span><span class="nx">uber</span> <span class="o">=</span> <span class="nx">Parent</span><span class="p">.</span><span class="nx">prototype</span><span class="p">;</span>
+</code></pre>
+</div>
+
+<p>意思是为子对象设一个uber属性，这个属性直接指向父对象的prototype属性。（uber是一个德语词，意思是”向上”、”上一层”。）这等于在子对象上打开一条通道，可以直接调用父对象的方法。这一行放在这里，只是为了实现继承的完备性，纯属备用性质。</p>
+
+<h1 id="section-2">五、 拷贝继承</h1>
+
+<p>上面是采用prototype对象，实现继承。我们也可以换一种思路，纯粹采用”拷贝”方法实现继承。简单说，如果把父对象的所有属性和方法，拷贝进子对象，不也能够实现继承吗？这样我们就有了第五种方法。</p>
+
+<p>首先，还是把Animal的所有不变属性，都放到它的prototype对象上。</p>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">Animal</span><span class="p">(){}</span>
+<span class="nx">Animal</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">species</span> <span class="o">=</span> <span class="s2">"动物"</span><span class="p">;</span>
+</code></pre>
+</div>
+
+<p>然后，再写一个函数，实现属性拷贝的目的。</p>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">extend2</span><span class="p">(</span><span class="nx">Child</span><span class="p">,</span> <span class="nx">Parent</span><span class="p">)</span> <span class="p">{</span>
+	<span class="kd">var</span> <span class="nx">p</span> <span class="o">=</span> <span class="nx">Parent</span><span class="p">.</span><span class="nx">prototype</span><span class="p">;</span>
+	<span class="kd">var</span> <span class="nx">c</span> <span class="o">=</span> <span class="nx">Child</span><span class="p">.</span><span class="nx">prototype</span><span class="p">;</span>
+	<span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="k">in</span> <span class="nx">p</span><span class="p">)</span> <span class="p">{</span>
+		<span class="nx">c</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">=</span> <span class="nx">p</span><span class="p">[</span><span class="nx">i</span><span class="p">];</span>
+	<span class="p">}</span>
+	<span class="nx">c</span><span class="p">.</span><span class="nx">uber</span> <span class="o">=</span> <span class="nx">p</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p>这个函数的作用，就是将父对象的prototype对象中的属性，一一拷贝给Child对象的prototype对象。</p>
+
+<p>使用的时候，这样写：</p>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="nx">extend2</span><span class="p">(</span><span class="nx">Cat</span><span class="p">,</span> <span class="nx">Animal</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">cat1</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Cat</span><span class="p">(</span><span class="s2">"大毛"</span><span class="p">,</span><span class="s2">"黄色"</span><span class="p">);</span>
+<span class="nx">alert</span><span class="p">(</span><span class="nx">cat1</span><span class="p">.</span><span class="nx">species</span><span class="p">);</span> <span class="c1">// 动物</span>
+</code></pre>
+</div>
+
+<p>本文转载于阮一峰老师的网络日志，<a href="http://www.ruanyifeng.com/blog/2010/05/object-oriented_javascript_inheritance.html">查看原文</a>。</p>
+
+<p><strong>《完》</strong></p>

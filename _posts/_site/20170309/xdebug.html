@@ -1,0 +1,58 @@
+<p>断点调试是编程的一大利器，为我们的调试工作带来很多便利。但是php的断点调试一直不是一件很容易的事情，
+所以大部分的phper都还是停留在使用 <strong>死亡输出</strong> 来进行代码调试。这也是php被一部分javaer吐槽比较多的地方。
+本文我就讲讲如何用phpstrom配置php的断点调试。</p>
+
+<h1 id="xdebug">安装xdebug</h1>
+<p>在配置断点调试之前，你必须先安装xdebug，先去官网下载源码，然后编译安装就好了。（windows用户请直接下载编译好的二进制包）</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>wget https://xdebug.org/files/xdebug-2.5.0.tgz
+tar xvpzf xdebug-2.5.0.tgz
+<span class="nb">cd </span>xdebug-2.5.0 <span class="o">&amp;&amp;</span> phpize
+./configue 
+make <span class="o">&amp;&amp;</span> sudo make install
+</code></pre>
+</div>
+<p>安装好了之后，在php的配置文档中启用xdebug</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="nv">zend_extension</span><span class="o">=</span>xdebug.so
+xdebug.remote_enable<span class="o">=</span>1
+xdebug.remote_mode<span class="o">=</span>req
+xdebug.idekey<span class="o">=</span><span class="s2">"PHPSTORM"</span>
+xdebug.auto_trace<span class="o">=</span>1
+xdebug.remote_port <span class="o">=</span> 9000
+xdebug.remote_host <span class="o">=</span> 127.0.0.1
+xdebug.remote_handler <span class="o">=</span> dbgp
+xdebug.collect_params<span class="o">=</span>1
+xdebug.collect_return<span class="o">=</span>1
+xdebug.profiler_enable<span class="o">=</span>1
+</code></pre>
+</div>
+<p>如果是windows系统，请把xdebug.so 改成 xdebug.dll</p>
+
+<h1 id="phpstorm">配置phpstorm</h1>
+<p>phpstrom 的配置很简单，监听xdebug的端口就好了，打开菜单 Languages -&gt; Frameworks -&gt; PHP -&gt; Debug, 把 <code class="scode">Debug port</code> 改成9000就好了。</p>
+
+<p><img class="img-view" data-src="/images/2017/03/xdebug-phpstorm.png" src="/images/1px.png" /></p>
+
+<h1 id="chrome-xdebug-">添加chrome xdebug 扩展</h1>
+<p>要在web端进行断点调试，还需要给谷歌浏览器（目前只支持chrome）安装一个<code class="scode">xdebug helper</code>，这个只需要chrome web store 去搜索以下，然后添加就好了。</p>
+
+<p><img class="img-view" data-src="/images/2017/03/xdebug-01.png" src="/images/1px.png" /></p>
+
+<p>安装好之后，你的浏览器右边工具栏就有会出现一个xdebug的小图标，调试的时候点击图标选择绿色的那个状态就好了。</p>
+
+<p><img class="img-view" data-src="/images/2017/03/xdebug-02.png" src="/images/1px.png" /></p>
+
+<h1 id="section">开始断点调试</h1>
+<p>一切准备就绪之后，就可以开始断点调试了。首先在chrome把xdebug扩展设置为调试状态（绿色）</p>
+
+<p>然后还需要在phpstorm点击那个绿色的小电话</p>
+
+<p><img class="img-view" data-src="/images/2017/03/xdebug-03.png" src="/images/1px.png" /></p>
+
+<h4 id="java">访问你打了断点的页面，你就会发现你可以向java那样调试了</h4>
+
+<p><img class="img-view" data-src="/images/2017/03/xdebug-04.png" src="/images/1px.png" /></p>
+
+<p><br />
+从此断点调试变得如此简单。</p>

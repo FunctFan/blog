@@ -125,13 +125,7 @@ sudo docker run -it -v /share:/usr/local/myshare --name container_name ubuntu:14
 ```
 
 
-可能碰到的问题
-=====
-一、 网络超级慢，运行一个apt-get update要半天
-
-1. 切换源
-2. docker 默认的dns是8.8.8.8和8.8.4.4这个一般在天朝是比较慢的，所以最好换成所在城市的dns
-
+> 如果你发现容器的网络超级慢，运行一个apt-get update要半天, 那么可能需要切换源.
 这里贴上一个阿里云的源，亲测很快
 
 ```bash
@@ -147,6 +141,62 @@ deb-src http://mirrors.aliyun.com/ubuntu/ trusty-proposed main restricted univer
 deb-src http://mirrors.aliyun.com/ubuntu/ trusty-backports main restricted universe multiverseV
 ```
 
+docker镜像的远程托管
+=====
+我们可以像把代码托管在git仓库一样，容器的镜像也是可以托管到远程镜像仓库的，比如说<a href="https://dev.aliyun.com/search.html">阿里云的镜像仓库。</a>
+登陆进去创建一个镜像仓库。（这里不提供教程，很容创建的），创建之后你就可以管理你的docker镜像了
 
+> 登陆 docker registry:
 
+```bash
+$ sudo docker login --username={username} registry.cn-shenzhen.aliyuncs.com
+```
+{username}是你的阿里云账号全名，密码是您开通namespace时设置的密码。
 
+registry.cn-shenzhen.aliyuncs.com 是你的镜像仓库的地址
+
+> 从registry中拉取镜像：
+
+```bash
+$ sudo docker pull registry.cn-shenzhen.aliyuncs.com/{username}/{仓库名称}:{镜像版本号}
+```
+
+> 将镜像推送到registry：
+
+```bash
+$ sudo docker login --username={username} registry.cn-shenzhen.aliyuncs.com
+$ sudo docker tag {ImageId} registry.cn-shenzhen.aliyuncs.com/{username}/{仓库名称}:{镜像版本号}
+$ sudo docker push registry.cn-shenzhen.aliyuncs.com/{username}/{仓库名称}:{镜像版本号}
+```
+
+使用过程中的一些思考
+=====
+(1) 在使用和管理容器的时候，你要始终记住一点 <strong>docker 创建的只是一个容器，而不是虚拟机</strong>，
+容器只是起到一个隔离作用，这一点很容易搞混。
+在linux系统中，你会发现docker容器中的进程都是跑再宿主机器中的
+，这一点很容易自己证实，你只需要在宿主机器上输入<code class="scode">ps aux</code>查看你宿主机器上没有的进程就好了。
+比如你在容器中开了nginx，但是宿主机器并没有启动nginx，在执行 <code class="scode">ps aux|grep nginx</code> 也是能看到有进程的。
+所以，<strong>如果你在宿主目录启动了多个容器，千万不要在宿主目录使用pkill去杀死某个进程</strong>, 因为这样你可能没法知道
+你杀死的是哪个容器的进程，最终不得不把所有的容器重启一遍。
+
+<hr />
+
+(2) 容器在启动的时候的ip地址是自动分配的，不可更改。一般是从 <code class="scode">172.17.0.2</code> 开始。为什么？因为 
+<code class="scode">172.17.0.1</code> 这个ip是宿主机的。从这你也可以知道，在一台宿主机器上你最多只能创建 65534个容器。
+
+<hr />
+
+(3) 容器和外部的通信是不受影响的，因为它是通过宿主机的路由出去的，但是外部机器和容器通信则必须通过宿主机的端口映射来实现，
+否则，宿主机无法提供路由到达容器。这一点不搞清楚，你的在配置服务的时候一定会踩各种坑。
+但是同一个宿主机器创建的容器之间是可以通过内网ip(<code class="scode">172.28.x.x</code>)直接通信的。
+
+(4) window系统的docker是通过虚拟机实现的，具体实现原理是，通过docker-tool 调用vbox创建一个ubuntu的虚拟机，虚拟机再创建容器。
+如果能搞清这层关系，你就可以理解其实在windows系统中，<strong>真正的宿主机是虚拟机，不是windows系统的宿主机器。</strong>
+它们是完全不同的系统了，你在windows系统里面是肯定无法管理容器中的进程的。
+那很显然，它们之间的网络通信也肯定不像linux那么简单了。大部分人都在百度，google提问，为什么创建容器的时候挂载不了
+D盘，或者E，F盘的文件夹。如有你能了解上面所说的，真正的宿主机是虚拟机，而并非window物理机，那么这个问题就很容易解决了。
+容器只能挂载宿主机的目录的，所以想要挂载windows的目录或者磁盘，那你首先必须要把windows的磁盘挂载（共享）到虚拟机，这样问题就解决。
+<strong>同样，网络也是一样，想要过window宿主机访问容器，那你需要先在虚拟机上做window物理机和虚拟机的端口映射。
+然后创建的容器的时候在把容器的端口映射到虚拟机，这样经过2次映射，你就可以通过windows主机的端口直接访问容器的服务了。</strong>
+
+<strong>《完》</strong>
