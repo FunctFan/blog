@@ -1,0 +1,148 @@
+@charset "UTF-8";
+/* SCSS Document */
+HTML, body {
+  overflow: hidden; }
+
+/* 隐藏body滚动条 */
+body, div, span, a, ul, li {
+  margin: 0;
+  padding: 0; }
+
+/*去掉IE下点击会出现虚线框*/
+a {
+  outline: none;
+  blr: expression(this.onFocus=this.blur()); }
+  a:active {
+    outline: none; }
+  a:visited {
+    outline: none; }
+
+/* pop window styles */
+.jwindow_box {
+  zoom: 1;
+  overflow: hidden; }
+  .jwindow_box .jwindow_title_box {
+    box-sizing: content-box;
+    height: 42px;
+    line-height: 42px; }
+    .jwindow_box .jwindow_title_box .jwindow_title {
+      text-align: left;
+      height: 42px;
+      line-height: 42px;
+      cursor: default; }
+    .jwindow_box .jwindow_title_box div {
+      box-sizing: content-box; }
+      .jwindow_box .jwindow_title_box div a {
+        box-sizing: content-box; }
+  .jwindow_box .jwindow_content {
+    background-color: #ffffff;
+    margin: 5px;
+    overflow: auto;
+    text-align: left; }
+
+.jwindow_default {
+  border: 1px solid #dddddd;
+  -webkit-background-clip: content;
+  box-shadow: 1px 1px 50px rgba(0, 0, 0, 0.3);
+  background-color: #ffffff;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+  -webkit-animation-duration: .3s;
+  animation-duration: .3s; }
+  .jwindow_default .jwindow_title_box {
+    padding: 0 80px 0 10px;
+    border-bottom: 1px solid #eeeeee;
+    font-size: 14px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    background-color: #F8F8F8;
+    border-radius: 2px 2px 0 0;
+    position: relative; }
+    .jwindow_default .jwindow_title_box .jwindow_title {
+      color: #333333; }
+    .jwindow_default .jwindow_title_box .jwindow_button {
+      position: absolute;
+      width: 90px;
+      height: 40px;
+      zoom: 1;
+      overflow: hidden;
+      top: 5px;
+      right: 10px; }
+      .jwindow_default .jwindow_title_box .jwindow_button a {
+        float: left;
+        background: url(../images/bg-default.png) no-repeat;
+        width: 24px;
+        height: 20px;
+        margin: 5px 2px 0; }
+      .jwindow_default .jwindow_title_box .jwindow_button .jwindow_min_button {
+        background-position: 5px -36px; }
+        .jwindow_default .jwindow_title_box .jwindow_button .jwindow_min_button:hover {
+          background-position: 5px 2px; }
+      .jwindow_default .jwindow_title_box .jwindow_button .jwindow_max_button {
+        background-position: -25px -36px; }
+        .jwindow_default .jwindow_title_box .jwindow_button .jwindow_max_button:hover {
+          background-position: -25px 3px; }
+      .jwindow_default .jwindow_title_box .jwindow_button .jwindow_reduce_button {
+        background-position: -83px -36px; }
+        .jwindow_default .jwindow_title_box .jwindow_button .jwindow_reduce_button:hover {
+          background-position: -83px 3px; }
+      .jwindow_default .jwindow_title_box .jwindow_button .jwindow_close_button {
+        background-position: -53px -36px; }
+        .jwindow_default .jwindow_title_box .jwindow_button .jwindow_close_button:hover {
+          background-position: -53px 3px; }
+
+/* 任务拦样式控制 */
+#jwindow_task_bar_bg {
+  z-index: 2000;
+  position: absolute;
+  background-color: #666666;
+  height: 25px; }
+
+#jwindow_task_bar {
+  margin-left: auto;
+  margin-right: auto;
+  zoom: 1;
+  overflow: hidden;
+  padding: 5px 0px;
+  z-index: 2000;
+  position: absolute;
+  /* 任务按钮样式控制 */ }
+  #jwindow_task_bar #jwindow_task_ul {
+    width: 10000px;
+    zoom: 1;
+    overflow: hidden; }
+  #jwindow_task_bar .task_item_li {
+    list-style: none;
+    float: left;
+    text-align: center;
+    cursor: pointer; }
+    #jwindow_task_bar .task_item_li .task_item {
+      display: inline-block;
+      height: 64px;
+      width: 112px;
+      background: none;
+      background: url(../images/bg_task_notify.png) no-repeat center center;
+      zoom: 1;
+      overflow: hidden;
+      text-decoration: none; }
+      #jwindow_task_bar .task_item_li .task_item:hover {
+        background-image: url(../images/bg_task_over.png); }
+      #jwindow_task_bar .task_item_li .task_item .task_item_icon {
+        float: left;
+        position: relative;
+        top: 20px;
+        left: 5px;
+        cursor: pointer; }
+      #jwindow_task_bar .task_item_li .task_item .task_item_txt {
+        float: left;
+        position: relative;
+        top: 35px;
+        left: 10px;
+        font-size: 12px;
+        color: #FFF;
+        cursor: pointer; }
+    #jwindow_task_bar .task_item_li .task_item_unnotify {
+      background-image: url(../images/bg_task_current.png); }
+
+/*# sourceMappingURL=JWindow.css.map */
