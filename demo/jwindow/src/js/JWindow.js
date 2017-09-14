@@ -23,6 +23,9 @@ window.JWIN_MAX_ZINDEX = 1000;
 		$(options.handler).mousedown(function(e) {
 			var offsetLeft = e.pageX - $(__self).position().left;
 			var offsetTop = e.pageY - $(__self).position().top;
+			if (typeof options.callback == "function") {
+				options.callback();
+			}
 			$(document).mousemove(function(e) {
 				//清除拖动鼠标的时候选择文本
 				window.getSelection ? window.getSelection().removeAllRanges():document.selection.empty();
@@ -103,7 +106,10 @@ var JWindow = function( __options ) {
 		});
 
 		//绑定拖动事件
-		o.winBox.draggable({handler:win_title});
+		o.winBox.draggable({handler:win_title, callback:function() {
+			JWIN_MAX_ZINDEX++;
+			o.winBox.css('z-index', JWIN_MAX_ZINDEX);
+		}});
 
 		$('body').append(o.winBox);
 	}
