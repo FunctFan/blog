@@ -1,0 +1,1064 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 7 ]>    <html lang="zh-CN" class="ie7"> <![endif]-->
+<!--[if IE 8 ]>    <html lang="zh-CN" class="ie8"> <![endif]-->
+<!--[if IE 9 ]>    <html lang="zh-CN" class="ie9"> <![endif]-->
+<!--[if (gte IE 10)|!(IE)]><!--> <html lang="zh-CN"> <!--<![endif]-->
+
+<head>
+  <meta charset="UTF-8">
+
+  <title>docker学习笔记（一） - 小一辈无产阶级码农</title>
+  
+  
+  <meta name="author" content="阳建">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="/favicon.png">
+
+  <!-- Feed -->
+  <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="/rss.xml">
+  <link rel="alternate" type="application/atom+xml" title="Atom Feed" href="/atom.xml">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="/assets/themes/twitter/css/style.css?ver=20151125">
+  <link rel="stylesheet" href="/assets/themes/twitter/css/highlight.css?ver=20151125">
+  <link rel="stylesheet" href="/assets/themes/twitter/css/font-awesome.min.css?ver=20151122">
+  <!--[if IE 7 ]><link rel="stylesheet" href="/assets/themes/twitter/css/font-awesome-ie7.min.css?ver=20151122"><![endif]-->
+
+  <!-- Scripts -->
+  <script type="text/javascript" src="/assets/themes/twitter/js/jquery-1.11.1.min.js"></script>
+  <!--[if lt IE 9]><script src="/assets/themes/twitter/js/html5shiv.min.js"></script><![endif]-->
+</head>
+
+<body>
+
+  <div id="wrap">
+    <header id="top">
+      <!-- Home Link -->
+      <a id="logo" href="/" title="回到首页">
+		  <h1>小一辈无产阶级码农</h1>
+      </a>
+      <!-- Navigation Bar -->
+      <nav id="navbar">
+        <ul>
+          <li>
+            <a href="/" title="首页">Blogs</a>
+          </li>
+          <li>
+            <a href="/categories.html" title="分类">Categories</a>
+          </li>
+          <li>
+            <a href="/tags.html" title="标签">Tags</a>
+          </li>
+		  <li>
+            <a href="/links.html" title="友情链接">Links</a>
+          </li>
+          <li>
+            <a href="/messages.html" title="留言板">Message</a>
+          </li>
+          <li id="about-link" >
+            <a href="/about.html" title="关于我">About</a>
+          </li>
+          <li id="rss-link">
+            <a href="/rss.xml" title="订阅 RSS"><i class="icon-large icon-fixed-width icon-rss"></i></a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <section id="main">
+
+      <!-- Sidebar -->
+      <aside id="sidebar">
+        <section id="search-box">
+          <form id="search-form">
+  <input id="query" type="text" placeholder="正则搜索"></input>
+  <button type="submit"><i class="icon-search"></i></button>
+</form>
+<script type="text/javascript">
+$(document).ready(function() {
+  $('#search-form').submit(function() {
+    $('#query').blur().attr('disabled', true);
+    $('#main-content').hide();
+    $('#loader').show();
+    $.ajax({url: '/atom.xml?r=' + (Math.random() * 999999), dataType: 'xml', success: function(data) {
+      var rq = new RegExp($('#query').val(), 'im');
+      var rl = /\/([^\/]+)\.html$/;
+      var html = '';
+      $(data).find('entry').each(function(index, entry) {
+        var title = $(entry).find('title').text();
+        var link = $(entry).find('link').attr('href');
+        var title_en = rl.exec(link)[1].replace('-', ' ');
+        var content = $(entry).find('content').text();
+        if (rq.test(title) || rq.test(title_en) || rq.test(content)) {
+          var parts = $(entry).find('updated').text().split(/[-T:+]/g);
+          var months = [ "January", "February", "March", "April", "May", "June",
+            "July", "August", "September", "October", "November", "December" ];
+          date = parts[2] + ' ' + months[parts[1] - 1] + ' ' + parts[0];
+          html += '<article class="nested">';
+          html += '<header><h2><a href="' + link + '">' + title + '</a></h2></header>';
+          html += '<section><p>' + content + '</p></section>';
+          html += '<footer><p>更新日期：' + date + '</p></footer>';
+          html += '</article>';
+        }
+      });
+      $('#main-content').html(html);
+      $('#loader').hide();
+      $('#main-content').show();
+    }});
+    $('#query').blur().attr('disabled', false);
+    return false;
+  });
+});
+</script>
+
+        </section>
+        <section class="active">
+          <a href="/" title="查看最近发表"><i class="icon-fixed-width icon-edit"></i> 最近发表</a>
+<ul>
+
+  <li class="text-clip"><a href="/20171013/springboot-start.html" title="查看《SpringBoot 的三种启动方式》">SpringBoot 的三种启动方式</a></li>
+
+  <li class="text-clip"><a href="/20170309/xdebug.html" title="查看《phpstrom 实现php断点调试》">phpstrom 实现php断点调试</a></li>
+
+  <li class="text-clip"><a href="/20170301/charles.html" title="查看《charles 抓包工具安装与使用》">charles 抓包工具安装与使用</a></li>
+
+  <li class="text-clip"><a href="/201702/javascript-inherit.html" title="查看《【转】：javascript 实现继承的5种方法》">【转】：javascript 实现继承的5种方法</a></li>
+
+  <li class="text-clip"><a href="/201702/javascript-call-apply.html" title="查看《javascript中call和apply的区别》">javascript中call和apply的区别</a></li>
+
+  <li class="text-clip"><a href="/20170220/react-native.html" title="查看《linux react native开发原生app》">linux react native开发原生app</a></li>
+
+  <li class="text-clip"><a href="/20170219/ubuntu-install-qq2013.html" title="查看《ubuntu 安装Wine longene QQ 7.8 和微信》">ubuntu 安装Wine longene QQ 7.8 和微信</a></li>
+
+  <li class="text-clip"><a href="/2016-11-04/it-team-management.html" title="查看《IT团队管理心得》">IT团队管理心得</a></li>
+
+  <li class="text-clip"><a href="/20161016/imagettftext-notfound.html" title="查看《解决Call to undefined function imagettftext()方法》">解决Call to undefined function imagettftext()方法</a></li>
+
+  <li class="text-clip"><a href="/20161012/check-soft-installed.html" title="查看《Ubuntu上如何检测某个软件包是否安装》">Ubuntu上如何检测某个软件包是否安装</a></li>
+
+</ul>
+
+        </section>
+        <section>
+          <a href="/archive.html" title="查看所有存档"><i class="icon-fixed-width icon-file-text"></i> 文章存档</a>
+<span title="文章总数">30</span>
+<ul>
+
+
+  
+  
+  
+  
+    <li><a href="/archive.html#October-2017">2017 年 10 月 (1)</a></li>
+    
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+    <li><a href="/archive.html#March-2017">2017 年 03 月 (2)</a></li>
+    
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+    <li><a href="/archive.html#February-2017">2017 年 02 月 (4)</a></li>
+    
+  
+
+  
+  
+  
+  
+    <li><a href="/archive.html#November-2016">2016 年 11 月 (1)</a></li>
+    
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+    <li><a href="/archive.html#October-2016">2016 年 10 月 (2)</a></li>
+    
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+    <li><a href="/archive.html#August-2016">2016 年 08 月 (4)</a></li>
+    
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+    <li><a href="/archive.html#May-2016">2016 年 05 月 (2)</a></li>
+    
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+    <li><a href="/archive.html#April-2016">2016 年 04 月 (5)</a></li>
+    
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+    <li><a href="/archive.html#March-2016">2016 年 03 月 (4)</a></li>
+    
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+    <li><a href="/archive.html#November-2015">2015 年 11 月 (2)</a></li>
+    
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+    <li><a href="/archive.html#May-2015">2015 年 05 月 (2)</a></li>
+    
+  
+
+  
+  
+  
+  
+    <li><a href="/archive.html#March-2015">2015 年 03 月 (1)</a></li>
+    
+  
+
+</ul>
+
+        </section>
+        <section>
+          <a href="/categories.html" title="查看所有分类"><i class="icon-fixed-width icon-folder-open"></i> 文章分类</a>
+<span title="分类总数">12</span>
+<ul>
+
+  <li><a href="/categories.html#学习和思考-ref">学习和思考 (4)</a></li>
+
+  <li><a href="/categories.html#操作系统-ref">操作系统 (6)</a></li>
+
+  <li><a href="/categories.html#数据库技术-ref">数据库技术 (3)</a></li>
+
+  <li><a href="/categories.html#Funny-ref">Funny (1)</a></li>
+
+  <li><a href="/categories.html#前端开发-ref">前端开发 (3)</a></li>
+
+  <li><a href="/categories.html#服务器运维-ref">服务器运维 (4)</a></li>
+
+  <li><a href="/categories.html#linux-ref">linux (5)</a></li>
+
+  <li><a href="/categories.html#php-ref">php (5)</a></li>
+
+  <li><a href="/categories.html#mongodb-ref">mongodb (1)</a></li>
+
+  <li><a href="/categories.html#nodejs-ref">nodejs (1)</a></li>
+
+  <li><a href="/categories.html#工具-ref">工具 (2)</a></li>
+
+  <li><a href="/categories.html#java编程-ref">java编程 (1)</a></li>
+
+</ul>
+
+        </section>
+        <section>
+          <a href="/tags.html" title="查看所有标签"><i class="icon-fixed-width icon-tags"></i> 标签云</a>
+<span title="标签总数">34</span>
+<div id="tag-cloud">
+
+
+
+
+
+
+  
+    
+    
+    
+    
+    
+    <a href="/tags.html#linux-ref" style="font-size: 18pt; color: #000;">linux</a>
+  
+    
+    
+    
+    
+    
+    <a href="/tags.html#flashpalyer-ref" style="font-size: 9pt; color: #999;">flashpalyer</a>
+  
+    
+    
+    
+    
+    
+    <a href="/tags.html#mysql-ref" style="font-size: 10.5pt; color: #777;">mysql</a>
+  
+    
+    
+    
+    
+    
+    <a href="/tags.html#ubuntu-ref" style="font-size: 15pt; color: #333;">ubuntu</a>
+  
+    
+    
+    
+    
+    
+    <a href="/tags.html#fcitx-ref" style="font-size: 10.5pt; color: #777;">fcitx</a>
+  
+    
+    
+    
+    
+    
+    <a href="/tags.html#idea-ref" style="font-size: 10.5pt; color: #777;">idea</a>
+  
+    
+    
+    
+    
+    
+    <a href="/tags.html#phpstrom-ref" style="font-size: 12pt; color: #666;">phpstrom</a>
+  
+    
+    
+    
+    
+    
+    <a href="/tags.html#jekyll-ref" style="font-size: 10.5pt; color: #777;">jekyll</a>
+  
+    
+    
+    
+    
+    
+    <a href="/tags.html#ruby-ref" style="font-size: 9pt; color: #999;">ruby</a>
+  
+    
+    
+    
+    
+    
+    <a href="/tags.html#liquid-ref" style="font-size: 9pt; color: #999;">liquid</a>
+  
+    
+    
+    
+    
+    
+    <a href="/tags.html#lastPass-ref" style="font-size: 9pt; color: #999;">lastPass</a>
+  
+    
+    
+    
+    
+    
+    <a href="/tags.html#javascript-ref" style="font-size: 12pt; color: #666;">javascript</a>
+  
+    
+    
+    
+    
+    
+    <a href="/tags.html#跨域-ref" style="font-size: 9pt; color: #999;">跨域</a>
+  
+    
+    
+    
+    
+    
+    <a href="/tags.html#运维-ref" style="font-size: 9pt; color: #999;">运维</a>
+  
+    
+    
+    
+    
+    
+    <a href="/tags.html#nginx-ref" style="font-size: 9pt; color: #999;">nginx</a>
+  
+    
+    
+    
+    
+    
+    <a href="/tags.html#tengine-ref" style="font-size: 9pt; color: #999;">tengine</a>
+  
+    
+    
+    
+    
+    
+    <a href="/tags.html#php-ref" style="font-size: 13.5pt; color: #444;">php</a>
+  
+    
+    
+    
+    
+    
+    <a href="/tags.html#抓包工具-ref" style="font-size: 10.5pt; color: #777;">抓包工具</a>
+  
+    
+    
+    
+    
+    
+    <a href="/tags.html#tcpdump-ref" style="font-size: 9pt; color: #999;">tcpdump</a>
+  
+    
+    
+    
+    
+    
+    <a href="/tags.html#docker-ref" style="font-size: 10.5pt; color: #777;">docker</a>
+  
+    
+    
+    
+    
+    
+    <a href="/tags.html#dockerfile-ref" style="font-size: 9pt; color: #999;">dockerfile</a>
+  
+    
+    
+    
+    
+    
+    <a href="/tags.html#nosql-ref" style="font-size: 9pt; color: #999;">nosql</a>
+  
+    
+    
+    
+    
+    
+    <a href="/tags.html#mongodb-ref" style="font-size: 10.5pt; color: #777;">mongodb</a>
+  
+    
+    
+    
+    
+    
+    <a href="/tags.html#Ubuntu-ref" style="font-size: 9pt; color: #999;">Ubuntu</a>
+  
+    
+    
+    
+    
+    
+    <a href="/tags.html#dpkg-ref" style="font-size: 9pt; color: #999;">dpkg</a>
+  
+    
+    
+    
+    
+    
+    <a href="/tags.html#imagettftext-ref" style="font-size: 9pt; color: #999;">imagettftext</a>
+  
+    
+    
+    
+    
+    
+    <a href="/tags.html#longeneqq-ref" style="font-size: 9pt; color: #999;">longeneqq</a>
+  
+    
+    
+    
+    
+    
+    <a href="/tags.html#react-native-ref" style="font-size: 9pt; color: #999;">react-native</a>
+  
+    
+    
+    
+    
+    
+    <a href="/tags.html#react-ref" style="font-size: 9pt; color: #999;">react</a>
+  
+    
+    
+    
+    
+    
+    <a href="/tags.html#nodejs-ref" style="font-size: 9pt; color: #999;">nodejs</a>
+  
+    
+    
+    
+    
+    
+    <a href="/tags.html#charles-ref" style="font-size: 9pt; color: #999;">charles</a>
+  
+    
+    
+    
+    
+    
+    <a href="/tags.html#断点调试-ref" style="font-size: 9pt; color: #999;">断点调试</a>
+  
+    
+    
+    
+    
+    
+    <a href="/tags.html#xdebug-ref" style="font-size: 9pt; color: #999;">xdebug</a>
+  
+    
+    
+    
+    
+    
+    <a href="/tags.html#spring-boot-ref" style="font-size: 9pt; color: #999;">spring-boot</a>
+  
+
+</div>
+
+        </section>
+        <div id="fixed-container">
+  <section>
+    <a href="#"><i class="icon-fixed-width icon-code"></i> 代码仓库</a>
+<ul>
+  <li><a href="http://git.oschina.net/blackfox/herosphp" target="_blank">Herosphp框架</a></li>
+  <li><a href="http://git.oschina.net/blackfox/jekyll-blog" target="_blank">本博客源码</a></li>
+  <li><a href="http://git.oschina.net/lionsoul/friso" target="_blank">C语言中文分词</a></li>
+  <li><a href="http://git.oschina.net/blackfox/AjaxProxy" target="_blank">Ajax代理插件</a></li>
+  <li><a href="https://git.oschina.net/blackfox/purenode" target="_blank">Nodejs web开发框架</a></li>
+  <li><a href="http://git.oschina.net/lionsoul/jcseg" target="_blank">Jcseg中文分词工具</a></li>
+</ul>
+
+  </section>
+  <section>
+    <a href="#"><i class="icon-fixed-width icon-heart"></i> 与我联系</a>
+<div id="contacts-list">
+  <a href="mailto:yangjian102621@gmail.com" target="_blank" title="Gmail">
+    <i class="icon-large icon-fixed-width icon-envelope"></i>
+  </a>
+  <a href="https://github.com/yangjian102621" target="_blank" title="GitHub">
+    <i class="icon-large icon-fixed-width icon-github"></i>
+  </a>
+<!--
+  <a href="http://weibo.com/" target="_blank" title="新浪微博">
+    <i class="icon-large icon-fixed-width icon-weibo"></i>
+  </a>
+  <a href="http://v2ex.com/member/" target="_blank" title="V2EX">
+    <i class="icon-large icon-fixed-width icon-v2ex"></i>
+  </a>
+-->
+  <a href="https://plus.google.com/116761736844742660869" target="_blank" title="Google+">
+    <i class="icon-large icon-fixed-width icon-google-plus"></i>
+  </a>
+  <a href="https://www.facebook.com/smallstone2017" target="_blank" title="Twitter">
+    <i class="icon-large icon-fixed-width icon-facebook"></i>
+  </a>
+   <a href="https://www.twitter.com/smallstone2017" target="_blank" title="Twitter">
+    <i class="icon-large icon-fixed-width icon-twitter"></i>
+  </a>
+</div>
+
+  </section>
+  <section>
+    <a href="#"><i class="icon-fixed-width icon-link"></i> 友情链接</a>
+<ul>
+	<li><a href="http://docs.r9it.com/herosphp/" target="_blank">HerosPHP</a></li>
+	<li><a href="https://my.oschina.net/u/940314" target="_blank">开源中国</a></li>
+	<li><a href="http://jekyll.com.cn/" target="_blank">Jekyll &bull; 简单的博客</a></li> 
+	<li><a href="https://github.com/Shopify/liquid/wiki/Liquid-for-Designers" target="_blank">Liquid 模板引擎</a></li>
+	<li><a href="http://liberize.github.io/" target="_blank">本博客模板作者 Liberize</a></li>
+ 
+</ul>
+
+  </section>
+</div>
+<script type="text/javascript">
+$(document).ready(function() {
+  var position = $('#fixed-container').offset();
+  $(window).scroll(function() {
+    if($(window).scrollTop() > position.top) {
+      $('#fixed-container').css('position','fixed').css('top','0');
+    } else {
+      $('#fixed-container').css('position','static');
+    }
+  });
+});
+</script>
+
+      </aside>
+
+      <!-- Main Content -->
+      <div id="main-inner">
+        <div id="loader"><img src="/assets/themes/twitter/img/loading.gif" alt="请稍侯"></div>
+        <div id="main-content">
+          
+
+<section id="content">
+  <article class="post">
+
+    <header>
+      <h1>docker学习笔记（一）</h1>
+    </header>
+
+    <section>
+      <div class="post-extra">
+        <div class="pull-left">
+          <span>01 May 2016</span>
+        </div>
+        <div class="pull-right">
+          
+
+
+  <span id="share">
+  <a class="wechat" target="_blank" title="分享到微信" href="http://chart.apis.google.com/chart?cht=qr&amp;chs=300x300&amp;chl=http://www.r9it.com/20160501/docker-study-1.html"><i class="icon-large icon-wechat"></i></a>
+  <a class="weibo" target="_blank" title="分享到微博" href="http://service.weibo.com/share/share.php?title=docker学习笔记（一） - 小一辈无产阶级码农&amp;url=http://www.r9it.com/20160501/docker-study-1.html&amp;type=3&amp;searchPic=1"><i class="icon-large icon-weibo"></i></a>
+  <a class="qzone" target="_blank" title="分享到 QQ 空间" href="http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://www.r9it.com/20160501/docker-study-1.html&amp;title=docker学习笔记（一） - 小一辈无产阶级码农&amp;summary=docker 入门学习笔记（一）&amp;site=http://www.r9it.com"><i class="icon-large icon-qzone"></i></a>
+  <a class="twitter" target="_blank" title="Share to Twitter" href="https://twitter.com/intent/tweet?url=http://www.r9it.com/20160501/docker-study-1.html&amp;text=docker学习笔记（一） - 小一辈无产阶级码农&amp;via=smallstone2017"><i class="icon-large icon-twitter"></i></a>
+  <a class="facebook" target="_blank" title="Share to Facebook" href="http://www.facebook.com/sharer.php?u=http://www.r9it.com/20160501/docker-study-1.html&amp;t=docker学习笔记（一） - 小一辈无产阶级码农"><i class="icon-large icon-facebook-sign"></i></a>
+  <a class="googleplus" target="_blank" title="Share to Google+" href="https://plus.google.com/share?url=http://www.r9it.com/20160501/docker-study-1.html"><i class="icon-large icon-google-plus-sign"></i></a>
+</span>
+
+
+
+
+
+        </div>
+      </div>
+      <div class="post-content"><p>作为码农，最麻烦的莫过于系统奔溃之后需要重新配置环境了，这个比较麻烦且耗时，一个偶然的机会了解docker,它解决了长期困扰我的问题</p>
+
+<h1 id="docker">关于docker</h1>
+
+<p>Docker是一个开源的引擎，可以轻松的为任何应用创建一个轻量级的、可移植的、自给自足的容器。开发者在笔记本上编译测试通过的容器可以批量地在生产环境中部署，包括VMs（虚拟机）、bare metal、OpenStack 集群和其他的基础应用平台。</p>
+
+<p><strong>docker的应用场景</strong></p>
+
+<ul>
+<li>隔离开发环境，每个容器都是个独立的开发环境，如果这个容器坏了，删掉再创建一个容器即可。</li>
+<li>web应用的自动化打包和发布；</li>
+<li>自动化测试和持续集成、发布；</li>
+<li>在服务型环境中部署和调整数据库或其他的后台应用；</li>
+<li>从头编译或者扩展现有的OpenShift或Cloud Foundry平台来搭建自己的PaaS环境。</li>
+</ul>
+
+<p><strong>docker的特点</strong></p>
+
+<p>第一：它是轻量级的 – 容器的内存占用非常小一般只有200左右，它只要对主进程分配内存再加上几十MB</p>
+
+<p>第二：它很快速 – 启动一个容器与启动一个单进程一样快。不需要几分钟，您可以在几秒钟内启动一个全新的容器。</p>
+
+<h1 id="docker">安装 docker</h1>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">sudo apt-get install apt-transport-https
+sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 36A1D7869245C8950F966E92D8576A8BA88D21E9
+sudo bash -c <span class="s2">"echo deb https://get.docker.io/ubuntu docker main &gt; /etc/apt/sources.list.d/docker.list"</span>
+sudo apt-get update
+sudo apt-get install lxc-docker
+</code></pre></div>
+<h1 id="part-2dd02f6a0343ee0d">获取镜像</h1>
+
+<p>获取官方镜像(默认)</p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">sudo docker pull ubuntu:14.04
+</code></pre></div>
+<p>获取指定镜像仓库的镜像，如获取阿里云docker镜像</p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">sudo docker pull registry.mirrors.aliyuncs.com/library/centos
+</code></pre></div>
+<h1 id="part-2b903e2446168499">创建容器</h1>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">sudo docker run -d --name php ubuntu:14.04 /usr/sbin/sshd -D
+</code></pre></div>
+<h1 id="part-2b9114f82dfd9fca">删除容器</h1>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">sudo docker rm  container_name <span class="c">#这里传入容器名称或者容器id</span>
+sudo docker rm <span class="k">$(</span>sudo docker ps -a -q<span class="k">)</span>  <span class="c">#删除所有已终止的容器</span>
+</code></pre></div>
+<h1 id="part-c4f990e9e0056aad">启动|终止容器</h1>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">sudo docker start container_name | container_id
+sudo docker stop container_name | container_id
+</code></pre></div>
+<h1 id="part-2ed630525971aa68">进入容器</h1>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">sudo docker attach &lt;container_name&gt;|&lt;container_id&gt;
+sudo docker <span class="nb">exec</span> -it &lt;container_name&gt; /bin/bash
+</code></pre></div>
+<h1 id="part-4865e717869cd230">打包和导入镜像</h1>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"> sudo docker commit 046331bdbb90 new-image  <span class="c">#提交容器</span>
+
+ sudo docker save new-image &gt; /tmp/new-image.tar <span class="c">#保存容器</span>
+ sudo docker save -o centos.tar centos <span class="c">#也可以用这种方法保存容器</span>
+
+ sudo docker load &lt; /tmp/new-image.tar <span class="c">#导入容器</span>
+ sudo docker load --input /tmp/new-image.tar
+</code></pre></div>
+<h1 id="part-2db919e3af6aacb4">端口映射</h1>
+
+<p><strong>1. 自动映射端口</strong></p>
+
+<p>-P 使用时需要指定 --expose 选项，指定需要对外提供服务的端口</p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">sudo docker run -t -P --expose 22 --name container_name  ubuntu:14.04
+</code></pre></div>
+<p><strong>2. 绑定端口到指定接口</strong></p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">sudo docker run -it -p 8080:80 -p 22:22 container_name ubuntu:14.04 /bin/bash
+</code></pre></div>
+<h1 id="part-a4424fc877f1a8fc">挂载宿主文件</h1>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">sudo docker run -it -v /share:/usr/local/myshare --name container_name ubuntu:14.04 /bin/bash
+</code></pre></div>
+<blockquote>
+<p>如果你发现容器的网络超级慢，运行一个apt-get update要半天, 那么可能需要切换源.
+这里贴上一个阿里云的源，亲测很快</p>
+</blockquote>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">deb http://mirrors.aliyun.com/ubuntu/ trusty main restricted universe multiverse
+deb http://mirrors.aliyun.com/ubuntu/ trusty-security main restricted universe multiverse
+deb http://mirrors.aliyun.com/ubuntu/ trusty-updates main restricted universe multiverse
+deb http://mirrors.aliyun.com/ubuntu/ trusty-proposed main restricted universe multiverse
+deb http://mirrors.aliyun.com/ubuntu/ trusty-backports main restricted universe multiverse
+deb-src http://mirrors.aliyun.com/ubuntu/ trusty main restricted universe multiverse
+deb-src http://mirrors.aliyun.com/ubuntu/ trusty-security main restricted universe multiverse
+deb-src http://mirrors.aliyun.com/ubuntu/ trusty-updates main restricted universe multiverse
+deb-src http://mirrors.aliyun.com/ubuntu/ trusty-proposed main restricted universe multiverse
+deb-src http://mirrors.aliyun.com/ubuntu/ trusty-backports main restricted universe multiverseV
+</code></pre></div>
+<h1 id="docker">docker镜像的远程托管</h1>
+
+<p>我们可以像把代码托管在git仓库一样，容器的镜像也是可以托管到远程镜像仓库的，比如说<a href="https://dev.aliyun.com/search.html">阿里云的镜像仓库。</a>
+登陆进去创建一个镜像仓库。（这里不提供教程，很容创建的），创建之后你就可以管理你的docker镜像了</p>
+
+<blockquote>
+<p>登陆 docker registry:</p>
+</blockquote>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="gp">$ </span>sudo docker login --username<span class="o">={</span>username<span class="o">}</span> registry.cn-shenzhen.aliyuncs.com
+</code></pre></div>
+<p>{username}是你的阿里云账号全名，密码是您开通namespace时设置的密码。</p>
+
+<p>registry.cn-shenzhen.aliyuncs.com 是你的镜像仓库的地址</p>
+
+<blockquote>
+<p>从registry中拉取镜像：</p>
+</blockquote>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="gp">$ </span>sudo docker pull registry.cn-shenzhen.aliyuncs.com/<span class="o">{</span>username<span class="o">}</span>/<span class="o">{</span>仓库名称<span class="o">}</span>:<span class="o">{</span>镜像版本号<span class="o">}</span>
+</code></pre></div>
+<blockquote>
+<p>将镜像推送到registry：</p>
+</blockquote>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="gp">$ </span>sudo docker login --username<span class="o">={</span>username<span class="o">}</span> registry.cn-shenzhen.aliyuncs.com
+<span class="gp">$ </span>sudo docker tag <span class="o">{</span>ImageId<span class="o">}</span> registry.cn-shenzhen.aliyuncs.com/<span class="o">{</span>username<span class="o">}</span>/<span class="o">{</span>仓库名称<span class="o">}</span>:<span class="o">{</span>镜像版本号<span class="o">}</span>
+<span class="gp">$ </span>sudo docker push registry.cn-shenzhen.aliyuncs.com/<span class="o">{</span>username<span class="o">}</span>/<span class="o">{</span>仓库名称<span class="o">}</span>:<span class="o">{</span>镜像版本号<span class="o">}</span>
+</code></pre></div>
+<h1 id="part-d75acaf914475b61">使用过程中的一些思考</h1>
+
+<p>(1) 在使用和管理容器的时候，你要始终记住一点 <strong>docker 创建的只是一个容器，而不是虚拟机</strong>，
+容器只是起到一个隔离作用，这一点很容易搞混。
+在linux系统中，你会发现docker容器中的进程都是跑再宿主机器中的
+，这一点很容易自己证实，你只需要在宿主机器上输入<code class="scode">ps aux</code>查看你宿主机器上没有的进程就好了。
+比如你在容器中开了nginx，但是宿主机器并没有启动nginx，在执行 <code class="scode">ps aux|grep nginx</code> 也是能看到有进程的。
+所以，<strong>如果你在宿主目录启动了多个容器，千万不要在宿主目录使用pkill去杀死某个进程</strong>, 因为这样你可能没法知道
+你杀死的是哪个容器的进程，最终不得不把所有的容器重启一遍。</p>
+
+<p><hr /></p>
+
+<p>(2) 容器在启动的时候的ip地址是自动分配的，不可更改。一般是从 <code class="scode">172.17.0.2</code> 开始。为什么？因为 
+<code class="scode">172.17.0.1</code> 这个ip是宿主机的。从这你也可以知道，在一台宿主机器上你最多只能创建 65534个容器。</p>
+
+<p><hr /></p>
+
+<p>(3) 容器和外部的通信是不受影响的，因为它是通过宿主机的路由出去的，但是外部机器和容器通信则必须通过宿主机的端口映射来实现，
+否则，宿主机无法提供路由到达容器。这一点不搞清楚，你的在配置服务的时候一定会踩各种坑。
+但是同一个宿主机器创建的容器之间是可以通过内网ip(<code class="scode">172.28.x.x</code>)直接通信的。</p>
+
+<p>(4) window系统的docker是通过虚拟机实现的，具体实现原理是，通过docker-tool 调用vbox创建一个ubuntu的虚拟机，虚拟机再创建容器。
+如果能搞清这层关系，你就可以理解其实在windows系统中，<strong>真正的宿主机是虚拟机，不是windows系统的宿主机器。</strong>
+它们是完全不同的系统了，你在windows系统里面是肯定无法管理容器中的进程的。
+那很显然，它们之间的网络通信也肯定不像linux那么简单了。大部分人都在百度，google提问，为什么创建容器的时候挂载不了
+D盘，或者E，F盘的文件夹。如有你能了解上面所说的，真正的宿主机是虚拟机，而并非window物理机，那么这个问题就很容易解决了。
+容器只能挂载宿主机的目录的，所以想要挂载windows的目录或者磁盘，那你首先必须要把windows的磁盘挂载（共享）到虚拟机，这样问题就解决。
+<strong>同样，网络也是一样，想要过window宿主机访问容器，那你需要先在虚拟机上做window物理机和虚拟机的端口映射。
+然后创建的容器的时候在把容器的端口映射到虚拟机，这样经过2次映射，你就可以通过windows主机的端口直接访问容器的服务了。</strong></p>
+
+<p><strong>《完》</strong></p>
+</div>
+      
+    </section>
+
+  </article>
+</section>
+
+<section>
+
+  <div class="tag-box-wrapper">
+    
+    <ul class="tag-box inline">
+      <li><i class="icon-large icon-folder-open"></i></li>
+      
+      
+
+
+  
+     
+    	<li><a href="/categories.html#linux-ref">
+    		linux <span>5</span>
+    	</a></li>
+     
+    	<li><a href="/categories.html#服务器运维-ref">
+    		服务器运维 <span>4</span>
+    	</a></li>
+    
+  
+
+
+
+    </ul>
+    
+
+    
+    <ul class="tag-box inline">
+      <li><i class="icon-large icon-tags"></i></li>
+      
+      
+
+
+  
+     
+    	<li><a href="/tags.html#linux-ref">linux <span>7</span></a></li>
+     
+    	<li><a href="/tags.html#docker-ref">docker <span>2</span></a></li>
+    
+  
+
+
+
+    </ul>
+    
+  </div>
+
+  <div class="pagination">
+    <ul>
+      
+      <li class="prev"><a href="/20160427/tcpdump.html" title="linux抓包神器tcpdump">&larr; 上一篇</a></li>
+      
+      <li><a href="/archive.html">文章列表</a></li>
+      
+      <li class="next"><a href="/20160502/docker-study-2.html" title="docker学习笔记（二）">下一篇 &rarr;</a></li>
+      
+    </ul>
+  </div>
+
+</section>
+
+<script src="/assets/themes/twitter/js/highlight.js"></script>
+<script type="text/javascript">
+	//初始化代码高亮
+	hljs.initHighlightingOnLoad();
+</script>
+
+
+
+<script src="/assets/themes/twitter/js/jpreview.js"></script>
+<script src="/assets/themes/twitter/js/JLazyLoader.js"></script>
+<script type="text/javascript">
+	//初始化图片预览插件, 图片延时加载
+	$(".img-view").jpreview();
+</script>
+
+
+
+<section id="comments">
+  
+
+
+  
+<div class="post-comments" style="overflow:hidden;">
+
+	<!--畅言评论高速版-->
+	<div id="SOHUCS" sid="/20160501/docker-study-1"></div>
+	<script charset="utf-8" type="text/javascript" src="http://changyan.sohu.com/upload/changyan.js" ></script>
+	<script type="text/javascript">
+	$(document).ready(function() {
+	   window.changyan.api.config({
+			appid: 'cysmNxmia',
+			conf: 'prod_a49688836dc6cfb80dfc53f48bb864ab'
+	   });
+		
+	});
+    
+	</script>        
+</div>
+
+
+
+
+
+
+
+</section>
+
+
+        </div>
+      </div>
+
+      <div id="back-top">
+  <a href="#top" title="回到顶部">
+    <i class="icon-2x icon-arrow-up"></i>
+  </a>
+</div>
+<script type="text/javascript">
+$("#back-top").hide();
+$(document).ready(function () {
+  $(window).scroll(function () {
+    if ($(this).scrollTop() > 100) {
+      $('#back-top').fadeIn();
+    } else {
+      $('#back-top').fadeOut();
+    }
+  });
+  $('#back-top a').click(function () {
+    $('body,html').animate({
+      scrollTop: 0
+    }, 500);
+    return false;
+  });
+});
+</script>
+
+
+    </section>
+
+    <footer id="bottom">
+      <p align="center">&copy; 2017 阳建
+        with help from <a href="http://jekyllbootstrap.com" target="_blank" title="The Definitive Jekyll Blogging Framework">Jekyll Bootstrap</a>
+        and <a href="https://github.com/yangjian102621/yangjian102621.github.com" target="_blank">source on GitHub</a>
+      </p>
+    </footer>
+  </div>
+
+  <script type="text/javascript">
+    $('article.post a').attr('target', '_blank');
+    if (navigator.appVersion.indexOf("Mac") != -1) {
+      $('code, pre').css('font-family', 'Courier, monospace');
+    }
+  </script>
+  
+
+
+  <script type="text/javascript">
+//百度统计代码
+if ( location.host.indexOf('r9it.com') !== -1 ) {
+	var _hmt = _hmt || [];
+	(function() {
+	 var hm = document.createElement("script");
+	 hm.src = "//hm.baidu.com/hm.js?fa1700c08f6ac35179270783fc63a18f";
+	 var s = document.getElementsByTagName("script")[0]; 
+	 s.parentNode.insertBefore(hm, s);
+	 })();
+
+}
+</script>
+
+
+
+
+
+  
+</body>
+</html>
+

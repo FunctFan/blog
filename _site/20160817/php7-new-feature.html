@@ -1,0 +1,1043 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 7 ]>    <html lang="zh-CN" class="ie7"> <![endif]-->
+<!--[if IE 8 ]>    <html lang="zh-CN" class="ie8"> <![endif]-->
+<!--[if IE 9 ]>    <html lang="zh-CN" class="ie9"> <![endif]-->
+<!--[if (gte IE 10)|!(IE)]><!--> <html lang="zh-CN"> <!--<![endif]-->
+
+<head>
+  <meta charset="UTF-8">
+
+  <title>简单了解php7的新特性 - 小一辈无产阶级码农</title>
+  <meta name="keywords" content="php7新特性,php7,php7性能的优化">
+  
+  <meta name="author" content="阳建">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="/favicon.png">
+
+  <!-- Feed -->
+  <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="/rss.xml">
+  <link rel="alternate" type="application/atom+xml" title="Atom Feed" href="/atom.xml">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="/assets/themes/twitter/css/style.css?ver=20151125">
+  <link rel="stylesheet" href="/assets/themes/twitter/css/highlight.css?ver=20151125">
+  <link rel="stylesheet" href="/assets/themes/twitter/css/font-awesome.min.css?ver=20151122">
+  <!--[if IE 7 ]><link rel="stylesheet" href="/assets/themes/twitter/css/font-awesome-ie7.min.css?ver=20151122"><![endif]-->
+
+  <!-- Scripts -->
+  <script type="text/javascript" src="/assets/themes/twitter/js/jquery-1.11.1.min.js"></script>
+  <!--[if lt IE 9]><script src="/assets/themes/twitter/js/html5shiv.min.js"></script><![endif]-->
+</head>
+
+<body>
+
+  <div id="wrap">
+    <header id="top">
+      <!-- Home Link -->
+      <a id="logo" href="/" title="回到首页">
+		  <h1>小一辈无产阶级码农</h1>
+      </a>
+      <!-- Navigation Bar -->
+      <nav id="navbar">
+        <ul>
+          <li>
+            <a href="/" title="首页">Blogs</a>
+          </li>
+          <li>
+            <a href="/categories.html" title="分类">Categories</a>
+          </li>
+          <li>
+            <a href="/tags.html" title="标签">Tags</a>
+          </li>
+		  <li>
+            <a href="/links.html" title="友情链接">Links</a>
+          </li>
+          <li>
+            <a href="/messages.html" title="留言板">Message</a>
+          </li>
+          <li id="about-link" >
+            <a href="/about.html" title="关于我">About</a>
+          </li>
+          <li id="rss-link">
+            <a href="/rss.xml" title="订阅 RSS"><i class="icon-large icon-fixed-width icon-rss"></i></a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <section id="main">
+
+      <!-- Sidebar -->
+      <aside id="sidebar">
+        <section id="search-box">
+          <form id="search-form">
+  <input id="query" type="text" placeholder="正则搜索"></input>
+  <button type="submit"><i class="icon-search"></i></button>
+</form>
+<script type="text/javascript">
+$(document).ready(function() {
+  $('#search-form').submit(function() {
+    $('#query').blur().attr('disabled', true);
+    $('#main-content').hide();
+    $('#loader').show();
+    $.ajax({url: '/atom.xml?r=' + (Math.random() * 999999), dataType: 'xml', success: function(data) {
+      var rq = new RegExp($('#query').val(), 'im');
+      var rl = /\/([^\/]+)\.html$/;
+      var html = '';
+      $(data).find('entry').each(function(index, entry) {
+        var title = $(entry).find('title').text();
+        var link = $(entry).find('link').attr('href');
+        var title_en = rl.exec(link)[1].replace('-', ' ');
+        var content = $(entry).find('content').text();
+        if (rq.test(title) || rq.test(title_en) || rq.test(content)) {
+          var parts = $(entry).find('updated').text().split(/[-T:+]/g);
+          var months = [ "January", "February", "March", "April", "May", "June",
+            "July", "August", "September", "October", "November", "December" ];
+          date = parts[2] + ' ' + months[parts[1] - 1] + ' ' + parts[0];
+          html += '<article class="nested">';
+          html += '<header><h2><a href="' + link + '">' + title + '</a></h2></header>';
+          html += '<section><p>' + content + '</p></section>';
+          html += '<footer><p>更新日期：' + date + '</p></footer>';
+          html += '</article>';
+        }
+      });
+      $('#main-content').html(html);
+      $('#loader').hide();
+      $('#main-content').show();
+    }});
+    $('#query').blur().attr('disabled', false);
+    return false;
+  });
+});
+</script>
+
+        </section>
+        <section class="active">
+          <a href="/" title="查看最近发表"><i class="icon-fixed-width icon-edit"></i> 最近发表</a>
+<ul>
+
+  <li class="text-clip"><a href="/20171013/springboot-start.html" title="查看《SpringBoot 的三种启动方式》">SpringBoot 的三种启动方式</a></li>
+
+  <li class="text-clip"><a href="/20170309/xdebug.html" title="查看《phpstrom 实现php断点调试》">phpstrom 实现php断点调试</a></li>
+
+  <li class="text-clip"><a href="/20170301/charles.html" title="查看《charles 抓包工具安装与使用》">charles 抓包工具安装与使用</a></li>
+
+  <li class="text-clip"><a href="/201702/javascript-inherit.html" title="查看《【转】：javascript 实现继承的5种方法》">【转】：javascript 实现继承的5种方法</a></li>
+
+  <li class="text-clip"><a href="/201702/javascript-call-apply.html" title="查看《javascript中call和apply的区别》">javascript中call和apply的区别</a></li>
+
+  <li class="text-clip"><a href="/20170220/react-native.html" title="查看《linux react native开发原生app》">linux react native开发原生app</a></li>
+
+  <li class="text-clip"><a href="/20170219/ubuntu-install-qq2013.html" title="查看《ubuntu 安装Wine longene QQ 7.8 和微信》">ubuntu 安装Wine longene QQ 7.8 和微信</a></li>
+
+  <li class="text-clip"><a href="/2016-11-04/it-team-management.html" title="查看《IT团队管理心得》">IT团队管理心得</a></li>
+
+  <li class="text-clip"><a href="/20161016/imagettftext-notfound.html" title="查看《解决Call to undefined function imagettftext()方法》">解决Call to undefined function imagettftext()方法</a></li>
+
+  <li class="text-clip"><a href="/20161012/check-soft-installed.html" title="查看《Ubuntu上如何检测某个软件包是否安装》">Ubuntu上如何检测某个软件包是否安装</a></li>
+
+</ul>
+
+        </section>
+        <section>
+          <a href="/archive.html" title="查看所有存档"><i class="icon-fixed-width icon-file-text"></i> 文章存档</a>
+<span title="文章总数">30</span>
+<ul>
+
+
+  
+  
+  
+  
+    <li><a href="/archive.html#October-2017">2017 年 10 月 (1)</a></li>
+    
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+    <li><a href="/archive.html#March-2017">2017 年 03 月 (2)</a></li>
+    
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+    <li><a href="/archive.html#February-2017">2017 年 02 月 (4)</a></li>
+    
+  
+
+  
+  
+  
+  
+    <li><a href="/archive.html#November-2016">2016 年 11 月 (1)</a></li>
+    
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+    <li><a href="/archive.html#October-2016">2016 年 10 月 (2)</a></li>
+    
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+    <li><a href="/archive.html#August-2016">2016 年 08 月 (4)</a></li>
+    
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+    <li><a href="/archive.html#May-2016">2016 年 05 月 (2)</a></li>
+    
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+    <li><a href="/archive.html#April-2016">2016 年 04 月 (5)</a></li>
+    
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+    <li><a href="/archive.html#March-2016">2016 年 03 月 (4)</a></li>
+    
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+    <li><a href="/archive.html#November-2015">2015 年 11 月 (2)</a></li>
+    
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+    <li><a href="/archive.html#May-2015">2015 年 05 月 (2)</a></li>
+    
+  
+
+  
+  
+  
+  
+    <li><a href="/archive.html#March-2015">2015 年 03 月 (1)</a></li>
+    
+  
+
+</ul>
+
+        </section>
+        <section>
+          <a href="/categories.html" title="查看所有分类"><i class="icon-fixed-width icon-folder-open"></i> 文章分类</a>
+<span title="分类总数">12</span>
+<ul>
+
+  <li><a href="/categories.html#学习和思考-ref">学习和思考 (4)</a></li>
+
+  <li><a href="/categories.html#操作系统-ref">操作系统 (6)</a></li>
+
+  <li><a href="/categories.html#数据库技术-ref">数据库技术 (3)</a></li>
+
+  <li><a href="/categories.html#Funny-ref">Funny (1)</a></li>
+
+  <li><a href="/categories.html#前端开发-ref">前端开发 (3)</a></li>
+
+  <li><a href="/categories.html#服务器运维-ref">服务器运维 (4)</a></li>
+
+  <li><a href="/categories.html#linux-ref">linux (5)</a></li>
+
+  <li><a href="/categories.html#php-ref">php (5)</a></li>
+
+  <li><a href="/categories.html#mongodb-ref">mongodb (1)</a></li>
+
+  <li><a href="/categories.html#nodejs-ref">nodejs (1)</a></li>
+
+  <li><a href="/categories.html#工具-ref">工具 (2)</a></li>
+
+  <li><a href="/categories.html#java编程-ref">java编程 (1)</a></li>
+
+</ul>
+
+        </section>
+        <section>
+          <a href="/tags.html" title="查看所有标签"><i class="icon-fixed-width icon-tags"></i> 标签云</a>
+<span title="标签总数">34</span>
+<div id="tag-cloud">
+
+
+
+
+
+
+  
+    
+    
+    
+    
+    
+    <a href="/tags.html#linux-ref" style="font-size: 18pt; color: #000;">linux</a>
+  
+    
+    
+    
+    
+    
+    <a href="/tags.html#flashpalyer-ref" style="font-size: 9pt; color: #999;">flashpalyer</a>
+  
+    
+    
+    
+    
+    
+    <a href="/tags.html#mysql-ref" style="font-size: 10.5pt; color: #777;">mysql</a>
+  
+    
+    
+    
+    
+    
+    <a href="/tags.html#ubuntu-ref" style="font-size: 15pt; color: #333;">ubuntu</a>
+  
+    
+    
+    
+    
+    
+    <a href="/tags.html#fcitx-ref" style="font-size: 10.5pt; color: #777;">fcitx</a>
+  
+    
+    
+    
+    
+    
+    <a href="/tags.html#idea-ref" style="font-size: 10.5pt; color: #777;">idea</a>
+  
+    
+    
+    
+    
+    
+    <a href="/tags.html#phpstrom-ref" style="font-size: 12pt; color: #666;">phpstrom</a>
+  
+    
+    
+    
+    
+    
+    <a href="/tags.html#jekyll-ref" style="font-size: 10.5pt; color: #777;">jekyll</a>
+  
+    
+    
+    
+    
+    
+    <a href="/tags.html#ruby-ref" style="font-size: 9pt; color: #999;">ruby</a>
+  
+    
+    
+    
+    
+    
+    <a href="/tags.html#liquid-ref" style="font-size: 9pt; color: #999;">liquid</a>
+  
+    
+    
+    
+    
+    
+    <a href="/tags.html#lastPass-ref" style="font-size: 9pt; color: #999;">lastPass</a>
+  
+    
+    
+    
+    
+    
+    <a href="/tags.html#javascript-ref" style="font-size: 12pt; color: #666;">javascript</a>
+  
+    
+    
+    
+    
+    
+    <a href="/tags.html#跨域-ref" style="font-size: 9pt; color: #999;">跨域</a>
+  
+    
+    
+    
+    
+    
+    <a href="/tags.html#运维-ref" style="font-size: 9pt; color: #999;">运维</a>
+  
+    
+    
+    
+    
+    
+    <a href="/tags.html#nginx-ref" style="font-size: 9pt; color: #999;">nginx</a>
+  
+    
+    
+    
+    
+    
+    <a href="/tags.html#tengine-ref" style="font-size: 9pt; color: #999;">tengine</a>
+  
+    
+    
+    
+    
+    
+    <a href="/tags.html#php-ref" style="font-size: 13.5pt; color: #444;">php</a>
+  
+    
+    
+    
+    
+    
+    <a href="/tags.html#抓包工具-ref" style="font-size: 10.5pt; color: #777;">抓包工具</a>
+  
+    
+    
+    
+    
+    
+    <a href="/tags.html#tcpdump-ref" style="font-size: 9pt; color: #999;">tcpdump</a>
+  
+    
+    
+    
+    
+    
+    <a href="/tags.html#docker-ref" style="font-size: 10.5pt; color: #777;">docker</a>
+  
+    
+    
+    
+    
+    
+    <a href="/tags.html#dockerfile-ref" style="font-size: 9pt; color: #999;">dockerfile</a>
+  
+    
+    
+    
+    
+    
+    <a href="/tags.html#nosql-ref" style="font-size: 9pt; color: #999;">nosql</a>
+  
+    
+    
+    
+    
+    
+    <a href="/tags.html#mongodb-ref" style="font-size: 10.5pt; color: #777;">mongodb</a>
+  
+    
+    
+    
+    
+    
+    <a href="/tags.html#Ubuntu-ref" style="font-size: 9pt; color: #999;">Ubuntu</a>
+  
+    
+    
+    
+    
+    
+    <a href="/tags.html#dpkg-ref" style="font-size: 9pt; color: #999;">dpkg</a>
+  
+    
+    
+    
+    
+    
+    <a href="/tags.html#imagettftext-ref" style="font-size: 9pt; color: #999;">imagettftext</a>
+  
+    
+    
+    
+    
+    
+    <a href="/tags.html#longeneqq-ref" style="font-size: 9pt; color: #999;">longeneqq</a>
+  
+    
+    
+    
+    
+    
+    <a href="/tags.html#react-native-ref" style="font-size: 9pt; color: #999;">react-native</a>
+  
+    
+    
+    
+    
+    
+    <a href="/tags.html#react-ref" style="font-size: 9pt; color: #999;">react</a>
+  
+    
+    
+    
+    
+    
+    <a href="/tags.html#nodejs-ref" style="font-size: 9pt; color: #999;">nodejs</a>
+  
+    
+    
+    
+    
+    
+    <a href="/tags.html#charles-ref" style="font-size: 9pt; color: #999;">charles</a>
+  
+    
+    
+    
+    
+    
+    <a href="/tags.html#断点调试-ref" style="font-size: 9pt; color: #999;">断点调试</a>
+  
+    
+    
+    
+    
+    
+    <a href="/tags.html#xdebug-ref" style="font-size: 9pt; color: #999;">xdebug</a>
+  
+    
+    
+    
+    
+    
+    <a href="/tags.html#spring-boot-ref" style="font-size: 9pt; color: #999;">spring-boot</a>
+  
+
+</div>
+
+        </section>
+        <div id="fixed-container">
+  <section>
+    <a href="#"><i class="icon-fixed-width icon-code"></i> 代码仓库</a>
+<ul>
+  <li><a href="http://git.oschina.net/blackfox/herosphp" target="_blank">Herosphp框架</a></li>
+  <li><a href="http://git.oschina.net/blackfox/jekyll-blog" target="_blank">本博客源码</a></li>
+  <li><a href="http://git.oschina.net/lionsoul/friso" target="_blank">C语言中文分词</a></li>
+  <li><a href="http://git.oschina.net/blackfox/AjaxProxy" target="_blank">Ajax代理插件</a></li>
+  <li><a href="https://git.oschina.net/blackfox/purenode" target="_blank">Nodejs web开发框架</a></li>
+  <li><a href="http://git.oschina.net/lionsoul/jcseg" target="_blank">Jcseg中文分词工具</a></li>
+</ul>
+
+  </section>
+  <section>
+    <a href="#"><i class="icon-fixed-width icon-heart"></i> 与我联系</a>
+<div id="contacts-list">
+  <a href="mailto:yangjian102621@gmail.com" target="_blank" title="Gmail">
+    <i class="icon-large icon-fixed-width icon-envelope"></i>
+  </a>
+  <a href="https://github.com/yangjian102621" target="_blank" title="GitHub">
+    <i class="icon-large icon-fixed-width icon-github"></i>
+  </a>
+<!--
+  <a href="http://weibo.com/" target="_blank" title="新浪微博">
+    <i class="icon-large icon-fixed-width icon-weibo"></i>
+  </a>
+  <a href="http://v2ex.com/member/" target="_blank" title="V2EX">
+    <i class="icon-large icon-fixed-width icon-v2ex"></i>
+  </a>
+-->
+  <a href="https://plus.google.com/116761736844742660869" target="_blank" title="Google+">
+    <i class="icon-large icon-fixed-width icon-google-plus"></i>
+  </a>
+  <a href="https://www.facebook.com/smallstone2017" target="_blank" title="Twitter">
+    <i class="icon-large icon-fixed-width icon-facebook"></i>
+  </a>
+   <a href="https://www.twitter.com/smallstone2017" target="_blank" title="Twitter">
+    <i class="icon-large icon-fixed-width icon-twitter"></i>
+  </a>
+</div>
+
+  </section>
+  <section>
+    <a href="#"><i class="icon-fixed-width icon-link"></i> 友情链接</a>
+<ul>
+	<li><a href="http://docs.r9it.com/herosphp/" target="_blank">HerosPHP</a></li>
+	<li><a href="https://my.oschina.net/u/940314" target="_blank">开源中国</a></li>
+	<li><a href="http://jekyll.com.cn/" target="_blank">Jekyll &bull; 简单的博客</a></li> 
+	<li><a href="https://github.com/Shopify/liquid/wiki/Liquid-for-Designers" target="_blank">Liquid 模板引擎</a></li>
+	<li><a href="http://liberize.github.io/" target="_blank">本博客模板作者 Liberize</a></li>
+ 
+</ul>
+
+  </section>
+</div>
+<script type="text/javascript">
+$(document).ready(function() {
+  var position = $('#fixed-container').offset();
+  $(window).scroll(function() {
+    if($(window).scrollTop() > position.top) {
+      $('#fixed-container').css('position','fixed').css('top','0');
+    } else {
+      $('#fixed-container').css('position','static');
+    }
+  });
+});
+</script>
+
+      </aside>
+
+      <!-- Main Content -->
+      <div id="main-inner">
+        <div id="loader"><img src="/assets/themes/twitter/img/loading.gif" alt="请稍侯"></div>
+        <div id="main-content">
+          
+
+<section id="content">
+  <article class="post">
+
+    <header>
+      <h1>简单了解php7的新特性</h1>
+    </header>
+
+    <section>
+      <div class="post-extra">
+        <div class="pull-left">
+          <span>17 August 2016</span>
+        </div>
+        <div class="pull-right">
+          
+
+
+  <span id="share">
+  <a class="wechat" target="_blank" title="分享到微信" href="http://chart.apis.google.com/chart?cht=qr&amp;chs=300x300&amp;chl=http://www.r9it.com/20160817/php7-new-feature.html"><i class="icon-large icon-wechat"></i></a>
+  <a class="weibo" target="_blank" title="分享到微博" href="http://service.weibo.com/share/share.php?title=简单了解php7的新特性 - 小一辈无产阶级码农&amp;url=http://www.r9it.com/20160817/php7-new-feature.html&amp;type=3&amp;searchPic=1"><i class="icon-large icon-weibo"></i></a>
+  <a class="qzone" target="_blank" title="分享到 QQ 空间" href="http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://www.r9it.com/20160817/php7-new-feature.html&amp;title=简单了解php7的新特性 - 小一辈无产阶级码农&amp;summary=&amp;site=http://www.r9it.com"><i class="icon-large icon-qzone"></i></a>
+  <a class="twitter" target="_blank" title="Share to Twitter" href="https://twitter.com/intent/tweet?url=http://www.r9it.com/20160817/php7-new-feature.html&amp;text=简单了解php7的新特性 - 小一辈无产阶级码农&amp;via=smallstone2017"><i class="icon-large icon-twitter"></i></a>
+  <a class="facebook" target="_blank" title="Share to Facebook" href="http://www.facebook.com/sharer.php?u=http://www.r9it.com/20160817/php7-new-feature.html&amp;t=简单了解php7的新特性 - 小一辈无产阶级码农"><i class="icon-large icon-facebook-sign"></i></a>
+  <a class="googleplus" target="_blank" title="Share to Google+" href="https://plus.google.com/share?url=http://www.r9it.com/20160817/php7-new-feature.html"><i class="icon-large icon-google-plus-sign"></i></a>
+</span>
+
+
+
+
+
+        </div>
+      </div>
+      <div class="post-content"><p>截止到目前为止，PHP官方已经发布了php7的7.0.9版本，现在来说php7的重大特性肯定已经是定型了，不会再有什么变动了。后续一些版本的迭代主要也就是修修bug，优化之类的。下面就来说话我们一直期待的php7会有那些主要的变化了。。。</p>
+
+<h1 id="1">1.标量数据类型</h1>
+
+<p>string, int, float, bool，会按照定义的类型自动进行数据类型的转换, 也就是说php7已经逐步支持强类型了。</p>
+<div class="highlight"><pre><code class="language-php" data-lang="php">function addUser(string name, int age) {
+    echo "add user {$name}, {$age} years old.";
+}
+</code></pre></div>
+<p>这样看起来是不是代码的语义化也更强一些。</p>
+
+<h1 id="2">2.函数返回类型的定义支持</h1>
+
+<p>php7支持返回类型定义，用于返回类型的自动标准和自动转换</p>
+<div class="highlight"><pre><code class="language-php" data-lang="php">function login(string username, string password) : bool {
+    return false;
+}
+login("root", "123456");
+</code></pre></div>
+<h1 id="3-null">3.null的快捷合并操作</h1>
+
+<p>这个特性不错，可以节省不少代码，替换三目运算符</p>
+<div class="highlight"><pre><code class="language-php" data-lang="php">$username = $_GET['user'] ?? 'nobody';
+//来代替之前的：
+$username = isset($_GET['user']) ? $_GET['user'] : 'nobody';
+//甚至还可以这么用：
+$username = $_GET['user'] ?? $_POST['user'] ?? 'nobody';
+</code></pre></div>
+<h1 id="4-spaceship">4.新增Spaceship（飞船）操作符号</h1>
+<div class="highlight"><pre><code class="language-php" data-lang="php">$a <span class="err">&lt;</span>=&gt; $b
+//来代替：
+if ($a &gt; $b ) return 1;
+else if ( $a == b ) return 0;
+else return -1;
+</code></pre></div>
+<p>这个特性对于数据的比较又可以省去不少代码了</p>
+
+<h1 id="5-define">5.define可以定义常量数组了</h1>
+
+<p>这个不粗，在PHP5.6，它们只能使用 const 关键字定义. 这样就可以方便define定义的常量的统一管理，也解决了常量命名冲突的问题。如果是这样的话，也不需要每次定义常量之前都用<code>defined</code>函数检查了</p>
+<div class="highlight"><pre><code class="language-php" data-lang="php">define('ANIMALS', [
+    'dog',
+    'cat',
+    'bird'
+]);
+print(animals[1]);
+
+//以上将输出cat
+</code></pre></div>
+<h1 id="6">6.支持匿名类的使用</h1>
+
+<p>在php7以后开始支持匿名类，匿名类像普通类一样传递参数到匿名类的构造器，也可以扩展（extend）其他类、实现接口（implement interface），以及像其他普通的类一样使用 trait</p>
+
+<p>不过一直觉得匿名类除了用来创建一次性的简单对象之外没啥卵用，不过一般支持匿名类的语言，基本可以支持闭包，这个对于后期重复操作代码的减少很有用，闭包理解为：实现某种业务的逻辑代码，可以理解为微型函数，不同在于，可以动态的绑定到执行环境进行调用！</p>
+<div class="highlight"><pre><code class="language-php" data-lang="php">$getX = function() {return $this-&gt;x;};
+echo $getX-&gt;call(new A);
+//将getX闭包，绑定到new A对象上执行！
+</code></pre></div>
+<p>这个特性很棒！</p>
+
+<h1 id="7">7.快捷进行除法并且放回取整结果</h1>
+<div class="highlight"><pre><code class="language-php" data-lang="php">int a = intdiv(10, 3);
+a = 3
+//来代替：(int) 10/3或者floort(10/3)
+//这个主要是运行速度上的优化！
+</code></pre></div>
+<h1 id="8-dirname">8.dirname()函数增加了第二个参数</h1>
+
+<p>第二个参数表示剔除的层数，免去<code>dirname(dirname(<strong>FILE</strong>))</code>这种嵌套的调用！</p>
+<div class="highlight"><pre><code class="language-php" data-lang="php">$dir = dirname(dirname(dirname(__FILE__)))
+//等价于：
+$dir = dirname(__FILE__, 3);
+</code></pre></div>
+<h1 id="9-unicode">9.对unicode有更好的支持了</h1>
+
+<p>例如如下，可以输出一个emoji表情：</p>
+<div class="highlight"><pre><code class="language-php" data-lang="php">echo "\u{1F60D}"; // outputs 
+</code></pre></div>
+<h1 id="10">10.便于引入相同的命名空间的类和函数</h1>
+<div class="highlight"><pre><code class="language-php" data-lang="php">// 新语法写法
+use FooLibrary\Bar\Baz\{ ClassA, ClassB, ClassC, ClassD as Fizbo };
+
+// 以前语法的写法
+
+use FooLibrary\Bar\Baz\ClassA;
+use FooLibrary\Bar\Baz\ClassB;
+use FooLibrary\Bar\Baz\ClassC;
+use FooLibrary\Bar\Baz\ClassD as Fizbo;
+</code></pre></div>
+<h1 id="11">11.可以捕获系统内核异常了</h1>
+
+<p>这个貌似是个坑，亲测发现，虽然可以抛出异常了，但是并不能捕获</p>
+<div class="highlight"><pre><code class="language-php" data-lang="php">try {
+    test_func();
+} catch(EngineException $e) {
+    echo "Exception: {$e-&gt;getMessage()}\n";
+} finally {
+    echo "undefined function…";n
+}   
+</code></pre></div>
+<p>这段代码在php5中只会输出错误，不会抛出异常，如下</p>
+<div class="highlight"><pre><code class="language-" data-lang="">PHP Fatal error:  Call to undefined function test_func() in test.php on line 4
+</code></pre></div>
+<p>但是在php7中就会抛出异常，而不是简单的抛出错误信息，如下</p>
+<div class="highlight"><pre><code class="language-" data-lang="">undefined function…PHP Fatal error:  Uncaught Error: Call to undefined function test_func() in /home/yangjian/test.php:4
+Stack trace:
+#0 {main}
+thrown in /home/yangjian/test.php on line 4
+
+Fatal error: Uncaught Error: Call to undefined function test_func() in /home/yangjian/test.php:4
+Stack trace:
+#0 {main}
+thrown in /home/yangjian/test.php on line 4
+
+</code></pre></div>
+<h1 id="12-php7">12.php7弃用的一些功能</h1>
+
+<p>php7中也放弃了一些过时的功能，这里列出2点
+1. PHP4式构造函数，它与类的名称相同，因为它们是在所定义类的方法，现在已过时，并且将在未来被移除。
+2. 非静态方法静态调用已被弃用，并且可能在将来被移除。也就是说非静态方法已经不能用<code>Class::method();</code>的形式调用了</p>
+
+<h1 id="part-d0d964e0439b">总结 </h1>
+
+<p><strong>总结来说，php7性能的优化，是来自多部分的小细节优化叠加的效果！</strong>
+php7采用了PHP NG – Zend Engine ，最大的改变，在于运行速度上面，测试了，确实比老版本快了１倍，php7对于速度的主要优化在两个方面：</p>
+
+<ol>
+<li>优化了编译是得到的运行指令排序更适合现代CPU的cache line，充分利用cpu的多级缓存！</li>
+<li>运行过程中减少了很多内存的搬运，例如用于存储变了的zval结构体从24为减少为16位，用户类存储和数组存储的HashTable结构体从72位减少为56位！</li>
+<li>有意识的将zval的二级指针变成了一级，也就是把部分变量了从堆空间变成了栈空间存储，对于变量的操作和内存的释放上面，充分利用运行栈的优势！</li>
+</ol>
+</div>
+      
+    </section>
+
+  </article>
+</section>
+
+<section>
+
+  <div class="tag-box-wrapper">
+    
+    <ul class="tag-box inline">
+      <li><i class="icon-large icon-folder-open"></i></li>
+      
+      
+
+
+  
+     
+    	<li><a href="/categories.html#php-ref">
+    		php <span>5</span>
+    	</a></li>
+    
+  
+
+
+
+    </ul>
+    
+
+    
+    <ul class="tag-box inline">
+      <li><i class="icon-large icon-tags"></i></li>
+      
+      
+
+
+  
+     
+    	<li><a href="/tags.html#php-ref">php <span>4</span></a></li>
+    
+  
+
+
+
+    </ul>
+    
+  </div>
+
+  <div class="pagination">
+    <ul>
+      
+      <li class="prev"><a href="/20160814/php-true.html" title="php的true和TRUE引发的一些思考">&larr; 上一篇</a></li>
+      
+      <li><a href="/archive.html">文章列表</a></li>
+      
+      <li class="next"><a href="/20160819/mongodb-group.html" title="细说mongodb 分组查询">下一篇 &rarr;</a></li>
+      
+    </ul>
+  </div>
+
+</section>
+
+<script src="/assets/themes/twitter/js/highlight.js"></script>
+<script type="text/javascript">
+	//初始化代码高亮
+	hljs.initHighlightingOnLoad();
+</script>
+
+
+
+<script src="/assets/themes/twitter/js/jpreview.js"></script>
+<script src="/assets/themes/twitter/js/JLazyLoader.js"></script>
+<script type="text/javascript">
+	//初始化图片预览插件, 图片延时加载
+	$(".img-view").jpreview();
+</script>
+
+
+
+<section id="comments">
+  
+
+
+  
+<div class="post-comments" style="overflow:hidden;">
+
+	<!--畅言评论高速版-->
+	<div id="SOHUCS" sid="/20160817/php7-new-featrues"></div>
+	<script charset="utf-8" type="text/javascript" src="http://changyan.sohu.com/upload/changyan.js" ></script>
+	<script type="text/javascript">
+	$(document).ready(function() {
+	   window.changyan.api.config({
+			appid: 'cysmNxmia',
+			conf: 'prod_a49688836dc6cfb80dfc53f48bb864ab'
+	   });
+		
+	});
+    
+	</script>        
+</div>
+
+
+
+
+
+
+
+</section>
+
+
+        </div>
+      </div>
+
+      <div id="back-top">
+  <a href="#top" title="回到顶部">
+    <i class="icon-2x icon-arrow-up"></i>
+  </a>
+</div>
+<script type="text/javascript">
+$("#back-top").hide();
+$(document).ready(function () {
+  $(window).scroll(function () {
+    if ($(this).scrollTop() > 100) {
+      $('#back-top').fadeIn();
+    } else {
+      $('#back-top').fadeOut();
+    }
+  });
+  $('#back-top a').click(function () {
+    $('body,html').animate({
+      scrollTop: 0
+    }, 500);
+    return false;
+  });
+});
+</script>
+
+
+    </section>
+
+    <footer id="bottom">
+      <p align="center">&copy; 2017 阳建
+        with help from <a href="http://jekyllbootstrap.com" target="_blank" title="The Definitive Jekyll Blogging Framework">Jekyll Bootstrap</a>
+        and <a href="https://github.com/yangjian102621/yangjian102621.github.com" target="_blank">source on GitHub</a>
+      </p>
+    </footer>
+  </div>
+
+  <script type="text/javascript">
+    $('article.post a').attr('target', '_blank');
+    if (navigator.appVersion.indexOf("Mac") != -1) {
+      $('code, pre').css('font-family', 'Courier, monospace');
+    }
+  </script>
+  
+
+
+  <script type="text/javascript">
+//百度统计代码
+if ( location.host.indexOf('r9it.com') !== -1 ) {
+	var _hmt = _hmt || [];
+	(function() {
+	 var hm = document.createElement("script");
+	 hm.src = "//hm.baidu.com/hm.js?fa1700c08f6ac35179270783fc63a18f";
+	 var s = document.getElementsByTagName("script")[0]; 
+	 s.parentNode.insertBefore(hm, s);
+	 })();
+
+}
+</script>
+
+
+
+
+
+  
+</body>
+</html>
+

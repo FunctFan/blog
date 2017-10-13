@@ -1,0 +1,1124 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 7 ]>    <html lang="zh-CN" class="ie7"> <![endif]-->
+<!--[if IE 8 ]>    <html lang="zh-CN" class="ie8"> <![endif]-->
+<!--[if IE 9 ]>    <html lang="zh-CN" class="ie9"> <![endif]-->
+<!--[if (gte IE 10)|!(IE)]><!--> <html lang="zh-CN"> <!--<![endif]-->
+
+<head>
+  <meta charset="UTF-8">
+
+  <title>liquid学习笔记 - 小一辈无产阶级码农</title>
+  
+  
+  <meta name="author" content="阳建">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="/favicon.png">
+
+  <!-- Feed -->
+  <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="/rss.xml">
+  <link rel="alternate" type="application/atom+xml" title="Atom Feed" href="/atom.xml">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="/assets/themes/twitter/css/style.css?ver=20151125">
+  <link rel="stylesheet" href="/assets/themes/twitter/css/highlight.css?ver=20151125">
+  <link rel="stylesheet" href="/assets/themes/twitter/css/font-awesome.min.css?ver=20151122">
+  <!--[if IE 7 ]><link rel="stylesheet" href="/assets/themes/twitter/css/font-awesome-ie7.min.css?ver=20151122"><![endif]-->
+
+  <!-- Scripts -->
+  <script type="text/javascript" src="/assets/themes/twitter/js/jquery-1.11.1.min.js"></script>
+  <!--[if lt IE 9]><script src="/assets/themes/twitter/js/html5shiv.min.js"></script><![endif]-->
+</head>
+
+<body>
+
+  <div id="wrap">
+    <header id="top">
+      <!-- Home Link -->
+      <a id="logo" href="/" title="回到首页">
+		  <h1>小一辈无产阶级码农</h1>
+      </a>
+      <!-- Navigation Bar -->
+      <nav id="navbar">
+        <ul>
+          <li>
+            <a href="/" title="首页">Blogs</a>
+          </li>
+          <li>
+            <a href="/categories.html" title="分类">Categories</a>
+          </li>
+          <li>
+            <a href="/tags.html" title="标签">Tags</a>
+          </li>
+		  <li>
+            <a href="/links.html" title="友情链接">Links</a>
+          </li>
+          <li>
+            <a href="/messages.html" title="留言板">Message</a>
+          </li>
+          <li id="about-link" >
+            <a href="/about.html" title="关于我">About</a>
+          </li>
+          <li id="rss-link">
+            <a href="/rss.xml" title="订阅 RSS"><i class="icon-large icon-fixed-width icon-rss"></i></a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <section id="main">
+
+      <!-- Sidebar -->
+      <aside id="sidebar">
+        <section id="search-box">
+          <form id="search-form">
+  <input id="query" type="text" placeholder="正则搜索"></input>
+  <button type="submit"><i class="icon-search"></i></button>
+</form>
+<script type="text/javascript">
+$(document).ready(function() {
+  $('#search-form').submit(function() {
+    $('#query').blur().attr('disabled', true);
+    $('#main-content').hide();
+    $('#loader').show();
+    $.ajax({url: '/atom.xml?r=' + (Math.random() * 999999), dataType: 'xml', success: function(data) {
+      var rq = new RegExp($('#query').val(), 'im');
+      var rl = /\/([^\/]+)\.html$/;
+      var html = '';
+      $(data).find('entry').each(function(index, entry) {
+        var title = $(entry).find('title').text();
+        var link = $(entry).find('link').attr('href');
+        var title_en = rl.exec(link)[1].replace('-', ' ');
+        var content = $(entry).find('content').text();
+        if (rq.test(title) || rq.test(title_en) || rq.test(content)) {
+          var parts = $(entry).find('updated').text().split(/[-T:+]/g);
+          var months = [ "January", "February", "March", "April", "May", "June",
+            "July", "August", "September", "October", "November", "December" ];
+          date = parts[2] + ' ' + months[parts[1] - 1] + ' ' + parts[0];
+          html += '<article class="nested">';
+          html += '<header><h2><a href="' + link + '">' + title + '</a></h2></header>';
+          html += '<section><p>' + content + '</p></section>';
+          html += '<footer><p>更新日期：' + date + '</p></footer>';
+          html += '</article>';
+        }
+      });
+      $('#main-content').html(html);
+      $('#loader').hide();
+      $('#main-content').show();
+    }});
+    $('#query').blur().attr('disabled', false);
+    return false;
+  });
+});
+</script>
+
+        </section>
+        <section class="active">
+          <a href="/" title="查看最近发表"><i class="icon-fixed-width icon-edit"></i> 最近发表</a>
+<ul>
+
+  <li class="text-clip"><a href="/20171013/springboot-start.html" title="查看《SpringBoot 的三种启动方式》">SpringBoot 的三种启动方式</a></li>
+
+  <li class="text-clip"><a href="/20170309/xdebug.html" title="查看《phpstrom 实现php断点调试》">phpstrom 实现php断点调试</a></li>
+
+  <li class="text-clip"><a href="/20170301/charles.html" title="查看《charles 抓包工具安装与使用》">charles 抓包工具安装与使用</a></li>
+
+  <li class="text-clip"><a href="/201702/javascript-inherit.html" title="查看《【转】：javascript 实现继承的5种方法》">【转】：javascript 实现继承的5种方法</a></li>
+
+  <li class="text-clip"><a href="/201702/javascript-call-apply.html" title="查看《javascript中call和apply的区别》">javascript中call和apply的区别</a></li>
+
+  <li class="text-clip"><a href="/20170220/react-native.html" title="查看《linux react native开发原生app》">linux react native开发原生app</a></li>
+
+  <li class="text-clip"><a href="/20170219/ubuntu-install-qq2013.html" title="查看《ubuntu 安装Wine longene QQ 7.8 和微信》">ubuntu 安装Wine longene QQ 7.8 和微信</a></li>
+
+  <li class="text-clip"><a href="/2016-11-04/it-team-management.html" title="查看《IT团队管理心得》">IT团队管理心得</a></li>
+
+  <li class="text-clip"><a href="/20161016/imagettftext-notfound.html" title="查看《解决Call to undefined function imagettftext()方法》">解决Call to undefined function imagettftext()方法</a></li>
+
+  <li class="text-clip"><a href="/20161012/check-soft-installed.html" title="查看《Ubuntu上如何检测某个软件包是否安装》">Ubuntu上如何检测某个软件包是否安装</a></li>
+
+</ul>
+
+        </section>
+        <section>
+          <a href="/archive.html" title="查看所有存档"><i class="icon-fixed-width icon-file-text"></i> 文章存档</a>
+<span title="文章总数">30</span>
+<ul>
+
+
+  
+  
+  
+  
+    <li><a href="/archive.html#October-2017">2017 年 10 月 (1)</a></li>
+    
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+    <li><a href="/archive.html#March-2017">2017 年 03 月 (2)</a></li>
+    
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+    <li><a href="/archive.html#February-2017">2017 年 02 月 (4)</a></li>
+    
+  
+
+  
+  
+  
+  
+    <li><a href="/archive.html#November-2016">2016 年 11 月 (1)</a></li>
+    
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+    <li><a href="/archive.html#October-2016">2016 年 10 月 (2)</a></li>
+    
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+    <li><a href="/archive.html#August-2016">2016 年 08 月 (4)</a></li>
+    
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+    <li><a href="/archive.html#May-2016">2016 年 05 月 (2)</a></li>
+    
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+    <li><a href="/archive.html#April-2016">2016 年 04 月 (5)</a></li>
+    
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+    <li><a href="/archive.html#March-2016">2016 年 03 月 (4)</a></li>
+    
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+    <li><a href="/archive.html#November-2015">2015 年 11 月 (2)</a></li>
+    
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+    <li><a href="/archive.html#May-2015">2015 年 05 月 (2)</a></li>
+    
+  
+
+  
+  
+  
+  
+    <li><a href="/archive.html#March-2015">2015 年 03 月 (1)</a></li>
+    
+  
+
+</ul>
+
+        </section>
+        <section>
+          <a href="/categories.html" title="查看所有分类"><i class="icon-fixed-width icon-folder-open"></i> 文章分类</a>
+<span title="分类总数">12</span>
+<ul>
+
+  <li><a href="/categories.html#学习和思考-ref">学习和思考 (4)</a></li>
+
+  <li><a href="/categories.html#操作系统-ref">操作系统 (6)</a></li>
+
+  <li><a href="/categories.html#数据库技术-ref">数据库技术 (3)</a></li>
+
+  <li><a href="/categories.html#Funny-ref">Funny (1)</a></li>
+
+  <li><a href="/categories.html#前端开发-ref">前端开发 (3)</a></li>
+
+  <li><a href="/categories.html#服务器运维-ref">服务器运维 (4)</a></li>
+
+  <li><a href="/categories.html#linux-ref">linux (5)</a></li>
+
+  <li><a href="/categories.html#php-ref">php (5)</a></li>
+
+  <li><a href="/categories.html#mongodb-ref">mongodb (1)</a></li>
+
+  <li><a href="/categories.html#nodejs-ref">nodejs (1)</a></li>
+
+  <li><a href="/categories.html#工具-ref">工具 (2)</a></li>
+
+  <li><a href="/categories.html#java编程-ref">java编程 (1)</a></li>
+
+</ul>
+
+        </section>
+        <section>
+          <a href="/tags.html" title="查看所有标签"><i class="icon-fixed-width icon-tags"></i> 标签云</a>
+<span title="标签总数">34</span>
+<div id="tag-cloud">
+
+
+
+
+
+
+  
+    
+    
+    
+    
+    
+    <a href="/tags.html#linux-ref" style="font-size: 18pt; color: #000;">linux</a>
+  
+    
+    
+    
+    
+    
+    <a href="/tags.html#flashpalyer-ref" style="font-size: 9pt; color: #999;">flashpalyer</a>
+  
+    
+    
+    
+    
+    
+    <a href="/tags.html#mysql-ref" style="font-size: 10.5pt; color: #777;">mysql</a>
+  
+    
+    
+    
+    
+    
+    <a href="/tags.html#ubuntu-ref" style="font-size: 15pt; color: #333;">ubuntu</a>
+  
+    
+    
+    
+    
+    
+    <a href="/tags.html#fcitx-ref" style="font-size: 10.5pt; color: #777;">fcitx</a>
+  
+    
+    
+    
+    
+    
+    <a href="/tags.html#idea-ref" style="font-size: 10.5pt; color: #777;">idea</a>
+  
+    
+    
+    
+    
+    
+    <a href="/tags.html#phpstrom-ref" style="font-size: 12pt; color: #666;">phpstrom</a>
+  
+    
+    
+    
+    
+    
+    <a href="/tags.html#jekyll-ref" style="font-size: 10.5pt; color: #777;">jekyll</a>
+  
+    
+    
+    
+    
+    
+    <a href="/tags.html#ruby-ref" style="font-size: 9pt; color: #999;">ruby</a>
+  
+    
+    
+    
+    
+    
+    <a href="/tags.html#liquid-ref" style="font-size: 9pt; color: #999;">liquid</a>
+  
+    
+    
+    
+    
+    
+    <a href="/tags.html#lastPass-ref" style="font-size: 9pt; color: #999;">lastPass</a>
+  
+    
+    
+    
+    
+    
+    <a href="/tags.html#javascript-ref" style="font-size: 12pt; color: #666;">javascript</a>
+  
+    
+    
+    
+    
+    
+    <a href="/tags.html#跨域-ref" style="font-size: 9pt; color: #999;">跨域</a>
+  
+    
+    
+    
+    
+    
+    <a href="/tags.html#运维-ref" style="font-size: 9pt; color: #999;">运维</a>
+  
+    
+    
+    
+    
+    
+    <a href="/tags.html#nginx-ref" style="font-size: 9pt; color: #999;">nginx</a>
+  
+    
+    
+    
+    
+    
+    <a href="/tags.html#tengine-ref" style="font-size: 9pt; color: #999;">tengine</a>
+  
+    
+    
+    
+    
+    
+    <a href="/tags.html#php-ref" style="font-size: 13.5pt; color: #444;">php</a>
+  
+    
+    
+    
+    
+    
+    <a href="/tags.html#抓包工具-ref" style="font-size: 10.5pt; color: #777;">抓包工具</a>
+  
+    
+    
+    
+    
+    
+    <a href="/tags.html#tcpdump-ref" style="font-size: 9pt; color: #999;">tcpdump</a>
+  
+    
+    
+    
+    
+    
+    <a href="/tags.html#docker-ref" style="font-size: 10.5pt; color: #777;">docker</a>
+  
+    
+    
+    
+    
+    
+    <a href="/tags.html#dockerfile-ref" style="font-size: 9pt; color: #999;">dockerfile</a>
+  
+    
+    
+    
+    
+    
+    <a href="/tags.html#nosql-ref" style="font-size: 9pt; color: #999;">nosql</a>
+  
+    
+    
+    
+    
+    
+    <a href="/tags.html#mongodb-ref" style="font-size: 10.5pt; color: #777;">mongodb</a>
+  
+    
+    
+    
+    
+    
+    <a href="/tags.html#Ubuntu-ref" style="font-size: 9pt; color: #999;">Ubuntu</a>
+  
+    
+    
+    
+    
+    
+    <a href="/tags.html#dpkg-ref" style="font-size: 9pt; color: #999;">dpkg</a>
+  
+    
+    
+    
+    
+    
+    <a href="/tags.html#imagettftext-ref" style="font-size: 9pt; color: #999;">imagettftext</a>
+  
+    
+    
+    
+    
+    
+    <a href="/tags.html#longeneqq-ref" style="font-size: 9pt; color: #999;">longeneqq</a>
+  
+    
+    
+    
+    
+    
+    <a href="/tags.html#react-native-ref" style="font-size: 9pt; color: #999;">react-native</a>
+  
+    
+    
+    
+    
+    
+    <a href="/tags.html#react-ref" style="font-size: 9pt; color: #999;">react</a>
+  
+    
+    
+    
+    
+    
+    <a href="/tags.html#nodejs-ref" style="font-size: 9pt; color: #999;">nodejs</a>
+  
+    
+    
+    
+    
+    
+    <a href="/tags.html#charles-ref" style="font-size: 9pt; color: #999;">charles</a>
+  
+    
+    
+    
+    
+    
+    <a href="/tags.html#断点调试-ref" style="font-size: 9pt; color: #999;">断点调试</a>
+  
+    
+    
+    
+    
+    
+    <a href="/tags.html#xdebug-ref" style="font-size: 9pt; color: #999;">xdebug</a>
+  
+    
+    
+    
+    
+    
+    <a href="/tags.html#spring-boot-ref" style="font-size: 9pt; color: #999;">spring-boot</a>
+  
+
+</div>
+
+        </section>
+        <div id="fixed-container">
+  <section>
+    <a href="#"><i class="icon-fixed-width icon-code"></i> 代码仓库</a>
+<ul>
+  <li><a href="http://git.oschina.net/blackfox/herosphp" target="_blank">Herosphp框架</a></li>
+  <li><a href="http://git.oschina.net/blackfox/jekyll-blog" target="_blank">本博客源码</a></li>
+  <li><a href="http://git.oschina.net/lionsoul/friso" target="_blank">C语言中文分词</a></li>
+  <li><a href="http://git.oschina.net/blackfox/AjaxProxy" target="_blank">Ajax代理插件</a></li>
+  <li><a href="https://git.oschina.net/blackfox/purenode" target="_blank">Nodejs web开发框架</a></li>
+  <li><a href="http://git.oschina.net/lionsoul/jcseg" target="_blank">Jcseg中文分词工具</a></li>
+</ul>
+
+  </section>
+  <section>
+    <a href="#"><i class="icon-fixed-width icon-heart"></i> 与我联系</a>
+<div id="contacts-list">
+  <a href="mailto:yangjian102621@gmail.com" target="_blank" title="Gmail">
+    <i class="icon-large icon-fixed-width icon-envelope"></i>
+  </a>
+  <a href="https://github.com/yangjian102621" target="_blank" title="GitHub">
+    <i class="icon-large icon-fixed-width icon-github"></i>
+  </a>
+<!--
+  <a href="http://weibo.com/" target="_blank" title="新浪微博">
+    <i class="icon-large icon-fixed-width icon-weibo"></i>
+  </a>
+  <a href="http://v2ex.com/member/" target="_blank" title="V2EX">
+    <i class="icon-large icon-fixed-width icon-v2ex"></i>
+  </a>
+-->
+  <a href="https://plus.google.com/116761736844742660869" target="_blank" title="Google+">
+    <i class="icon-large icon-fixed-width icon-google-plus"></i>
+  </a>
+  <a href="https://www.facebook.com/smallstone2017" target="_blank" title="Twitter">
+    <i class="icon-large icon-fixed-width icon-facebook"></i>
+  </a>
+   <a href="https://www.twitter.com/smallstone2017" target="_blank" title="Twitter">
+    <i class="icon-large icon-fixed-width icon-twitter"></i>
+  </a>
+</div>
+
+  </section>
+  <section>
+    <a href="#"><i class="icon-fixed-width icon-link"></i> 友情链接</a>
+<ul>
+	<li><a href="http://docs.r9it.com/herosphp/" target="_blank">HerosPHP</a></li>
+	<li><a href="https://my.oschina.net/u/940314" target="_blank">开源中国</a></li>
+	<li><a href="http://jekyll.com.cn/" target="_blank">Jekyll &bull; 简单的博客</a></li> 
+	<li><a href="https://github.com/Shopify/liquid/wiki/Liquid-for-Designers" target="_blank">Liquid 模板引擎</a></li>
+	<li><a href="http://liberize.github.io/" target="_blank">本博客模板作者 Liberize</a></li>
+ 
+</ul>
+
+  </section>
+</div>
+<script type="text/javascript">
+$(document).ready(function() {
+  var position = $('#fixed-container').offset();
+  $(window).scroll(function() {
+    if($(window).scrollTop() > position.top) {
+      $('#fixed-container').css('position','fixed').css('top','0');
+    } else {
+      $('#fixed-container').css('position','static');
+    }
+  });
+});
+</script>
+
+      </aside>
+
+      <!-- Main Content -->
+      <div id="main-inner">
+        <div id="loader"><img src="/assets/themes/twitter/img/loading.gif" alt="请稍侯"></div>
+        <div id="main-content">
+          
+
+<section id="content">
+  <article class="post">
+
+    <header>
+      <h1>liquid学习笔记</h1>
+    </header>
+
+    <section>
+      <div class="post-extra">
+        <div class="pull-left">
+          <span>09 March 2016</span>
+        </div>
+        <div class="pull-right">
+          
+
+
+  <span id="share">
+  <a class="wechat" target="_blank" title="分享到微信" href="http://chart.apis.google.com/chart?cht=qr&amp;chs=300x300&amp;chl=http://www.r9it.com/20160309/liquid-study-note.html"><i class="icon-large icon-wechat"></i></a>
+  <a class="weibo" target="_blank" title="分享到微博" href="http://service.weibo.com/share/share.php?title=liquid学习笔记 - 小一辈无产阶级码农&amp;url=http://www.r9it.com/20160309/liquid-study-note.html&amp;type=3&amp;searchPic=1"><i class="icon-large icon-weibo"></i></a>
+  <a class="qzone" target="_blank" title="分享到 QQ 空间" href="http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://www.r9it.com/20160309/liquid-study-note.html&amp;title=liquid学习笔记 - 小一辈无产阶级码农&amp;summary=liquid学习笔记&amp;site=http://www.r9it.com"><i class="icon-large icon-qzone"></i></a>
+  <a class="twitter" target="_blank" title="Share to Twitter" href="https://twitter.com/intent/tweet?url=http://www.r9it.com/20160309/liquid-study-note.html&amp;text=liquid学习笔记 - 小一辈无产阶级码农&amp;via=smallstone2017"><i class="icon-large icon-twitter"></i></a>
+  <a class="facebook" target="_blank" title="Share to Facebook" href="http://www.facebook.com/sharer.php?u=http://www.r9it.com/20160309/liquid-study-note.html&amp;t=liquid学习笔记 - 小一辈无产阶级码农"><i class="icon-large icon-facebook-sign"></i></a>
+  <a class="googleplus" target="_blank" title="Share to Google+" href="https://plus.google.com/share?url=http://www.r9it.com/20160309/liquid-study-note.html"><i class="icon-large icon-google-plus-sign"></i></a>
+</span>
+
+
+
+
+
+        </div>
+      </div>
+      <div class="post-content"><p>jekyll是一个不可思议的博客系统，优雅，简单。有了她之后你可以在vim编辑器中愉快的写博客，然后push到github去发布博客。
+但是在愉快玩耍之前你必须要了解Liquid语法，因为jekyll的模板使用的是Liquid语法的标签。网上关于Liquid的学习资料比较多，但是很多的都不全面
+要么就是讲得太简单了，要么就讲的太多了。但是对于我们这种只想玩转jekyll博客的来说，搞懂一些基本的够写博客用就可以了。所以特地整理了
+一套容易学习的教程，给需要的人使用。</p>
+
+<p>Liquid语法是相当强大的，特别是她的过滤器操作（管道操作的格式），总体来说分为一下几部分</p>
+
+<h1 id="output">Output</h1>
+
+<p>简单来说就是输出变量， eg:</p>
+
+<blockquote>
+<p>{{ name }} <br />
+  {{ &quot;Hello world&quot; }} //输出 &quot;Hello world&quot; <br />
+  {{ user.name }}</p>
+</blockquote>
+
+<h1 id="output-filters">高级Output: Filters</h1>
+
+<p>简单来说就是过滤器，对变量的数据进行过滤（处理）， 她的语法原理类似linux系统的shell脚本的管道操作，也就是把前一个操作的计算结果作为后一个操作的参数
+不多说，直接看 eg:</p>
+
+<blockquote>
+<p>{{ post.author | capitalize }} //将博客的作者的首字母转大写 <br />
+{{ user.name | upcase }} //用户名转大写 <br />
+{{ post.date | date: &quot;%Y-%m-%d&quot; }} //转换日期的格式</p>
+</blockquote>
+
+<h3 id="part-a65a7558fda467dd">标准过滤器</h3>
+
+<ul>
+<li>date - 格式化时间</li>
+<li>capitalize - 输出字符串，字符串（句子）首字母大写</li>
+<li>downcase - 转换小写</li>
+<li>upcase - 转换大写</li>
+<li>first - 获取数组的第一个元素</li>
+<li>last - 获取数组的最后一个元素</li>
+<li>join - 用指定的字符拼接数组元素</li>
+<li>sort - 排序数组</li>
+<li>map - 映射或收集给定属性的数组</li>
+<li>size - 返回数组大小</li>
+<li>escape - 转移字符串</li>
+<li>strip_html - 除去字符串中的html标签?</li>
+<li>strip_newlines - 除去字符串中的回车?</li>
+<li>newline_to_br - 将所有的回车&quot;\n&quot; 转换成&quot;&lt;br /&gt;&quot;</li>
+<li>replace - 替换所有匹配内容</li>
+<li>replace_first - 替换第一个匹配内容</li>
+<li>remove - 移除所有匹配内容</li>
+<li>remove_first - 移除第一个匹配内容</li>
+<li>prepend - 在字符串前面加上内容</li>
+<li>append - 字符串后面加上内容</li>
+<li>minus - 减法</li>
+<li>plus - 加法</li>
+<li>times - 乘法</li>
+<li>divided_by - 除法</li>
+<li>split - 分割字符串</li>
+<li>modulo - 取余</li>
+</ul>
+
+<p><strong>好了，闲话不多说，下面我们看demo</strong></p>
+
+<blockquote>
+<p>{{ &quot;abcdswe&quot; | replace:&quot;s&quot;, &quot;w&quot; }}  //输出 abcdwwe <br />
+{{ &quot;ming&quot; | prepend:&quot;xiao&quot; }} //输出 xiaoming <br />
+{{ 10 | divided_by:2}} //输出 5 <br />
+{{ &quot;&lt;span&gt;xiaoming</span>&quot; | strip_html }} //输出 xiaoming</p>
+</blockquote>
+
+<h3 id="tags">Tags</h3>
+
+<p>模板中的逻辑处理通常通过使用tags来完成， 目前Liquid支持的tags有：</p>
+
+<ul>
+<li>assign - 定义变量</li>
+<li>capture - Block tag为变量赋值</li>
+<li>case - Block tag its the standard case...when block</li>
+<li>comment - Block tag 注释</li>
+<li>cycle - 循环列举, 类似数据结构中的枚举.</li>
+<li>for - for循环block</li>
+<li>if - 判断block</li>
+<li>include - 引入模板</li>
+<li>raw - 转义内容tag, 这个非常有用否则你要想再jekyll输出 Liquid标签就要添加很多\来输出标签代码， 本文就是用到了这个标签</li>
+<li>unless - Mirror of if statement</li>
+</ul>
+
+<p><strong>赋值操作：e.g:</strong></p>
+<div class="highlight"><pre><code class="language-html" data-lang="html">{% capture username %}{{ name }}{% endcapture %} //将 name 的值赋给 username
+{% assign date = page.date | date: "%Y" %}
+</code></pre></div>
+<h1 id="if-else">If / Else</h1>
+<div class="highlight"><pre><code class="language-html" data-lang="html">{% if user %}
+  Hello {{ user.name }}
+{% endif %}
+
+{% if user != null %}
+  Hello {{ user.name }}
+{% endif %}
+
+{% if user.name == 'tobi' %}
+  Hello tobi
+{% elsif user.name == 'bob' %}
+  Hello bob
+{% endif %}
+
+{% if user.name == 'tobi' or user.name == 'bob' %}
+  Hello tobi or bob
+{% endif %}
+
+{% if user.name == 'bob' and user.age &gt; 45 %}
+  Hello old bob
+{% endif %}
+
+# Same as above
+{% unless user.name == 'tobi' %}
+  Hello non-tobi
+{% endunless %}
+
+# Check for the size of an array
+{% if user.payments == empty %}
+   you never paid !
+{% endif %}
+
+{% if user.payments.size &gt; 0  %}
+   you paid !
+{% endif %}
+
+{% if user.age &gt; 18 %}
+   Login here
+{% else %}
+   Sorry, you are too young
+{% endif %}
+
+# array = 1,2,3
+{% if array contains 2 %}
+   array includes 2
+{% endif %}
+
+# string = 'hello world'
+{% if string contains 'hello' %}
+   string includes 'hello'
+{% endif %}
+</code></pre></div>
+<h1 id="case">Case 语句</h1>
+
+<p>如果你需要多的条件判断，那么你可以使用case语句:</p>
+<div class="highlight"><pre><code class="language-html" data-lang="html">{% case condition %}
+{% when 1 %}
+hit 1
+{% when 2 or 3 %}
+hit 2 or 3
+{% else %}
+... else ...
+{% endcase %}
+
+//Another Example:
+{% case template %}
+
+{% when 'label' %}
+     // {{ label.title }}
+{% when 'product' %}
+     // {{ product.vendor | link_to_vendor }} / {{ product.title }}
+{% else %}
+     // {{page_title}}
+{% endcase %}
+</code></pre></div>
+<h1 id="cycle"> Cycle</h1>
+
+<p>默认循环</p>
+<div class="highlight"><pre><code class="language-html" data-lang="html">{% cycle 'one', 'two', 'three' %}
+{% cycle 'one', 'two', 'three' %}
+{% cycle 'one', 'two', 'three' %}
+{% cycle 'one', 'two', 'three' %}
+
+//结果为：
+one
+two
+three
+one
+
+//当然你也可以指定分组来轮询
+{% cycle 'group 1': 'one', 'two', 'three' %}
+{% cycle 'group 1': 'one', 'two', 'three' %}
+{% cycle 'group 2': 'one', 'two', 'three' %}
+{% cycle 'group 2': 'one', 'two', 'three' %}
+
+//那么对应的结果为：
+one
+two
+one
+two
+</code></pre></div>
+<h1 id="for">for 循环</h1>
+<div class="highlight"><pre><code class="language-html" data-lang="html">//最普通的循环
+{% for post in site.posts %}
+  {{ post.title }}
+{% endfor %}
+
+//限制循环次数
+# array = [1,2,3,4,5,6]
+{% for item in array limit:2 offset:2 %}
+  {{ item }}
+{% endfor %}
+# results in 3,4
+
+//反向循环
+{% for item in collection reversed %}
+  {{item}}
+{% endfor %}
+</code></pre></div>
+<p>参考资料：<span><a href="https://github.com/Shopify/liquid/wiki/Liquid-for-Designers">https://github.com/Shopify/liquid/wiki/Liquid-for-Designers</a></span></p>
+</div>
+      
+    </section>
+
+  </article>
+</section>
+
+<section>
+
+  <div class="tag-box-wrapper">
+    
+    <ul class="tag-box inline">
+      <li><i class="icon-large icon-folder-open"></i></li>
+      
+      
+
+
+  
+     
+    	<li><a href="/categories.html#学习和思考-ref">
+    		学习和思考 <span>4</span>
+    	</a></li>
+    
+  
+
+
+
+    </ul>
+    
+
+    
+    <ul class="tag-box inline">
+      <li><i class="icon-large icon-tags"></i></li>
+      
+      
+
+
+  
+     
+    	<li><a href="/tags.html#liquid-ref">liquid <span>1</span></a></li>
+     
+    	<li><a href="/tags.html#jekyll-ref">jekyll <span>2</span></a></li>
+    
+  
+
+
+
+    </ul>
+    
+  </div>
+
+  <div class="pagination">
+    <ul>
+      
+      <li class="prev"><a href="/20160302/jekyll-install.html" title="jekyll 环境的搭建">&larr; 上一篇</a></li>
+      
+      <li><a href="/archive.html">文章列表</a></li>
+      
+      <li class="next"><a href="/20160326/lastpass.html" title="lastPass-在线密码管理神器">下一篇 &rarr;</a></li>
+      
+    </ul>
+  </div>
+
+</section>
+
+<script src="/assets/themes/twitter/js/highlight.js"></script>
+<script type="text/javascript">
+	//初始化代码高亮
+	hljs.initHighlightingOnLoad();
+</script>
+
+
+
+<script src="/assets/themes/twitter/js/jpreview.js"></script>
+<script src="/assets/themes/twitter/js/JLazyLoader.js"></script>
+<script type="text/javascript">
+	//初始化图片预览插件, 图片延时加载
+	$(".img-view").jpreview();
+</script>
+
+
+
+<section id="comments">
+  
+
+
+  
+<div class="post-comments" style="overflow:hidden;">
+
+	<!--畅言评论高速版-->
+	<div id="SOHUCS" sid="/20160309/liquid-study-note"></div>
+	<script charset="utf-8" type="text/javascript" src="http://changyan.sohu.com/upload/changyan.js" ></script>
+	<script type="text/javascript">
+	$(document).ready(function() {
+	   window.changyan.api.config({
+			appid: 'cysmNxmia',
+			conf: 'prod_a49688836dc6cfb80dfc53f48bb864ab'
+	   });
+		
+	});
+    
+	</script>        
+</div>
+
+
+
+
+
+
+
+</section>
+
+
+        </div>
+      </div>
+
+      <div id="back-top">
+  <a href="#top" title="回到顶部">
+    <i class="icon-2x icon-arrow-up"></i>
+  </a>
+</div>
+<script type="text/javascript">
+$("#back-top").hide();
+$(document).ready(function () {
+  $(window).scroll(function () {
+    if ($(this).scrollTop() > 100) {
+      $('#back-top').fadeIn();
+    } else {
+      $('#back-top').fadeOut();
+    }
+  });
+  $('#back-top a').click(function () {
+    $('body,html').animate({
+      scrollTop: 0
+    }, 500);
+    return false;
+  });
+});
+</script>
+
+
+    </section>
+
+    <footer id="bottom">
+      <p align="center">&copy; 2017 阳建
+        with help from <a href="http://jekyllbootstrap.com" target="_blank" title="The Definitive Jekyll Blogging Framework">Jekyll Bootstrap</a>
+        and <a href="https://github.com/yangjian102621/yangjian102621.github.com" target="_blank">source on GitHub</a>
+      </p>
+    </footer>
+  </div>
+
+  <script type="text/javascript">
+    $('article.post a').attr('target', '_blank');
+    if (navigator.appVersion.indexOf("Mac") != -1) {
+      $('code, pre').css('font-family', 'Courier, monospace');
+    }
+  </script>
+  
+
+
+  <script type="text/javascript">
+//百度统计代码
+if ( location.host.indexOf('r9it.com') !== -1 ) {
+	var _hmt = _hmt || [];
+	(function() {
+	 var hm = document.createElement("script");
+	 hm.src = "//hm.baidu.com/hm.js?fa1700c08f6ac35179270783fc63a18f";
+	 var s = document.getElementsByTagName("script")[0]; 
+	 s.parentNode.insertBefore(hm, s);
+	 })();
+
+}
+</script>
+
+
+
+
+
+  
+</body>
+</html>
+

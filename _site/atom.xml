@@ -1,0 +1,575 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>小一辈无产阶级码农</title>
+  <link href="http://www.r9it.com/atom.xml" rel="self"/>
+  <link href="http://www.r9it.com"/>
+  <updated>2017-10-13T15:38:26+08:00</updated>
+  <id>http://www.r9it.com</id>
+  <author>
+    <name>阳建</name>
+    <email>yangjian102621@gmail.com</email>
+  </author>
+
+
+  <entry>
+    <title>SpringBoot 的三种启动方式</title>
+    <link href="http://www.r9it.com/20171013/springboot-start.html"/>
+    <updated>2017-10-13T00:00:00+08:00</updated>
+    <id>http://www.r9it.com/20171013/sringboot-start</id>
+    <content type="html">Spring Boot 是什么
+
+Spring Boot是由Pivotal团队提供的全新框架，其设计目的是用来简化新Spring应用的初始搭建以及开发过程。
+该框架使用了特定的方式来进行配置，从而使开发人员不再需要定义样板化的配置。
+
+我简单学习了一下 Spring Boot 的感触就是：简单，方便，快速。
+
+使用 Spring Boot 只需要简单的几行配置，就可以快速搭建一套web项目，或者构建一套微服务。从此抛弃繁杂的 xml 配置文档，各种注解扫描，
+,各种数据库链接，Spring 事物配置，各种日志配置... 这些通通可以省略，极大提高开发效率，让你有更多的时间装逼和陪女朋友逛...</content>
+  </entry>
+
+  <entry>
+    <title>phpstrom 实现php断点调试</title>
+    <link href="http://www.r9it.com/20170309/xdebug.html"/>
+    <updated>2017-03-09T00:00:00+08:00</updated>
+    <id>http://www.r9it.com/20170309/xdebug</id>
+    <content type="html">断点调试是编程的一大利器，为我们的调试工作带来很多便利。但是php的断点调试一直不是一件很容易的事情，
+所以大部分的phper都还是停留在使用 死亡输出 来进行代码调试。这也是php被一部分javaer吐槽比较多的地方。
+本文我就讲讲如何用phpstrom配置php的断点调试。
+
+安装xdebug
+
+在配置断点调试之前，你必须先安装xdebug，先去官网下载源码，然后编译安装就好了。（windows用户请直接下载编译好的二进制包）
+wget https://xdebug.org/files/xdebug-2.5.0.tgz
+tar xvpzf xdebug-2.5.0.tgz
+cd xd...</content>
+  </entry>
+
+  <entry>
+    <title>charles 抓包工具安装与使用</title>
+    <link href="http://www.r9it.com/20170301/charles.html"/>
+    <updated>2017-03-01T00:00:00+08:00</updated>
+    <id>http://www.r9it.com/20170301/charles</id>
+    <content type="html">charles 是一个功能强大的跨平台抓包工具，有window, linux, mac版本。操作简单，界面美观，性能可靠。尤其是用来作为手机代理，可以很方便的破解手机app的通讯过程。
+
+下面就简单介绍一下如何安装和使用。由于我使用的linux系统，所以是以linux版本为例，其他系统的请参考调试。
+
+关于正版
+
+Charles 是收费软件，可以免费试用 30 天。试用期过后，未付费的用户仍然可以继续使用，
+但是每次使用时间不能超过 30 分钟，使用过程中不定时会中断 5 秒钟，并且启动时将会有 10 秒种的延时。
+因此，该付费方案对广大用户还是相当友好的，即使你长期不付费，也能使用完整...</content>
+  </entry>
+
+  <entry>
+    <title>【转】：javascript 实现继承的5种方法</title>
+    <link href="http://www.r9it.com/201702/javascript-inherit.html"/>
+    <updated>2017-02-21T00:00:00+08:00</updated>
+    <id>http://www.r9it.com/201702/javascript_inherit</id>
+    <content type="html">今天介绍javascript的五种实现继承的方法。
+
+比如，现在有一个&amp;quot;动物&amp;quot;对象的构造函数。
+function Animal(){
+    this.species = &quot;动物&quot;;
+}
+
+
+还有一个&amp;quot;猫&amp;quot;对象的构造函数。
+function Cat(name,color){
+    this.name = name;
+    this.color = color;
+}
+
+怎样才能使&amp;quot;猫&amp;quot;继承&amp;quot;动物&amp;quot;呢？
+
+一、 构造函数绑定
+
+第一种方法也是最简单的方法，使用call或apply方法，将父对象的构造函数绑定在...</content>
+  </entry>
+
+  <entry>
+    <title>javascript中call和apply的区别</title>
+    <link href="http://www.r9it.com/201702/javascript-call-apply.html"/>
+    <updated>2017-02-21T00:00:00+08:00</updated>
+    <id>http://www.r9it.com/201702/javascript-call-apply</id>
+    <content type="html">javascript
+中有2个方法用来调用一个对象的一个方法，但是以另一个对象替换当前对象，也就是替换对象的上下文，更改对象的内部指针，简单来说就是更改this指向的内容。
+
+这两个方法分别是call和apply,
+    他们的作用几乎相同，只是在使用的时候有小小的差别。
+
+首先看下这2个函数的原型
+call([thisObj[,arg1[, arg2[,   [,.argN]]]]])
+
+apply(thisObj, args);
+
+call函数和apply方法的第一个参数都是要传入给当前对象的对象，即函数内部的this。后面的参数都是传递给当前对象的参数。
+
+其实他们的区别就在传参...</content>
+  </entry>
+
+  <entry>
+    <title>linux react native开发原生app</title>
+    <link href="http://www.r9it.com/20170220/react-native.html"/>
+    <updated>2017-02-20T00:00:00+08:00</updated>
+    <id>http://www.r9it.com/20170220/ubuntu-react-native</id>
+    <content type="html">&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;前段时间一直想开发一个记录时间开销的app，但是又不想去学android开发，于是就是想使用facebook开源的React-Native 来尝试开发。在自学过程中踩过一些坑，记录下来。
+
+1.搭建环境
+
+这个比较简单，先安装nodejs，然后再安装react-native-cli，
+具体步骤可以参考官方的文档搭建开发环境, 这篇文档写的很清楚
+
+2.编写Hello World
+
+搭建好环境之后，就可以建一个项目测试一下了。
+react-native init test
+cd test
+react-native run-android
+
+很...</content>
+  </entry>
+
+  <entry>
+    <title>ubuntu 安装Wine longene QQ 7.8 和微信</title>
+    <link href="http://www.r9it.com/20170219/ubuntu-install-qq2013.html"/>
+    <updated>2017-02-19T00:00:00+08:00</updated>
+    <id>http://www.r9it.com/20170219/ubuntu-install-longeneqq</id>
+    <content type="html">毫无疑问，在linux系统环境下编程是非常愉快的。所以它应该是程序员的首选工作操作系统，但是作为开发人很尴尬的问题就是我们要和其他部门人员沟通总是或多或少要使用QQ这个神奇的聊天工具，而偏偏企鹅公司并没有打算开发linux版本的qq(可能是因为linux软件是开源不收费的原因）。几经折腾，在ubuntu 14.04 LTS上安装成功了，记录一下步骤。
+
+1.下载deb安装包
+
+直接去longene 官网下载就好了
+
+WineQQ7.8-20151109-Longene：http://www.longene.org/download/WineQQ7.8-20151109-Longene.d...</content>
+  </entry>
+
+  <entry>
+    <title>IT团队管理心得</title>
+    <link href="http://www.r9it.com/2016-11-04/it-team-management.html"/>
+    <updated>2016-11-04T00:00:00+08:00</updated>
+    <id>http://www.r9it.com/2016-11-04/it-team-managerment</id>
+    <content type="html">记得曾经有位领导在员工大会上谈管理的时候，说人人都是管理者，因为你从一出生开始一直都在管理你自己。管理自己的情绪，管理你的时间，管理你的零花钱...我一直觉得这话说虽然没错，但是又有点牵强。因为自我管理和管理团队还是有比较大的区别的。人人都是管理者至少他对我们绝大部分人来说是不靠谱的，否则管理者就是大多数人，而不是极少数人。在这里总结了一些自己的工作心得，因为是一家之言，纯属个人见解，所以不接受大家吐槽。
+
+在此之前我想先讲讲IT团队员工的特点：
+
+
+高学历, 知识密集型. 学习的需求强烈，学习能力也普遍较强.
+人际关系简单. 摩擦大多数由技术产生, 相处也比较容易.
+需要较高的自由度，...</content>
+  </entry>
+
+  <entry>
+    <title>解决Call to undefined function imagettftext()方法</title>
+    <link href="http://www.r9it.com/20161016/imagettftext-notfound.html"/>
+    <updated>2016-10-16T00:00:00+08:00</updated>
+    <id>http://www.r9it.com/20161016/function-imagettftext-notfound</id>
+    <content type="html">前几天系统崩溃了，重装系统之后第一件事情就是编译LNMP开发环境，当编译好php之后执行一个验证码生成的程序，结果报错&amp;quot;function imagettftext() not found&amp;quot;. 搞的我一脸懵逼，因为我在编译php的时候明明添加了--enable-gd 这个选项的。
+
+没有办法，那就一步一步排查把，首先打开phpinfo页面，发现gd扩展是确实有安装的。google一下，找到一个答案说是编译的时候没有加上FreeType. 这里顺便介绍下FreeType是个什么东西
+
+
+FreeType库是一个完全免费（开源）的、高质量的且可移植的字体引擎，它提供统一的接...</content>
+  </entry>
+
+  <entry>
+    <title>Ubuntu上如何检测某个软件包是否安装</title>
+    <link href="http://www.r9it.com/20161012/check-soft-installed.html"/>
+    <updated>2016-10-12T00:00:00+08:00</updated>
+    <id>http://www.r9it.com/20161012/ubuntu-checksoft-installed</id>
+    <content type="html">记得初学linux的时候，到网上去查找&amp;quot;linux如何查询某个软件包是否安装&amp;quot;， 结果出来90%的都是 rpm -qa, 然后把这条命令在自己的终端敲出来的时候每次都是很遗憾的命名没有找到。后来才知道，原来我使用的是ubuntu发行版，rpm是centOS的软件包管理机制。Ubuntu 应该使用 dpkg来查询。
+
+在本篇中，让我们看下如何在基于DEB的系统下检查是否安装了一个包。
+
+要查询特定的安装包，比如说vim是否被安装，使用下面这个命令：
+dpkg -s vim
+
+终端输出结果
+Package: vim
+Status: install ok installed...</content>
+  </entry>
+
+  <entry>
+    <title>细说mongodb 分组查询</title>
+    <link href="http://www.r9it.com/20160819/mongodb-group.html"/>
+    <updated>2016-08-19T00:00:00+08:00</updated>
+    <id>http://www.r9it.com/20160819/mongo-group</id>
+    <content type="html">最近在给herosphp框架添加mongodb支持，考虑到后期可能要切换模型，所以就把Model层把mysql和mongodb的查询语法做了兼容，屏蔽差异性。简单的增删查改都没有问题，可以很方便的做兼容，但是在处理分组查询的时候，发现mongodb的分组查询跟mysql的差别还是蛮大的。
+
+mongodb的原生查询shell语法是这样的
+db.collection.group({keys, initial, reduce, conditions })
+
+包含四个参数
+
+
+
+参数名
+参数说明
+
+
+
+keys
+分组字段
+
+
+initial
+分组初始条件
+
+
+reduce
+分组计算方式，是一个...</content>
+  </entry>
+
+  <entry>
+    <title>简单了解php7的新特性</title>
+    <link href="http://www.r9it.com/20160817/php7-new-feature.html"/>
+    <updated>2016-08-17T00:00:00+08:00</updated>
+    <id>http://www.r9it.com/20160817/php7-new-featrues</id>
+    <content type="html">截止到目前为止，PHP官方已经发布了php7的7.0.9版本，现在来说php7的重大特性肯定已经是定型了，不会再有什么变动了。后续一些版本的迭代主要也就是修修bug，优化之类的。下面就来说话我们一直期待的php7会有那些主要的变化了。。。
+
+1.标量数据类型
+
+string, int, float, bool，会按照定义的类型自动进行数据类型的转换, 也就是说php7已经逐步支持强类型了。
+function addUser(string name, int age) {
+    echo &quot;add user {$name}, {$age} years old.&quot;;
+}
+
+这样看起来是不是...</content>
+  </entry>
+
+  <entry>
+    <title>php的true和TRUE引发的一些思考</title>
+    <link href="http://www.r9it.com/20160814/php-true.html"/>
+    <updated>2016-08-14T00:00:00+08:00</updated>
+    <id>http://www.r9it.com/20160814/php-true</id>
+    <content type="html">最近在写php代码的时候突然很纠结一个问题，就是php里面的那些预定义常量也预定义变量到底有什么区别。比如说true和TRUE,
+false和FALSE，null和NULL...
+那么这些变量对到底有什么区别呢，作为一名热衷技术热衷死磕的码农，果断要测试一下
+var_dump(true === TRUE);
+
+结果为bool(true)，那意味着他们是没有区别的。那么问题来了，php为什么要放2个一毛一样的预定义变量呢？是有什么用意呢，还是本身语言设计的历史遗留问题？百度google一大圈
+没有找到合适的答案，于是果断去看php的编译源代码，php的整个编译程序只有一个文件，都在zend...</content>
+  </entry>
+
+  <entry>
+    <title>mongodb初步学习</title>
+    <link href="http://www.r9it.com/20160811/mongodb.html"/>
+    <updated>2016-08-11T00:00:00+08:00</updated>
+    <id>http://www.r9it.com/20160811/mongodb</id>
+    <content type="html">MongoDB 是由C++语言编写的，是一个基于分布式文件存储的开源数据库系统。
+在高负载的情况下，添加更多的节点，可以保证服务器性能。
+MongoDB 旨在为WEB应用提供可扩展的高性能数据存储解决方案。
+
+安装
+
+mongodb 安装很简单，不管windows还是linux直接去官方下载压缩包解压就行了。本人使用的linux
+wget https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-amazon-3.2.8.tgz
+tar xvpzf mongodb-linux-x86_64-amazon-3.2.8.tgz
+mv mong...</content>
+  </entry>
+
+  <entry>
+    <title>docker学习笔记（二）</title>
+    <link href="http://www.r9it.com/20160502/docker-study-2.html"/>
+    <updated>2016-05-02T00:00:00+08:00</updated>
+    <id>http://www.r9it.com/20160502/docker-study-2</id>
+    <content type="html">Dockerfile是用来自动化创建容器的语法命令，你可以先把你要创建的容器的脚本写成dockerfile,比如创建容器，然后执行一些初始化的命令，安装初始化的的软件等等，其实就是相当一个
+录播功能，你先把你要做的操作用dockerfile记录下来，不用每次创建容器都要敲一大堆的命令，省事。
+
+Dockerfile包含创建镜像所需要的全部指令。基于在Dockerfile中的指令，我们可以使用Docker build命令来创建镜像。通过减少镜像和容器的创建过程来简化部署。
+Dockerfile指令不区分大小写。但是，命名约定为全部大写。
+
+这里贴上一个自己的写dockerfile
+#选择镜...</content>
+  </entry>
+
+  <entry>
+    <title>docker学习笔记（一）</title>
+    <link href="http://www.r9it.com/20160501/docker-study-1.html"/>
+    <updated>2016-05-01T00:00:00+08:00</updated>
+    <id>http://www.r9it.com/20160501/docker-study-1</id>
+    <content type="html">作为码农，最麻烦的莫过于系统奔溃之后需要重新配置环境了，这个比较麻烦且耗时，一个偶然的机会了解docker,它解决了长期困扰我的问题
+
+关于docker
+
+Docker是一个开源的引擎，可以轻松的为任何应用创建一个轻量级的、可移植的、自给自足的容器。开发者在笔记本上编译测试通过的容器可以批量地在生产环境中部署，包括VMs（虚拟机）、bare metal、OpenStack 集群和其他的基础应用平台。
+
+docker的应用场景
+
+
+隔离开发环境，每个容器都是个独立的开发环境，如果这个容器坏了，删掉再创建一个容器即可。
+web应用的自动化打包和发布；
+自动化测试和持续集成、发布；
+在服务型环...</content>
+  </entry>
+
+  <entry>
+    <title>linux抓包神器tcpdump</title>
+    <link href="http://www.r9it.com/20160427/tcpdump.html"/>
+    <updated>2016-04-27T00:00:00+08:00</updated>
+    <id>http://www.r9it.com/20160427/tcpdump</id>
+    <content type="html">&amp;nbsp;&amp;nbsp;&amp;nbsp;tcpdump是一个用于截取网络分组，并输出分组内容的工具。tcpdump凭借强大的功能和灵活的截取策略，使其成为类UNIX系统下用于网络分析和问题排查的首选工具。 
+
+选项介绍
+
+引用
+-A 以ASCII格式打印出所有分组，并将链路层的头最小化。 
+
+-c 在收到指定的数量的分组后，tcpdump就会停止。 
+
+-C 在将一个原始分组写入文件之前，检查文件当前的大小是否超过了参数file_size 中指定的大小。如果超过了指定大小，则关闭当前文件，然后在打开一个新的文件。参数 file_size 的单位是兆字节（是1,000,000字节，而不是1,0...</content>
+  </entry>
+
+  <entry>
+    <title>ubuntu编译安装php5.5.26</title>
+    <link href="http://www.r9it.com/20160425/php-compile.html"/>
+    <updated>2016-04-25T00:00:00+08:00</updated>
+    <id>http://www.r9it.com/20160425/php-compile</id>
+    <content type="html">安装依赖
+apt-get install -y build-essential gcc g++ make
+
+for packages in bzip2 libzip-dev libperl-dev libc6-dev  
+libevent-dev libpcre3 libpcre3-dev libpcrecpp0 zlibc openssl 
+libsasl2-dev libmcrypt-dev libbz2-1.0 libbz2-dev libpng3 
+libjpeg62 libjpeg62-dev libpng-dev libpng12-0 libpng12-dev curl 
+l...</content>
+  </entry>
+
+  <entry>
+    <title>ubuntu编译安装tengine</title>
+    <link href="http://www.r9it.com/20160427/tengine-compile.html"/>
+    <updated>2016-04-24T00:00:00+08:00</updated>
+    <id>http://www.r9it.com/20160427/tengine-compile</id>
+    <content type="html">安装依赖
+
+
+sudo apt-get install build-essential gcc g++ libssl-dev libpcre3-dev
+
+
+下载软件
+
+
+wget http://tengine.taobao.org/download/tengine-2.1.0.tar.gz
+
+
+编译&amp;amp;安装
+
+
+tar xvpzf tengine-2.1.0.tar.gz 
+cd tengine/ 
+./configure --prefix=/usr/local/tengine --user=www-data --group=www-data 
+
+</content>
+  </entry>
+
+  <entry>
+    <title>切割nginx日志</title>
+    <link href="http://www.r9it.com/20160421/cut-nginx-log.html"/>
+    <updated>2016-04-21T00:00:00+08:00</updated>
+    <id>http://www.r9it.com/20160421/cut-nginx-log</id>
+    <content type="html">nginx运行时间久了日志会比较大，经常会需要将日志按天切割，方便查看。不多说，直接上脚本
+
+#!/bin/bash
+# this script cut nginx logs
+
+# nginx日志根目录
+LOGS_PATH=&quot;/var/log/nginx&quot;
+PID=&quot;/var/run/nginx.pid&quot;
+
+## get the date of yesterday  yyyy-MM-dd
+YESTERDAY=$(date -d last-day +%Y-%m-%d)
+
+## 生成路径
+DATE_PATH=$(date -d last-day +%Y)/$(date -d last-day...</content>
+  </entry>
+
+  <entry>
+    <title>ubuntu server中文乱码</title>
+    <link href="http://www.r9it.com/20160416/ununtu-server-garbled.html"/>
+    <updated>2016-04-16T00:00:00+08:00</updated>
+    <id>http://www.r9it.com/20160416/ubuntu-server-garbled</id>
+    <content type="html">安装中文语言包
+
+
+sudo apt-get install language-pack-zh-hans
+
+
+获取语言包支持
+
+
+sudo locale-gen zh_CN.UTF-8
+
+
+添加语言支持
+
+
+sudo vim /var/lib/locales/supported.d/local
+
+
+添加如下内容（如果已经有了就不用再添加）：
+
+
+zh_CN.UTF-8 UTF-8 
+en_US.UTF-8 UTF-8
+
+
+重新配置 locales
+
+
+sudo dpkg-reconfigure locales
+
+
+设置默认语言
+
+
+vim /etc/environment
+
+
+在文件末尾...</content>
+  </entry>
+
+  <entry>
+    <title>javascript 通过发送http头信息跨域</title>
+    <link href="http://www.r9it.com/20160330/javascript-cross-domain.html"/>
+    <updated>2016-03-30T00:00:00+08:00</updated>
+    <id>http://www.r9it.com/20160330/javascript-html5-cross-domain</id>
+    <content type="html">&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;从古至今，javascript ajax跨域问题一直是比较纠结的一个问题，虽然说网上有各种解决方案，包括设置域名，和jsonp方案，但是始终觉得实现起来有点小麻烦，html5出来之后就有一种新的解决方案，简单，粗暴，我喜欢。
+
+到底是怎么回事呢，简单来说就是通过后端发送http头信息来解决前端的跨域操作。在网上搜索了一下这个跨域的头信息，几乎90%的都是：
+Access-Control-Allow-Origin:*
+
+哥一下兴喜万分啊，于是赶紧试了一下，结果发现病没什么卵用，还是提示：
+XMLHttpRequest cannot load ...</content>
+  </entry>
+
+  <entry>
+    <title>lastPass-在线密码管理神器</title>
+    <link href="http://www.r9it.com/20160326/lastpass.html"/>
+    <updated>2016-03-26T00:00:00+08:00</updated>
+    <id>http://www.r9it.com/20160326/lastpass-tool</id>
+    <content type="html">&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;今天偶然发现一个很有意思的东西， lastPass。Lastpass是一个在线密码管理器和页面过滤器，它可以使得你的网页浏览更加的轻松和更安全。
+有了他以后妈妈再也不用担心你忘记网络密码了，从此以后也不必在为了填写网络表格而浪费时间，让lastpass来替你完成这些任务。
+
+功能
+
+
+创建强密码，只需用主密码登录一次。
+自动填写表格，节省您的时间
+您经常访问的网站只需一次点击 ,无需重复输入密码.
+无缝访问和管理来自多台计算机的数据.
+与朋友 - 分享登录和让别人分享你的登录信息.
+使用一次性密码，屏幕和键盘时，可保持你的连接安全。
+支持I...</content>
+  </entry>
+
+  <entry>
+    <title>liquid学习笔记</title>
+    <link href="http://www.r9it.com/20160309/liquid-study-note.html"/>
+    <updated>2016-03-09T00:00:00+08:00</updated>
+    <id>http://www.r9it.com/20160309/liquid-study-note</id>
+    <content type="html">jekyll是一个不可思议的博客系统，优雅，简单。有了她之后你可以在vim编辑器中愉快的写博客，然后push到github去发布博客。
+但是在愉快玩耍之前你必须要了解Liquid语法，因为jekyll的模板使用的是Liquid语法的标签。网上关于Liquid的学习资料比较多，但是很多的都不全面
+要么就是讲得太简单了，要么就讲的太多了。但是对于我们这种只想玩转jekyll博客的来说，搞懂一些基本的够写博客用就可以了。所以特地整理了
+一套容易学习的教程，给需要的人使用。
+
+Liquid语法是相当强大的，特别是她的过滤器操作（管道操作的格式），总体来说分为一下几部分
+
+Output
+
+简单来说...</content>
+  </entry>
+
+  <entry>
+    <title>jekyll 环境的搭建</title>
+    <link href="http://www.r9it.com/20160302/jekyll-install.html"/>
+    <updated>2016-03-02T00:00:00+08:00</updated>
+    <id>http://www.r9it.com/20160302/jekyll-install</id>
+    <content type="html">jekyll是一个不可思议的博客系统，优雅，简单。
+jekyll不需要数据库支持。但是可以配合第三方服务,例如Disqus搭建功能丰富的博客。最关键的是jekyll可以免费部署在Github上，而且可以绑定自己的域名。
+有了她之后你可以在vim编辑器中愉快的写博客，然后push到github去发布博客，这种感觉总结来说就一个词：很吊！
+
+安装ruby
+
+由于jekyll的运行依赖于 ruby, 所以你必须先安装 ruby
+sudo apt-get install ruby ruby-dev
+
+如果你用的ubuntu 14.01 LTS desktop版， 也许会出现找不到软件包 ruby...</content>
+  </entry>
+
+  <entry>
+    <title>linux命令学习：chattr</title>
+    <link href="http://www.r9it.com/20151112/chattr.html"/>
+    <updated>2015-11-12T00:00:00+08:00</updated>
+    <id>http://www.r9it.com/20151112/linux-command-chattr</id>
+    <content type="html">今天在服务器上删除某个文件时发现一直删除不了，提示：Operation not permitted。 个人觉得很诡异，因为我是用root登录的，不应该没有权限，
+果断google一下，原来是chattr命令在作怪，chattr命令是用来改变文件、目录属性的，和chmod，ls这些命令相比，chmod只是改变文件的读写、执行权限，
+更底层的属性控制是由chattr来改变的。
+
+chattr命令的用法：chattr [ -RV ] [ -v version ] [ mode ] files...
+最关键的是在[mode]部分，[mode]部分是由+-=和[ASacDdIijsTtu]这些字符...</content>
+  </entry>
+
+  <entry>
+    <title>解决搜狗输入法在linux系统不能输入中文</title>
+    <link href="http://www.r9it.com/20151102/sogou-input-chinese.html"/>
+    <updated>2015-11-02T00:00:00+08:00</updated>
+    <id>http://www.r9it.com/20151102/sogou-input-chinese-in-ubuntu</id>
+    <content type="html">今天期待已久的搜狗输入法linux版上线了，对于我们这种之前用习惯了搜狗输入法的屌丝来说是个不错的消息，于是赶紧去官网下载了一个装上了。迫不及待的试了一下，很不错，很流畅。
+打中文的速度一下子快起来了。但是当我打开 idea, phpstorm, sublime 这些软件之后傻眼了，发现输入不了中文，虽然习惯了coding的时候写英文注释，但是有些复杂的逻辑还是需要
+ 用中文来解释会好些。于是到google搜索半天，终于找到了靠谱，简单的解决方法，在此记录一下以便后期查看
+
+（一）如果你用 KDM, GDM, LightDM 等显示管理器，请在 ~/.xprofile 中加入以下代码；如...</content>
+  </entry>
+
+  <entry>
+    <title>使用存储过程删除字段和索引</title>
+    <link href="http://www.r9it.com/20150519/delete-index-by-procedure.html"/>
+    <updated>2015-05-19T00:00:00+08:00</updated>
+    <id>http://www.r9it.com/20150519/delete-col-or-index-by-procedure</id>
+    <content type="html">今天对公司OA系统的数据表进行了一些重构，需要删除很多字段和索引，但是发现有两个问题
+
+第一个就是：删除字段的语句要些很多变，好麻烦的说
+
+第二个就是：当字段或者索引不存在时会报错，这样下面sql语句就会被中断执行，这个更麻烦
+
+所以第一时间就想到了使用mysql的存储过程就可以解决这个问题，这里记录一下sql语句，以便以后借鉴
+
+删除字段
+DROP PROCEDURE IF EXISTS Del_Col;  
+-- 创建删除字段的存储过程
+
+create procedureDel_Col (IN p_tablename VARCHAR(200), IN p_col VARCHAR(20...</content>
+  </entry>
+
+  <entry>
+    <title>linux 安装flashplayer</title>
+    <link href="http://www.r9it.com/20150511/install-flash-player.html"/>
+    <updated>2015-05-11T00:00:00+08:00</updated>
+    <id>http://www.r9it.com/20150511/ubuntu-install-flash-player</id>
+    <content type="html">网上看到很多结果，各种复杂，比如去ubuntu 软件中心安装，或者直接用apt-get 或者yum安装，但是这些对有的系统有用，但是经常不灵
+
+其实很简单的，就3步就好了
+
+第一步，去 https://get.adobe.com/cn/flashplayer/?no_redirect 下载 install_flash_player_11_linux.x86_64.tar.gz
+
+第二步，將下载好的包拷到某个目录下并解压,将libflashplayer.so拷到firefox的插件目录/usr/lib/mozilla/plugin/下
+sudo cp libflashplayer.so /...</content>
+  </entry>
+
+  <entry>
+    <title>「转」为什么你应该（从现在开始就）写博客</title>
+    <link href="http://www.r9it.com/20150307/start-bloging-now.html"/>
+    <updated>2015-03-07T00:00:00+08:00</updated>
+    <id>http://www.r9it.com/20150307/why-you-should-start-blogging-now</id>
+    <content type="html">（一）为什么你应该从现在开始就写博客
+
+用一句话来说就是，写一个博客有很多好处，却没有任何明显的坏处。（阿灵顿的情况属于例外，而非常态，就像不能拿抽烟活到一百岁的英国老太太的个例来反驳抽烟对健康的极大损伤一样）
+
+让我说得更明确一点：用博客的形式来记录下你有价值的思考，会带来很多好处，却没有任何明显的坏处。Note：碎碎念不算思考、心情琐记不算思考、唠唠叨叨也不算思考、没话找话也不算思考，请以此类推。
+
+下面是我个人认为写一个长期的价值博客的最大的几点好处：
+
+1) 能够交到很多志同道合的朋友。我自己既写博客，也读别人的博客，在这个时代，对于生活中的绝大多数人来说，拓宽朋友圈子的途径几乎...</content>
+  </entry>
+
+
+</feed>
