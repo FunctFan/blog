@@ -36,7 +36,230 @@ SpringBoot 整合 dubbo
 创建服务实例，结果发现启动 SpringBoot 之后，发现 Controller 的服务无法访问。在调试源码之后我们发现原来是 spring-boot-starter-dubbo 在
 扫描 @DubboConsumer 创建实例的时候导致 SpringBoot 无法创建 Controller 的实例。
 
-第三方的组件虽然可以正常暴露和消费服务，但是 issue 说会有导致事务注解失效的情况
+第三方的组件虽然可以正常暴露和消费服务，但是 issue 说会有导致事务注解失效的情况, 这个暂时没有测试，测试之后在确定。
+
+接下来我们就分别说说这 spring-boot-starter-dubbo 和 xml 这两种接入方式
+
+
+spring-boot-starter-dubbo 接入方式
+=========
+
+### __1. 安装 spring-boot-start-dubbo 到本地仓库__
+
+```bash
+## 克隆代码
+git clone git@github.com:teaey/spring-boot-starter-dubbo.git
+
+## 编译安装
+cd spring-boot-starter-dubbo
+mvn clean install
+```
+
+### __2. 修改 pom.xml 文件，加入依赖__
+
+```xml
+
+<!-- spring boot dubbo starter -->
+<dependency>
+	<groupId>io.dubbo.springboot</groupId>
+	<artifactId>spring-boot-starter-dubbo</artifactId>
+	<version>1.0.0</version>
+</dependency>
+
+```
+
+
+### __3. 发布服务__
+
+先修改 application.properties 文件，设置服务暴露参数
+
+```bash
+spring.dubbo.module=provider
+spring.dubbo.application.name=provider
+spring.dubbo.registry.address=zookeeper://127.0.0.1:2181
+spring.dubbo.protocol.name=dubbo
+spring.dubbo.protocol.port=20884    
+spring.dubbo.scan=com.springboot.dubbo.provider.service
+```
+
+在Spring Application的application.properties中添加spring.dubbo.scan即可支持Dubbo服务发布，其中scan表示要扫描的package目录。
+
+
+__通过注解暴露服务__
+
+```java
+import com.alibaba.dubbo.config.annotation.Service;
+import com.springboot.dubbo.service.DemoService;
+
+@Service(version = "1.0.0")
+public class DemoServiceImpl implements DemoService {
+
+	@Override
+	public String hello(String name) {
+		return "From Spring-Boot-Starter Provider, Hello "+name+", Fuck it whatever!";
+	}
+}
+```
+
+启动 Provider 项目的 springBoot 应用可以成功将服务发布了。
+
+### __4. 消费服务__
+
+首先同样要在消费项目的 pom.xml 引入 spring-boot-dubbo-starter
+
+然后在需要调用服务的类(Controller) 中使用　@Reference 注解来创建 Bean
+
+```java
+package com.springboot.dubbo.consumer.controller;
+
+import com.alibaba.dubbo.config.annotation.Reference;
+import com.springboot.dubbo.service.DemoService;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+public class HelloController {
+
+	@Reference(version = "1.0.0")
+	private DemoService demoService;
+
+	@GetMapping(value = "/hello")
+	public String index() {
+		return demoService.hello("Xiao Ming");
+	}
+}
+```
+
+启动 Consumer 项目的 springBoot 访问 http://localhost:8001/hello　看看服务是否能正常访问
+
+
+使用原生的 xml 方式接入
+======
+
+分别创建２个　SpringBoot 项目　XmlProvider, XmlConsumer. 分别加入　dubbo 和 zookeeper 依赖
+
+```xml
+<dependency>
+	<groupId>com.alibaba</groupId>
+	<artifactId>dubbo</artifactId>
+	<version>2.5.6</version>
+</dependency>
+<dependency>
+	<groupId>org.apache.zookeeper</groupId>
+	<artifactId>zookeeper</artifactId>
+	<version>3.4.9</version>
+</dependency>
+<dependency>
+	<groupId>com.101tec</groupId>
+	<artifactId>zkclient</artifactId>
+	<version>0.2</version>
+</dependency>
+```
+
+### __1. 发布服务__
+
+在　XmlProvider 项目的　resource 目录下新建　dubbo-demo-provider.xml, 配置服务暴露
+
+```xml
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+	http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+    <!-- 提供方应用信息，用于计算依赖关系 -->
+    <dubbo:application name="demo-provider-xml"/>
+
+    <!-- 使用multicast广播注册中心暴露服务地址 -->
+    <dubbo:registry address="zookeeper://127.0.0.1:2181"/>
+
+    <!-- 用dubbo协议在20880端口暴露服务 -->
+    <dubbo:protocol name="dubbo" port="20885"/>
+    
+    <!-- 要扫描服务的包路径，使用注解方式暴露接口 -->
+    <dubbo:annotation package="com.springboot.dubbo.provider.service" />
+
+</beans>
+```
+
+在　SpringBoot 应用入口程序　XmlProviderApplication 导入　dubbo-demo-provider.xml
+
+```java
+package com.springboot.dubbo;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.ImportResource;
+
+@SpringBootApplication
+@ImportResource(value = "classpath:dubbo-demo-provider.xml")
+public class XmlproviderApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(XmlproviderApplication.class, args);
+	}
+}
+
+```
+__这里服务的暴露方式同上，也是使用 @Sevice 注解的方式暴露服务的.__
+启动 SpringBoot 应用，服务就可以成功发布了。
+
+### __2. 消费服务__
+
+在 XmlConsumer 项目的 resource 目录下新建　dubbo-demo-consumer.xml
+
+
+```xml
+
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+	http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+    <!-- 消费方应用名，用于计算依赖关系，不是匹配条件，不要与提供方一样 -->
+    <dubbo:application name="demo-consumer-xml"/>
+
+    <!-- 使用multicast广播注册中心暴露发现服务地址 -->
+    <dubbo:registry address="zookeeper://127.0.0.1:2181"/>
+    <!-- 要扫描的包路径　使用注解方式创建服务 -->
+    <dubbo:annotation package="com.springboot.dubbo.consumer.controller" />
+    
+
+</beans>
+```
+
+在应用启动的时候加载 dubbo-demo-consumer.xml 
+
+```java
+package com.springboot.dubbo;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.ImportResource;
+
+@SpringBootApplication
+@ImportResource(value = "classpath:dubbo-demo-consumer.xml")
+public class XmlconsumerApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(XmlconsumerApplication.class, args);
+	}
+}
+```
+
+使用也跟第一种方法一样，在需要调用远程的服务的地方使用　@Reference 注解创建服务就好了
+
+
+__总结：__
+
+1. 第一种方式比较简单，方便，可以完全摆脱 xml 文档，但是兼容性有待考证，可能跟其他 SpringBoot 组件有冲突。
+
+2. 第二种方式稍微麻烦一些，需要配置 xml 文档，但是由于是采用原生的方式接入，兼容性会比较好些，可以放心使用。
+
+3. 两种方式的服务发布和消费都是相当方便的，通过注解就可以轻松解决，而且效率要比 SpringCloud 官方提供的分布式服务组件高的多。
+
 
 <strong>《完》</strong>
 
