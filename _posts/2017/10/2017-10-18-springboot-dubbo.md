@@ -261,6 +261,10 @@ __总结：__
 3. 两种方式的服务发布和消费都是相当方便的，通过注解就可以轻松解决，而且效率要比 SpringCloud 官方提供的分布式服务组件高的多。
 
 
+项目源码
+======
+[https://gitee.com/blackfox/springboot-dubbo](https://gitee.com/blackfox/springboot-dubbo)
+
 <strong>《完》</strong>
 
 
