@@ -249,7 +249,7 @@ public class XmlconsumerApplication {
 }
 ```
 
-使用也跟第一种方法一样，在需要调用远程的服务的地方使用　@Reference 注解创建服务就好了
+使用也跟第一种方法一样，在需要调用远程的服务的地方使用 @Reference 注解创建服务就好了
 
 
 __总结：__
