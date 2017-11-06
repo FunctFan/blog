@@ -1,7 +1,7 @@
 ---
 layout: post
 title: lastPass-在线密码管理神器
-categories: [Funny]
+categories: [小工具]
 tags: [lastPass]
 status: publish
 type: post

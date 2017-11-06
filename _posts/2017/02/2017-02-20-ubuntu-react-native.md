@@ -2,7 +2,7 @@
 
 layout: post
 title: "linux react native开发原生app"
-categories: [nodejs]
+categories: [前端开发]
 tags: [react-native, react, nodejs]
 status: publish
 type: post

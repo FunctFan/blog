@@ -1,7 +1,7 @@
 ---
 layout: post
 title: jekyll 环境的搭建
-categories: [学习和思考]
+categories: [小工具]
 tags: [jekyll,ruby]
 status: publish
 type: post

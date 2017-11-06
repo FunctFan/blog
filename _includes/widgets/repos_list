@@ -2,8 +2,9 @@
 <ul>
   <li><a href="http://git.oschina.net/blackfox/herosphp" target="_blank">Herosphp框架</a></li>
   <li><a href="http://git.oschina.net/blackfox/jekyll-blog" target="_blank">本博客源码</a></li>
-  <li><a href="http://git.oschina.net/lionsoul/friso" target="_blank">C语言中文分词</a></li>
-  <li><a href="http://git.oschina.net/blackfox/AjaxProxy" target="_blank">Ajax代理插件</a></li>
-  <li><a href="https://git.oschina.net/blackfox/purenode" target="_blank">Nodejs web开发框架</a></li>
+  <li><a href="https://gitee.com/blackfox/kindeditor" target="_blank">NKeditor 富文本编辑器</a></li>
+  <li><a href="https://gitee.com/blackfox/ajaxUpload" target="_blank">图片异步上传</a></li>
+  <li><a href="https://gitee.com/blackfox/scrawl" target="_blank">JS在线涂鸦小工具</a></li>
   <li><a href="http://git.oschina.net/lionsoul/jcseg" target="_blank">Jcseg中文分词工具</a></li>
+  <li><a href="https://gitee.com/blackfox/spring-boot-demo" target="_blank">SpringBoot Demo 项目</a></li>
 </ul>

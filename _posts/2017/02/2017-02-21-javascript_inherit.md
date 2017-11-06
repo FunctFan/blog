@@ -1,7 +1,7 @@
 ---
 
 layout: post
-title: "【转】：javascript 实现继承的5种方法"
+title: javascript 实现继承的5种方法
 categories: [前端开发]
 tags: [javascript]
 status: publish
@@ -22,7 +22,6 @@ desc : javascript继承
 function Animal(){
 	this.species = "动物";
 }
-
 ```
 
 还有一个"猫"对象的构造函数。

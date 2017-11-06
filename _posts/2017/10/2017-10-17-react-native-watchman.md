@@ -1,7 +1,7 @@
 ---
 layout: post
 title: react-native 环境搭建遇到坑
-categories: [react-native]
+categories: [前端开发]
 tags: [react-native, genymotion]
 status: publish
 type: post

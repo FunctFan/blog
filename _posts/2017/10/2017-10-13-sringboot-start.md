@@ -1,7 +1,7 @@
 ---
 layout: post
 title: SpringBoot 的三种启动方式
-categories: [SpringBoot]
+categories: [JAVA]
 tags: [spring-boot]
 status: publish
 type: post

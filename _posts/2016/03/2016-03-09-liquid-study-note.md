@@ -1,7 +1,7 @@
 ---
 layout: post
 title: liquid学习笔记
-categories: [学习和思考]
+categories: [小工具]
 tags: [liquid, jekyll]
 status: publish
 type: post

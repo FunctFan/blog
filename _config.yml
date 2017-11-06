@@ -36,6 +36,7 @@ author :
 #
 production_url : http://www.r9it.com 
 domain : r9it.com
+source_code_url: https://gitee.com/blackfox/jekyll-blog
 
 # All Jekyll-Bootstrap specific configurations are namespaced into this hash
 #

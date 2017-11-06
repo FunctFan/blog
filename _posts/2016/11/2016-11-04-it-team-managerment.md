@@ -2,7 +2,7 @@
 
 layout: post
 title: "IT团队管理心得"
-categories: []
+categories: [读书和思考]
 tags: []
 status: publish
 type: post

@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 切割nginx日志
-categories: [服务器运维]
+categories: [操作系统]
 tags: [linux,nginx]
 status: publish
 type: post

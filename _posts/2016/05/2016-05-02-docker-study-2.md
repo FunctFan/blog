@@ -1,7 +1,7 @@
 ---
 layout: post
 title: docker学习笔记（二）
-categories: [linux,服务器运维]
+categories: [操作系统]
 tags: [linux,docker, dockerfile]
 status: publish
 type: post

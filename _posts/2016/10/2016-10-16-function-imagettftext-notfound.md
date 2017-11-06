@@ -2,7 +2,7 @@
 
 layout: post
 title: "解决Call to undefined function imagettftext()方法"
-categories: [php]
+categories: [PHP]
 tags: [php,imagettftext]
 status: publish
 type: post

@@ -2,7 +2,7 @@
 
 layout: post
 title: "简单了解php7的新特性"
-categories: [php]
+categories: [PHP]
 tags: [php]
 status: publish
 type: post

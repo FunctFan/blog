@@ -1,8 +1,8 @@
 ---
 layout: post
 title: SpringBoot dubbo 整合
-categories: [springBoot]
-tags: [spring-boot]
+categories: [JAVA]
+tags: [spring-boot, dubbo]
 status: publish
 type: post
 published: true
