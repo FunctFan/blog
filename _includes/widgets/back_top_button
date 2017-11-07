@@ -4,7 +4,9 @@
   </a>
 </div>
 <script type="text/javascript">
-$("#back-top").hide();
+$("#back-top").css({
+    'margin-left' : $("#main").width() + 20 + "px"
+}).hide();
 $(document).ready(function () {
   $(window).scroll(function () {
     if ($(this).scrollTop() > 100) {

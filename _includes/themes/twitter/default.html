@@ -116,29 +116,27 @@
 	//修改背景图片
 	(function () {
 		var date = new Date();
-		var bodyBgImg = '';
+		var bodyClass = '';
 		switch (date.getDay()) {
             case 1:
-	            bodyBgImg = 'bg_body0.png';
+	            bodyClass = 'theme-0';
 	            break;
 			case 2:
-				bodyBgImg = 'bg_body1.png';
+				bodyClass = 'theme-1';
 				break;
 			case 3:
-				bodyBgImg = 'bg_body1.jpg';
+				bodyClass = 'theme-2';
 				break;
 			case 4:
-				bodyBgImg = 'bg_body3.png';
+				bodyClass = 'theme-3';
 				break;
 			case 5:
-				bodyBgImg = 'bg_body5.jpg';
+				bodyClass = 'theme-5';
 				break;
 			default:
-				bodyBgImg = 'bg_body4.png';
+				bodyClass = 'theme-4';
         }
-        $('body').css({
-            'background-image' : 'url(/assets/themes/twitter/img/bgs/'+bodyBgImg+')'
-        });
+        $('body').addClass(bodyClass);
 	})();
 </script>
 {% include JB/analytics %}

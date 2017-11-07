@@ -16,7 +16,8 @@ desc: javascript Promise 对象详解
 ====
 1. 本文的 demo 代码有些是伪代码，不可以直接执行。
 2. 没有特殊说明，本文所有 demo 都是基于 ES6 规范。
-3. Object.method 代表是静态方法， Object#method 代表的是实例方法。
+3. Object.method 代表是静态方法， Object#method 代表的是实例方法。如 Promise#then 代表的是 Promise 的实例方法,
+	Promise.resolve 代表的是 Promise 的静态方法.
 
 2、什么是 Promise?
 ======
