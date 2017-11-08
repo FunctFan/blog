@@ -336,6 +336,8 @@ p2
 7、Promise 基本方法
 ========
 
+ES6的Promise API提供的方法不是很多，下面介绍一下 Promise 对象常用的几个方法.
+
 ## 7.1 Promise.prototype.catch()  
 Promise.prototype.catch方法是.then(null, rejection)的别名，用于指定发生错误时的回调函数。
 
