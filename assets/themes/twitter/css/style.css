@@ -64,7 +64,7 @@ body {
 .theme-2 {background-image: url(../img/bgs/bg_body2.jpg);}
 
 .theme-3 {background-image: url(../img/bgs/bg_body3.png);}
-.theme-3 #navbar ul li a, .theme-1 #top >a > h1 {color: #FFFFFF;}
+.theme-3 #navbar ul li a, .theme-3 #top >a > h1 {color: #FFFFFF;}
 .theme-3 #bottom {color: #e1e1e1;}
 .theme-3 #bottom a {color: #2674BA}
 
@@ -123,7 +123,7 @@ blockquote {
 /*  Main  */
 #wrap {
   width: 100%;
-  max-width: 1400px;
+  max-width: 1200px;
   margin: 20px auto;
 }
 
@@ -901,6 +901,9 @@ pre code {
 }
 
 /*  Responsive UI  */
+@media (min-width: 1600px) {
+  #wrap { width: 100%; max-width: 1400px }
+}
 @media (max-width: 999px) {
   #wrap { width: 100%; }
   #logo, #about-link, #rss-link { display: none; }
