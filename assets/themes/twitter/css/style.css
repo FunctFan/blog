@@ -239,7 +239,7 @@ blockquote {
   background-color: #fff;
   min-height: 1500px;
   margin-left: 271px;
-  padding: 40px;
+  padding: 20px;
 }
 
 #content { margin-bottom: 35px; }
@@ -904,6 +904,9 @@ pre code {
 @media (min-width: 1600px) {
   #wrap { width: 100%; max-width: 1400px }
 }
+@media (max-width: 1400px) {
+  #wrap { max-width: 1100px }
+}
 @media (max-width: 999px) {
   #wrap { width: 100%; }
   #logo, #about-link, #rss-link { display: none; }
@@ -912,7 +915,6 @@ pre code {
   #main { background: none; }
   #main-inner {
     margin-left: 0;
-    padding: 20px;
   }
   article header {
     overflow: hidden;
