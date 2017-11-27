@@ -2,13 +2,13 @@
 
 layout: post
 title: "IT团队管理心得"
-categories: [读书和思考]
+categories: [阅读与思考]
 tags: []
 status: publish
 type: post
 published: true
 author: blackfox
-permalink: 2016-11-04/it-team-management.html
+permalink: /20161104/it-team-management.html
 keyword : 
 desc : 
 
