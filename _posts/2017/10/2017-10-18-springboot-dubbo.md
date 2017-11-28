@@ -36,8 +36,6 @@ SpringBoot 整合 dubbo
 创建服务实例，结果发现启动 SpringBoot 之后，发现 Controller 的服务无法访问。在调试源码之后我们发现原来是 spring-boot-starter-dubbo 在
 扫描 @DubboConsumer 创建实例的时候导致 SpringBoot 无法创建 Controller 的实例。
 
-第三方的组件虽然可以正常暴露和消费服务，但是 issue 说会有导致事务注解失效的情况, 这个暂时没有测试，测试之后在确定。
-
 接下来我们就分别说说这 spring-boot-starter-dubbo 和 xml 这两种接入方式
 
 
@@ -65,7 +63,6 @@ mvn clean install
 	<artifactId>spring-boot-starter-dubbo</artifactId>
 	<version>1.0.0</version>
 </dependency>
-
 ```
 
 
@@ -82,7 +79,7 @@ spring.dubbo.protocol.port=20884
 spring.dubbo.scan=com.springboot.dubbo.provider.service
 ```
 
-在Spring Application的application.properties中添加spring.dubbo.scan即可支持Dubbo服务发布，其中scan表示要扫描的package目录。
+在 Spring Application 的 application.properties 中添加 spring.dubbo.scan 即可支持Dubbo服务发布，其中scan表示要扫描的package目录。
 
 
 __通过注解暴露服务__
@@ -176,11 +173,35 @@ public class HelloController {
     <!-- 用dubbo协议在20880端口暴露服务 -->
     <dubbo:protocol name="dubbo" port="20885"/>
     
-    <!-- 要扫描服务的包路径，使用注解方式暴露接口 -->
-    <dubbo:annotation package="com.springboot.dubbo.provider.service" />
+    <!-- demo service -->
+    <dubbo:service version="1.0.1" interface="com.springboot.dubbo.service.DemoService" ref="demoService"/>
+    
+    <!-- user service -->
+    <dubbo:service version="1.0.1" interface="com.springboot.dubbo.service.UserService" ref="userService"/>
+    
+    <!-- order service -->
+    <dubbo:service version="1.0.1" interface="com.springboot.dubbo.service.OrderService" ref="orderService"/>
 
 </beans>
 ```
+
+__这里尤其需要注意，服务的暴露需要一个一个暴露，不要使用扫描服务包路径的形式一次性暴露__
+
+```html
+ <dubbo:annotation package="com.springboot.dubbo.service" />
+```
+__这样在暴露多个服务的时候，会导致 @Transactional 注解失效__
+
+而且比较坑的是，启动的时候并不会报错，但是你在 dubbo 的后台查看服务的
+的时候会发现服务的暴露地址有点奇怪，正常的暴露地址应该是这样的：
+
+<img class="img-view" data-src="/images/2017/11/springboot-dubbo-2.png" src="/images/1px.png" />
+
+而使用扫描包路径暴露的服务却是这样的：
+
+<img class="img-view" data-src="/images/2017/11/springboot-dubbo-1.png" src="/images/1px.png" />
+
+而且所有的服务都是一样的，没有什么区分，返回的都是一个 SpringProxy 代理对象，在调用的时候就出问题的了。
 
 在　SpringBoot 应用入口程序　XmlProviderApplication 导入　dubbo-demo-provider.xml
 
@@ -201,7 +222,21 @@ public class XmlproviderApplication {
 }
 
 ```
-__这里服务的暴露方式同上，也是使用 @Sevice 注解的方式暴露服务的.__
+__在服务暴露上也是不相同的，使用的是 Spring 的 @Service 注解，而不是 Dubbo 的 @Service.__
+
+```java 
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+/**
+ * @author yangjian
+ * @since 17-10-20.
+ */
+@Service("userService")
+@Transactional(rollbackFor = Exception.class)
+public class UserServiceImpl implements UserService {}
+```
+
 启动 SpringBoot 应用，服务就可以成功发布了。
 
 ### __2. 消费服务__

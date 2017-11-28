@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 使用 php-webdriver 实现自动化测试 
-categories: [php, 小工具]
+categories: [PHP, 小工具]
 tags: [php, webdriver, selenium]
 status: publish
 type: post
