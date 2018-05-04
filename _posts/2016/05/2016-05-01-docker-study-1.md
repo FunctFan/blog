@@ -169,6 +169,22 @@ $ sudo docker tag {ImageId} registry.cn-shenzhen.aliyuncs.com/{username}/{仓库
 $ sudo docker push registry.cn-shenzhen.aliyuncs.com/{username}/{仓库名称}:{镜像版本号}
 ```
 
+> 重命名镜像
+
+镜像的名称其实是以标签的形式存在，一般都是 {ImageName}:{Version} 的形式， 所以要想重名镜像只需要再打一个标签
+
+```bash
+sudo docker tag {ImageId} {ImageName} 
+sudo docker tag 4356834d3af1 new-image
+```
+
+然后把之前的标签删除
+
+```bash
+sudo docker rmi {ImageName}
+```
+
+
 使用过程中的一些思考
 =====
 (1) 在使用和管理容器的时候，你要始终记住一点 <strong>docker 创建的只是一个容器，而不是虚拟机</strong>，
