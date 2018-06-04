@@ -3,7 +3,7 @@
   <a href="mailto:{{ site.author.email }}" target="_blank" title="Gmail">
     <i class="icon-large icon-fixed-width icon-envelope"></i>
   </a>
-  <a href="https://github.com/{{ site.author.github }}" target="_blank" title="GitHub">
+  <a href="https://gitee.com/{{ site.author.github }}" target="_blank" title="GitHub">
     <i class="icon-large icon-fixed-width icon-github"></i>
   </a>
 <!--

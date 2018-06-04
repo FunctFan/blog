@@ -51,9 +51,11 @@
         <li{% if page.url == site.JB.tags_path %} class="active"{% endif %}>
         <a href="{{ site.JB.tags_path }}" title="标签">标签</a>
         </li>
+		{% if (site.JB.messages_path == "/message.html")%}
         <li{% if page.url == site.JB.messages_path %} class="active"{% endif %}>
         <a href="{{ site.JB.messages_path }}" title="留言板">留言板</a>
         </li>
+		{% endif %}
         <li {% if page.url == site.JB.about_path %} class="active"{% endif %}>
           <a href="{{ site.JB.about_path }}" title="关于我">关于我</a>
         </li>

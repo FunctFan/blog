@@ -21,7 +21,7 @@ tagline: 学无先后，达者为师.
 author :
   name : 阳建
   email : yangjian102621@gmail.com
-  github : yangjian102621
+  github : blackfox
   facebook : smallstone2017
   twitter : smallstone2017
   googleplus : 116761736844742660869
@@ -87,7 +87,9 @@ JB :
   links_path : /links.html
   atom_path : /atom.xml
   rss_path : /rss.xml
-  messages_path : /messages.html
+# remove message page
+  messages_path : #
+#messages_path : /messages.html
   about_path : /about.html
 
   # Settings for comments helper
@@ -95,7 +97,7 @@ JB :
   # Set 'provider' to false to turn commenting off globally.
   #
   comments :
-    provider : changyan
+# provider : changyan
     changyan :
       appid : cysmNxmia
       conf : prod_a49688836dc6cfb80dfc53f48bb864ab
