@@ -34,7 +34,8 @@ __所以说内存低于 8GB 的同学就不要尝试了__
 啧啧, 果然不是穷逼能玩的起的，据说每年租用费都高达 76 万 RMB.
 
 我物理机安装的是 ubuntu 16.04 LTS, 为了不影响我的开发环境，我选择在 docker 容器里面搭建测试环境，因为 EOS 运行环境需要安装各种依赖，我担心
-它分分钟把我的开发主机环境搞的一团糟。
+它分分钟把我的开发主机环境搞的一团糟。如果对 docker 容器还不了解的同学，请看下我的另外一篇 docker 容器入门的博客 
+[docker学习笔记（一）](/20160501/docker-study-1.html)
 
 容器使用的镜像还是 ubuntu, 官方推荐的是 ubuntu16.04 或者 ubuntu 18.04, 我这里选择 ubuntu 18.04, 先使用 docker pull 命令把容器镜像下载下来：
 
@@ -48,7 +49,7 @@ docker pull ubuntu:18.04
 docker run -it -v /data/eos:/temp -p 8888:8888 -p 9876:9876 --name eos ubuntu:18.04 /bin/bash 
 ```
 
-> 注意: 我这里使用了 -v 参数映射了我宿主机的一个文件夹进去，方便我们宿主机和容易之间的文件传输.
+> 注意: 我这里使用了 -v 参数映射了我宿主机的一个文件夹进去，方便我们宿主机和容器之间的文件传输.
 
 接下来，去 github 下载 eos 的源代码, 这里需要下载所有的子模块，所以需要使用 --recursive 参数.
 
@@ -59,7 +60,7 @@ git clone https://github.com/EOSIO/eos --recursive
 由于我们做了文件夹映射，所以如果你觉得容器里面的速度太慢，你也可以在宿主机运行，只不过目录需要切换到 <code class="scode">/data/eos</code>
 
 项目比较大，源代码差不多有 800 多MB，真的相当于一个操作系统了， 如果没有翻墙的话，github 会很慢，还有可能会超时下载失败。但是没关系，如果下载失败了
-在项目的根目录执行下面代码继续 pull 代码
+在项目的根目录执行下面代码可以继续 pull 代码
 
 ```bash
 git submodule update --init --recursive 
@@ -72,27 +73,26 @@ cd eos
 ./eosio_build.sh
 ```
 
-首先自动构建脚本会先安装依赖包，这个过程大概需要15分钟左右，根据你的网速决定。在安装依赖的时候还有一个小插曲，就是 eosio_build.sh 这个自动化构建脚本都是、
-里面默认你不是 __root__  用户的，所以它里面很多命令都用了 __sudo__ , 这样就会导致报一个这样的错误：
+首先自动构建脚本会先安装依赖包，这个过程大概需要15分钟左右，根据你的网速决定。在安装依赖的时候还有一个小插曲，就是 eosio_build.sh 
+这个自动化构建脚本里面默认你不是 __root__  用户的，所以它里面很多命令都用了 __sudo__ , 这样就会导致报一个这样的错误：
 
 <img class="img-view" data-src="/images/2018/06/eosbuild-2.png" src="/images/1px.png" />
 
 这个很简单，打开 eosio_build.sh 脚本，把里面所有的 __sudo__ 全部去掉。比如把 sudo apt-get update 换成 apt-get update, 以此类推.
 
-依赖安装一切很顺利，然后接下来你会遇到第二个坑，就是 eosio_build.sh 会在 github 上面下载很多项目来编译安装，比如 mondo-c-driver 等。
+依赖安装一切很顺利，然后接下来你会遇到第二个坑，就是 eosio_build.sh 会在 github 上面下载很多项目来编译安装，比如 mongo-c-driver 等。
 
 github 用的是亚马逊的 aws 云存储，国内访问非常慢，经常下着下着就断了，相信不少人都吐槽过这个。所以安装进行到第二阶段的时候我这边是报了一个这样的错误：
 
 <img class="img-view" data-src="/images/2018/06/eosbuild-1.png" src="/images/1px.png" />
 
-由于 mondo-c-driver 下载失败，执行下面的解压命令的时候出错了，重试了好几次，每次都是到这里下载失败。后来不想浪费时间了，直接去 github 把 
-mondo-c-driver-1.9.3.tar.gz 下载下来，然后 copy 到 /tmp 
+由于 mongo-c-driver 下载失败，执行下面的解压命令的时候出错了，重试了好几次，每次都是到这里下载失败。后来不想浪费时间了，直接去 github 把 
+mongo-c-driver-1.9.3.tar.gz 下载下来，然后 copy 到 /tmp 
 
 下载地址：[https://github.com/mongodb/mongo-c-driver/releases?after=1.9.4](https://github.com/mongodb/mongo-c-driver/releases?after=1.9.4)
 
 ```bash
 wget https://github.com/mongodb/mongo-c-driver/releases/download/1.9.3/mongo-c-driver-1.9.3.tar.gz 
-
 cp mongo-c-driver-1.9.3.tar.gz /tmp
 ```
 
@@ -102,7 +102,7 @@ cp mongo-c-driver-1.9.3.tar.gz /tmp
 vim scripts/eosio_build_ubuntu.sh 
 ```
 
-注释掉从 281 到 290 行，这几行是下载 mondo-c-driver 的
+注释掉从 281 到 290 行，这几行是下载 mongo-c-driver 的
 
 ```bash
 #STATUS=$(curl -LO -w '%{http_code}' --connect-timeout 30 https://github.com/mongodb/mongo-c-driver/releases/download/1.9.3/mongo-c-driver-    1.9.3.tar.gz)
@@ -117,7 +117,7 @@ vim scripts/eosio_build_ubuntu.sh
 290 #               fi
 ```
 
-然后把那几行删除 mondo-c-driver-1.9.3.tar.gz 的脚本也注释掉，防止后面安装失败你又得重新拷贝，最后安装完了之后你一次性的把 /tmp 下面的文件删除就好。
+然后把那几行删除 mongo-c-driver-1.9.3.tar.gz 的脚本也注释掉，防止后面安装失败你又得重新拷贝，最后安装完了之后你一次性的把 /tmp 下面的文件删除就好。
 
 ```bash
 297 #               if ! rm -f "${TEMP_DIR}/mongo-c-driver-1.9.3.tar.gz"
@@ -186,7 +186,11 @@ nodeos -e -p eosio --plugin eosio::chain_api_plugin --plugin eosio::history_api_
 
 <img class="img-view" data-src="/images/2018/06/eosbuild-7.png" src="/images/1px.png" />
 
-至此，EOS 本地开发环境搭建搭建完成. Enjoy coding!
+至此，EOS 本地开发环境搭建搭建完成. 
+
+这里顺便提一句，本文是使用 docker 容器模拟物理机器来搭建的，如果单纯想用容器去跑 EOS 服务，要简单的多，只要执行几条命令就好了，
+官网有详细的教程 [https://github.com/EOSIO/eos/blob/master/Docker/README.md](https://github.com/EOSIO/eos/blob/master/Docker/README.md), 感兴趣的
+同学可以去看看，我这里就不赘述了.
 
 
 
