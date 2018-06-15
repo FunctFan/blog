@@ -73,7 +73,16 @@ cd eos
 ./eosio_build.sh
 ```
 
-首先自动构建脚本会先安装依赖包，这个过程大概需要15分钟左右，根据你的网速决定。在安装依赖的时候还有一个小插曲，就是 eosio_build.sh 
+首先自动构建脚本会先安装依赖包，这个过程大概需要15分钟左右，根据你的网速决定。当然你可以可以自己手动安装，这样构建脚本就不会安装了.
+
+```bash
+sudo apt-get install clang-4.0 lldb-4.0 libclang-4.0-dev cmake make \
+		 automake libbz2-dev libssl-dev libgmp3-dev autotools-dev \
+		 build-essential libicu-dev python2.7-dev python3-dev \
+		 autoconf libtool zlib1g-dev doxygen graphviz
+```
+
+在安装依赖的时候还有一个小插曲，就是 eosio_build.sh 
 这个自动化构建脚本里面默认你不是 __root__  用户的，所以它里面很多命令都用了 __sudo__ , 这样就会导致报一个这样的错误：
 
 <img class="img-view" data-src="/images/2018/06/eosbuild-2.png" src="/images/1px.png" />
@@ -128,11 +137,57 @@ vim scripts/eosio_build_ubuntu.sh
 302 #               fi
 ```
 
-装完 mongo C++ 之后，还会有几个软件时不时下载失败（如下图）
+我这里在编译 mongo-cxx-driver 时候报了编译失败的错误：
+
+```
+CMake Error at src/bsoncxx/CMakeLists.txt:86 (find_package):
+	Could not find a configuration file for package "libbson-static-1.0" that
+	is compatible with requested version "1.10.0".
+
+	The following configuration files were considered but not accepted:
+
+	/usr/local/lib/cmake/libbson-static-1.0/libbson-static-1.0-config.cmake, version: 1.9.3
+
+
+
+	-- Configuring incomplete, errors occurred!
+	See also "/tmp/mongo-cxx-driver/build/CMakeFiles/CMakeOutput.log".
+	Cmake has encountered the above errors building the MongoDB C++ driver.
+
+	Exiting now.
+
+```
+这是因为 EOS 默认下载的是最新的稳定版 mongo-cxx-driver, master/stable , 导致依赖高版本的 libbson 库，而我系统装的是低版本的. 
+那显然解决方案就是有两个: 
+
+> 1. 降低 mongo-cxx-driver 的版本 <br />
+2. 升高系统 libbson 库的版本
+
+考虑到升级系统的依赖库版本成本太高，可能导致其他应用程序不可用，甚至系统会崩溃, 所以我们采取保守的做法, 就是给 mongo-cxx-driver 版本降级.
+
+办法很简单，打开 scripts/eosio_build_ubuntu.sh, 修改第 339 行脚本：
+
+把
+```bash
+if ! git clone https://github.com/mongodb/mongo-cxx-driver.git --branch releases/stable --depth 1
+```
+改成
+
+```bash
+if ! git clone https://github.com/mongodb/mongo-cxx-driver.git --branch releases/v3.2 --depth 1
+```
+
+然后要记得先删除之前 clone 的高版本文件，否则又会报错说无法创建 /tmp/mongo-cxx-driver 文件夹
+
+```bash
+rm -rf /tmp/mongo-cxx-driver
+```
+然后再重新执行 eosio_build.sh, 会发现上面的问题解决了. 装完 mongo C++ 之后，还会有几个软件时不时下载失败（如下图）
 
 <img class="img-view" data-src="/images/2018/06/eosbuild-3.png" src="/images/1px.png" />
 
 没关系，重新之心 eosio_build.sh 就好了，它会接着上次失败的地方继续安装。
+
 
 装完一些依赖插件之后，就迎来了 EOS 主程序代码编译，要编译比较久，你会发现你的 CPU 在满负荷工作，CPU 风扇猛转，几乎所有的 CPU 资源都用光了。下面贴上我的
 雷神笔记本执行 __top__ 命令之后的情况:
@@ -198,6 +253,7 @@ nodeos -e -p eosio --plugin eosio::chain_api_plugin --plugin eosio::history_api_
 
 [https://github.com/EOSIO/eos/wiki/Local-Environment#2-building-eosio](https://github.com/EOSIO/eos/wiki/Local-Environment#2-building-eosio)
 
+[https://github.com/EOSIO/eos/issues/4062](https://github.com/EOSIO/eos/issues/4062)
 
 
 
