@@ -16,7 +16,7 @@
 			var timer = 500;
 			var $lock = $('<div style="position: absolute; background: #000000; opacity: .6; z-index: 666; display: none;"></div>');
 			var $imgBox = $('<div style="display: none; position: absolute; z-index: 999; "></div>');
-			var $img = $('<img src="" style="max-width: 1024px;" />');
+			var $img = $('<img src="" style="max-width: '+($(window).width() - 30)+'px;" />');
 			var $closeBtn = $('<span style="position: absolute; font-size: 30px; border-radius: 40px; font-weight: bold;' +
 				'height: 40px; width: 40px; line-height: 35px; z-index: 999; background: #ffffff; text-align: center; cursor: pointer;">x</span>');
 			$closeBtn.css({

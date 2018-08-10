@@ -237,7 +237,7 @@ Chrome 浏览器插件中心去安装, 点击 [这里](https://chrome.google.com
 
 > 点击创建之后，MetaMask 钱包会弹出一个让你确认的弹框， 你点击 SUBMIT (确认发送交易)
 
-<img class="img-view" data-src="/images/2018/07/remix-submit.png" src="/images/1px.png" />
+<img class="img-view" data-src="/images/2018/07/metamask-submit.png" src="/images/1px.png" />
 
 > 确认发送交易之后，控制台会有输出，表示你发送了一个交易，右边也出现一条待确认的交易
 
@@ -249,7 +249,7 @@ Chrome 浏览器插件中心去安装, 点击 [这里](https://chrome.google.com
 
 > 这里需要提一下的是，测试网络一般返回的快一些，一般一分钟之内会返回创建结果。但是如果你是在主网发布合约的话，堵塞个半天都有可能。
 
-合约创建之后，点击右边的按钮复制和合约地址，然后打开你的 remix 钱包，选择 TOKENS 菜单，添加 TOKEN 
+合约创建之后，点击右边的按钮复制和合约地址，然后打开你的 MetaMask 钱包，选择 TOKENS 菜单，添加 TOKEN 
 
 <img class="img-view" data-src="/images/2018/07/metamask-add-token.png" src="/images/1px.png" />
 
