@@ -69,7 +69,7 @@ cleos create account {creater} {account_name} {key_1} {key_2}
 
 其中 {creater}  是为这个创建动作支付 EOS 的账户，公钥1和公钥2分别是两个不同权限的密钥对的公钥。
 
-综上可知，不管是比特币，以太坊还是 EOSIO，他们在生成钱包和账户之前都必须要先生成一对 key, 制不管他们生成的算法可能个有差异。
+综上可知，不管是比特币，以太坊还是 EOSIO，他们在生成钱包和账户之前都必须要先生成一对 key, 只不过他们生成的算法可能个有差异。
 所以秘钥是区块链账户体系的核心。
 
 不过大家可能也发现了，EOS 的账户体系明显比 BTC 和 ETH 的账户体系复杂很多。
@@ -107,13 +107,13 @@ EOS 把账户(Account)权限分为以下几级
 3. Recovery : 用于恢复账户使用权。
 4. Others: 其他自定义的权限级别。
 
-这上面4种权限级别具有从属关系，低等级是高等级的子集，也就是说 Owner 具有 Active 的所有权限，而 Active 又具有 Recovery 的所有权限，以此类推。
-
 下面是 EOS 白皮书上对 EOS 账户权限级别的示意图
 
 <img class="img-view" data-src="/images/2018/09/permission-group-1.png" style="max-width:500px;" src="/images/1px.png" />
 
 你可以在 Active 下面再新建自己的自定义权限分组，比如 FAMILY 和 LAWYER, FAMILY 下面又分了 FRIEND 权限组...
+
+需要注意的是 EOS 权限级别具有从属关系，低等级是高等级的子集，比如说 Active 具有 FAMILY 的所有权限，而 FAMILY 又具有 FRIEND 所有权限, 以此类推。
 
 EOS 采用权限阈值来判断某个操作是否满足权限要求，如下表所示：
 
