@@ -54,7 +54,7 @@ imported private key for: EOS72F864zF8FZwkHXjZSFjubJoqxbQehDyQe4og1D55PQooUzXbH
 
 > 4.创建账户
 
-然后我们可以用第一步得到的public key来创建一个账户user1
+首先我们用第一步创建的 key 来创建账户 user1
 
 ```bash
 cleos create account eosio user1 EOS72F864zF8FZwkHXjZSFjubJoqxbQehDyQe4og1D55PQooUzXbH EOS72F864zF8FZwkHXjZSFjubJoqxbQehDyQe4og1D55PQooUzXbH
