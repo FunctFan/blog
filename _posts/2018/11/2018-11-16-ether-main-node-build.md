@@ -45,7 +45,7 @@ CPU: 通用型 2 核
 网络: 1M
 ```
 
-我们公司是在阿里云买的 ECS 云主机，配置话用的是"中产阶级配置"，系统是 Ubuntu 16.04 LTS.
+我们公司是在阿里云买的 ECS 云主机，配置使用的是"中产阶级配置"，系统是 Ubuntu 16.04 LTS.
 
 # 安装相关工具软件
 目前搭建以太坊钱包节点的主流的有两种，一种是使用官方的 geth 工具，一种是使用 parity 工具搭建。我们这次技术选型选的是 geth, 你要问我为什么不用 parity,是因为我觉得官方的更靠谱一些，而且我的 API 用的是 web3, 最重要的原因是 parity 我不熟，呵呵...
@@ -62,7 +62,7 @@ mv go /usr/local/
 ```
 #### 2. 安装 geth
 这里我们采用编译以太坊官方的源码来安装，
-我安装的时候最新版本是 v1.8.17, 大家具体根据自己情况下载对用的版本，下载地址：[https://github.com/ethereum/go-ethereum/tags](https://github.com/ethereum/go-ethereum/tags)
+我安装的时候最新版本是 v1.8.17, 大家具体根据自己情况下载对应的版本，下载地址：[https://github.com/ethereum/go-ethereum/tags](https://github.com/ethereum/go-ethereum/tags)
 
 ```bash
 wget https://github.com/ethereum/go-ethereum/archive/v1.8.17.tar.gz
@@ -124,7 +124,7 @@ nohup geth --syncmode "fast" --networkid 1 --datadir /data --cache 2048 --identi
 --rpccorsdomain | RPC 调用跨域限制，`*`号标识不限制
 --rpcport | JSONRPC 服务监控的端口
 --port | 同步服务端口
---rpcaddr | 可以调用 RPC 服务的IP地址，我这里只允许本地调用，不开发给其他用户，如果你想做成 Infura 那样作为公开的 API 的话，可以设置成 0.0.0.0
+--rpcaddr | 可以调用 RPC 服务的IP地址，我这里只允许本地调用，不开放给其他用户，如果你想做成 Infura 那样作为公开的 API 的话，可以设置成 0.0.0.0
 
 ```bash
 nohup {cmd} & > nohup.out 
@@ -139,7 +139,7 @@ __这里我再对同步模式做一个更加详细的解释__
 速度最慢，但是能获取到所有的历史数据, 这个是默认的选项。<br />
 【light】仅获取当前状态。验证元素需要向full节点发起相应的请求。
 
-如果想要关闭在后天运行的节点，可以使用以下脚本
+如果想要关闭在后台运行的节点，可以使用以下脚本
 
 ```bash
 #!/bin/sh
@@ -178,7 +178,7 @@ modules: admin:1.0 debug:1.0 eth:1.0 ethash:1.0 miner:1.0 net:1.0 personal:1.0 r
 这里有个坑就是，你会发现你每次执行 `eth.syncing` 命令的时候 currentBlock 和 highestBlock 都只相差几百，以为马上就要同步完了，只有几百个区块了。
 其实你还只是同步了一小部分。这个是正常现象，因为我们使用了 --fast 选项，所以开始只同步了区块头，它还要慢慢的去同步区块 Body.
 
-在同步的过程中我们通过 eth.blockNumber 去查看当前区块号的话会显示为 0
+另外在同步的过程中我们通过 eth.blockNumber 去查看当前区块号的话会显示为 0
 
 ```bash
 > eth.blockNumber
