@@ -2,7 +2,7 @@
 
 layout: post
 title: "Ubuntu上如何检测某个软件包是否安装"
-categories: [操作系统]
+categories: [系统运维]
 tags: [Ubuntu,dpkg]
 status: publish
 type: post

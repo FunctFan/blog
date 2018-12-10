@@ -1,7 +1,7 @@
 ---
 layout: post
 title: ubuntu编译安装php5.5.26
-categories: [操作系统]
+categories: [系统运维]
 tags: [linux,ubuntu,php]
 status: publish
 type: post

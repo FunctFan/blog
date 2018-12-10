@@ -1,7 +1,7 @@
 ---
 layout: post
 title: ubuntu server中文乱码
-categories: [操作系统]
+categories: [系统运维]
 tags: [运维,ubuntu,乱码]
 status: publish
 type: post

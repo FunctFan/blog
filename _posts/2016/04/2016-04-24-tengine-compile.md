@@ -1,7 +1,7 @@
 ---
 layout: post
 title: ubuntu编译安装tengine
-categories: [操作系统]
+categories: [系统运维]
 tags: [linux,ubuntu,tengine]
 status: publish
 type: post

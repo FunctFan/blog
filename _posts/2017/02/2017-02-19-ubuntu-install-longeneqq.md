@@ -2,7 +2,7 @@
 
 layout: post
 title: "ubuntu 安装Wine longene QQ 7.8 和微信"
-categories: [操作系统]
+categories: [系统运维]
 tags: [longeneqq]
 status: publish
 type: post

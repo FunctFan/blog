@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "linux 安装flashplayer"
-categories: 操作系统
+categories: [系统运维]
 tags: [linux,flashpalyer]
 status: publish
 type: post

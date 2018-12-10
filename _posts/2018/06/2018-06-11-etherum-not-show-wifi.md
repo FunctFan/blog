@@ -1,7 +1,7 @@
 ---
 layout: post
 title: ubuntu 16.06 LTS 安装以太坊钱包之后不显示 WIFI 列表
-categories: [操作系统]
+categories: [系统运维]
 tags: [以太坊]
 status: publish
 type: post

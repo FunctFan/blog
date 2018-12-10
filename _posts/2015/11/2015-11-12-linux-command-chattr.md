@@ -1,7 +1,7 @@
 ---
 layout: post
 title: linux命令学习：chattr
-categories: 操作系统
+categories: [系统运维]
 tags: [ubuntu, fcitx, idea, phpstrom]
 status: publish
 type: post
