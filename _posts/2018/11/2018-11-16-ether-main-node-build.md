@@ -59,6 +59,7 @@ wget https://dl.google.com/go/go1.11.2.linux-amd64.tar.gz
 tar xvpzf go1.11.2.linux-amd64.tar.gz 
 # 安装
 mv go /usr/local/ 
+sudo ln -s /usr/local/go/bin/go /usr/local/bin/
 ```
 #### 2. 安装 geth
 这里我们采用编译以太坊官方的源码来安装，
