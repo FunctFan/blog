@@ -56,6 +56,22 @@ http://localhost:8080/jenkins 了。
 
 装完插件之后，会让你选择创建账号，你也可以先用admin，以后需要再创建新账号。
 
-接下来就可以开始配置项目的自动部署了，这些将在下一篇文章中介绍。
+# 3. 项目部署
+
+在进行项目部署之前，我们需要确保已经安装了 `Git plugin` 和 `Publish Over SSH` 这两个插件，如果没有安装的话，通过菜单 `系统管理` -> `插件管理`　安装。
+
+<img class="img-view" data-src="/images/2018/12/jenkins-04.png" src="/images/1px.png" />
+
+在插件管理页面通过搜索关键字，找到索要安装的插件，选中安装就可以了
+
+<img class="img-view" data-src="/images/2018/12/jenkins-05.png" src="/images/1px.png" />
+
+由于我们的项目需要通过 `publish Over SSH` 连接服务器发布，所以我们先要配置 `Publish Over SSH`, 进入菜单 `系统管理` -> `系统设置`， 找到 
+`Publish Over SSH` 添加你需要发布到的服务器的连接信息。
+
+<img class="img-view" data-src="/images/2018/12/jenkins-06.png" src="/images/1px.png" />
+
+
+
 
 
