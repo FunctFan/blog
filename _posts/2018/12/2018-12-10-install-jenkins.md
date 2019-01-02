@@ -71,7 +71,53 @@ http://localhost:8080/jenkins 了。
 
 <img class="img-view" data-src="/images/2018/12/jenkins-06.png" src="/images/1px.png" />
 
+__做完这些之后，记得把部署 jenkins 所在的服务器的公钥放在要部署的目标服务器的 ~/.ssh/authorized_keys 文件中.__
 
+# 4. 添加构建任务
 
+点击`新建任务`， 输入项目名称，选择 `构建自由风格的软件项目`，按照下图配置：
 
+<img class="img-view" data-src="/images/2018/12/jenkins-project.png" src="/images/1px.png" />
 
+配置好之后，在目标服务器的 Jenkins-in 目录下新建一个 xxxx-deloy.sh 也就是上图中最后一栏中填写的的项目部署脚本，这个脚本里你可以编写
+任意的 shell 脚本帮你完成项目的部署，非常方便。下面贴出我的一个测试项目的部署脚本，仅供参考：
+
+```bash
+#!/bin/bash
+export JAVA_HOME=/opt/jdk1.8.0_181
+export CLASSPATH=./:$JAVA_HOME/lib/tools.jar:$JAVA_HOME/lib/dt.jar
+export JRE_HOME=$JAVA_HOME/jre
+export PATH=$PATH:$JAVA_HOME/bin
+
+DIR=/var/www/java/test
+JARFILE=test-1.0-SNAPSHOT.jar
+# take a backup 
+NOW=`date +%Y-%m-%d-%H-%M`
+
+if [ ! -d $DIR/backup ];then
+   mkdir -p $DIR/backup
+fi
+
+cd $DIR
+# stop the service 
+ps aux|grep "test"|awk '{print $2}'|xargs kill -9
+
+mv $JARFILE backup/$JARFILE$NOW
+mv -f /root/Jenkins-in/$JARFILE .
+
+# start the service
+java -jar $JARFILE > out.log &
+
+# waiting 30 secs and print the log
+if [ $? = 0 ];then
+        sleep 30
+        tail -n 100 out.log
+fi
+
+# remove backups left 10
+cd backup/
+ls -lt|awk 'NR>10{print $NF}'|xargs rm -rf
+
+```
+
+接下来就可以执行构建了。
