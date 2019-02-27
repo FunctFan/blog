@@ -183,3 +183,8 @@ Filecoin 社区发展还比较快，开发者也比较活跃，说明业界对�
 * [Filecoin Proofs](https://github.com/filecoin-project/specs/blob/master/proofs.md)
 * [The Filecoin Storage Market](https://github.com/filecoin-project/specs/blob/master/storage-market.md)
 
+# 其他相关博文
+[IPFS系列01-IPFS 前世今生](/20180906/ipfs-01-summary.html)
+[区块链技术指南一](/20171218/block-chain-1.html)
+[区块链技术指南二](/20171218/block-chain-2.html)
+
