@@ -308,8 +308,8 @@ go-filecoin wallet balance ${WALLET_ADDR}
 好了，恭喜！你现在已连接到 Filecoin 并且可以开始在 Filecoin 网络上挖掘或存储数据！
 
 # 参考文献
-[Filecoin install](https://github.com/filecoin-project/go-filecoin/blob/master/README.md)
-[Geting Started](https://github.com/filecoin-project/go-filecoin/wiki/Getting-Started)
+* [Filecoin install](https://github.com/filecoin-project/go-filecoin/blob/master/README.md)
+* [Geting Started](https://github.com/filecoin-project/go-filecoin/wiki/Getting-Started)
 
 # 其他相关文章
 * [IPFS系列04-FILECOIN 挖矿](/20190301/minering-filecoin.html)
