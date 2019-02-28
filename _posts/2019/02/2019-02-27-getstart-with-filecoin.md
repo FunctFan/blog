@@ -273,7 +273,7 @@ go-filecoin wallet addrs ls
 ```
 正常情况下应该返回你的钱包地址，如果你有多个钱包的话，会返回多个地址。钱包地址是一个 41 位的字符串
 
-2.拿到钱包地址之后你可以到官方提供的[http://user.kittyhawk.wtf:9797](http://user.kittyhawk.wtf:9797)去提交你的钱包地址，提交成功之后会返回一个
+2.拿到钱包地址之后你可以到官方提供的 [http://user.kittyhawk.wtf:9797](http://user.kittyhawk.wtf:9797) 去提交你的钱包地址，提交成功之后会返回一个
 {MESSAGE_CID}，类似业务回执单编号的东西。凭证可以查到你的处理进度。
 
 ```
