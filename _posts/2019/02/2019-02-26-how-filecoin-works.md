@@ -185,7 +185,8 @@ Filecoin 社区发展还比较快，开发者也比较活跃，说明业界对�
 
 # 其他相关博文
 * [IPFS系列01-IPFS 前世今生](/20180906/ipfs-01-summary.html)
-* [IPFS系列03-IPFS 搭建 FILECOIN 挖矿节点](/20190227/getstart-with-filecoin.html)
+* [IPFS系列03-搭建 FILECOIN 挖矿节点](/20190227/getstart-with-filecoin.html)
+* [IPFS系列04-FILECOIN 挖矿](/20190301/minering-filecoin.html)
 * [区块链技术指南一](/20171218/block-chain-1.html)
 * [区块链技术指南二](/20171218/block-chain-2.html)
 
