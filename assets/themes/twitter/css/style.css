@@ -77,6 +77,9 @@ strong, th { font-weight: bold; }
 em { font-style: italic; }
 ul, ol { margin: 0 0 1em 2.5em; }
 ol { list-style-type: decimal; }
+blockquote > ul, blockquote > ol {
+	margin: 0 0 0 2.5em;
+}
 h1, h2, h3, h4, h5, h6 {
   font-weight: normal;
   text-shadow: 0 1px 1px #b3b3b3;

@@ -14,6 +14,15 @@ keyword: getstart-with-filecoin, 搭建 FILECOIN 挖矿节点
 
 本文介绍如何在计算机上安装和运行 Filecoin 节点。后续教程将介绍如何使用您的节点进行 Filecoin 挖矿或存储数据。
 
+搭建节点整个过程分为以下几个步骤：
+
+> 1. 安装 Filecoin
+2. 运行 Filecoin 守护进程
+3. 给你的节点命名
+4. 激活节点，加入网络统计
+5. 获取 Filecoin 测试代币
+6. 创建矿工，开始挖矿
+
 # 安装 Filecoin 
 Filecoin 目前有两种安装方式，一种是直接下载编译好的可执行文件，另一种是通过编译源码安装。
 
@@ -64,10 +73,11 @@ sudo agt-get install curl # 如果你的操作系统已经安装了 curl 了，�
 curl https://sh.rustup.rs -sSf | sh
 ```
 
-> 安装 jq
+> 安装 jq, gcc(官方要求是 v7.4.0 以上，但是我用 v7.3.0 也编译成功了)
 
 ```bash
 sudo apt-get install jq
+sudo apt-get install gcc
 ```
 
 > 下载 go-filecoin 源码并安装 Go 依赖包
