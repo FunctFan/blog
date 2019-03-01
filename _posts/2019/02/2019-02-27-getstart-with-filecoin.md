@@ -25,7 +25,7 @@ Filecoin 目前有两种安装方式，一种是直接下载编译好的可执�
 
 ## 下载可执行文件
 官网有直接编译好的 release 版本 v0.0.1
-下载地址为: [https://github.com/filecoin-project/go-filecoin/releases](https://github.com/filecoin-project/go-filecoin/releases){:target="\_blank"}
+下载地址为: [https://github.com/filecoin-project/go-filecoin/releases](https://github.com/filecoin-project/go-filecoin/releases){:target="_blank"}
 
 不过遗憾的是，官方编译的0.0.1(写本文时的最新版本)无法正常运行(本人是用 linux 测试)。我自己手动编译了一个版本，基于 commit 
 `94b2894473e57c44d60164f89f417694ea3911db`。 下载地址为: [百度云盘](https://pan.baidu.com/s/1Nf9hqqXDfw6u2aP3Lu1xuA)
@@ -315,8 +315,8 @@ go-filecoin wallet balance ${WALLET_ADDR}
 好了，恭喜！你现在已连接到 Filecoin 并且可以开始在 Filecoin 网络上挖掘或存储数据！
 
 # 参考文献
-* [Filecoin install](https://github.com/filecoin-project/go-filecoin/blob/master/README.md)
-* [Geting Started](https://github.com/filecoin-project/go-filecoin/wiki/Getting-Started)
+* [Filecoin install](https://github.com/filecoin-project/go-filecoin/blob/master/README.md){:target="_blank"}
+* [Geting Started](https://github.com/filecoin-project/go-filecoin/wiki/Getting-Started){:target="_blank"}
 
 # 其他相关文章
 * [IPFS系列04-FILECOIN 挖矿](/20190301/minering-filecoin.html)
