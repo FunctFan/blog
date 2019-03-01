@@ -14,6 +14,11 @@ desc: Ubuntu 安装 Jenkins
 
 Jenkins是基于Java开发的一种持续集成工具，功能非常强大，可以让程序员从繁杂的项目部署的工作中抽离出来。
 
+搭建步骤：
+
+* TOC
+{:toc}
+
 # 1. Jenkins 安装
 
 首先去官网下载安装安装包，下载地址：[https://jenkins.io/download/](https://jenkins.io/download/)

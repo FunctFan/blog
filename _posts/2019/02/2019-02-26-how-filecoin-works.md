@@ -15,6 +15,11 @@ desc: FILECOIN 工作原理, How filecoin work
 本文简单介绍一下 Filecoin 的工作原理以及工作流程，让读者可以对整个 Filecoin 去中心化存储解决方案有个大概的认知。如果想要详细深入了解细节的，
 请阅读 Filecoin 和 IPFS 白皮书(在文末参考文献中有链接)。另外，本文为作者完全原创，转载请注明来源，谢谢。
 
+文章导读:
+
+* TOC
+{:toc}
+
 # 什么是 Filecoin 
 
 Filecoin 是一个去中心化的存储网络，简称 DSN(下面我们称之为 Filecoin 网络), 她将全球的闲置的存储资源转变为一个存储算法市场，

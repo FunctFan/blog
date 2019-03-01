@@ -82,7 +82,7 @@ blockquote > ul, blockquote > ol {
 }
 h1, h2, h3, h4, h5, h6 {
   font-weight: normal;
-  text-shadow: 0 1px 1px #b3b3b3;
+/*  text-shadow: 0 1px 1px #b3b3b3;*/
 }
 
 a {
@@ -348,7 +348,9 @@ article footer {
 }
 .post .post-content h1 {font-size:168%;}
 .post .post-content h2 {font-size:148%;}
-.post .post-content h2 {font-size:128%;}
+.post .post-content h3 {font-size:128%;}
+.post .post-content h4 {font-size:118%;}
+.post .post-content h5 {font-size:108%;}
 .post .post-content h1, .post .post-content h2 {
     margin-bottom: 10px;
     margin-top: 20px;
@@ -946,14 +948,14 @@ pre code {
 }
 
 .post .post-content h1 {
-  color: #2674BA;
+  color: #0066CC;
 }
 .post .post-content h2 {
-  color: #0099CC;
+  color: #999933;
 }
 .post .post-content h3 {
-  color: #F77A0B;
+  color: #990033;
 }
 .post .post-content h4 {
-  color: #662D91;
+  color: #663300;
 }
