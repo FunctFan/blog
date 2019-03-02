@@ -117,7 +117,7 @@ type Actor struct {
 的整数倍(这个后面我们在介绍如何创建矿工的时候会细讲，这里略过)。目前测试网络一个 Sector 的大小是 256MB
 * `AllocationTable:` 数据分配追踪表，它记录了每个 Pieces 和 Sector 的对应关系，如某个 Pieces 存储在了哪个 Sector. 
 当某个 Sector 被存满(Fill)了之后，系统将会把该 Sector 封存(Sealing the Sector)，然后生成存储证明，这是一个缓慢的操作(slow, sequential operation)。
-* `Orders:` 订单，系统中有两种订单，一种是询价订单(bid order), 由客户发起，另一种是出价订单(ask order), 由矿工发起。
+* `Orders:` 订单，系统中有两种订单，一种是竞价订单(bid order), 由客户发起，另一种是要价订单(ask order), 由矿工发起。
 * `Orderbook:` 订单簿，也就是订单列表，包括 bid order 和 ask order，系统根据订单列表进行自动撮合匹配交易。
 * `Pledge:` 抵押，矿工必须需要向 Filecoin 网络抵押 FIL 代币才能才能开始接受存储市场的订单。
 
@@ -128,10 +128,10 @@ type Actor struct {
 通过这张图我们可以从横向(操作)和纵向(角色)来了解整个流程。我们对文件的操作无非就两种，存(Put)和取(Get), 而这两种操作分别对应两种角色，客户和矿工。
 外加一个区块链网络和市场管理者(Manage), 这就构成了整个 Filecoin 的 `DSN` 网络，具体交易流程如下。
 
-> （1）客户和矿工分别发送一个询价订单和出价订单到交易市场(Market)，这里需要注意的是，如果是 bid order, 
+> （1）客户和矿工分别发送一个竞价订单和出价订单到交易市场(Market)，这里需要注意的是，如果是 bid order, 
 	需要注明你这个文件的存储时间(比如三个月), 以及需要备份的数量(比如 3 份)，备份数量越多，文件丢失的概率就越低，当然价格也就更高一些。
 	
->（2）交易网络管理中心(Manage)分别验证订单是否合法，如果是询价订单，系统会锁定客户资金，如果是出价订单，系统会锁定矿工的存储空间。
+>（2）交易网络管理中心(Manage)分别验证订单是否合法，如果是竞价订单，系统会锁定客户资金，如果是出价订单，系统会锁定矿工的存储空间。
 
 > （3）分别执行 Put.MatchOrders 和 Get.MatchOrders 进行订单撮合，成功之后会运行 Manage.AssignOrders 来标记该订单为`Deal Orders`(成交订单)，
 并在 AllocationTable 中记订单的 Pieces 和 Sector 信息。
