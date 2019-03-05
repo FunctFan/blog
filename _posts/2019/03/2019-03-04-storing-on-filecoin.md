@@ -129,7 +129,37 @@ go-filecoin client propose-storage-deal fcqdzp28x8vnph7aedzw3pwlpwrnxjh77zayx75c
 当你的存储订单提交成功的同时，`propose-storage-deal` 命令将自动将支付交易所需的资金转移到存储矿工的支付渠道(钱包地址)。__这笔资金将在整个交易生命
 周期内定期分次支付给矿工。__
 
+订单提交之后你的数据将通过 Filecoin 的底层 `bitswap` 协议(实现自 IPFS)自动存储到暂存区。矿工将开始把你的文件存储到它的机器，并开始打包和验证。
+
+矿工在某个配置的时间间隔（默认为120秒）自动启动密封程序，以获取矿工暂存区域中的所有数据并将其密封打包到到矿工的承诺的存储区域，
+此时您的交易状态将转为 "暂存"。在打包密封完成后，矿工将向区块链提交存储证明，此时您的交易状态将移至 "已发布"。
+
+
 # 检索你的数据
+
+在你成功存储数据之后，你可以尝试去检索它，但是在检索之前，你最好先查询一下你的存储交易是否发布成功了。
+
+使用下面的命令来检查交易的状态：
+
+```bash
+go-filecoin client query-storage-deal {dealID}
+```
+
+{dealID} 是你通过 `propose-storage-deal` 命令提交存储订单时候返回数据.
+
+如果成功发布，命令将返回 `posted`, 然后你可以通过下面的命令去检索它: 
+
+```bash
+# Retrieve your data, using the address of the
+# miner you made a deal with and the <CID> of the data.
+go-filecoin retrieval-client retrieve-piece <minerAddress> <CID> # can take a minute
+```
+
+目前检索一次预计要花费一分钟左右，这让我有点担忧，这效率也太低了吧，我就存一张图片，结果存要一分钟，读取还要一分钟，
+如果 Filecoin 要投入生产使用，至少需要把效率提升两个数量级，否则根本不现实。我只能说期待它在今年有重大的技术突破把。。。
+
+
+
 
 # 参考文献
 
