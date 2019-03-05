@@ -1,15 +1,15 @@
 ---
 layout: post
-title: IPFS 系列02-FILECOIN 工作原理
+title: IPFS 系列02-Filecon 工作原理
 categories: [IPFS]
-tags: [IPFS, FILECOIN]
+tags: [IPFS, Filecon]
 status: publish
 type: post
 published: true
 author: blackfox
 permalink: /20190226/how-filecoin-work.html
-keyword: FILECOIN, IPFS
-desc: FILECOIN 工作原理, How filecoin work
+keyword: Filecon, IPFS
+desc: Filecon 工作原理, How filecoin work
 ---
 
 本文简单介绍一下 Filecoin 的工作原理以及工作流程，让读者可以对整个 Filecoin 去中心化存储解决方案有个大概的认知。如果想要详细深入了解细节的，
@@ -20,7 +20,7 @@ desc: FILECOIN 工作原理, How filecoin work
 * TOC
 {:toc}
 
-# 什么是 Filecoin 
+# 什么是 Filecoin
 
 Filecoin 是一个去中心化的存储网络，简称 DSN(下面我们称之为 Filecoin 网络), 她将全球的闲置的存储资源转变为一个存储算法市场，
 其最终目标是创建一个永久的，安全的，不受监管的新一代存储网络。
@@ -65,7 +65,7 @@ __这也说明作为 Filecoin 矿工，如果你的存储能力越强，你挖�
 
 Actor 比较难解释，我们先看 Filecoin 项目中源码是怎么定义 actor 的：
 
-```go 
+```go
 // Actor is the central abstraction of entities in the system.
 //
 // Both individual accounts, as well as contracts (user & system level) are
@@ -100,7 +100,7 @@ type Actor struct {
 * Nonce: 这个跟以太坊一样，用来对抗重放攻击
 * Balance: 账户余额
 
-> 从 `Actor` 的数据结构我们可以看出，__合约账户也是有余额的，也就是说我们也可以往合约中转入 FIL 代币，__ 
+> 从 `Actor` 的数据结构我们可以看出，__合约账户也是有余额的，也就是说我们也可以往合约中转入 FIL 代币，__
 这个跟以太坊是一模一样，所以预测 Filecoin 的智能
 合约功能应该也是比较强大的，开发者可以基于它开发强大的第三方去中心化存储的 DAPP。
 
@@ -111,11 +111,11 @@ type Actor struct {
 
 在讲工作流程之前我们简单介绍一下 Filecoin 中几个基本的数据结构，这对我们理解下面的挖矿流程很有帮助。
 
-> * `Pieces:` 数据单元，是 Filecoin 网络中最小存储单位，每个 Pieces 大小为 512KB， Filecoin 会把大文件拆分成很多个 Pieces, 
+> * `Pieces:` 数据单元，是 Filecoin 网络中最小存储单位，每个 Pieces 大小为 512KB， Filecoin 会把大文件拆分成很多个 Pieces,
 	交给不同的矿工存储。
-* `Sectors:` 扇区，矿工提供存储空间的最小单元，也就是说在我们创建矿工的时候抵押存储空间大小必须是 Sector 
+* `Sectors:` 扇区，矿工提供存储空间的最小单元，也就是说在我们创建矿工的时候抵押存储空间大小必须是 Sector
 的整数倍(这个后面我们在介绍如何创建矿工的时候会细讲，这里略过)。目前测试网络一个 Sector 的大小是 256MB
-* `AllocationTable:` 数据分配追踪表，它记录了每个 Pieces 和 Sector 的对应关系，如某个 Pieces 存储在了哪个 Sector. 
+* `AllocationTable:` 数据分配追踪表，它记录了每个 Pieces 和 Sector 的对应关系，如某个 Pieces 存储在了哪个 Sector.
 当某个 Sector 被存满(Fill)了之后，系统将会把该 Sector 封存(Sealing the Sector)，然后生成存储证明，这是一个缓慢的操作(slow, sequential operation)。
 * `Orders:` 订单，系统中有两种订单，一种是竞价订单(bid order), 由客户发起，另一种是要价订单(ask order), 由矿工发起。
 * `Orderbook:` 订单簿，也就是订单列表，包括 bid order 和 ask order，系统根据订单列表进行自动撮合匹配交易。
@@ -128,9 +128,9 @@ type Actor struct {
 通过这张图我们可以从横向(操作)和纵向(角色)来了解整个流程。我们对文件的操作无非就两种，存(Put)和取(Get), 而这两种操作分别对应两种角色，客户和矿工。
 外加一个区块链网络和市场管理者(Manage), 这就构成了整个 Filecoin 的 `DSN` 网络，具体交易流程如下。
 
-> （1）客户和矿工分别发送一个竞价订单和出价订单到交易市场(Market)，这里需要注意的是，如果是 bid order, 
+> （1）客户和矿工分别发送一个竞价订单和出价订单到交易市场(Market)，这里需要注意的是，如果是 bid order,
 	需要注明你这个文件的存储时间(比如三个月), 以及需要备份的数量(比如 3 份)，备份数量越多，文件丢失的概率就越低，当然价格也就更高一些。
-	
+
 >（2）交易网络管理中心(Manage)分别验证订单是否合法，如果是竞价订单，系统会锁定客户资金，如果是出价订单，系统会锁定矿工的存储空间。
 
 > （3）分别执行 Put.MatchOrders 和 Get.MatchOrders 进行订单撮合，成功之后会运行 Manage.AssignOrders 来标记该订单为`Deal Orders`(成交订单)，
@@ -144,7 +144,7 @@ type Actor struct {
 
 ```
 比如 Rock 需要把他的照片一共10GB存储一年，出价 12 个 FIL 代币，然后你接了这笔订单，交易网络的 epoch 设置是一个月，那么你每个月都要向交易网络提供
-这 10GB 照片的存储时空证明，交易网络验证成功之后会发送给你 1 个 FIL，下个月你还得提交证明，验证通过之后又给你发送一个币... 
+这 10GB 照片的存储时空证明，交易网络验证成功之后会发送给你 1 个 FIL，下个月你还得提交证明，验证通过之后又给你发送一个币...
 直到12个月后你才会收到这笔订单的所有资金。
 ```
 
@@ -194,4 +194,3 @@ Filecoin 社区发展还比较快，开发者也比较活跃，说明业界对�
 * [IPFS系列04-FILECOIN 挖矿](/20190301/minering-filecoin.html)
 * [区块链技术指南一](/20171218/block-chain-1.html)
 * [区块链技术指南二](/20171218/block-chain-2.html)
-

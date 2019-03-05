@@ -2,7 +2,7 @@
 layout: post
 title: IPFS 系列04-加入 Filecoin 测试网络挖矿
 categories: [IPFS,区块链]
-tags: [IPFS, FILECOIN, 区块链, 挖矿]
+tags: [IPFS, Filecon, 区块链, 挖矿]
 status: publish
 type: post
 published: true
@@ -22,7 +22,7 @@ desc: 如何加入 Filecoin 测试网络挖矿
 # 什么是 Filecoin 矿工？
 
 在 Filecoin 没有出来之前，我们所说的矿工一般都是只区块链中的出块的矿工，也就是通过参与某个区块链网络，
-与其他节点达成某种共识(比如说 POW, POS, DPOS 等)，他们负责保持区块链的有效性和安全性。__说白就是一个参与记账和执行智能合约的节点。__ 
+与其他节点达成某种共识(比如说 POW, POS, DPOS 等)，他们负责保持区块链的有效性和安全性。__说白就是一个参与记账和执行智能合约的节点。__
 比特币，以太坊，EOS 的矿工都是如此。
 
 而 Filecoin 的矿工有很多种，除了上述的出块的矿工之外，还有下面几种重要的矿工：
@@ -54,7 +54,7 @@ __修复矿工__ 这个在白皮书中没有怎么提及，只是在一张流程
 首先你需要运行 Filecoin 守护进程：
 
 ```bash
-go-filecoin daemon 
+go-filecoin daemon
 ```
 
 然后打开一个新的终端，创建一个矿工，在此之前你得先保证自己钱包账户中有足够的余额(至少 100 FIL)，
@@ -148,7 +148,7 @@ go-filecoin show block {BlockId}
 1\. 获取矿工地址，并将其导出到变量中（你也可以直接从配置文档中复制矿工地址）：
 
 ```
-export MINER_ADDR=`go-filecoin config mining.minerAddress | tr -d \"` 
+export MINER_ADDR=`go-filecoin config mining.minerAddress | tr -d \"`
 ```
 
 2\. 获取矿工所有者的钱包地址，并将其导出到变量中(同样你也可以直接从配置文档中复制)：
@@ -157,7 +157,7 @@ export MINER_ADDR=`go-filecoin config mining.minerAddress | tr -d \"`
 export MINER_OWNER_ADDR=`go-filecoin miner owner $MINER_ADDR`
 ```
 
-3\. 发布订单 
+3\. 发布订单
 
 ```bash
 go-filecoin miner set-price --from=$MINER_OWNER_ADDR --miner=$MINER_ADDR --price=0 --limit=1000 0.000000001 2880
@@ -169,7 +169,7 @@ __参数说明：__ 0.00000001 为矿工自定义的存储价格，单位为（F
 ```bash
 24×60×60/30=2880
 ```
-上述命令需要等待大概 30s(包含你的订单的区块被打包) 才会有响应，如果发布成功将返回 `ask order` 的 CID 和包含你订单的区块 Hash: 
+上述命令需要等待大概 30s(包含你的订单的区块被打包) 才会有响应，如果发布成功将返回 `ask order` 的 CID 和包含你订单的区块 Hash:
 
 <img class="img-view" data-src="http://blog.img.r9it.com/image-3672840367bff20f54093cb77f9f492c.png" src="/images/1px.png" />
 
@@ -177,7 +177,7 @@ __参数说明：__ 0.00000001 为矿工自定义的存储价格，单位为（F
 
 一旦订单发布成功之后，你立即就可以查看到你的订单，通过 `client list-asks` 查询并确认你的订单已经被添加到订单簿。
 
-```bash 
+```bash
 go-filecoin client list-asks --enc=json | jq  
 ```
 
@@ -246,5 +246,3 @@ __但是建议你这么做之前先至少要备份一下钱包的数据和配置
 
 * [Mining-Filecoin](https://github.com/filecoin-project/go-filecoin/wiki/Mining-Filecoin){:target="_blank"}
 * [FILECOIN解析(二) 如何加入测试网络挖矿](http://pkblog.cc/2019/02/blockchain-filecoin_02){:target="_blank"}
-
-

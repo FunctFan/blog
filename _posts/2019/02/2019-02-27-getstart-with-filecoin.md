@@ -1,15 +1,15 @@
 ---
 layout: post
-title: IPFS 系列03-搭建 FILECOIN 挖矿节点
+title: IPFS 系列03-搭建 Filecon 挖矿节点
 categories: [IPFS]
-tags: [IPFS,FILECOIN]
+tags: [IPFS,Filecon]
 status: publish
-type: post 
+type: post
 noToc: true
 published: true
 author: blackfox
 permalink: /20190227/getstart-with-filecoin.html
-keyword: getstart-with-filecoin, 搭建 FILECOIN 挖矿节点
+keyword: getstart-with-filecoin, 搭建 Filecon 挖矿节点
 
 ---
 
@@ -27,7 +27,7 @@ Filecoin 目前有两种安装方式，一种是直接下载编译好的可执�
 官网有直接编译好的 release 版本 v0.0.1
 下载地址为: [https://github.com/filecoin-project/go-filecoin/releases](https://github.com/filecoin-project/go-filecoin/releases){:target="_blank"}
 
-不过遗憾的是，官方编译的0.0.1(写本文时的最新版本)无法正常运行(本人是用 linux 测试)。我自己手动编译了一个版本，基于 commit 
+不过遗憾的是，官方编译的0.0.1(写本文时的最新版本)无法正常运行(本人是用 linux 测试)。我自己手动编译了一个版本，基于 commit
 `94b2894473e57c44d60164f89f417694ea3911db`。 下载地址为: [百度云盘](https://pan.baidu.com/s/1Nf9hqqXDfw6u2aP3Lu1xuA)
 
 ## 手动编译
@@ -42,7 +42,7 @@ go-filecoin 的编译依赖 Go 语言，Rust, cargo, jq 所以在编译之前需
 去 Go 官网下载二进制安装包， [https://dl.google.com/go/go1.11.5.linux-amd64.tar.gz](https://dl.google.com/go/go1.11.5.linux-amd64.tar.gz)，然后解压：
 
 ```bash
-tar xvf go1.11.5.linux-amd64.tar.gz -C /usr/local/ 
+tar xvf go1.11.5.linux-amd64.tar.gz -C /usr/local/
 ```
 
 然后配置环境变量 `sudo vim /etc/profile`, 在文件末尾加上
@@ -53,7 +53,7 @@ export GOROOT=/usr/local/go
 export GOBIN=$GOROOT/bin
 export GOPKG=$GOROOT/pkg/tool/linux_amd64
 export GOARCH=amd64
-export GOOS=linux 
+export GOOS=linux
 export GOPATH=/golang/
 PATH=$PATH:$GOBIN:$GOPKG
 ```
@@ -83,7 +83,7 @@ sudo apt-get install gcc
 
 不知道配置终端翻墙的同学请移步 [linux 配置终端代理](/20190121/proxy-in-terminal.html)
 
-```bash 
+```bash
 # 创建项目目录
 mkdir -p ${GOPATH}/src/github.com/filecoin-project
 # clone 代码
@@ -133,7 +133,7 @@ go run ./build/*.go all
 如果你已经安装了 Filecoin, 只是想更新的话，那就非常简单了：
 
 ```bash
-cd $GOPATH/src/github.com/filecoin-project/go-filecoin 
+cd $GOPATH/src/github.com/filecoin-project/go-filecoin
 git fetch origin devnet-user -f
 git checkout devnet-user
 FILECOIN_USE_PRECOMPILED_RUST_PROOFS=true go run ./build/*.go deps
@@ -141,7 +141,7 @@ go run ./build/*.go build
 go run ./build/*.go install
 ```
 
-本人亲测，更新的时间虽然没有第一次安装那么长，但是大概也需要15-20分钟左右。因为更新的时候虽说不需要下载依赖, 也不需要生成 filecoin-proof-parameters 
+本人亲测，更新的时间虽然没有第一次安装那么长，但是大概也需要15-20分钟左右。因为更新的时候虽说不需要下载依赖, 也不需要生成 filecoin-proof-parameters
 文件，但是它还是需要去检查一下每个依赖包是否有更新，加上翻墙的网速实在不算快，所以这个过程没有自己想象的那么短。
 
 # 开始运行 Filecoin
@@ -149,13 +149,13 @@ go run ./build/*.go install
 1.如果你之前有运行过 go-filecoin，那你需要先删除现有 Filecoin 初始化数据：
 
 ```bash
-rm -f ~/.filecoin 
+rm -f ~/.filecoin
 ```
 
-2.初始化 Filecoin, 使用 --devnet-user 参数连接到测试主网，--genesisfile 指定获取初始化数据的地址 
+2.初始化 Filecoin, 使用 --devnet-user 参数连接到测试主网，--genesisfile 指定获取初始化数据的地址
 
 ```bash
-go-filecoin init --devnet-user --genesisfile=http://user.kittyhawk.wtf:8020/genesis.car 
+go-filecoin init --devnet-user --genesisfile=http://user.kittyhawk.wtf:8020/genesis.car
 ```
 
 3.启动 go-filecoin 守护进程
@@ -289,7 +289,7 @@ Success! Message CID: zDPWYqFD7zqaPvnfmYy2Zr6xnwXrF4QLusdbmCnBTbyFjKJFBtrz
 
 或者你也可以通过命令行去手动提交：
 
-```bash 
+```bash
 export WALLET_ADDR=`go-filecoin wallet addrs ls` # 获取钱包地址
 MESSAGE_CID=`curl -X POST -F "target=${WALLET_ADDR}" "http://user.kittyhawk.wtf:9797/tap" | cut -d" " -f4`
 echo $MESSAGE_CID=
@@ -324,5 +324,3 @@ go-filecoin wallet balance ${WALLET_ADDR}
 * [IPFS系列02-FILECOIN 工作原理](/20190226/how-filecoin-work.html)
 * [区块链技术指南一](/20171218/block-chain-1.html)
 * [区块链技术指南二](/20171218/block-chain-2.html)
-
-
