@@ -20,8 +20,9 @@ desc: Filecon 工作原理, How filecoin work
 * TOC
 {:toc}
 
-# 什么是 Filecoin
+# 什么是 Filecoin？
 
+![](http://blog.img.r9it.com/image-ab0ea1e824e0c4850696a648e05d69f1.png){:style='height:40px;display:inline !important;'}
 Filecoin 是一个去中心化的存储网络，简称 DSN(下面我们称之为 Filecoin 网络), 她将全球的闲置的存储资源转变为一个存储算法市场，
 其最终目标是创建一个永久的，安全的，不受监管的新一代存储网络。
 

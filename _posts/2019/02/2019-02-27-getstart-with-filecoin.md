@@ -21,6 +21,7 @@ keyword: getstart-with-filecoin, 搭建 Filecon 挖矿节点
 {:toc}
 
 # 安装 Filecoin
+![](http://blog.img.r9it.com/image-ab0ea1e824e0c4850696a648e05d69f1.png){:style='height:40px;display:inline !important;'}
 Filecoin 目前有两种安装方式，一种是直接下载编译好的可执行文件，另一种是通过编译源码安装。
 
 ## 下载可执行文件

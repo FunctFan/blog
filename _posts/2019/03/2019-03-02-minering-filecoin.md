@@ -21,6 +21,7 @@ desc: 如何加入 Filecoin 测试网络挖矿
 
 # 什么是 Filecoin 矿工？
 
+![](http://blog.img.r9it.com/image-ab0ea1e824e0c4850696a648e05d69f1.png){:style='height:40px;display:inline !important;'}
 在 Filecoin 没有出来之前，我们所说的矿工一般都是只区块链中的出块的矿工，也就是通过参与某个区块链网络，
 与其他节点达成某种共识(比如说 POW, POS, DPOS 等)，他们负责保持区块链的有效性和安全性。__说白就是一个参与记账和执行智能合约的节点。__
 比特币，以太坊，EOS 的矿工都是如此。

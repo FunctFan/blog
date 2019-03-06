@@ -19,12 +19,12 @@ desc: 如何存储数据到 Filecoin 网络
 * TOC
 {:toc}
 
+![](http://blog.img.r9it.com/image-ab0ea1e824e0c4850696a648e05d69f1.png){:style='height:40px;display:inline !important;'}
 Filecoin 是一个去中心化的存储市场，客户端把数据存储到满足他们要求的矿工的矿机上。客户发送存储订单 ，矿工可以选择接单或者拒绝节点(假如觉得不划算)。
-
 一旦矿工接收了订单，客户端就开始发送数据，整个存储交易就开始了。
 
-> 注：在开始存储数据之前，你先得确保你的计算机上已经安装了 Filecoin 并且运行了守护进程。否则请先阅读我们之前的文章： 
-[IPFS 系列03-搭建 FILECOIN 挖矿节点](/20190227/getstart-with-filecoin.html)
+> 注：在开始存储数据之前，你先得确保你的计算机上已经安装了 Filecoin 并且运行了守护进程。否则请先阅读我们之前的文章：
+[IPFS 系列03-搭建 Filecon 挖矿节点](/20190227/getstart-with-filecoin.html)
 
 
 # 下载测试数据
@@ -100,7 +100,7 @@ go-filecoin client propose-storage-deal fcqdzp28x8vnph7aedzw3pwlpwrnxjh77zayx75c
 如果成功则会返回 `Status: accepted` 以及 {dealID}。
 
 > 这里需要注意的是，如果你的矿工是部署在阿里云服务器上，切记要要把 6000 端口打开，否则会出现客户端与矿工无法通信的问题。<br />
-还有就是 __如果你自己部署的矿工节点的节点 ID 没有在你本地的节点列表，那么你需要手动连接矿工节点。__ 
+还有就是 __如果你自己部署的矿工节点的节点 ID 没有在你本地的节点列表，那么你需要手动连接矿工节点。__
 
 举个栗子：我的矿工节点是部署在阿里云的，我在本地查找节点列表确实没有包含我的矿工节点，也就是说他们两目前是没有办法通过 P2P 连接的，
 所以我肯定无法把数据存储到我的矿工节点上。那么该怎么处理呢：
@@ -147,7 +147,7 @@ go-filecoin client query-storage-deal {dealID}
 
 {dealID} 是你通过 `propose-storage-deal` 命令提交存储订单时候返回数据.
 
-如果成功发布，命令将返回 `posted`, 然后你可以通过下面的命令去检索它: 
+如果成功发布，命令将返回 `posted`, 然后你可以通过下面的命令去检索它:
 
 ```bash
 # Retrieve your data, using the address of the
@@ -164,5 +164,3 @@ go-filecoin retrieval-client retrieve-piece <minerAddress> <CID> # can take a mi
 # 参考文献
 
 * [Storing-on-Filecoin](https://github.com/filecoin-project/go-filecoin/wiki/Storing-on-Filecoin)
-
-
