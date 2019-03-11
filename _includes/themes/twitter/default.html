@@ -6,26 +6,26 @@
 
 <head>
   <meta charset="UTF-8">
-  
+
   <title>{{ page.title }}{% if page.url != HOME_PATH %} - {{ site.title }}{% endif %}</title>
   {% if page.keyword %}<meta name="keywords" content="{{ page.keyword | join: "," }}">{% endif %}
   {% if page.desc %}<meta name="description" content="{{ page.desc }}">{% endif %}
   <meta name="author" content="{{ site.author.name }}">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
+
   <!-- Favicon -->
   <link rel="shortcut icon" href="{{ BASE_PATH }}/favicon.png">
-  
+
   <!-- Feed -->
   <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="{{ site.JB.rss_path }}">
   <link rel="alternate" type="application/atom+xml" title="Atom Feed" href="{{ site.JB.atom_path }}">
-  
+
   <!-- Styles -->
   <link rel="stylesheet" href="{{ ASSET_PATH }}/css/style.css?ver=20151125">
   <link rel="stylesheet" href="{{ ASSET_PATH }}/css/highlight.css?ver=20151125">
   <link rel="stylesheet" href="{{ ASSET_PATH }}/css/font-awesome.min.css?ver=20151122">
   <!--[if IE 7 ]><link rel="stylesheet" href="{{ ASSET_PATH }}/css/font-awesome-ie7.min.css?ver=20151122"><![endif]-->
-  
+
   <!-- Scripts -->
   <script type="text/javascript" src="{{ ASSET_PATH }}/js/jquery-1.11.1.min.js"></script>
   <!--[if lt IE 9]><script src="{{ ASSET_PATH }}/js/html5shiv.min.js"></script><![endif]-->
@@ -65,9 +65,9 @@
       </ul>
     </nav>
   </header>
-  
+
   <section id="main">
-    
+
     <!-- Sidebar -->
     <aside id="sidebar">
       <section id="search-box">
@@ -87,7 +87,7 @@
   </section>
   {% include widgets/fixed_container %}
   </aside>
-  
+
   <!-- Main Content -->
   <div id="main-inner">
     <div id="loader"><img src="{{ ASSET_PATH }}/img/loading.gif" alt="请稍侯"></div>
@@ -95,11 +95,11 @@
       {{ content }}
     </div>
   </div>
-  
+
   {% include widgets/back_top_button %}
-  
+
   </section>
-  
+
   <footer id="bottom">
     <p align="center">&copy; {{ site.time | date: '%Y' }} {{ site.author.name }}
       博客源码 <a href="{{ site.source_code_url }}" target="_blank">source on GitHub</a>
