@@ -56,7 +56,7 @@ export GOPKG=$GOROOT/pkg/tool/linux_amd64
 export GOARCH=amd64
 export GOOS=linux
 export GOPATH=/golang/
-PATH=$PATH:$GOBIN:$GOPKG
+export PATH=$PATH:$GOBIN:$GOPKG
 ```
 
 这里需要注意的是：__假如你没有设置 GOBIN 环境变量，那么你需要把 $GOPATH/bin 加入 PATH 环境路径，
@@ -70,6 +70,8 @@ GOPATH 是你所有 Go 项目的根目录，保存之后重启或者执行 `sour
 sudo agt-get install curl # 如果你的操作系统已经安装了 curl 了，那么这一步可以跳过
 curl https://sh.rustup.rs -sSf | sh
 ```
+
+**切记安装 Rust, cargo 不能使用终端代理，否则可能会出现安装脚本下载失败的问题** 
 
 > 安装 jq, gcc(官方要求是 v7.4.0 以上，但是我用 v7.3.0 也编译成功了)
 
