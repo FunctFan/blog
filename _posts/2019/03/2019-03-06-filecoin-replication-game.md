@@ -1,6 +1,6 @@
 ---
 layout: post
-title: IPFS 系列06-复制游戏(Replication-Game)
+title: Filecon 系列05-复制游戏(Replication-Game)
 categories: [IPFS,区块链]
 tags: [IPFS,区块链,Filecoin]
 status: publish
@@ -66,7 +66,7 @@ Filecoin 在挖矿过程打包数据时使用复制证明。
 
 * [rustup](https://www.rust-lang.org/tools/install){:target="_blank"}
 * Rust nightly (执行 `rustup install nightly` 安装)
-* [PostgreSQL](https://www.postgresql.org/) 数据库，如果你需要自己搭建游戏后端服务器的话，就需要安装. ubuntu 安装教程在 
+* [PostgreSQL](https://www.postgresql.org/) 数据库，如果你需要自己搭建游戏后端服务器的话，就需要安装. ubuntu 安装教程在
 [这里](https://www.postgresql.org/download/linux/ubuntu/)
 * Clang and libclang (C++ 编译环境)
 * jq (可选安装) - 一个美化 json 数据的命令行工具，查看排行榜使用
@@ -142,7 +142,7 @@ export REPL_GAME_TIMESTAMP=$(cat seed.json| jq -r '.timestamp')
 
 <img class="img-view" data-src="http://blog.img.r9it.com/image-219c3cc8aa7ccb60f5fede054a7c1b4b.png" src="/images/1px.png" />
 
-我的机器配置为: CPU i5 四核，RAM 16GB。**从图上可以看出仅仅 replication-game 一个进程就几乎耗尽了我整个计算机的所有资源！！！** 
+我的机器配置为: CPU i5 四核，RAM 16GB。**从图上可以看出仅仅 replication-game 一个进程就几乎耗尽了我整个计算机的所有资源！！！**
 
 执行完成之后把结果发送到服务器：
 
@@ -167,7 +167,7 @@ SIZE 用来过滤复制游戏的 SIZE 参数，游戏有很多个排行榜，分
 curl https://replication-game.herokuapp.com/api/leaderboard | jq
 ```
 
-方法三： 直接通过浏览器打开官方排名网站 [https://replication-game.herokuapp.com/](https://replication-game.herokuapp.com/){:target="_blank"} 
+方法三： 直接通过浏览器打开官方排名网站 [https://replication-game.herokuapp.com/](https://replication-game.herokuapp.com/){:target="_blank"}
 
 下面贴上本人的运行结果(我的游戏名称是: xjxh.io)：
 
@@ -188,7 +188,3 @@ cargo +nightly run --bin replication-game-server
 * GET /api/seed: 获取游戏种子文件
 * POST /api/proof: 上传复制证明结果
 * GET /api/leaderboard: 获取排行榜
-
-
-
-

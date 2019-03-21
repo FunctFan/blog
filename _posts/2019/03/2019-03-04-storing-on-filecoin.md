@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  IPFS 系列05-存储数据到 Filecoin 网络
+title:  Filecon 系列04-存储数据到 Filecoin 网络
 categories: [IPFS,区块链]
 tags: [Filecoin,区块链,IPFS,分布式存储]
 status: publish

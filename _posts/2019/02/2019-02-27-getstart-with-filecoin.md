@@ -1,6 +1,6 @@
 ---
 layout: post
-title: IPFS 系列03-搭建 Filecon 挖矿节点
+title: Filecon 系列02-搭建 Filecon 挖矿节点
 categories: [IPFS]
 tags: [IPFS,Filecon]
 status: publish
@@ -71,7 +71,7 @@ sudo agt-get install curl # 如果你的操作系统已经安装了 curl 了，�
 curl https://sh.rustup.rs -sSf | sh
 ```
 
-**切记安装 Rust, cargo 不能使用终端代理，否则可能会出现安装脚本下载失败的问题** 
+**切记安装 Rust, cargo 不能使用终端代理，否则可能会出现安装脚本下载失败的问题**
 
 > 安装 jq, gcc(官方要求是 v7.4.0 以上，但是我用 v7.3.0 也编译成功了)
 
