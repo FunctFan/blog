@@ -1,15 +1,15 @@
 ---
 layout: post
-title: Filecon 系列02-搭建 Filecon 挖矿节点
+title: Filecoin 系列02-搭建 Filecoin 挖矿节点
 categories: [IPFS]
-tags: [IPFS,Filecon]
+tags: [IPFS,Filecoin]
 status: publish
 type: post
 noToc: true
 published: true
 author: blackfox
 permalink: /20190227/getstart-with-filecoin.html
-keyword: getstart-with-filecoin, 搭建 Filecon 挖矿节点
+keyword: getstart-with-filecoin, 搭建 Filecoin 挖矿节点
 
 ---
 

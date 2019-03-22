@@ -1,8 +1,8 @@
 ---
 layout: post
-title: Filecon 系列03-加入 Filecoin 测试网络挖矿
+title: Filecoin 系列03-加入 Filecoin 测试网络挖矿
 categories: [IPFS,区块链]
-tags: [IPFS, Filecon, 区块链, 挖矿]
+tags: [IPFS, Filecoin, 区块链, 挖矿]
 status: publish
 type: post
 published: true

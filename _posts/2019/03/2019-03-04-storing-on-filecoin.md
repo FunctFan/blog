@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  Filecon 系列04-存储数据到 Filecoin 网络
+title:  Filecoin 系列04-存储数据到 Filecoin 网络
 categories: [IPFS,区块链]
 tags: [Filecoin,区块链,IPFS,分布式存储]
 status: publish
@@ -24,7 +24,7 @@ Filecoin 是一个去中心化的存储市场，客户端把数据存储到满�
 一旦矿工接收了订单，客户端就开始发送数据，整个存储交易就开始了。
 
 > 注：在开始存储数据之前，你先得确保你的计算机上已经安装了 Filecoin 并且运行了守护进程。否则请先阅读我们之前的文章：
-[IPFS 系列03-搭建 Filecon 挖矿节点](/20190227/getstart-with-filecoin.html)
+[IPFS 系列03-搭建 Filecoin 挖矿节点](/20190227/getstart-with-filecoin.html)
 
 
 # 下载测试数据

@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Filecon 系列05-复制游戏(Replication-Game)
+title: Filecoin 系列05-复制游戏(Replication-Game)
 categories: [IPFS,区块链]
 tags: [IPFS,区块链,Filecoin]
 status: publish
@@ -31,7 +31,7 @@ desc: Filecoin 复制证明游戏
 
 ## 什么是复制证明？
 
-这个我们在之前的文章 [IPFS 系列02-Filecon 工作原理](/20190226/how-filecoin-work.html#复制证明) 中简单的介绍过，
+这个我们在之前的文章 [Filecoin 系列02-Filecoin 工作原理](/20190226/how-filecoin-work.html#复制证明) 中简单的介绍过，
 这里补充说明下，所谓的复制证明就是为了确保：
 
 1. Filecoin 存储市场是安全的：它确保矿工不会在没有存储数据的情况下谎称自己存储了用户的数据
