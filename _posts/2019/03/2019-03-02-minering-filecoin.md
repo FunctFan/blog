@@ -62,15 +62,15 @@ go-filecoin daemon
 创建矿工需要抵押相应的 TOKEN，根据官方的文档，十个扇区(Sector, 每个扇区256MB) 需要抵押100 FIL，然后还需要设置 Gas 价格和最大 Gas 消耗值
 
 ```bash
-go-filecoin miner create 10 100 --price=0 --limit=1000 --peerid `go-filecoin id | jq -r '.ID'`
+go-filecoin miner create 10 100 --gas-price=0 --gas-limit=1000 --peerid `go-filecoin id | jq -r '.ID'`
 ```
 
 这里有几个参数需要解释一下：
 
 > * 第一个参数 `(10)` 是提供存储的扇区数量
 * 第二参数 `(100)` 是抵押 FIL TOKEN 数量
-* --price 设置 Gas Price, 这里官方推荐设置为 0
-* --limit 设置 Gas Limit, 跟以太坊里面的意思是一样的，Gas 耗费完之后会强制停止执行，避免死循环。
+* --gas-price 设置 Gas Price, 这里官方推荐设置为 0
+* --gas-limit 设置 Gas Limit, 跟以太坊里面的意思是一样的，Gas 耗费完之后会强制停止执行，避免死循环。
 * --peerid 节点 ID
 
 大概 1 分钟左右会有执行反馈，但是如果你的钱包账户余额不够的话，这里会一直阻塞(卡住)。
@@ -161,7 +161,7 @@ export MINER_OWNER_ADDR=`go-filecoin miner owner $MINER_ADDR`
 3\. 发布订单
 
 ```bash
-go-filecoin miner set-price --from=$MINER_OWNER_ADDR --miner=$MINER_ADDR --price=0 --limit=1000 0.000000001 2880
+go-filecoin miner set-price --from=$MINER_OWNER_ADDR --miner=$MINER_ADDR --gas-price=0 --gas-limit=1000 0.000000001 2880
 ```
 __参数说明：__ 0.00000001 为矿工自定义的存储价格，单位为（FIL/byte/block）每字节多少个FIL，
 对 2880 个区块有效。订单的有效时长是通过区块个数计算的，假如你的订单想要发布一天，目前每个区块的间隔时间是30s，
