@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Filecoin 系列02-搭建 Filecoin 挖矿节点
-categories: [IPFS]
+categories: [IPFS,Filecoin]
 tags: [IPFS,Filecoin]
 status: publish
 type: post

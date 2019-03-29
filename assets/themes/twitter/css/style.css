@@ -204,7 +204,7 @@ blockquote {
 }
 #sidebar section.active >a {
   color: #ae432e;
-  background: url(../img/bgs/bg_all.png) no-repeat 0 -20px; 
+  background: url(../img/bgs/bg_all.png) no-repeat 0 -20px;
 }
 #sidebar section ul {
   margin-left: 40px;
@@ -263,7 +263,7 @@ article header h1 { font-size: 198%; }
 article header h2 { font-size: 168%; }
 article header a:hover { color: #036; }
 article section { overflow: hidden; }
-article section h2, article section h3, article section h4, article section h5 { 
+article section h2, article section h3, article section h4, article section h5 {
   margin-top: 1.0em;
   margin-bottom: .8em;
 }
@@ -286,7 +286,7 @@ article footer {
 }
 
 .nested {
-  
+
   position: relative;
   border: 1px solid #bfbfbf inset;
   background-color: #f0f0f0;
@@ -355,11 +355,11 @@ article footer {
     margin-bottom: 10px;
     margin-top: 20px;
 }
-.post .post-content h1, 
-.post .post-content h2, 
-.post .post-content h3, 
-.post .post-content h4, 
-.post .post-content h5, 
+.post .post-content h1,
+.post .post-content h2,
+.post .post-content h3,
+.post .post-content h4,
+.post .post-content h5,
 .post .post-content h6 {
     color: #000;
 }
@@ -373,11 +373,11 @@ article footer {
     margin-bottom: 10px;
     margin-top: 20px;
 }
-.page h1, 
-.page h2, 
-.page h3, 
-.page h4, 
-.page h5, 
+.page h1,
+.page h2,
+.page h3,
+.page h4,
+.page h5,
 .page h6 {
     color: #000;
 }
@@ -467,7 +467,7 @@ button:hover {
   -pie-background: linear-gradient(#d06c57, #943a28);
   color: #fff;
 }
-button.blue { 
+button.blue {
   border-color: #1495cc #2b8ab3 #066d99;
   background: -moz-linear-gradient(top, #afe3fa, #6cb8d9 5%, #088ec8 100%);
   background: -webkit-gradient(linear, left top, left bottom, from(#afe3fa), to(#088ec8), color-stop(0.05, #6cb8d9));
@@ -488,7 +488,7 @@ button.blue:hover {
   -pie-background: linear-gradient(#6cb8d9, #077bad);
   color: #fff;
 }
-button.green { 
+button.green {
   border-color: #8dcc18 #7cb315 #6a9912;
   background: -moz-linear-gradient(top, #d7fa96, #abd957 5%, #78ac15 100%);
   background: -webkit-gradient(linear, left top, left bottom, from(#d7fa96), to(#78ac15), color-stop(0.05, #abd957));
@@ -958,4 +958,13 @@ pre code {
 }
 .post .post-content h4 {
   color: #663300;
+}
+
+a.tag {
+    display: inline-block;
+    padding: 3px 5px;
+    color: #f46300;
+    background: rgba(244,99,0,.12);
+    border-radius: 100px;
+    font-weight: 500;
 }

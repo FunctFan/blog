@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Filecoin 系列01-Filecon 工作原理
-categories: [IPFS]
+categories: [IPFS, Filecoin]
 tags: [IPFS, Filecon]
 status: publish
 type: post
