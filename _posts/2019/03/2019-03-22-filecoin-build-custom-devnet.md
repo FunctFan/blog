@@ -125,7 +125,7 @@ $ ./go-filecoin wallet balance $walletaddr
 ```
 服务器启动成功之后，使用浏览器访问 `http://localhost:9797` 就能看到熟悉的 faucet 页面了
 
-<img class="img-view" data-src="http://blog.img.r9it.com/image-fc35ebe3bc0ee992402ac03b3629fbad.png" src="/images/1px.png" />
+![](/images/1px.png){:class="img-view" data-src="http://blog.img.r9it.com/image-fc35ebe3bc0ee992402ac03b3629fbad.png"}
 
 #### 2. 搭建 genesisfile.car 下载服务
 这个也是从节点初始化的时候所必须的服务，在 devnet-user 网络我们都是用 `http://user.kittyhawk.wtf:8020/genesis.car`，现在因为我们需要用我们自己搭建网络的
@@ -146,7 +146,7 @@ Note: 其实理论来说，没有主从节点的说法，都是对等节点，�
 ```
 这里的 192.168.0.110 是我的主节点的 IP，所以这里你需要换成你的 ip 或域名。
 
-<img class="img-view" data-src="http://blog.img.r9it.com/image-67f5386c85d17b3bc46de0e6705683b9.png" src="/images/1px.png" />
+![](/images/1px.png){:class="img-view" data-src="http://blog.img.r9it.com/image-67f5386c85d17b3bc46de0e6705683b9.png"}
 
 然后启动守护进程，启动之后由于是内部网络，你会发现区块数据同步很快。
 
@@ -176,6 +176,24 @@ Note: 其实理论来说，没有主从节点的说法，都是对等节点，�
 ```bash
 ./go-filecoin swarm connect /ip4/192.168.0.110/tcp/6000/ipfs/QmQvUmeB2jtFWJEmCe5LXyDmRzToJkDDzC6eK9oWvfspzM
 ```
+
+> Note: 这里每次重新启动从节点的时候都需要重新使用 `swarm` 命令去连接主节点同步数据，当然你也可以通过更改节点的配置文档来让节点在每次启动的时候自动连接主节点同步数据
+
+打开节点配置文档 `vim ~/.filecoin/config.json`, （如果你在启动 daemon 的时候更改了  `--repodir` 参数，请替换成你的真实配置文档地址）
+
+修改 `bootstrap.addresses` 配置：
+
+```bash
+"bootstrap": {
+	"addresses": [
+		"/ip4/192.168.0.110/tcp/6000/ipfs/QmQvUmeB2jtFWJEmCe5LXyDmRzToJkDDzC6eK9oWvfspzM"
+	],
+	"minPeerThreshold": 1,
+	"period": "10s"
+}
+
+```
+
 ### 3. 测试
 
 测试之前先为每个从节点申请测试 FIL，先查看钱包地址:
