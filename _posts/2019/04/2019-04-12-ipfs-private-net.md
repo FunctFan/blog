@@ -101,9 +101,49 @@ Daemon is ready
 ipfs cat /ipfs/QmTrA1w1ux7jW55eqC8Vu7DCRyTMqdpHA5iAZUTRt7snuN/readme
 ```
 
+再比如添加文件
+
+```bash
+echo "hello world" > hello.txt
+ipfs add hello.txt
+added QmT78zSuBmuS4z925WZfrqQ1qHaJ56DQaTfyMUF7F8ff5o hello.txt
+ 12 B / 12 B [===========================================================================================================================] 100.00%
+```
+
 # 搭建私有网络
 
+IPFS 默认是通过一些种子连接到全球网络，但是我们现在是要搭建私有网络，所以需要先把种子节点连接信息删除。
 
+有两种方式可以删除种子节点连接信息，一种是标准操作，直接执行命令：
+
+```bash
+ipfs bootstrap rm --all
+```
+
+另一种是暴力操作，直接从配置文档中删除 bootstrap 连接信息， `vim ~/.ipfs/config`， 找到 `bootstrap` 
+
+```javascript
+"Bootstrap": [
+	"/dnsaddr/bootstrap.libp2p.io/ipfs/QmNnooDu7bfjPFoTZYxMNLWUQJyrVwtbZg5gBMjTezGAJN",
+	"/dnsaddr/bootstrap.libp2p.io/ipfs/QmQCU2EcMqAqQPR2i9bChDtGNJchTbq5TbXJJ16u19uLTa",
+	"/dnsaddr/bootstrap.libp2p.io/ipfs/QmbLHAnMoJPWSCR5Zhtx6BHJX9KiKNN6tpvbUcqanj75Nb",
+	"/dnsaddr/bootstrap.libp2p.io/ipfs/QmcZf59bWwK5XFi76CZX8cbJ4BhTzzA3gU1ZjYZcYW3dwt",
+	"/ip4/104.131.131.82/tcp/4001/ipfs/QmaCpDMGvV2BGHeYERUEnRQAwe3N8SzbUtfsmvsqQLuvuJ",
+	"/ip4/104.236.179.241/tcp/4001/ipfs/QmSoLPppuBtQSGwKDZT2M73ULpjvfd3aZ6ha4oFGL1KrGM",
+	"/ip4/128.199.219.111/tcp/4001/ipfs/QmSoLSafTMBsPKadTEgaXctDQVcqN88CNLHXMkTNwMKPnu",
+	"/ip4/104.236.76.40/tcp/4001/ipfs/QmSoLV4Bbm51jM9C4gDYZQ9Cy3U6aXMJDAbzgu2fzaDs64",
+	"/ip4/178.62.158.247/tcp/4001/ipfs/QmSoLer265NRgSp2LA3dPaeykiS1J6DifTC88f5uVQKNAd",
+	"/ip6/2604:a880:1:20::203:d001/tcp/4001/ipfs/QmSoLPppuBtQSGwKDZT2M73ULpjvfd3aZ6ha4oFGL1KrGM",
+	"/ip6/2400:6180:0:d0::151:6001/tcp/4001/ipfs/QmSoLSafTMBsPKadTEgaXctDQVcqN88CNLHXMkTNwMKPnu",
+	"/ip6/2604:a880:800:10::4a:5001/tcp/4001/ipfs/QmSoLV4Bbm51jM9C4gDYZQ9Cy3U6aXMJDAbzgu2fzaDs64",
+	"/ip6/2a03:b0c0:0:1010::23:1001/tcp/4001/ipfs/QmSoLer265NRgSp2LA3dPaeykiS1J6DifTC88f5uVQKNAd"
+],
+```
+直接把里面的节点全部删除就好了。这样你再重启节点之后你就是一个孤立的节点了。
+
+接下来我们开始来搭建私有网络，我们需要启动三个节点，不管你是用三台物理机器还是虚拟机还是[新建三个容器](/20190410/run-ipfs-with-docker.html)。
+
+假设名称分别为 ipfs-master, ipfs-node1, ipfs-node2，其中 master 为主节点(种子节点)，node1, node2 均为普通节点。
 
 # 测试
 
