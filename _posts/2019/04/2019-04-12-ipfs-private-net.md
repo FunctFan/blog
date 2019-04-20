@@ -145,5 +145,127 @@ ipfs bootstrap rm --all
 
 假设名称分别为 ipfs-master, ipfs-node1, ipfs-node2，其中 master 为主节点(种子节点)，node1, node2 均为普通节点。
 
+> Note: 以下操作我们默认你已经初始化三个节点，并删除了他们的 bootstrap 种子节点。
+
+第一步，我们需要在主节点生成私有网络共享的 key，作为其他节点加入私有网络的准入凭证，没有共享 key 的节点不允许加入私有网络。
+
+我们需要使用 [go-ipfs-swarm-key-gen](https://github.com/Kubuxu/go-ipfs-swarm-key-gen) 工具来创建共享 key。安装方式很简单：
+
+```bash
+go get -u github.com/Kubuxu/go-ipfs-swarm-key-gen/ipfs-swarm-key-gen
+```
+
+第二步，在 master 节点生成共享 key 
+
+```bash
+ipfs-swarm-key-gen > ~/.ipfs/swarm.key
+```
+
+第三部，分别拷贝 `swarm.key` 到 node1, node2 节点的 `~/.ipfs/ `目录下，然后你需要获取 master 节点的连接地址：
+
+```bash
+~$ ipfs id
+{
+	"ID": "QmeXkxzGxUrChcYJbuQQfw34Ze5bmQhmegTNDLtANKHWLP",
+	"PublicKey": "CAASpgIwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQCxNWcsgcNlD6DrYHLLNLeJt2y0x0mqaruSse6hhM11tcPocdJq7z03WL9Elu/sPoBZ0SfG6SKgS9xrXewNrJKIGR85qlJcv43c7/6xjP41liOpY5Gtw4UWQlEZ4gV40OZceILQFD5bnpym+bQh/3zDduvASwDOBOpNS+3liIDXpR4fDh8EWoIi4pFBqDinsIs6lkd0dJBchHnUgPT83ZKpTj1pWf+52MxNDMQq8bmI7ZioojhncZb+Qp5yrgD80XR21WtbUIfVrZyF9e5Yo+DUV1WTEWG+955Cl+3FmXP0IEkZBPZL0g5DGibS+p0XQFXqJd4rcPPw1J0Gq0fWv9VrAgMBAAE=",
+	"Addresses": [
+		"/ip4/127.0.0.1/tcp/4001/ipfs/QmeXkxzGxUrChcYJbuQQfw34Ze5bmQhmegTNDLtANKHWLP",
+		"/ip4/192.168.1.5/tcp/4001/ipfs/QmeXkxzGxUrChcYJbuQQfw34Ze5bmQhmegTNDLtANKHWLP",
+		"/ip4/192.168.1.2/tcp/4001/ipfs/QmeXkxzGxUrChcYJbuQQfw34Ze5bmQhmegTNDLtANKHWLP",
+		"/ip4/172.17.0.1/tcp/4001/ipfs/QmeXkxzGxUrChcYJbuQQfw34Ze5bmQhmegTNDLtANKHWLP",
+		"/ip6/::1/tcp/4001/ipfs/QmeXkxzGxUrChcYJbuQQfw34Ze5bmQhmegTNDLtANKHWLP",
+		"/ip6/240e:fa:ff02:6900:dea:2285:6549:3ce0/tcp/4001/ipfs/QmeXkxzGxUrChcYJbuQQfw34Ze5bmQhmegTNDLtANKHWLP",
+		"/ip6/240e:fa:ff02:6900:9bbf:20ba:9f76:5a1/tcp/4001/ipfs/QmeXkxzGxUrChcYJbuQQfw34Ze5bmQhmegTNDLtANKHWLP",
+		"/ip6/240e:fa:ff85:a100::1/tcp/4001/ipfs/QmeXkxzGxUrChcYJbuQQfw34Ze5bmQhmegTNDLtANKHWLP",
+		"/ip6/240e:fa:fffc:2500:dea:2285:6549:3ce0/tcp/4001/ipfs/QmeXkxzGxUrChcYJbuQQfw34Ze5bmQhmegTNDLtANKHWLP",
+		"/ip6/240e:fa:fffc:2500:1702:d952:9dec:84fa/tcp/4001/ipfs/QmeXkxzGxUrChcYJbuQQfw34Ze5bmQhmegTNDLtANKHWLP",
+		"/ip6/240e:fa:ff02:6900:45ce:6b27:8eae:62fb/tcp/4001/ipfs/QmeXkxzGxUrChcYJbuQQfw34Ze5bmQhmegTNDLtANKHWLP",
+		"/ip6/240e:fa:ff02:6900:6ea2:555d:866e:4445/tcp/4001/ipfs/QmeXkxzGxUrChcYJbuQQfw34Ze5bmQhmegTNDLtANKHWLP"
+	],
+	"AgentVersion": "go-ipfs/0.4.20/",
+	"ProtocolVersion": "ipfs/0.1.0"
+}
+```
+这里你需要选择局域网的那个连接地址，一般是 `192.168` 开头，因为我的机器上有两个网卡，所以我这里有两个 IP. 随便选一个就可以了。
+
+假设我们选择 `"/ip4/192.168.1.5/tcp/4001/ipfs/QmeXkxzGxUrChcYJbuQQfw34Ze5bmQhmegTNDLtANKHWLP"`
+
+前面我们删除了 node1 和 node2 的种子节点，那么现在他们是孤立的节点，所以我们需要把我们的 master 节点设置成他们的种子节点，设置的方法也
+有两种，一种是分别在 node1 和 node2 上执行：
+
+```bash
+ipfs bootstrap add /ip4/192.168.1.5/tcp/4001/ipfs/QmeXkxzGxUrChcYJbuQQfw34Ze5bmQhmegTNDLtANKHWLP
+
+added /ip4/192.168.1.5/tcp/4001/ipfs/QmeXkxzGxUrChcYJbuQQfw34Ze5bmQhmegTNDLtANKHWLP
+```
+
+或者采取我们前面的粗暴的方法，直接修改 node1 和 node2 的配置文档，修改 Bootstrap 选项的值。
+
+我们还可以在各个节点添加环境变量来使得节点启动的时候强制连接私有网络：
+
+```bash
+export LIBP2P_FORCE_PNET=1
+```
+
+设置好以后重启各个节点，你会发现在输出的日志中多了这么 2 条：
+
+```bash
+Swarm is limited to private network of peers with the swarm key
+Swarm key fingerprint: c2fc00b19ee671210674155a5cf76ee8
+```
+
+说明节点现在连接的是私有网络。
+
 # 测试
+
+接下来我们开始测试，分别在三个节点添加文件，然后看能否在在另外两个节点下载到文件，下面我直接说下我的测试结果。
+
+1. 在网络中的任意节点添加文件，均能在其他任意节点下载到该文件。
+2. 超过 256KB 大小的文件会自动分片存储，但是并没有像我们想象中的那样会将同一个文件的分片存储到不同的节点上去，事实上不管你添加多大的文件，
+即使这个文件最后被分成 100 个 piece, 最终这 100 个 piece 也只是存储在了进行添加操作的节点上，其他节点的 `.ipfs` 目录大小并没有明显的改变，
+估计只有那张分布式哈希表(DHT)被同步了。
+3. 其他节点在第一访问文件的时候会自动下载一份完整的文件缓存到本地节点，但是如果存储文件的那个节点停止服务，那么从其他节点将无法下载到文件。
+4. 上传到 ipfs 节点的文件将被永久存储，无法删除，只要知道文件 hash，用户可以通过节点守护进程提供的网关服务访问存储的文件，访问地址为：
+http://127.0.0.1:8080/ipfs/{hash} 
+
+# 对外服务
+
+默认 ipfs 节点提供的服务都是在本机的，如果你想要自己的节点对外提供服务(局域网或者公网)，需要修改配置文件，不要绑定本地 IP，
+把 `127.0.0.1` 修改成 `0.0.0.0`
+
+```javascript
+"Addresses": {
+  "API": "/ip4/0.0.0.0/tcp/5001",
+  "Announce": [],
+  "Gateway": "/ip4/0.0.0.0/tcp/8080",
+  "NoAnnounce": [],
+  "Swarm": [
+	"/ip4/0.0.0.0/tcp/4001",
+  "/ip6/::/tcp/4001"
+  ]
+},
+
+```
+	
+如果你想要给前端调用的话，还需要配置跨域设置。
+
+```
+"API": {
+  "HTTPHeaders": {
+    "Access-Control-Allow-Methods": [
+      "PUT",
+      "GET",
+      "POST"
+    ],
+    "Access-Control-Allow-Origin": [
+      "*"
+    ]
+  }
+}
+
+```
+
+如果你想要把整个网络作为一个集群对外提供服务的话，你可以再用一个负载均衡将所有的节点罩住，简单点的用 Nginx，如果你熟悉 LVS 配置的话更好。
+
+
 
