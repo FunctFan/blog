@@ -62,6 +62,9 @@ export KEY_NAME="EasyRSA"
 
 # 使环境变量生效
 source ./vars
+
+# 添加 openssl 配置文档
+cp openssl-1.0.0.cnf openssl.cnf
 ```
 ### 创建秘钥
 
