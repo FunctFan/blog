@@ -1,6 +1,6 @@
 ---
 layout: post
-title: IPFS系列03-搭建 IPFS 私有网络
+title: IPFS系列04-搭建 IPFS 私有网络
 categories: [IPFS]
 tags: [IPFS]
 status: publish
