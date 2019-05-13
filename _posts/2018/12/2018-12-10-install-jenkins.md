@@ -1,13 +1,13 @@
 ---
 layout: post
-title: Jenkins 搭建持续集成环境 
-categories: [系统运维]
+title: Jenkins 搭建持续集成环境
+categories: [Linux]
 tags: [jenkins]
 status: publish
 type: post
 published: true
 author: blackfox
-permalink: /20181210/install-jenkins.html 
+permalink: /20181210/install-jenkins.html
 keyword: Jenkins 安装
 desc: Ubuntu 安装 Jenkins
 ---
@@ -33,7 +33,7 @@ Jenkins 针对不同的系统提供了不同的便捷安装方式，比如如果
 ```shell
 wget -q -O - https://pkg.jenkins.io/debian-stable/jenkins.io.key | sudo apt-key add -
 
-sudo echo deb https://pkg.jenkins.io/debian-stable binary/ >> /etc/apt/sources.list 
+sudo echo deb https://pkg.jenkins.io/debian-stable binary/ >> /etc/apt/sources.list
 sudo apt-get update
 sudo apt-get install jenkins
 ```
@@ -71,7 +71,7 @@ http://localhost:8080/jenkins 了。
 
 <img class="img-view" data-src="/images/2018/12/jenkins-05.png" src="/images/1px.png" />
 
-由于我们的项目需要通过 `publish Over SSH` 连接服务器发布，所以我们先要配置 `Publish Over SSH`, 进入菜单 `系统管理` -> `系统设置`， 找到 
+由于我们的项目需要通过 `publish Over SSH` 连接服务器发布，所以我们先要配置 `Publish Over SSH`, 进入菜单 `系统管理` -> `系统设置`， 找到
 `Publish Over SSH` 添加你需要发布到的服务器的连接信息。
 
 <img class="img-view" data-src="/images/2018/12/jenkins-06.png" src="/images/1px.png" />
@@ -96,7 +96,7 @@ export PATH=$PATH:$JAVA_HOME/bin
 
 DIR=/var/www/java/test
 JARFILE=test-1.0-SNAPSHOT.jar
-# take a backup 
+# take a backup
 NOW=`date +%Y-%m-%d-%H-%M`
 
 if [ ! -d $DIR/backup ];then
@@ -104,7 +104,7 @@ if [ ! -d $DIR/backup ];then
 fi
 
 cd $DIR
-# stop the service 
+# stop the service
 ps aux|grep "test"|awk '{print $2}'|xargs kill -9
 
 mv $JARFILE backup/$JARFILE$NOW

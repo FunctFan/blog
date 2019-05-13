@@ -1,14 +1,14 @@
 ---
 layout: post
 title: 为什么MYSQL不用密码也能访问？
-categories: [数据库技术]
+categories: [Database]
 tags: [MYSQL]
 status: publish
 type: post
 published: true
 author: blackfox
 permalink: /20180810/why-mysql-nopass-login.html
-keyword: 
+keyword:
 desc: 为什么MySQL 不输入密码也等登录
 ---
 
@@ -30,7 +30,7 @@ owners.
 
 Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
 
-mysql> 
+mysql>
 
 ```
 
@@ -55,7 +55,7 @@ root@ppblock:/etc/mysql#
 root@ppblock:~# cd /etc/mysql/
 root@ppblock:/etc/mysql# grep -r "user=root"
 root@ppblock:/etc/mysql# grep -r "user='root'"
-root@ppblock:/etc/mysql# 
+root@ppblock:/etc/mysql#
 ```
 
 查完发现没有，另外还需在查找是否存在 ~/.my.cnf 文件，因为一般的免密码登录都设置在这个文件里面。我一查发现我的机器上根本没有这个文件。所以排除原因2
@@ -97,7 +97,3 @@ ERROR 1045 (28000): Access denied for user 'root'@'localhost' (using password: N
 ```
 
 至此，这个问题算是彻底解决了。
-
-
-
-

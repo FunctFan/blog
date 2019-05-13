@@ -1,14 +1,14 @@
 ---
 layout: post
-title: 切割nginx日志
-categories: [系统运维]
-tags: [linux,nginx]
+title: 切割 nginx 日志
+categories: [Linux]
+tags: [nginx]
 status: publish
 type: post
 published: true
 author: blackfox
 permalink: /20160421/cut-nginx-log.html
-description: 
+description:
 ---
 
 nginx运行时间久了日志会比较大，经常会需要将日志按天切割，方便查看。不多说，直接上脚本

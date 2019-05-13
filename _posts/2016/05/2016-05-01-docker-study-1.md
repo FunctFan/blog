@@ -1,7 +1,7 @@
 ---
 layout: post
-title: docker学习笔记（一）
-categories: [系统运维]
+title: docker 学习笔记（一）
+categories: [Docker]
 tags: [linux,docker]
 status: publish
 type: post
@@ -174,7 +174,7 @@ $ sudo docker push registry.cn-shenzhen.aliyuncs.com/{username}/{仓库名称}:{
 镜像的名称其实是以标签的形式存在，一般都是 {ImageName}:{Version} 的形式， 所以要想重名镜像只需要再打一个标签
 
 ```bash
-sudo docker tag {ImageId} {ImageName} 
+sudo docker tag {ImageId} {ImageName}
 sudo docker tag 4356834d3af1 new-image
 ```
 
@@ -197,7 +197,7 @@ sudo docker rmi {ImageName}
 
 <hr />
 
-(2) 容器在启动的时候的ip地址是自动分配的，不可更改。一般是从 <code class="scode">172.17.0.2</code> 开始。为什么？因为 
+(2) 容器在启动的时候的ip地址是自动分配的，不可更改。一般是从 <code class="scode">172.17.0.2</code> 开始。为什么？因为
 <code class="scode">172.17.0.1</code> 这个ip是宿主机的。从这你也可以知道，在一台宿主机器上你最多只能创建 65534个容器。
 
 <hr />

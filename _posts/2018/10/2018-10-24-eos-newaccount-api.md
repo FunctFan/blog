@@ -1,8 +1,8 @@
 ---
 layout: post
 title: 使用RPC接口新建EOS账户
-categories: [EOS,区块链]
-tags: [区块链,EOS]
+categories: [EOS]
+tags: [EOS,RPC]
 status: publish
 type: post
 published: true
@@ -16,7 +16,7 @@ desc: 使用EOS RPC接口创建账户
 
 废话不多说，直接上实战代码。
 
-首先启动 EOS node，我的 EOS 钱包节点是搭建在 Docker 容器中的，所以我直接通过容器启动，至于如何安装 EOS 钱包节点，请参考我的另一篇博客 
+首先启动 EOS node，我的 EOS 钱包节点是搭建在 Docker 容器中的，所以我直接通过容器启动，至于如何安装 EOS 钱包节点，请参考我的另一篇博客
 [EOS 本地开发环境搭建](/20180612/build-eos-dev-env.html).
 
 ```bash
@@ -32,14 +32,14 @@ docker exec -d eosio /run.sh
 ```bash
 #!/bin/bash
 
-# start ssh-server 
+# start ssh-server
 /etc/init.d/ssh start
 
 # start EOS node
 /root/bin/eos_node_start.sh
 ```
 
-eos_node_start.sh 就是 EOS 节点的启动脚本，内容如下： 
+eos_node_start.sh 就是 EOS 节点的启动脚本，内容如下：
 
 ```bash
 nodeos -e -p eosio \
@@ -62,7 +62,7 @@ nodeos -e -p eosio \
 ```bash
 curl http://127.0.0.1:8888/v1/chain/get_info
 ```
-得到类似下面的返回，则说明正常 
+得到类似下面的返回，则说明正常
 
 ```
 {
@@ -85,7 +85,7 @@ curl http://127.0.0.1:8888/v1/chain/get_info
 
 > 1、将要发送的交易数据(创建账户)转成 binary data(二进制)
 
-请求接口： POST http://127.0.0.1:8888/v1/chain/abi_json_to_bin 
+请求接口： POST http://127.0.0.1:8888/v1/chain/abi_json_to_bin
 
 请求参数示例：
 
@@ -100,7 +100,7 @@ curl http://127.0.0.1:8888/v1/chain/get_info
       "threshold": 1,
       "keys": [
         {
-          "key": "EOS6MRyAjQq8ud7hVNYcfnVPJqcVpscN5So8BhtHuGYqET5GDW5CV", 
+          "key": "EOS6MRyAjQq8ud7hVNYcfnVPJqcVpscN5So8BhtHuGYqET5GDW5CV",
           "weight": 1
         }
       ],
@@ -111,7 +111,7 @@ curl http://127.0.0.1:8888/v1/chain/get_info
       "threshold": 1,
       "keys": [
         {
-          "key": "EOS6MRyAjQq8ud7hVNYcfnVPJqcVpscN5So8BhtHuGYqET5GDW5CV", 
+          "key": "EOS6MRyAjQq8ud7hVNYcfnVPJqcVpscN5So8BhtHuGYqET5GDW5CV",
           "weight": 1
         }
       ],
@@ -146,7 +146,7 @@ key | 创建账户的公钥，使用哪个公钥创建账户
 
 > 2、获取当前节点信息，得到 EOS 区块链的最新区块号
 
-请求接口：GET http://127.0.0.1:8888/v1/chain/get_info 
+请求接口：GET http://127.0.0.1:8888/v1/chain/get_info
 
 请求参数： 无
 
@@ -181,7 +181,7 @@ head_block_producer | 出块帐号
 
 > 3、获取最新区块的具体信息
 
-请求接口：POST http://127.0.0.1:8888/v1/chain/get_block 
+请求接口：POST http://127.0.0.1:8888/v1/chain/get_block
 
 请求参数示例：
 
@@ -190,9 +190,9 @@ head_block_producer | 出块帐号
 	"block_num_or_id":50174
 }
 ```
-这里的 block_num_or_id 就是上面返回的最新区块号 head_block_num 
+这里的 block_num_or_id 就是上面返回的最新区块号 head_block_num
 
-返回报文： 
+返回报文：
 
 ```javascript
 {
@@ -224,7 +224,7 @@ head_block_producer | 出块帐号
 ```javascript
 ["default","PW5J6V6g3jR8NdeNrzPg9PP87z4hWiCEbb8qx2xLqnRFrNhfhZGKx"]
 ```
-这里只有两个参数，第一个是钱包名称，第二个是钱包密码，如果解锁成功会返回空 
+这里只有两个参数，第一个是钱包名称，第二个是钱包密码，如果解锁成功会返回空
 
 ```javascript
 {}
@@ -241,7 +241,7 @@ head_block_producer | 出块帐号
     "expiration": "2018-10-24T10:08:14",
     "actions": [
       {
-        "account": "eosio", 
+        "account": "eosio",
         "name": "newaccount",
         "authorization": [
           {
@@ -276,7 +276,7 @@ data | string| abi_json_to_bin 序列化后的 值 binargs
 EOS6MR...| string | 创建者的公钥
 cf057...| string | get_info 获得的网络 ID，__这个非常重要，网上很多教程里面都漏掉这个了，会导致后面发送交易的时候报签名错误__
 
-返回报文： 
+返回报文：
 
 ```javascript
 {
@@ -312,7 +312,7 @@ cf057...| string | get_info 获得的网络 ID，__这个非常重要，网上�
 
 > 6、发送交易，执行智能合约，创建账户
 
-请求接口：POST http://127.0.0.1:8888/v1/chain/push_transaction 
+请求接口：POST http://127.0.0.1:8888/v1/chain/push_transaction
 
 请求参数示例：
 
@@ -507,5 +507,3 @@ cleos get account ppblock --json
 ```
 
 至此，我们已经成功的使用 RPC 接口创建了 EOS 帐号。
-
-

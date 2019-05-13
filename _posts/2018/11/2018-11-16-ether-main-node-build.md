@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 搭建主网以太坊全节点钱包
-categories: [区块链,以太坊]
+categories: [以太坊]
 tags: [以太坊,钱包]
 status: publish
 type: post
@@ -56,9 +56,9 @@ CPU: 通用型 2 核
 ```bash
 wget https://dl.google.com/go/go1.11.2.linux-amd64.tar.gz
 # 解压
-tar xvpzf go1.11.2.linux-amd64.tar.gz 
+tar xvpzf go1.11.2.linux-amd64.tar.gz
 # 安装
-mv go /usr/local/ 
+mv go /usr/local/
 sudo ln -s /usr/local/go/bin/go /usr/local/bin/
 ```
 #### 2. 安装 geth
@@ -68,7 +68,7 @@ sudo ln -s /usr/local/go/bin/go /usr/local/bin/
 ```bash
 wget https://github.com/ethereum/go-ethereum/archive/v1.8.17.tar.gz
 # 解压
-tar xvpzf v1.8.17.tar.gz 
+tar xvpzf v1.8.17.tar.gz
 mv go-ethereum-1.8.17 /usr/local/go-ethereum
 cd /usr/local/go-ethereum
 make all
@@ -128,7 +128,7 @@ nohup geth --syncmode "fast" --networkid 1 --datadir /data --cache 2048 --identi
 --rpcaddr | 可以调用 RPC 服务的IP地址，我这里只允许本地调用，不开放给其他用户，如果你想做成 Infura 那样作为公开的 API 的话，可以设置成 0.0.0.0
 
 ```bash
-nohup {cmd} & > nohup.out 
+nohup {cmd} & > nohup.out
 ```
 表示在后台运行一个脚本，并将输出导入到 nohup.out 文档中
 
@@ -152,7 +152,7 @@ kill -INT $pid
 在节点启动之后，我们可以使用 `geth attach` 命令去进入节点 javascript 终端
 
 ```bash
-root@iZj6cefzgbtxiky8zkwv3oZ:~# geth attach /data/geth.ipc 
+root@iZj6cefzgbtxiky8zkwv3oZ:~# geth attach /data/geth.ipc
 Welcome to the Geth JavaScript console!
 
 instance: Geth/ddblock/v1.8.17-stable/linux-amd64/go1.11.2
@@ -208,5 +208,3 @@ false
 顺便说一下，我用的阿里云的香港主机，中产阶级配置，大概不到两天就同步完成了，区块的数据总共 140 GB, 速度还是可以的。
 
 至此，一个全节点的以太坊钱包就部署完成，__Enjoy Coding.__
-
-

@@ -1,14 +1,14 @@
 ---
 layout: post
 title: Linux 实现终端代理
-categories: [系统运维]
+categories: [Linux]
 tags: [terminal, proxy]
 status: publish
 type: post
 published: true
 author: blackfox
 permalink: /20190121/proxy-in-terminal.html
-keyword: 终端代理, terminal proxy 
+keyword: 终端代理, terminal proxy
 desc: Ubuntu 实现终端代理
 
 ---
@@ -27,15 +27,15 @@ COW 的设计目标是自动化，理想情况下用户无需关心哪些网站�
 * 作为 HTTP 代理，可提供给移动设备使用；若部署在国内服务器上，可作为 APN 代理，__可使用多个二级代理，支持简单的负载均衡__
 * 支持 HTTP, SOCKS5, shadowsocks 和 cow 自身作为二级代理
 * 自动检测网站是否被墙，仅对被墙网站使用二级代理
-* 自动生成包含直连网站的 PAC，访问这些网站时可绕过 COW 
+* 自动生成包含直连网站的 PAC，访问这些网站时可绕过 COW
 
 安装方式非常简单, Linux 和 OSX 系统直接执行下面的命令：
 
 ```bash
-curl -L git.io/cow | bash 
+curl -L git.io/cow | bash
 ```
 
-修改配置文档 `vim ~/.cow/rc` 
+修改配置文档 `vim ~/.cow/rc`
 
 ```bash
 #开头的行是注释，会被忽略
@@ -68,6 +68,3 @@ https_proxy=http://127.0.0.1:7777
 然后启动你的 shadowsocks 代理软件。
 
 至此，恭喜你，你的终端可以畅通无阻了。
-
-
-

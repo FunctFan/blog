@@ -1,8 +1,8 @@
 ---
 layout: post
 title: 谈谈 EOS 的钱包，账户和权限
-categories: [EOS,区块链]
-tags: [EOS,钱包,区块链]
+categories: [EOS]
+tags: [EOS,钱包]
 status: publish
 type: post
 published: true
@@ -29,7 +29,7 @@ Address(钱包地址) 以及私钥。值得一提的是，以太坊的账户分�
 
 下面我们看看 EOSIO 中对于钱包，账户，公钥私钥之间的关系是怎么定义的：
 
-> 客户端： 也可以叫节点，在任何一台 PC 机上运行 nodeos 程序就自动运行了一个节点，每个节点可以创建多个钱包 
+> 客户端： 也可以叫节点，在任何一台 PC 机上运行 nodeos 程序就自动运行了一个节点，每个节点可以创建多个钱包
 
 通过下面脚本创建钱包
 
@@ -40,7 +40,7 @@ cleos wallet creat -n {wallet_name}
 > 秘钥：分为公钥和私钥，其中私钥用来签名，公钥用来创建账户，一个公钥可以创建多个账户。
 
 ```bash
-cleos create key 
+cleos create key
 
 Private key: 5KUvPZsZHPjvKaakkrHMR36xNXsErPmM1h1nD3NwjCAaCfNDxQj
 Public key: EOS5VUHtJb2PTpgvxEhjJ9r6pvgHfFuKeDNPHiwjDu9ZBsgCYnYM8
@@ -129,7 +129,7 @@ EOS 采用权限阈值来判断某个操作是否满足权限要求，如下表�
 
 > 对于 Recovery 权限组, 它的权限阀值是 2, @user1, @user2, @user3 所占的权重均为 1, 意味者如果想要恢复账户，必须获得他们中三分之二的人同意才行。
 
-> 下面还有一个交易权限组 Trade, 同理，如果想要获取交易权限，有两种方法，一种是获取 @user1 的同意(签名)，因为它的权重是 3, 而 Trade 的权限阀值也是 3, 
+> 下面还有一个交易权限组 Trade, 同理，如果想要获取交易权限，有两种方法，一种是获取 @user1 的同意(签名)，因为它的权重是 3, 而 Trade 的权限阀值也是 3,
 刚好满足，而 @user2 和 @user3 的权重都小于三。另一种方法是同时获取 @user2 和 @user3 的同意(签名), 这样 @user2 的权重为1，@user3 的权重为2，
 1+2 = 3 也刚好满足 Trade 的权重阀值。
 
@@ -167,12 +167,10 @@ EOS 采用权限阈值来判断某个操作是否满足权限要求，如下表�
 需要注意的是对于某个 Action 的权限的映射判断也是自下而上的，比如我要判断 @user/FAMILY 是否有 @EXCHANGE.CONTRACT/BUY 权限，判断看流程如下：
 
 1. 查看 @EXCHANGE.CONTRACT/BUY 有没有映射到 @user/FAMILY 或者 @user/FAMILY/FRIEND
-2. 如果 1 返回 false, 则继续查看 @EXCHANGE.CONTRACT.TRADE 组是否有映射到 @user/FAMILY 或者 @user/FAMILY/FRIEND 
-3. 如果 2 返回 false，则继续查找 @EXCHANGE.CONTRACT 有没有映射到 @user/FAMILY 或者 @user/FAMILY/FRIEND 
+2. 如果 1 返回 false, 则继续查看 @EXCHANGE.CONTRACT.TRADE 组是否有映射到 @user/FAMILY 或者 @user/FAMILY/FRIEND
+3. 如果 2 返回 false，则继续查找 @EXCHANGE.CONTRACT 有没有映射到 @user/FAMILY 或者 @user/FAMILY/FRIEND
 4. 如果还是没有找到，则说明没有权限
 
 至此我们就把 EOS 的账户权限，以及钱包，秘钥，账户之间的关系梳理清楚了，当然这些都是个人理解，如有不同的理解，欢迎不吝赐教，邮件交流。
 
-yangjian102621@gmail.com 
-
-
+yangjian102621@gmail.com

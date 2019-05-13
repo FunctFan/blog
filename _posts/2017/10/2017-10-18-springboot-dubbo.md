@@ -1,13 +1,13 @@
 ---
 layout: post
 title: SpringBoot dubbo 整合
-categories: [JAVA]
+categories: [Java]
 tags: [spring-boot, dubbo]
 status: publish
 type: post
 published: true
 author: blackfox
-permalink: 20171018/springboot-dubbo.html 
+permalink: 20171018/springboot-dubbo.html
 keyword: SpringBoot
 desc: springBoot dubbo整合, SpringBoot dubbo 接入
 ---
@@ -16,7 +16,7 @@ desc: springBoot dubbo整合, SpringBoot dubbo 接入
 一个问题，就是 SpringCloud 的eureka分布式服务在调用的时候还是有些不方便的地方，她主要是采用 http 协议实现 restful API，这样在调用的时候
 一个是效率不高，第二是参数的序列化是个问题，经测试发现她目前对远程服务的调用只能接收一个复杂类型的参数，也就是第一个参数可以是复杂类型
 的参数，其他参数都要是基本类型的，那就意味着，如果想要传入多个复杂类型参数，比如传入一个 User 类型的和一个 Order 类型，就必须自己手动将
-参数打包成一个复杂的参数。这样无端为编码带来了很多额外的工作量。因此架构组在再三考虑之下决定用 dubbo 替换 SpringCloud 
+参数打包成一个复杂的参数。这样无端为编码带来了很多额外的工作量。因此架构组在再三考虑之下决定用 dubbo 替换 SpringCloud
 自带的分布式服务框架。
 
 为什么用 dubbo
@@ -172,13 +172,13 @@ public class HelloController {
 
     <!-- 用dubbo协议在20880端口暴露服务 -->
     <dubbo:protocol name="dubbo" port="20885"/>
-    
+
     <!-- demo service -->
     <dubbo:service version="1.0.1" interface="com.springboot.dubbo.service.DemoService" ref="demoService"/>
-    
+
     <!-- user service -->
     <dubbo:service version="1.0.1" interface="com.springboot.dubbo.service.UserService" ref="userService"/>
-    
+
     <!-- order service -->
     <dubbo:service version="1.0.1" interface="com.springboot.dubbo.service.OrderService" ref="orderService"/>
 
@@ -224,7 +224,7 @@ public class XmlproviderApplication {
 ```
 __在服务暴露上也是不相同的，使用的是 Spring 的 @Service 注解，而不是 Dubbo 的 @Service.__
 
-```java 
+```java
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -260,12 +260,12 @@ public class UserServiceImpl implements UserService {}
     <dubbo:registry address="zookeeper://127.0.0.1:2181"/>
     <!-- 要扫描的包路径　使用注解方式创建服务 -->
     <dubbo:annotation package="com.springboot.dubbo.consumer.controller" />
-    
+
 
 </beans>
 ```
 
-在应用启动的时候加载 dubbo-demo-consumer.xml 
+在应用启动的时候加载 dubbo-demo-consumer.xml
 
 ```java
 package com.springboot.dubbo;
@@ -301,8 +301,3 @@ __总结：__
 [https://gitee.com/blackfox/springboot-dubbo](https://gitee.com/blackfox/springboot-dubbo)
 
 <strong>《完》</strong>
-
-
-
-
-

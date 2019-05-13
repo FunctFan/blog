@@ -2,7 +2,7 @@
 
 layout: post
 title: "细说mongodb 分组查询"
-categories: [数据库技术]
+categories: [Database]
 tags: [mongodb,php]
 status: publish
 type: post
@@ -11,7 +11,7 @@ author: blackfox
 permalink: /20160819/mongodb-group.html
 keyword : mongodb分组查询
 
---- 
+---
 
 最近在给<code>herosphp</code>框架添加mongodb支持，考虑到后期可能要切换模型，所以就把Model层把mysql和mongodb的查询语法做了兼容，屏蔽差异性。简单的增删查改都没有问题，可以很方便的做兼容，但是在处理分组查询的时候，发现mongodb的分组查询跟mysql的差别还是蛮大的。
 
@@ -203,6 +203,3 @@ Array
 ```
 
 令人眼前一亮的是mongodb的分组计算方式 reduce, 是一个javascript函数表达式，这样我们可以很方便的自定义分组方式，并且得到我们想要的数据。不像mysql一样要先查出分组，然后再根据分组查询，麻烦不说，而且效率也很低。
-
-
-

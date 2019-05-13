@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 搭建比特币私有链开发环境
-categories: [区块链]
+categories: [比特币]
 tags: [比特币]
 status: publish
 type: post
@@ -58,20 +58,20 @@ make -j8
 sudo make install
 ```
 
-安装玩之后记得要导出环境路径，否则编译器不知道去哪个目录找相关的类库 
-默认安装路径是/usr/local/BerkeleyDB.4.8 
+安装玩之后记得要导出环境路径，否则编译器不知道去哪个目录找相关的类库
+默认安装路径是/usr/local/BerkeleyDB.4.8
 
 ```bash
 export BDB_CFLAGS=/usr/local/BerkeleyDB.4.8/
 ```
 
 ## 2. 编译安装比特币源码
-首先需要去比特币的 github 仓库下载源代码 
+首先需要去比特币的 github 仓库下载源代码
 
 ```bash
 git clone https://github.com/bitcoin/bitcoin.git
 ```
-这里需要注意的是，clone 完代码之后，你需要 checkout 到你需要编译的安装的代码分之，比如我想要编译的是版本是 0.17, 所以我就需要把代码版本切换到 0.17 
+这里需要注意的是，clone 完代码之后，你需要 checkout 到你需要编译的安装的代码分之，比如我想要编译的是版本是 0.17, 所以我就需要把代码版本切换到 0.17
 
 ```bash
 git checkout 0.17
@@ -183,7 +183,7 @@ bitcoin-cli -regtest -datadir=/data/bitcoin -rpcuser=user -rpcpassword=password 
 如果感觉每次要输入这么长的命令很麻烦的话，可以在 /usr/local/bin 下新建脚本 bitcoin-cli(如果原来有软链接的话就删除)
 
 ```bash
-#!/bin/bash 
+#!/bin/bash
 
 /usr/local/bitcoin/bin/bitcoin-cli -regtest -datadir=/data/bitcoin -rpcuser=user -rpcpassword=password -rpcport=8332 getnewaddress
 ```
@@ -237,6 +237,3 @@ bitcoin-cli getwalletinfo
 最后，贴上一个比特币官方的 RPC API 文档地址
 
 [https://bitcoin.org/en/developer-reference](https://bitcoin.org/en/developer-reference)
-
-
-

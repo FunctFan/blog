@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 解决网易云音乐需要 root 权限才能打开的问题
-categories: [系统运维,小工具]
+categories: [Linux]
 tags: [网易云音乐]
 status: publish
 type: post
@@ -44,5 +44,3 @@ desc: ubuntu 18.04 不显示系统托盘图标, 网易云音乐需要 root 权�
 # 参考链接
 
 * [JoyNop's Blog](https://www.joynop.com/75.html)
-
-

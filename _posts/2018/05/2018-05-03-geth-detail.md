@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Geth 命令详解
-categories: [区块链]
+categories: [区块链技术]
 tags: [geth]
 status: publish
 type: post
@@ -9,7 +9,7 @@ published: true
 author: blackfox
 permalink: /20180503/geth.html
 keyword: Geth,以太坊
-desc: Geth 命令详解 
+desc: Geth 命令详解
 ---
 
 geth控制台启动和退出
@@ -20,7 +20,7 @@ geth控制台启动和退出
 ```bash
 geth console
 ```
-启动成功之后可以看到输入提示符 > 
+启动成功之后可以看到输入提示符 >
 
 退出 Geth 控制台也很简单，只要输入 <code class="scode">exit</code> 即可.
 
@@ -53,13 +53,13 @@ tty
 然后另一个终端使用：
 
 ```bash
-geth console 2>> /dev/pts/19 
+geth console 2>> /dev/pts/19
 ```
 
 当然你也可以将日志导入到黑洞，即不输出日志
 
 ```bash
-geth console 2>> /dev/null 
+geth console 2>> /dev/null
 ```
 
 启动一个开发模式测试节点
@@ -117,7 +117,7 @@ geth --datadir ./data-init2/ --identity "TetNode2" --rpc --rpcapi "db,eth,net,we
 
 ```bash
 > admin.addPeer("enode://....")
-true 
+true
 ```
 
 #### admin.startRPC

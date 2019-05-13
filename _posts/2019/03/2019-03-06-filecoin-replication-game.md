@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Filecoin 系列05-复制游戏(Replication-Game)
-categories: [IPFS,Filecoin]
+categories: [Filecoin]
 tags: [IPFS,区块链,Filecoin]
 status: publish
 type: post

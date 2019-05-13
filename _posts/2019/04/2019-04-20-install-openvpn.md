@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Ubuntu 搭建 OpenVPN 服务
-categories: [系统运维]
+categories: [Linux]
 tags: [OpenVPN,Ubuntu]
 status: publish
 type: post
@@ -9,7 +9,7 @@ published: true
 author: blackfox
 permalink: /20190420/install-openvpn.html
 desc: Ubuntu 18.04 搭建 OpenVPN 服务
---- 
+---
 
 本文介绍如何在 Ubuntu 系统上搭建 OpenVPN 服务。
 
@@ -48,7 +48,7 @@ sudo apt-get install easy-rsa
 
 ```bash
 sudo su
-cd /usr/share/easy-rsa/ 
+cd /usr/share/easy-rsa/
 vim vars
 
 # 修改注册信息，比如公司地址、公司名称、部门名称等。
@@ -72,19 +72,19 @@ cp openssl-1.0.0.cnf openssl.cnf
 # 清除keys目录下所有与证书相关的文件
 # 下面步骤生成的证书和密钥都在/usr/share/easy-rsa/keys目录里
 ./clean-all
- 
+
 # 生成根证书ca.crt和根密钥ca.key（一路按回车即可）
 ./build-ca
- 
+
 # 为服务端生成证书和私钥, --batch 表示保持默认设置，无须回车确认
 ./build-key-server --batch server
- 
+
 # 为客户端生成证书和私钥
 ./build-key --batch client
- 
+
 # 创建迪菲·赫尔曼密钥，会生成dh2048.pem文件（生成过程比较慢，在此期间不要去中断它）
 ./build-dh
- 
+
 # 生成ta.key文件（防DDos攻击、UDP淹没等恶意攻击）
 openvpn --genkey --secret keys/ta.key
 ```
@@ -107,7 +107,7 @@ cp /usr/share/easy-rsa/keys/{ca.crt,server.{crt,key},dh2048.pem,ta.key} /etc/ope
 
 ```bash
 gzip -d /usr/share/doc/openvpn/examples/sample-config-files/server.conf.gz
-cp /usr/share/doc/openvpn/examples/sample-config-files/server.conf /etc/openvpn/ 
+cp /usr/share/doc/openvpn/examples/sample-config-files/server.conf /etc/openvpn/
 ```
 
 编辑 `server.conf`
@@ -124,7 +124,7 @@ dev tun
 # 证书路径
 ca keys/ca.crt
 cert keys/server.crt
-key keys/server.key 
+key keys/server.key
 
 dh keys/dh2048.pem
 
@@ -158,7 +158,7 @@ log-append  /var/log/openvpn/openvpn.log
 verb 3
 
 # 如果上面配置了传输方式为 TCP, 则此处应该注释掉，否则会产生冲突
-;explicit-exit-notify 1 
+;explicit-exit-notify 1
 
 # 这里配置使用用户名和密码登录的支持，可以取代使用秘钥和证书登录
 auth-user-pass-verify /etc/openvpn/checkpsw.sh via-env
@@ -306,11 +306,11 @@ pass1
 # 在路由器上创建虚拟服务器
 
 这一步非常重要！！！ 虽然你的 OpenVPN 服务已经正常启动了，但是你会发现你还是无法连接它，因为外界还无法跟你的 OpenVPN 服务器通信，
-**路由器默认是会拦截并丢弃外侧网络发起的主动连接，也就是说路由器默认是只能让你主动出去，而不允许网面的主动请求进来。** 
+**路由器默认是会拦截并丢弃外侧网络发起的主动连接，也就是说路由器默认是只能让你主动出去，而不允许网面的主动请求进来。**
 原因很简单，这样能保证你内部局域网主机的安全。
 **路由器两端连接的是不同的网络，而不同网络之间是不能相互通信的。**
 
-> 因为对于外部的主机来说，我们内部局域网所有主机都是共享一个公网 IP，比如目前我所在的局域网的共享公网 IP 为 
+> 因为对于外部的主机来说，我们内部局域网所有主机都是共享一个公网 IP，比如目前我所在的局域网的共享公网 IP 为
 14.153.76.90，那么此时外部主机向 14.153.76.90 发送一条消息，路由器应该怎么处理呢，因为此时路由器并不知道你这条消息要发给谁，
 是发给 192.168.0.110 还是 192.168.0.111 呢？它无法判断，所以只能把这个消息包丢弃。
 
@@ -350,7 +350,3 @@ Sat Apr 20 14:30:34 2019 Initialization Sequence Completed
 # 参考连接
 * [https://olei.me/181/](https://olei.me/181/)
 * [https://www.cnblogs.com/EasonJim/p/8339600.html](https://www.cnblogs.com/EasonJim/p/8339600.html)
-
-
-
-

@@ -1,15 +1,15 @@
 ---
 layout: post
 title: 【转】区块链开发技术综述
-categories: [区块链]
+categories: [随笔杂谈]
 tags: [以太坊]
 status: publish
 type: post
 published: true
 author: blackfox
 permalink: /20180615/ethereum-develop.html
-keyword: 
-desc: 
+keyword:
+desc:
 ---
 
 > 本文转载自 https://blog.csdn.net/heyc861221/article/details/80127963
@@ -121,5 +121,3 @@ Corda在设计中有多项独特考虑，就是为了对接现有的业务规则
 
 区块链是一项前景无限、极具颠覆性和想象空间的技术，它有潜力带来一个完全不同的商业时代，塑造新一代的互联网，也有可能被传统势力合谋异化。无论如何，区块链为创业者和程序员提供了又一次弄潮的机会，
 在这片蓝海上将演出一场怎样的大戏，我们且拭目以待。
-
-

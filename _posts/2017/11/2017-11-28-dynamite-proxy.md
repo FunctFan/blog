@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Java 的动态代理
-categories: [理解编程]
+categories: [Java]
 tags: [动态代理,JAVA，理解编程]
 status: publish
 type: post
@@ -14,7 +14,7 @@ desc: java 动态代理
 一、什么是代理模式
 ======
 &emsp;&emsp; 在讲动态代理之前，我先梳理一下什么是代理模式。代理模式就是 __给委托对象提供一个代理对象，并由代理对象控制对委托对象的引用__
-简单来说就是客户端 A 想要调用服务提供方 B 的某个服务，但是 A 又不直接调用 B， 而是调用代理方 C， 然后 C 再调用 B，将调用结果返回给 A。 
+简单来说就是客户端 A 想要调用服务提供方 B 的某个服务，但是 A 又不直接调用 B， 而是调用代理方 C， 然后 C 再调用 B，将调用结果返回给 A。
 说的比较绕，我们先分析一下代理模式中涉及到的几个对象：
 * 客户端(Client)： 也就是服务调用方
 * 委托对象（RealSubject）：也就是真实的服务提供方，它把服务委托给代理方
@@ -50,7 +50,7 @@ public class RealSubject implements Subject {
 
 > 步骤三： 创建代理类
 
-```java 
+```java
 public class StaticProxy implements Subject {
 	RealSubject subject;
 	StaticProxy(RealSubject subject) {
@@ -65,7 +65,7 @@ public class StaticProxy implements Subject {
 
 > 步骤四： 测试代码，客户端代理调用
 
-```java 
+```java
 /**
  * @author yangjian
  * @since 17-11-23.
@@ -108,12 +108,12 @@ public Object invoke(Object obj, Method method, Object[] args)，这个抽象方
     * obj：代理类，
     * method: 被代理方法
     * args: 被代理方法的参数
-    
+
 Java 动态代理的实现和静态代理差不多，抽象接口(Subject) 和委托对象(RealSubject) 是必须的，现在还需要添加如下步骤：
 
 > 步骤三： 创建“代理调用处理器”类， ProxyHandler
 
-```java 
+```java
 public class ProxyHandler implements InvocationHandler {
 	private Subject subject;
 	ProxyHandler(Subject subject) {
@@ -147,11 +147,11 @@ public void dynamiteProxy() {
 
 __Proxy.newProxyInstance() 主要完成了以下工作：__
 
-```java 
+```java
 static Object newProxyInstance(ClassLoader loader,Class<?>[] interfaces,InvocationHandler handler)
 {
     //1. 根据类加载器和接口创建代理类
-    Class clazz = Proxy.getProxyClass(loader, interfaces); 
+    Class clazz = Proxy.getProxyClass(loader, interfaces);
     //2. 获得代理类的带参数的构造函数
     Constructor constructor = clazz.getConstructor(new Class[] { InvocationHandler.class });
     //3. 创建代理对象，并制定调用处理器实例为参数传入
@@ -168,7 +168,7 @@ static Object newProxyInstance(ClassLoader loader,Class<?>[] interfaces,Invocati
 
 在上述的动态代理过程中，生成的代理类大致如下：
 
-```java 
+```java
 public final class $Proxy1 extends Proxy implements Subject{
     private InvocationHandler h;
     private $Proxy1(){}
@@ -177,11 +177,11 @@ public final class $Proxy1 extends Proxy implements Subject{
     }
     public void pay(BigDecimal amount){
         //创建method对象
-        Method method = Subject.class.getMethod("pay", new Class[]{BigDecimal.class}); 
+        Method method = Subject.class.getMethod("pay", new Class[]{BigDecimal.class});
         //调用了invoke方法
-        h.invoke(this, method, new Object[]{amount}); 
+        h.invoke(this, method, new Object[]{amount});
     }
 }
 ```
-    
+
 __THE END__

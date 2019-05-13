@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Filecoin 系列06-构建自己的 devnet 开发网络
-categories: [IPFS, Filecoin]
+categories: [Filecoin]
 tags: [区块链, Filecoin, IPFS]
 status: publish
 type: post

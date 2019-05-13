@@ -1,7 +1,7 @@
 ---
 layout: post
 title: ubuntu编译安装php5.5.26
-categories: [系统运维]
+categories: [Linux]
 tags: [linux,ubuntu,php]
 status: publish
 type: post
@@ -18,17 +18,17 @@ description: ubuntu编译安装php5.5.26
 apt-get install -y build-essential gcc g++ make
 
 for packages in bzip2 libzip-dev libperl-dev libc6-dev  
-libevent-dev libpcre3 libpcre3-dev libpcrecpp0 zlibc openssl 
-libsasl2-dev libmcrypt-dev libbz2-1.0 libbz2-dev libpng3 
-libjpeg62 libjpeg62-dev libpng-dev libpng12-0 libpng12-dev curl 
-libcurl3 libmhash2 libmhash-dev libpq-dev libpq5 gettext 
-libncurses5-dev libjpeg-dev libxml2-dev libfreetype6 
-libfreetype6-dev libssl-dev libcurl3 libcurl4-openssl-dev 
+libevent-dev libpcre3 libpcre3-dev libpcrecpp0 zlibc openssl
+libsasl2-dev libmcrypt-dev libbz2-1.0 libbz2-dev libpng3
+libjpeg62 libjpeg62-dev libpng-dev libpng12-0 libpng12-dev curl
+libcurl3 libmhash2 libmhash-dev libpq-dev libpq5 gettext
+libncurses5-dev libjpeg-dev libxml2-dev libfreetype6
+libfreetype6-dev libssl-dev libcurl3 libcurl4-openssl-dev
 libcurl4-gnutls-dev mcrypt;
-do 
+do
 apt-get install -y $packages --force-yes;
 apt-get -fy install;
-apt-get -y autoremove; 
+apt-get -y autoremove;
 done
 
 ```
@@ -81,7 +81,7 @@ cd php-5.5.26
 
 ```
 
-安装 
+安装
 =====
 
 ```bash
@@ -95,9 +95,9 @@ make install
 修改配置文档
 ======
 ```bash
-cd /usr/local/php/etc 
+cd /usr/local/php/etc
 mkdir conf.d
-cp php-fpm.con.default php-fpm.conf 
+cp php-fpm.con.default php-fpm.conf
 cp  php.ini-development php.ini
 
 ```
@@ -124,7 +124,7 @@ PHP_DIR=/usr/local/php
 NAME=php-fpm
 DAEMON=$PHP_DIR/sbin/$NAME
 PHP_CONFIG_FILE=$PHP_DIR/etc/php.ini
-FPM_CONFIG_FILE=$PHP_DIR/etc/php-fpm.conf 
+FPM_CONFIG_FILE=$PHP_DIR/etc/php-fpm.conf
 PIDFILE=$PHP_DIR/var/run/$NAME.pid
 
 # If the daemon file is not found, terminate the script.
@@ -175,9 +175,7 @@ exit 0
 
 ```
 
-启动php-fpm 
+启动php-fpm
 
 > chmod +x /usr/local/bin/php-fpm <br/>
 /usr/local/bin/php-fpm start
-
-

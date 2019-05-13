@@ -1,15 +1,15 @@
 ---
 layout: post
 title: 以太坊开发入门指南
-categories: [以太坊,区块链]
+categories: [以太坊]
 tags: [区块链, 以太坊]
 status: publish
 type: post
 published: true
 author: blackfox
 permalink: /20180718/ether-develop.html
-keyword: 
-desc: 
+keyword:
+desc:
 ---
 
 以太坊是什么
@@ -55,7 +55,7 @@ Remix 下载地址：[https://github.com/ethereum/remix/releases](https://github
 合约的编译和部署
 =======
 
-以太坊虚拟机上运行的是合约的字节码形式，需要我们在部署之前先对合约进行编译。通常我们可以选择 Remix IDE 或者客户端钱包进行编译和部署, 推荐使用 Remix, 
+以太坊虚拟机上运行的是合约的字节码形式，需要我们在部署之前先对合约进行编译。通常我们可以选择 Remix IDE 或者客户端钱包进行编译和部署, 推荐使用 Remix,
 毕竟客户端钱包太重了，同步去快得好几天，而且需要消耗掉你 > 100 GB (以后会越来越大) 的存储空间.
 
 > 下图是 Remix 的编译和运行界面截图：
@@ -88,7 +88,7 @@ Remix 下载地址：[https://github.com/ethereum/remix/releases](https://github
 Gas 值
 ====
 
-Gas 是以太坊虚拟机的独创，任何转账，交易发送，合约发布，合约执行，合约调用都需要消耗 Gas, 
+Gas 是以太坊虚拟机的独创，任何转账，交易发送，合约发布，合约执行，合约调用都需要消耗 Gas,
 一般来说智能合约越复杂（计算步骤的数量和类型，占用的内存等），用来完成运行就需要越多Gas。
 任何特定的合约所需的运行合约的Gas数量是固定的，由合约的复杂度决定。
 而Gas价格由运行合约的人在提交运行合约请求的时候规定，以确定他愿意为这次交易愿意付出的费用：Gas价格（用以太币计价） * Gas数量。
@@ -108,13 +108,13 @@ Gas的目的是限制执行交易所需的工作量，同时为执行支付费�
 1. 选择以太坊官网测试网络Testnet, 测试网络中，我们可以很容易获得免费的以太币，缺点是需要发很长时间初始化节点。
 2. 使用 geth 启动一个私有链， 如果不了解 geth 请点击[这里](http://www.r9it.com/20180503/geth.html)
 3. 使用模拟环境 Ganache 或者 Ganache-cli， Ganache GUI 客户端可以到这里下载 [https://truffleframework.com/ganache](https://truffleframework.com/ganache)
-Ganache-cli 安装起来更加方便，直接 npm install -g ganache-cli 就可以了. 
+Ganache-cli 安装起来更加方便，直接 npm install -g ganache-cli 就可以了.
 
 #### 启动 Ganache
 
 ```bash
 #如果你下载的是客户端的可执行文件，直接执行就好了, 如
-/opt/ganache-1.1.0-x86_64.AppImage 
+/opt/ganache-1.1.0-x86_64.AppImage
 # 如果是 ganache-cli 更简单
 ganache-cli
 ```
@@ -124,7 +124,7 @@ Dapp：去中心化的应用程序
 以太坊社区把基于智能合约的应用称为去中心化的应用程序(Decentralized App)。如果我们把区块链理解为一个不可篡改的数据库，智能合约理解为和数据库打交道的程序，
 那就很容易理解Dapp了，一个Dapp不单单有智能合约，比如还需要有一个友好的用户界面和其他的东西。
 
-Truffle 
+Truffle
 ======
 Truffle是Dapp开发框架，它可以帮我们处理掉大量无关紧要的小事情，让我们可以迅速开始写代码-编译-部署-测试-打包DApp这个流程。
 
@@ -134,18 +134,9 @@ Truffle是Dapp开发框架，它可以帮我们处理掉大量无关紧要的小
 npm install -g truffle
 ```
 
-值得一提的是，Truffle 和 Ganache 是同一个组织的，点击这里[快速开始](https://truffleframework.com/docs) 
+值得一提的是，Truffle 和 Ganache 是同一个组织的，点击这里[快速开始](https://truffleframework.com/docs)
 
-总结 
+总结
 ====
 
 以上就是本人根据自己的经验总结的有关以太坊开发的相关知识，仅供参考。有兴趣的同学不要观望了，赶紧上车。
-
-
-
-
-
-
-
-
-

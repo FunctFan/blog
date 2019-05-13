@@ -2,7 +2,7 @@
 
 layout: post
 title: "ubuntu 安装Wine longene QQ 7.8 和微信"
-categories: [系统运维]
+categories: [Linux]
 tags: [longeneqq]
 status: publish
 type: post
@@ -15,14 +15,14 @@ desc : "ubuntu 安装Wine longene QQ 7.8"
 ---
 
 毫无疑问，在linux系统环境下编程是非常愉快的。所以它应该是程序员的首选工作操作系统，但是作为开发人很尴尬的问题就是我们要和其他部门人员沟通总是或多或少要使用QQ这个神奇的聊天工具，而偏偏企鹅公司并没有打算开发linux版本的qq(可能是因为linux软件是开源不收费的原因）。几经折腾，在ubuntu 14.04 LTS上安装成功了，记录一下步骤。
-	
+
 1.下载deb安装包
 ======
 直接去longene 官网下载就好了
 
 WineQQ7.8-20151109-Longene：<a href="WineQQ7.8-20151109-Longene：http://www.longene.org/download/WineQQ7.8-20151109-Longene.deb">http://www.longene.org/download/WineQQ7.8-20151109-Longene.deb</a>
 
-下载完之后直接 dpkg -i WineQQ7.8-20151109-Longene.deb 
+下载完之后直接 dpkg -i WineQQ7.8-20151109-Longene.deb
 
 如果是16.04LTS版本的系统，就执行
 
@@ -45,7 +45,7 @@ sudo apt-get install wine1.7 winetricks
 ```
 
 根据官网的教程，如果是64位的系统，那你需要安装32的依赖 <code
-class="scode">ia32-libs</code>. 
+class="scode">ia32-libs</code>.
 
 ```bash
 sudo apt-get install ia32-libs
@@ -124,6 +124,3 @@ chrome://apps/
 欢迎在留言区写下你的想法.
 
 <strong>《完》</strong>
-
-
-

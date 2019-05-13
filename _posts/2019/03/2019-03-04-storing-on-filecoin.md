@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  Filecoin 系列04-存储数据到 Filecoin 网络
-categories: [IPFS,Filecoin]
+categories: [Filecoin]
 tags: [Filecoin,区块链,IPFS,分布式存储]
 status: publish
 type: post

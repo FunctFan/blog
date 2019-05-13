@@ -1,15 +1,15 @@
 ---
 layout: post
 title: 《厕所英雄》观后感
-categories: [杂谈]
+categories: [随笔杂谈]
 tags: [影评]
 status: publish
 type: post
 published: true
 author: blackfox
 permalink: /20180614/toilet-hero.html
-keyword: 
-desc: 《厕所英雄》观后感 
+keyword:
+desc: 《厕所英雄》观后感
 ---
 
 &emsp;&emsp; 昨天下班早，跟妹子以及公司联合创始人看了最近很火的印度神片 《厕所英雄》。讲真，从去年的《摔跤吧，爸爸》, 到今年的《神秘巨星》到昨天的
@@ -74,7 +74,3 @@ __"只要这事不涉及个人利益，就不会有人想要抗争或想办法"_
 
 总之，这部电影还是很值得看的，整部电影的节奏比较欢快，笑点比较多，但是却描写一种非常沉痛的社会现象， 让你笑着笑着就想哭。还有，凯沙夫和贾耶的爱情曲折
 也是影片中的不可错过的一条主线，很真实，很浪漫，有很接地气。
-
-
-
-

@@ -1,7 +1,7 @@
 ---
 layout: post
-title: ubuntu编译安装tengine
-categories: [系统运维]
+title: ubuntu 编译安装 tengine
+categories: [Linux]
 tags: [linux,ubuntu,tengine]
 status: publish
 type: post
@@ -29,5 +29,3 @@ description: ubuntu 编译安装tengine
 > tar xvpzf tengine-2.1.0.tar.gz <br />
 cd tengine/ <br />
 ./configure --prefix=/usr/local/tengine --user=www-data --group=www-data <br />
-
-

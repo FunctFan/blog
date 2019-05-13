@@ -1,15 +1,15 @@
 ---
 layout: post
 title: EOS 本地开发环境搭建
-categories: [区块链]
+categories: [EOS]
 tags: [EOS, docker]
 status: publish
 type: post
 published: true
 author: blackfox
-permalink: /20180612/build-eos-dev-env.html 
-keyword: EOS, 区块链 
-desc: EOS 本地开发环境搭建 
+permalink: /20180612/build-eos-dev-env.html
+keyword: EOS, 区块链
+desc: EOS 本地开发环境搭建
 ---
 
 &emsp;&emsp;EOS 主网已经于北京时间 2018 年 6 月 10 日晚 9 点开启交易。作为一个爱折腾的码农，花了一整天的事件尝试着搭建了本地测试网络。中间踩的坑比较多，
@@ -19,7 +19,7 @@ desc: EOS 本地开发环境搭建
 
 > System Requirements (all platforms) <br/>
 	8GB RAM free required <br />
-	20GB Disk free required 
+	20GB Disk free required
 
 __所以说内存低于 8GB 的同学就不要尝试了__
 
@@ -34,19 +34,19 @@ __所以说内存低于 8GB 的同学就不要尝试了__
 啧啧, 果然不是穷逼能玩的起的，据说每年租用费都高达 76 万 RMB.
 
 我物理机安装的是 ubuntu 16.04 LTS, 为了不影响我的开发环境，我选择在 docker 容器里面搭建测试环境，因为 EOS 运行环境需要安装各种依赖，我担心
-它分分钟把我的开发主机环境搞的一团糟。如果对 docker 容器还不了解的同学，请看下我的另外一篇 docker 容器入门的博客 
+它分分钟把我的开发主机环境搞的一团糟。如果对 docker 容器还不了解的同学，请看下我的另外一篇 docker 容器入门的博客
 [docker学习笔记（一）](/20160501/docker-study-1.html)
 
 容器使用的镜像还是 ubuntu, 官方推荐的是 ubuntu16.04 或者 ubuntu 18.04, 我这里选择 ubuntu 18.04, 先使用 docker pull 命令把容器镜像下载下来：
 
 ```bash
-docker pull ubuntu:18.04 
+docker pull ubuntu:18.04
 ```
 
 然后创建容器，按照官方的推荐需要映射两个端口 8888 和 9876
 
 ```bash
-docker run -it -v /data/eos:/temp -p 8888:8888 -p 9876:9876 --name eos ubuntu:18.04 /bin/bash 
+docker run -it -v /data/eos:/temp -p 8888:8888 -p 9876:9876 --name eos ubuntu:18.04 /bin/bash
 ```
 
 > 注意: 我这里使用了 -v 参数映射了我宿主机的一个文件夹进去，方便我们宿主机和容器之间的文件传输.
@@ -63,7 +63,7 @@ git clone https://github.com/EOSIO/eos --recursive
 在项目的根目录执行下面代码可以继续 pull 代码
 
 ```bash
-git submodule update --init --recursive 
+git submodule update --init --recursive
 ```
 
 代码下载完了之后，就可以开始构建环境了, EOS 提供了一个自动化构建的脚本, 从项目的根目录执行自动化构建脚本就好了。
@@ -82,7 +82,7 @@ sudo apt-get install clang-4.0 lldb-4.0 libclang-4.0-dev cmake make \
 		 autoconf libtool zlib1g-dev doxygen graphviz
 ```
 
-在安装依赖的时候还有一个小插曲，就是 eosio_build.sh 
+在安装依赖的时候还有一个小插曲，就是 eosio_build.sh
 这个自动化构建脚本里面默认你不是 __root__  用户的，所以它里面很多命令都用了 __sudo__ , 这样就会导致报一个这样的错误：
 
 <img class="img-view" data-src="/images/2018/06/eosbuild-2.png" src="/images/1px.png" />
@@ -95,20 +95,20 @@ github 用的是亚马逊的 aws 云存储，国内访问非常慢，经常下�
 
 <img class="img-view" data-src="/images/2018/06/eosbuild-1.png" src="/images/1px.png" />
 
-由于 mongo-c-driver 下载失败，执行下面的解压命令的时候出错了，重试了好几次，每次都是到这里下载失败。后来不想浪费时间了，直接去 github 把 
-mongo-c-driver-1.9.3.tar.gz 下载下来，然后 copy 到 /tmp 
+由于 mongo-c-driver 下载失败，执行下面的解压命令的时候出错了，重试了好几次，每次都是到这里下载失败。后来不想浪费时间了，直接去 github 把
+mongo-c-driver-1.9.3.tar.gz 下载下来，然后 copy 到 /tmp
 
 下载地址：[https://github.com/mongodb/mongo-c-driver/releases?after=1.9.4](https://github.com/mongodb/mongo-c-driver/releases?after=1.9.4)
 
 ```bash
-wget https://github.com/mongodb/mongo-c-driver/releases/download/1.9.3/mongo-c-driver-1.9.3.tar.gz 
+wget https://github.com/mongodb/mongo-c-driver/releases/download/1.9.3/mongo-c-driver-1.9.3.tar.gz
 cp mongo-c-driver-1.9.3.tar.gz /tmp
 ```
 
-然后在回到 eos 的项目根目录， 修改构建脚本 
+然后在回到 eos 的项目根目录， 修改构建脚本
 
 ```bash
-vim scripts/eosio_build_ubuntu.sh 
+vim scripts/eosio_build_ubuntu.sh
 ```
 
 注释掉从 281 到 290 行，这几行是下载 mongo-c-driver 的
@@ -157,8 +157,8 @@ CMake Error at src/bsoncxx/CMakeLists.txt:86 (find_package):
 	Exiting now.
 
 ```
-这是因为 EOS 默认下载的是最新的稳定版 mongo-cxx-driver, master/stable , 导致依赖高版本的 libbson 库，而我系统装的是低版本的. 
-那显然解决方案就是有两个: 
+这是因为 EOS 默认下载的是最新的稳定版 mongo-cxx-driver, master/stable , 导致依赖高版本的 libbson 库，而我系统装的是低版本的.
+那显然解决方案就是有两个:
 
 > 1. 降低 mongo-cxx-driver 的版本 <br />
 2. 升高系统 libbson 库的版本
@@ -230,7 +230,7 @@ make install
 然后启动节点
 
 ```bash
-nodeos -e -p eosio --plugin eosio::chain_api_plugin --plugin eosio::history_api_plugin 
+nodeos -e -p eosio --plugin eosio::chain_api_plugin --plugin eosio::history_api_plugin
 ```
 
 启动之后如果没有问题就会自动开始生成区块(producing blocks)
@@ -241,7 +241,7 @@ nodeos -e -p eosio --plugin eosio::chain_api_plugin --plugin eosio::history_api_
 
 <img class="img-view" data-src="/images/2018/06/eosbuild-7.png" src="/images/1px.png" />
 
-至此，EOS 本地开发环境搭建搭建完成. 
+至此，EOS 本地开发环境搭建搭建完成.
 
 这里顺便提一句，本文是使用 docker 容器模拟物理机器来搭建的，如果单纯想用容器去跑 EOS 服务，要简单的多，只要执行几条命令就好了，
 官网有详细的教程 [https://github.com/EOSIO/eos/blob/master/Docker/README.md](https://github.com/EOSIO/eos/blob/master/Docker/README.md), 感兴趣的
@@ -254,6 +254,3 @@ nodeos -e -p eosio --plugin eosio::chain_api_plugin --plugin eosio::history_api_
 [https://github.com/EOSIO/eos/wiki/Local-Environment#2-building-eosio](https://github.com/EOSIO/eos/wiki/Local-Environment#2-building-eosio)
 
 [https://github.com/EOSIO/eos/issues/4062](https://github.com/EOSIO/eos/issues/4062)
-
-
-

@@ -1,8 +1,8 @@
 ---
 layout: post
 title: EOS 创建自己的代币
-categories: [EOS,区块链]
-tags: [EOS]
+categories: [EOS]
+tags: [EOS,代币]
 status: publish
 type: post
 published: true
@@ -16,7 +16,7 @@ desc: 发布 EOS 代币
 
 ### 实验环境
 
-* 操作系统：Ubuntu 16.04 LTS 
+* 操作系统：Ubuntu 16.04 LTS
 * EOS 版本：DAWN-2018-05-30
 
 如果你还没搭建 EOS 开发环境，请先移步这里 [EOS 本地开发环境搭建](/20180612/build-eos-dev-env.html)
@@ -34,7 +34,7 @@ Public key: EOS72F864zF8FZwkHXjZSFjubJoqxbQehDyQe4og1D55PQooUzXbH
 > 2.创建钱包
 
 ```bash
-cleos wallet create -n token 
+cleos wallet create -n token
 
 Creating wallet: token
 Save password to use in the future to unlock this wallet.
@@ -64,7 +64,7 @@ cleos create account eosio user1 EOS72F864zF8FZwkHXjZSFjubJoqxbQehDyQe4og1D55PQo
 为了简单起见我们这里把 Owner 和 Active 这两种类型的 key 都设置为同一个。实际生产环境操作的时候建议生成2对key, 把 Owner 和 Active 分别设置
 为不同的 key.
 
-同样的我们再创建另外两个账户 user2 和 user3, __user1 作为代币合约部署账户, user2 是代币接收账户，user3 是普通账户。__ 
+同样的我们再创建另外两个账户 user2 和 user3, __user1 作为代币合约部署账户, user2 是代币接收账户，user3 是普通账户。__
 
 ```bash
 cleos create account eosio user2 EOS72F864zF8FZwkHXjZSFjubJoqxbQehDyQe4og1D55PQooUzXbH EOS72F864zF8FZwkHXjZSFjubJoqxbQehDyQe4og1D55PQooUzXbH
@@ -74,12 +74,12 @@ cleos create account eosio user3 EOS72F864zF8FZwkHXjZSFjubJoqxbQehDyQe4og1D55PQo
 
 > 5.部署代币合约
 
-首先我们找到 eostoken 合约文件，我的 EOS 的编译路径是 <code class="scode">/opt/eos</code>, 所以合约路径为 
+首先我们找到 eostoken 合约文件，我的 EOS 的编译路径是 <code class="scode">/opt/eos</code>, 所以合约路径为
 
-/opt/eos/contracts/eosio.token 
+/opt/eos/contracts/eosio.token
 
 ```bash
-cleos set contract user1 /opt/eos/contracts/eosio.token -p user1 
+cleos set contract user1 /opt/eos/contracts/eosio.token -p user1
 ```
 
 结果并不顺利，程序抛出了异常
@@ -92,8 +92,8 @@ Reading WAST/WASM from eosio.token/eosio.token.wast...
 说是找不到 eosio.token.wast 这个文件。我们用下面的命令去生成
 
 ```bash
-cd /opt/eos/contracts/eosio.token 
-eosiocpp -o eosio.token.wast eosio.token.cpp 
+cd /opt/eos/contracts/eosio.token
+eosiocpp -o eosio.token.wast eosio.token.cpp
 ```
 
 然后在重新部署合约
@@ -128,7 +128,7 @@ cleos push action user1 create '["eosio", "1000000000.0000 EOS", 0, 0, 0]' -p us
 executed transaction: 31508996812b5d6369c099e30047fab919b294baba12eae434f755a6aef2327a  120 bytes  423 us
 user1 <= user1::create          {"issuer":"eosio","maximum_supply":"1000000000.0000 EOS"}
 ```
-这里我们执行了eosio.token 这个合约里面的create方法，这个方法的作用就是创建一个代币。 
+这里我们执行了eosio.token 这个合约里面的create方法，这个方法的作用就是创建一个代币。
 这里我们创建了一个叫做 EOS 的代币，发行者为 eosio 这个账户，发行总量为1000000000.0000，使用 user1  这个用户来创建这个代币。
 
 
@@ -141,7 +141,7 @@ cleos push action user1 issue '[ "user2", "1000000000.0000 EOS", "created by use
 这样就把代币全部转给了发币账户 user2 ，现在我们可以查询一下 user2 的余额
 
 ```bash
-cleos get currency balance user1 user2 EOS 
+cleos get currency balance user1 user2 EOS
 
 1000000000.0000 EOS
 ```
@@ -149,7 +149,7 @@ cleos get currency balance user1 user2 EOS
 
 > 8.测试转账
 
-下面我们从发币账户中发送 10000 个 EOS 给普通账户 user3 
+下面我们从发币账户中发送 10000 个 EOS 给普通账户 user3
 
 ```bash
 cleos push action user1 transfer '["user2","user3","10000.0000 EOS","user2 send 1000 EOS to user3"]' -p user2
@@ -177,6 +177,3 @@ cleos get currency balance user1 user3 EOS
 ```
 
 至此，我们成功的在 EOS 上发布了自己的代币.
-
-
-

@@ -1,13 +1,13 @@
 ---
 layout: post
 title: Filecoin 系列07-构建 Filecoin 网络统计项目
-categories: [IPFS,Filecoin]
+categories: [Filecoin]
 tags: [Filecoin]
 status: publish
 type: post
 published: true
 author: blackfox
-permalink: /20190329/build-filecoin-network-stats.html 
+permalink: /20190329/build-filecoin-network-stats.html
 keyword: filecoin-network-stats
 desc: 构建 Filecoin 网络统计仪表盘
 ---
@@ -168,5 +168,3 @@ go-filecoin config heartbeat.beatTarget "/dns4/<your-backend-domain-name>/tcp/80
 
 # 参考文献
 [filecoin-network-stats](https://github.com/filecoin-project/filecoin-network-stats){:target="_blank"}
-
-

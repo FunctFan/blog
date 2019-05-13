@@ -1,13 +1,13 @@
 ---
 layout: post
 title: SpringBoot 的三种启动方式
-categories: [JAVA]
+categories: [Java]
 tags: [spring-boot]
 status: publish
 type: post
 published: true
 author: blackfox
-permalink: 20171013/springboot-start.html 
+permalink: 20171013/springboot-start.html
 keyword: SpringBoot
 desc: spring-boot 项目启动方式，spring-boot:run 带参数启动
 ---
@@ -52,8 +52,8 @@ java -jar xxx.jar --spring.profiles.active=prod > error.log &
 ### 3. 使用 mvn spring-boot:run 命令运行
 在项目的根目录运行
 
-```bash 
-mvn spring-boot:run 
+```bash
+mvn spring-boot:run
 ```
 这里也可以传入运行参数：
 
@@ -74,8 +74,3 @@ mvn spring-boot:run -Drun.arguments="--spring.profiles.active=prod" > error.log 
 
 
 <strong>《完》</strong>
-
-
-
-
-

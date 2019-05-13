@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 发行自己的 ERC20 标准代币
-categories: [solidity,智能合约]
+categories: [以太坊]
 tags: [众筹, ICO, solidity]
 status: publish
 type: post
@@ -28,7 +28,7 @@ desc: 使用代币进行 ICO
 
 今天我们就来详细讲一讲怎样创建一个这样的代币。
 
-ERC20 代币 
+ERC20 代币
 =======
 
 也许你经常看到ERC20和代币一同出现， ERC20是以太坊定义的一个代币标准。
@@ -226,7 +226,7 @@ Chrome 浏览器插件中心去安装, 点击 [这里](https://chrome.google.com
 
 <img class="img-view" data-src="/images/2018/07/metamask-net.png" src="/images/1px.png" />
 
-然后点击 "Buy" 按钮去免费获取 ETH 
+然后点击 "Buy" 按钮去免费获取 ETH
 
 <img class="img-view" data-src="/images/2018/07/metamask-buy.png" src="/images/1px.png" />
 
@@ -249,7 +249,7 @@ Chrome 浏览器插件中心去安装, 点击 [这里](https://chrome.google.com
 
 > 这里需要提一下的是，测试网络一般返回的快一些，一般一分钟之内会返回创建结果。但是如果你是在主网发布合约的话，堵塞个半天都有可能。
 
-合约创建之后，点击右边的按钮复制和合约地址，然后打开你的 MetaMask 钱包，选择 TOKENS 菜单，添加 TOKEN 
+合约创建之后，点击右边的按钮复制和合约地址，然后打开你的 MetaMask 钱包，选择 TOKENS 菜单，添加 TOKEN
 
 <img class="img-view" data-src="/images/2018/07/metamask-add-token.png" src="/images/1px.png" />
 
@@ -268,6 +268,3 @@ Chrome 浏览器插件中心去安装, 点击 [这里](https://chrome.google.com
 需要说明的是，由于是刚刚创建，所以没有任何代币发送记录，接下来你就可以拿着这代币去 I(割)C(韭)O(菜) 了。
 
 __《完》__
-
-
-

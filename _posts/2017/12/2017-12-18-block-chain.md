@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 《区块链技术指南》读书笔记（一）
-categories: [区块链,阅读与思考]
+categories: [读书笔记]
 tags: [区块链,比特币]
 status: publish
 type: post

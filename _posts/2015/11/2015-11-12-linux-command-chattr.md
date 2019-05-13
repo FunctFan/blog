@@ -1,14 +1,14 @@
 ---
 layout: post
-title: linux命令学习：chattr
-categories: [系统运维]
+title: linux 命令学习：chattr
+categories: [Linux]
 tags: [ubuntu, fcitx, idea, phpstrom]
 status: publish
 type: post
 published: true
 author: blackfox
 permalink: /20151112/chattr.html
-description: 解决搜狗输入法在linux系统不能输入中文,idea phpstorm 无法出入中文
+description: chattr 命令学习
 ---
 
 今天在服务器上删除某个文件时发现一直删除不了，提示：Operation not permitted。 个人觉得很诡异，因为我是用root登录的，不应该没有权限，

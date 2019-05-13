@@ -1,8 +1,8 @@
 ---
 layout: post
 title: jekyll 环境的搭建
-categories: [小工具]
-tags: [jekyll,ruby]
+categories: [Jekyll]
+tags: [jekyll,FunnyTools]
 status: publish
 type: post
 published: true

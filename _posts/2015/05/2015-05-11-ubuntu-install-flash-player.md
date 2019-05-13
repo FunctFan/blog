@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "linux 安装flashplayer"
-categories: [系统运维]
+categories: [Linux]
 tags: [linux,flashpalyer]
 status: publish
 type: post
@@ -30,4 +30,3 @@ sudo cp -r usr/* /usr
 ```
 
 第三步，重启浏览器，你就可以愉快的看电影和听音乐了。
-

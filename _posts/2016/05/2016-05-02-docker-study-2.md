@@ -1,7 +1,7 @@
 ---
 layout: post
-title: docker学习笔记（二）
-categories: [系统运维]
+title: docker 学习笔记（二）
+categories: [Docker]
 tags: [linux,docker, dockerfile]
 status: publish
 type: post
@@ -29,7 +29,7 @@ MAINTAINER yangjian <yangjian102621@gmail.com>
 #设置ubuntu源，使用阿里云的源
 RUN cp /etc/apt/sources.list /etc/apt/sources.list.bak
 RUN echo "deb http://mirrors.aliyun.com/ubuntu/ trusty main restricted universe multiverse" > /etc/apt/sources.list
-RUN echo "deb http://mirrors.aliyun.com/ubuntu/ trusty-security main restricted universe multiverse" >> /etc/apt/sources.list 
+RUN echo "deb http://mirrors.aliyun.com/ubuntu/ trusty-security main restricted universe multiverse" >> /etc/apt/sources.list
 RUN echo "deb http://mirrors.aliyun.com/ubuntu/ trusty-updates main restricted universe multiverse" >> /etc/apt/sources.list
 RUN echo "deb http://mirrors.aliyun.com/ubuntu/ trusty-proposed main restricted universe multiverse" >> /etc/apt/sources.list
 RUN echo "deb http://mirrors.aliyun.com/ubuntu/ trusty-backports main restricted universe multiverse" >> /etc/apt/sources.list
@@ -42,12 +42,12 @@ RUN echo "deb-src http://mirrors.aliyun.com/ubuntu/ trusty-backports main restri
 #安装软件包
 RUN apt-get update
 RUN apt-get install -y openssh-server vim
-RUN mkdir -p /var/run/sshd 
+RUN mkdir -p /var/run/sshd
 RUN mkdir -p /root/.ssh
 
 RUN locale-gen zh_CN.UTF-8
 RUN echo "zh_CN.UTF-8 UTF-8" >> /var/lib/locales/supported.d/local
-RUN echo "en_US.UTF-8 UTF-8" >> /var/lib/locales/supported.d/local 
+RUN echo "en_US.UTF-8 UTF-8" >> /var/lib/locales/supported.d/local
 RUN apt-get install -y language-pack-zh-hans
 
 #开放对外端口
@@ -65,4 +65,3 @@ RUN echo "export LC_ALL=C" >> /root/.profile
 #执行初始化命令
 CMD ["/run.sh"]
 ```
-

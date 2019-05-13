@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "「转」为什么你应该（从现在开始就）写博客"
-categories: [阅读与思考]
+categories: [随笔杂谈]
 tags: []
 status: publish
 type: post

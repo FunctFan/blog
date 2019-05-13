@@ -1,7 +1,7 @@
 ---
 layout: post
-title: 使用 php-webdriver 实现自动化测试 
-categories: [PHP, 小工具]
+title: 使用 php-webdriver 实现自动化测试
+categories: [PHP]
 tags: [php, webdriver, selenium]
 status: publish
 type: post
@@ -54,25 +54,25 @@ java -jar -Dwebdriver.chrome.driver="driver/chromedriver" selenium-server-standa
 然后创建一个会话，并指定你的服务器运行的地址和端口。
 
 ```php
-$host = 'http://localhost:4444/wd/hub'; 
+$host = 'http://localhost:4444/wd/hub';
 ```
 
 启动火狐浏览器，前提是你安装了火狐的 Geckodriver
 
-```php 
+```php
 $driver = RemoteWebDriver::create($host, DesiredCapabilities::firefox());
 ```
 
 或者启动 chrome 浏览器
 
-```php 
+```php
 $driver = RemoteWebDriver::create($host, DesiredCapabilities::chrome());
 ```
 
 你也可以自定义配置你的浏览器
 
-```php 
-$host = 'http://localhost:4444/wd/hub'; 
+```php
+$host = 'http://localhost:4444/wd/hub';
 $capabilities = DesiredCapabilities::chrome();
 $driver = RemoteWebDriver::create($host, $capabilities, 5000);
 ```
@@ -81,7 +81,7 @@ $driver = RemoteWebDriver::create($host, $capabilities, 5000);
 
 > 设置浏览器窗口
 
-```php 
+```php
 $size = new WebDriverDimension(1280, 900);
 $driver->manage()->window()->setSize($size);
 ```
@@ -117,7 +117,7 @@ WebDriverBy 是查询方式对象，提供了下面几个常用的方式
 * WebDriverBy::xpath($xpath) 根据 xpath 表达式查询，这个很强大。
 不了解什么是 xpath 的请参考我前面的文章 [XPath 语法](/20171104/xpath.html)
 
-__实例__ 
+__实例__
 
 
 ```php
@@ -184,15 +184,12 @@ $driver->getKeyboard()->releaseKey(WebDriverKeys::SHIFT);
 * RemoteWebDriver::executeScript($script, $args) 执行同步js代码
 * RemoteWebDriver::executeAsyncScript($script, $args) 执行异步 js 代码
 
-```php 
+```php
 $driver->executeScript("document.body.scrollTop = 1000; alert(arguments[0])", ["fuck"]);
 ```
 
 > 截图
 
-```php 
+```php
 $driver->takeScreenshot("test.png");
 ```
-
-
-

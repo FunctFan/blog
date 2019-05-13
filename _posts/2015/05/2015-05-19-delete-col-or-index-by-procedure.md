@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "使用存储过程删除字段和索引"
-categories: 数据库技术
+categories: Database
 tags: [mysql]
 status: publish
 type: post
@@ -26,9 +26,9 @@ description: 'ubuntu 安装 flashplayer'
 DROP PROCEDURE IF EXISTS Del_Col;  
 -- 创建删除字段的存储过程
 
-create procedureDel_Col (IN p_tablename VARCHAR(200), IN p_col VARCHAR(200)) 
+create procedureDel_Col (IN p_tablename VARCHAR(200), IN p_col VARCHAR(200))
 
-BEGIN 
+BEGIN
 
 
 
@@ -36,7 +36,7 @@ BEGIN
 
      alter table p_tablename drop column p_col;
 
-  end if; 
+  end if;
 
 
 END $$
@@ -53,25 +53,25 @@ CALL Del_Col ('user', 'country_id');
 
 ```mysql
 -- 删除已经存在的存储过程
-DROP PROCEDURE IF EXISTS Del_idx; 
+DROP PROCEDURE IF EXISTS Del_idx;
 DELIMITER $$
--- 创建删除索引的存储过程 
-create procedure Del_idx(IN p_tablename VARCHAR(200), IN p_idxname VARCHAR(200)) 
-BEGIN 
+-- 创建删除索引的存储过程
+create procedure Del_idx(IN p_tablename VARCHAR(200), IN p_idxname VARCHAR(200))
+BEGIN
 
-     DECLARE str VARCHAR(250); 
+     DECLARE str VARCHAR(250);
 
   set @str=concat(' drop index ',p_idxname,' on ',p_tablename);  
 
-  select count(*) into @cnt from information_schema.statistics where table_name=p_tablename and index_name=p_idxname ; 
+  select count(*) into @cnt from information_schema.statistics where table_name=p_tablename and index_name=p_idxname ;
 
   if @cnt > 0 then  
 
-    PREPARE stmt FROM @str; 
+    PREPARE stmt FROM @str;
 
-    EXECUTE stmt ; 
+    EXECUTE stmt ;
 
-  end if; 
+  end if;
 
 END $$
 

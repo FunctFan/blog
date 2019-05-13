@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 比特币的交易流程详解
-categories: [区块链]
+categories: [区块链技术]
 tags: [区块链,比特币]
 status: publish
 type: post
@@ -20,7 +20,7 @@ desc: 比特币的交易流程详解
 
 > 在这里特别说明一下，创建账户并不算交易流程中的部分，但是由于它对于交易的理解特别重要，所以我也放在这里解释一下。
 
-# 创建账户 
+# 创建账户
 
 &emsp;&emsp; 比特币创建全部是匿名账户，在比特币中其实所谓的账户就是用非对称加密算法(比特币使用的椭圆曲线算法)创建的一对秘钥，分为公钥和私钥。
 首先私钥是一个随机数，随机选取一个32字节的数，然后再使用椭圆曲线加密算法（ECDSA-secp256k1）对这个私钥压缩生成公钥。
@@ -44,15 +44,15 @@ desc: 比特币的交易流程详解
 户名 | 私钥 | 公钥 | 钱包地址
 -----|-----|-----|-------
 A | 0xtjnpelimdkygfoqsuhvxzwarcb | 0xDNnPoyw0QKVfssQy | 0x9SDYFw46EANVMp6P3F754k
-B | 0xwehsSivmE4IHN1aVzwDEzkVC | 0xp7cNc9rpnz23pEHc | 0xErho6FVqTqgHTpcLiE2R6A 
+B | 0xwehsSivmE4IHN1aVzwDEzkVC | 0xp7cNc9rpnz23pEHc | 0xErho6FVqTqgHTpcLiE2R6A
 
 为了方便理解和记录我们假设
 
-> A 的私钥，公钥，地址分别对应为: private-key-A, public-key-A, address-A. 
+> A 的私钥，公钥，地址分别对应为: private-key-A, public-key-A, address-A.
 
-> B 的私钥，公钥，地址分别对应为: private-key-B, public-key-B, address-B. 
+> B 的私钥，公钥，地址分别对应为: private-key-B, public-key-B, address-B.
 
-假设 A 要给 B 转账5个BTC, 则付款方会发送这么一笔交易 
+假设 A 要给 B 转账5个BTC, 则付款方会发送这么一笔交易
 
 ```javascript
 {
@@ -108,11 +108,10 @@ if (verify(signature, public-key-A) == summary) {
 }
 ```
 
-这里验证签名的是用的公钥去解密，这是非对称性加密的一个特性，如果不清楚什么是非对称性加密的，请去看下我之前的一篇博客 
+这里验证签名的是用的公钥去解密，这是非对称性加密的一个特性，如果不清楚什么是非对称性加密的，请去看下我之前的一篇博客
 <a href="/20180131/block-chain-2.html">《区块链技术指南》读书笔记（二）</a>
 
 # 存储交易
 
 &emsp;&emsp; 在交易验证通过之后，当前节点就会把交易写入账本，然后广播到与它相连接的节点，其他节点又会对交易进行验证，打包，广播...
 直到全网节点都确认了交易。
-

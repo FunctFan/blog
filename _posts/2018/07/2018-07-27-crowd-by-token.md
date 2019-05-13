@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 给自己的代币编写 ICO 众筹合约
-categories: [solidity,智能合约]
+categories: [以太坊]
 tags: [众筹, ICO, solidity]
 status: publish
 type: post
@@ -224,7 +224,7 @@ fundsRaisedTotal = fundsRaisedTotal.add(amount);
 ```
 
 > 这里需要乘以你的代币的精确度，否则你就会发现你命名是购买了 1000 个 token, 到最后发现是 0.0000000000000001 个，__所以如果你的代币有精度的话，这里计算代币
-数量的时候就需要加上精度。__ 
+数量的时候就需要加上精度。__
 
 写好合约代码之后我们就可以开始测试了。
 
@@ -268,7 +268,7 @@ fundsRaisedTotal = fundsRaisedTotal.add(amount);
 
 <img class="img-view" data-src="/images/2018/07/27/unlock-account.png" src="/images/1px.png" />
 
-> 解锁账户之后发送代币，复制众筹合约的地址，转入 3000 代币 
+> 解锁账户之后发送代币，复制众筹合约的地址，转入 3000 代币
 
 <img class="img-view" data-src="/images/2018/07/27/token-recharge.png" src="/images/1px.png" />
 
@@ -309,7 +309,3 @@ fundsRaisedTotal = fundsRaisedTotal.add(amount);
 <img class="img-view" data-src="/images/2018/07/27/withdraw.png" src="/images/1px.png" />
 
 至此，整个 ICO 流程就跑完了，多看无益，赶紧去自己实操一下把.
-
-
-
-

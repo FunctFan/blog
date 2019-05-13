@@ -1,14 +1,14 @@
 ---
 layout: post
 title: idea,webstrom,phpstorm solidity 插件配置
-categories: [小工具, solidity]
-tags: [idea, phpstorm,webstrom, solidity]
+categories: [以太坊]
+tags: [solidity]
 status: publish
 type: post
 published: true
 author: blackfox
 permalink: /20180725/idea-solidity-plugins.html
-keyword: idea,webstrom,phpstorm solidity 
+keyword: idea,webstrom,phpstorm solidity
 desc: IDE对solidity语法的支持
 ---
 
@@ -20,7 +20,7 @@ desc: IDE对solidity语法的支持
 直接通过 IDE 的插件管理器安装
 =======
 
-通常这无疑是最好安装方式，简单，方便。直接在插件管理器中搜索 __solidity__ 
+通常这无疑是最好安装方式，简单，方便。直接在插件管理器中搜索 __solidity__
 
 <img class="img-view" data-src="/images/2018/07/idea-plug-install.png" src="/images/1px.png" />
 
@@ -29,17 +29,17 @@ desc: IDE对solidity语法的支持
 手动下载安装
 ======
 
-通常通过 IDE 的插件管理器安装的过程不会那么流畅，一般表现为：安装时间太长，或者干脆下载失败. 
+通常通过 IDE 的插件管理器安装的过程不会那么流畅，一般表现为：安装时间太长，或者干脆下载失败.
 
 这个时候你就需要自己手动安装了，首先去这两个插件的官网分别下载安装文件，下面贴出了下载地址:
 
 Solidity Solhint : [https://plugins.jetbrains.com/plugin/10177-solidity-solhint](https://plugins.jetbrains.com/plugin/10177-solidity-solhint)
 
-Intellij-Solidity : [https://plugins.jetbrains.com/plugin/9475-intellij-solidity](https://plugins.jetbrains.com/plugin/9475-intellij-solidity) 
+Intellij-Solidity : [https://plugins.jetbrains.com/plugin/9475-intellij-solidity](https://plugins.jetbrains.com/plugin/9475-intellij-solidity)
 
 打开页面直接拉到下面的下载列表, 然后下载你所需要的版本
 
-<img class="img-view" data-src="/images/2018/07/plug-download.png" src="/images/1px.png" /> 
+<img class="img-view" data-src="/images/2018/07/plug-download.png" src="/images/1px.png" />
 
 这里注意两个插件的安装方式不一样， Intellij-Solidity 下载完之后是一个 zip 文件，解压后得到的是一个 lib 文件夹，里面有很多个 jar 包，你直接把这些 jar 包
 拷贝到你的 IDE 的 lib 目录就好了。比如我的 webstrom 的安装目录是 /opt/webstrom2018, 那我就直接把 jar 全部拷贝到 /opt/webstrom2018/lib 目录下。
@@ -52,6 +52,3 @@ Solidity Solhint 下载完之后是一个单独的 jar 文件，这是个 安装
 至此，插件就全部安装完成，接下来你就可以享受智能合约的 solidity 代码高亮和提示了, 贴上一张效果图:
 
 <img class="img-view" data-src="/images/2018/07/plug-install-complete.png" src="/images/1px.png" />
-
-
-

@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Genymotion 启动报错 undefined symbol
-categories: [系统运维, 小工具]
+categories: [Linux]
 tags: [Genymotion, Android 模拟器]
 status: publish
 type: post

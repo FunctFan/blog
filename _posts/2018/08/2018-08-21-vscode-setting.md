@@ -1,8 +1,8 @@
 ---
 layout: post
 title: vscode 常用插件配置
-categories: [小工具]
-tags: []
+categories: [FunnyTools]
+tags: [vscode]
 status: publish
 type: post
 published: true
@@ -21,7 +21,7 @@ vscode 是微软开发一款非常好用有轻量级的代码编辑器，强大�
 
 安装命令：<code class="scode">ext install zhuangtongfa.Material-theme</code>
 
-插件地址：https://marketplace.visualstudio.com/items?itemName=zhuangtongfa.Material-theme 
+插件地址：https://marketplace.visualstudio.com/items?itemName=zhuangtongfa.Material-theme
 
 切换主题快捷键： ctrl + K and ctrl + T
 
@@ -29,7 +29,7 @@ vscode 是微软开发一款非常好用有轻量级的代码编辑器，强大�
 
 安装命令： <code class="scode">ext install Zignd.html-css-class-completion</code>
 
-插件地址: https://marketplace.visualstudio.com/items?itemName=Zignd.html-css-class-completion 
+插件地址: https://marketplace.visualstudio.com/items?itemName=Zignd.html-css-class-completion
 
 > 代码美化插件, Beautify
 
@@ -37,7 +37,7 @@ vscode 是微软开发一款非常好用有轻量级的代码编辑器，强大�
 
 安装命令： <code class="scode">ext install HookyQR.beautify</code>
 
-插件地址: https://marketplace.visualstudio.com/items?itemName=HookyQR.beautify 
+插件地址: https://marketplace.visualstudio.com/items?itemName=HookyQR.beautify
 
 > 开启 ES6 语法支持
 
@@ -45,7 +45,7 @@ __JavaScript (ES6) code snippets__
 
 安装命令： <code class="scode">ext install xabikos.JavaScriptSnippets</code>
 
-插件地址： https://marketplace.visualstudio.com/items?itemName=xabikos.JavaScriptSnippets 
+插件地址： https://marketplace.visualstudio.com/items?itemName=xabikos.JavaScriptSnippets
 
 __ESLint__
 
@@ -59,17 +59,17 @@ __ESLint__
 
 安装命令: <code class="scode">ext install IoliteLabs.solidity-linux</code>
 
-插件地址：https://marketplace.visualstudio.com/items?itemName=IoliteLabs.solidity-linux 
+插件地址：https://marketplace.visualstudio.com/items?itemName=IoliteLabs.solidity-linux
 
 安装命令：<code class="scode">ext install JuanBlanco.solidity</code>
 
-插件地址：https://marketplace.visualstudio.com/items?itemName=JuanBlanco.solidity 
+插件地址：https://marketplace.visualstudio.com/items?itemName=JuanBlanco.solidity
 
 > 开启 Vue2.0 支持
 
 安装命令: <code class="scode">ext install hollowtree.vue-snippets</code>
 
-插件地址：https://marketplace.visualstudio.com/items?itemName=hollowtree.vue-snippets 
+插件地址：https://marketplace.visualstudio.com/items?itemName=hollowtree.vue-snippets
 
 开启 vue 文件图标美化：<code class="scode">ext install robertohuertasm.vscode-icons</code>
 
@@ -77,7 +77,7 @@ Vue 工具包， 比如内置 http-server 等: <code class="scode">ext install o
 
 最后贴上一个配置文档
 
-```javascript 
+```javascript
 {
 	// 基础设置
 	"editor.tabSize": 4,
@@ -133,6 +133,3 @@ Vue 工具包， 比如内置 http-server 等: <code class="scode">ext install o
 	"workbench.colorTheme": "One Dark Pro Vivid",
 }
 ```
-
-
-
