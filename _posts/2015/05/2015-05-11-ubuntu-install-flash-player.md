@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "linux 安装flashplayer"
+title: "linux 安装 flashplayer"
 categories: [Linux]
 tags: [linux,flashpalyer]
 status: publish

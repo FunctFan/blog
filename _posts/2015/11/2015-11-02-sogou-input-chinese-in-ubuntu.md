@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 解决搜狗输入法在linux系统不能输入中文
+title: 解决搜狗输入法在 linux 系统不能输入中文
 categories: [Linux]
 tags: [ubuntu, fcitx, idea, phpstrom]
 status: publish
