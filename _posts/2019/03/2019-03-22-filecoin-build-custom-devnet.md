@@ -103,7 +103,7 @@ $ peerid=$(./go-filecoin --enc=json id | jq -r '.ID')
 $ ./go-filecoin config mining.minerAddress $mineraddr
 $ walletaddr=$(./go-filecoin --enc=json wallet import ./fixtures/0.key | jq -r '.Addresses[0]')
 $ ./go-filecoin config wallet.defaultAddress $walletaddr
-$ ./go-filecoin miner update-peerid --from $walletaddr --gas-price 0 --gas-limit=300 $mineraddr $peerid
+$ ./go-filecoin miner update-peerid --from $walletaddr --gas-price 0.0000001 --gas-limit=300 $mineraddr $peerid
 ```
 
 启动挖矿，查询余额

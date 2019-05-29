@@ -69,7 +69,7 @@ go-filecoin miner create 10 100 --gas-price=0.0000001 --gas-limit=1000 --peerid 
 
 > * 第一个参数 `(10)` 是提供存储的扇区数量
 * 第二参数 `(100)` 是抵押 FIL TOKEN 数量
-* --gas-price 设置 Gas Price, 这里官方推荐设置为 0
+* --gas-price 设置 Gas Price
 * --gas-limit 设置 Gas Limit, 跟以太坊里面的意思是一样的，Gas 耗费完之后会强制停止执行，避免死循环。
 * --peerid 节点 ID
 
