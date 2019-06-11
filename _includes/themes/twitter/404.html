@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<!--[if IE 7 ]>    <html lang="zh-CN" class="ie7"> <![endif]-->
+<!--[if IE 8 ]>    <html lang="zh-CN" class="ie8"> <![endif]-->
+<!--[if IE 9 ]>    <html lang="zh-CN" class="ie9"> <![endif]-->
+<!--[if (gte IE 10)|!(IE)]><!-->
+<html lang="zh-CN">
+<!--<![endif]-->
+
+<head>
+    <meta charset="UTF-8">
+
+    <title>{{ page.title }}{% if page.url != HOME_PATH %} - {{ site.title }}{% endif %}</title>
+    {% if page.keyword %}
+    <meta name="keywords" content="{{ page.keyword | join: " , " }}">{% endif %} {% if page.desc %}
+    <meta name="description" content="{{ page.desc }}">{% endif %}
+    <meta name="author" content="{{ site.author.name }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="{{ BASE_PATH }}/favicon.png">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="{{ ASSET_PATH }}/css/style.css?ver=20151125">
+
+</head>
+
+<body style="background:none;">
+
+
+<!-- Main Content -->
+<div style="padding:0; margin-top: 20px; text-align: center;">
+	<div id="loader"><img src="{{ ASSET_PATH }}/img/loading.gif" alt="请稍侯"></div>
+	<div id="main-content">
+		{{ content }}
+	</div>
+</div>
+
+
+</body>
+
+</html>
