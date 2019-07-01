@@ -1,14 +1,13 @@
 # This is the default format. 
 # For more see: https://github.com/mojombo/jekyll/wiki/Permalinks
-permalink: /:categories/:title.html
+#permalink: /:categories/:title.html
 
 safe: false
 plugins: ["jekyll-paginate"]
 exclude: ["README.md", "Rakefile"]
 paginate: 10
 encoding: utf-8
-highlighter: rouge
-#markdown: redcarpet
+highlighter: none
 markdown: kramdown 
 kramdown:
   toc_levels: 1..3
@@ -142,8 +141,6 @@ JB :
   #
   sharing :
     provider : direct
-
-  # Settings for all other include helpers can be defined by creating 
   # a hash with key named for the given helper. ex:
   #
   #   pages_list :
