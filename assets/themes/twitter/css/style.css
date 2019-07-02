@@ -47,30 +47,21 @@ body, select, input, textarea { color: #444; }
 
 /*  General Settings  */
 body {
-  background-image: url(../img/bgs/bg_body4.png);
+  background-image: url(../img/bgs/bg_body.png);
   font-family: Verdana, Arial, "Microsoft YaHei", sans-serif;
   font-size: 14px;
   *font-size: small;
   zoom: 1;
 }
 /* 背景主题 */
-.theme-0 {background-image: url(../img/bgs/bg_body0.png);}
+.body-bg {background-image: url(../img/bgs/bg_body.png);}
+.body-bg #navbar ul li a, .body-bg #top >a > h1 {color: #FFFFFF;}
+.body-bg #bottom {color: #e1e1e1;}
+.body-bg #bottom a {color: #2674BA}
+.body-bg #top >a > h1 {
+    color: #FFFFFF;
+}
 
-.theme-1 {background-image: url(../img/bgs/bg_body1.png);}
-.theme-1 #navbar ul li a, .theme-1 #top >a > h1 {color: #FFFFFF;}
-.theme-1 #bottom {color: #e1e1e1;}
-.theme-1 #bottom a {color: #2674BA}
-
-.theme-2 {background-image: url(../img/bgs/bg_body2.jpg);}
-
-.theme-3 {background-image: url(../img/bgs/bg_body3.png);}
-.theme-3 #navbar ul li a, .theme-3 #top >a > h1 {color: #FFFFFF;}
-.theme-3 #bottom {color: #e1e1e1;}
-.theme-3 #bottom a {color: #2674BA}
-
-.theme-4 {background-image: url(../img/bgs/bg_body4.png);}
-
-.theme-5 {background-image: url(../img/bgs/bg_body5.jpg);}
 
 select, input, textarea, button { font: 99% sans-serif; }
 strong, th { font-weight: bold; }

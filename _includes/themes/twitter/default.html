@@ -31,7 +31,7 @@
   <!--[if lt IE 9]><script src="{{ ASSET_PATH }}/js/html5shiv.min.js"></script><![endif]-->
 </head>
 
-<body>
+<body class="body-bg">
 
 <div id="wrap">
   <header id="top">
@@ -115,32 +115,6 @@
 	if (navigator.appVersion.indexOf("Mac") != -1) {
 		$('code, pre').css('font-family', 'Courier, monospace');
 	}
-
-	//修改背景图片
-	(function () {
-		var date = new Date();
-		var bodyClass = '';
-		switch (date.getDay()) {
-            case 1:
-	            bodyClass = 'theme-0';
-	            break;
-			case 2:
-				bodyClass = 'theme-1';
-				break;
-			case 3:
-				bodyClass = 'theme-2';
-				break;
-			case 4:
-				bodyClass = 'theme-3';
-				break;
-			case 5:
-				bodyClass = 'theme-5';
-				break;
-			default:
-				bodyClass = 'theme-4';
-        }
-        $('body').addClass(bodyClass);
-	})();
 </script>
 {% include JB/analytics %}
 

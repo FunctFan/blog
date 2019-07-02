@@ -233,7 +233,7 @@ http://127.0.0.1:8080/ipfs/{hash}
 默认 ipfs 节点提供的服务都是在本机的，如果你想要自己的节点对外提供服务(局域网或者公网)，需要修改配置文件，不要绑定本地 IP，
 把 `127.0.0.1` 修改成 `0.0.0.0`
 
-```javascript
+```json
 "Addresses": {
   "API": "/ip4/0.0.0.0/tcp/5001",
   "Announce": [],
@@ -249,7 +249,7 @@ http://127.0.0.1:8080/ipfs/{hash}
 	
 如果你想要给前端调用的话，还需要配置跨域设置。
 
-```
+```json
 "API": {
   "HTTPHeaders": {
     "Access-Control-Allow-Methods": [
