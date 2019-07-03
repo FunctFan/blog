@@ -1,6 +1,6 @@
 ---
 layout: page
-title: "关于我"
+title: "学无先后，达者为师"
 description: "information about me"
 group: navigation
 permalink: /about.html
@@ -35,7 +35,7 @@ comments: false
 
 【技术研究方向】
 =======
-高性能系统架构， 区块链技术开发，区块链技术解决方案，DApp 智能合约开发。
+高性能系统架构， 区块链技术开发，区块链技术解决方案，基于 IPFS 的分布式云存储系统开发。
 
 
 【关于技术管理】
