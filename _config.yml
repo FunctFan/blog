@@ -88,9 +88,9 @@ JB :
   archive_path: /archive.html
   categories_path : /categories.html
   tags_path : /tags.html
-  links_path : /links.html
   atom_path : /atom.xml
   rss_path : /rss.xml
+  opensource_path : /opensource.html
 # remove message page
   messages_path : #
 #messages_path : /messages.html
