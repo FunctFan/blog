@@ -221,14 +221,35 @@ sed -i '/net.ipv4.ip_forward/s/#//' /etc/sysctl.conf
 sysctl -p
 ```
 
-> 第二步，配置防火墙
+> 第二步，配置 `iptables`
 
 ```bash
 iptables -I INPUT -p tcp --dport 1194 -m comment --comment "openvpn" -j ACCEPT
 iptables -t nat -A POSTROUTING -s 10.8.0.0/24 -j MASQUERADE
-mkdir /etc/iptables
-iptables-save > /etc/iptables/iptables.conf
 ```
+然后我们保存 iptables 设置，并在开机自动加载配置，初始化。这里可以通过 `iptables-persistent` 来快速实现
+
+```bash
+sudo apt-get install iptables-persistent
+# 保存规则
+sudo service netfilter-persistent save
+```
+
+下次开机启动的时候就可以看到 `iptables` 规则已经自动加载
+
+```bash
+$ sudo iptables -L
+Chain INPUT (policy ACCEPT)
+target     prot opt source               destination         
+ACCEPT     tcp  --  anywhere             anywhere             tcp dpt:openvpn /* openvpn */
+
+Chain FORWARD (policy ACCEPT)
+target     prot opt source               destination         
+
+Chain OUTPUT (policy ACCEPT)
+target     prot opt source               destination 
+```
+
 关闭 ufw 防火墙
 
 ```bash
