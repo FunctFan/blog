@@ -1,14 +1,14 @@
 ---
 layout: post
 title: SpringBoot dubbo 整合
-categories: [Java]
+categories: [Java,SpringBoot]
 tags: [spring-boot, dubbo]
 status: publish
 type: post
 published: true
 author: blackfox
 permalink: 20171018/springboot-dubbo.html
-keyword: SpringBoot
+keyword: SpringBoot, dubbo
 desc: springBoot dubbo整合, SpringBoot dubbo 接入
 ---
 

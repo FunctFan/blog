@@ -8,7 +8,7 @@ type: post
 published: true
 author: blackfox
 permalink: 20171106/javascript-promise.html 
-keyword: SpringBoot
+keyword: Promise,javascript
 desc: javascript Promise 对象详解
 ---
 

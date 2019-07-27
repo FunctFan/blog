@@ -8,7 +8,7 @@ type: post
 published: true
 author: blackfox
 permalink: 20171106/puppeteer.html
-keyword: SpringBoot
+keyword: Puppeteer
 desc: google headless chrome nodejs API, puppeteer 入门教程
 ---
 
