@@ -2,7 +2,7 @@
 layout: post
 title: "使用存储过程删除字段和索引"
 categories: Database
-tags: [mysql]
+tags: [MySQL]
 status: publish
 type: post
 published: true

@@ -116,7 +116,7 @@ miner@miner-karl:~$ curl http://127.0.0.1:3453/api/chain/ls |grep '"height":"130
 ```
 这里特别要注意， 这里的过滤条件是 `"height":"13094"`，因为区块结构中只有 `parents`，也就是上一个区块的哈希值。
 
-![](http://blog.img.r9it.com/image-4c61a685565c23943a67d9162127e3aa.png)
+![](/images/1px.png){:class="img-view" data-src="http://blog.img.r9it.com/image-4c61a685565c23943a67d9162127e3aa.png"}
 
 > 第四步，通过官方的区块浏览器浏览对应的区块详情
 

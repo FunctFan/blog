@@ -1,8 +1,8 @@
 ---
 layout: post
-title: 为什么MYSQL不用密码也能访问？
+title: 为什么 MySQL 不用密码也能访问？
 categories: [Database]
-tags: [MYSQL]
+tags: [MySQL]
 status: publish
 type: post
 published: true
