@@ -545,7 +545,7 @@ public class UserServiceTest {
 t_user_1 表，demo_ds_1 中的 t_user_0, 所以我们这里分表采取了 `t_user_${(user_id % 5) % 2}` 这种先对一个基数取模来解决这个问题。
 2. Sharding-JDBC 的查询是使用归并的形式，将从各个数据节点获取的多数据结果集，组合成为一个结果集并正确的返回至请求客户端。详细的算法
 请参考官方文档[归并引擎](https://shardingsphere.apache.org/document/legacy/3.x/document/cn/features/sharding/principle/merge/)
-3. Sharding-JDBC 内置的 `SNOWFLAKE` 生成ID的算法有缺陷，它只区分了 `workerId`(节点ID)，没有区分`dataCenterId`（数据中心ID）。
+3. Sharding-JDBC 内置的 `SNOWFLAKE` 生成ID的算法有缺陷，它只区分了 `workerId`(工作进程ID)，没有区分`dataCenterId`（数据中心ID）。
 不过网上有用户吐槽说 Sharding-JDBC 内置的算法生成的 ID 不连续，而且多为偶数，这个我在测试中倒是没有发现，误差都在可控范围内。
 
 # 项目源码链接
