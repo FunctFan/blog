@@ -3,7 +3,7 @@
 #permalink: /:categories/:title.html
 
 safe: false
-baseurl: "jekyll-blog" 
+baseurl: "" 
 plugins: ["jekyll-paginate"]
 exclude: ["README.md", "Rakefile"]
 paginate: 10
