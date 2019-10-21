@@ -155,7 +155,7 @@ Pending Sectors:	 0 # 正在追加的扇区
 Failed Sectors:	 0 # 密封失败的扇区
 ```
 
-# 存储和检索
+# 存储数据
 
 > 自动存储随机数据
 
@@ -276,6 +276,27 @@ Failed Sectors:	 0
 
 <img src="/images/1px.png" data-src="http://blog.img.r9it.com/image-f9eef3c3dc0278ea746892b5b97312bf.png" class="img-view" />
 
+# 搜索与检索
+
+如果您已将数据与矿工存储在网络中，则可以按CID搜索它：
+
+```bash
+# 通过 CID 搜索数据
+$ lotus client find <Data CID>
+LOCAL
+RETRIEVAL <miner>@<miner peerId>-<deal funds>-<size>
+```
+
+从矿工那里检索数据：
+
+```bash
+$ lotus client retrieve <Data CID> <outfile>
+# 比如检索我们刚刚存储的数据 
+Lotus client retrieve bafkreifgxbfutlcrbfnwpk5gx6o5of4mpleqvbkt5thphvbnsg6mnasp3q hello.txt
+```
+上面的指令将启动检索交易并将数据写入`hello.txt`。（此过程可能需要一些时间。）
+
+
 # 总结
 
 总体来说个人觉得 Lotus 的整体挖矿体验比 `go-filecoin` 要好一个档次，可能是因为它是 `轻量级` 实现，整个流程你体验下来不会有卡壳。
@@ -288,5 +309,5 @@ Failed Sectors:	 0
 
 3. Lotus 的存储挖矿功能是作为一个单独的模块(lotus-storage-miner)实现的，因此高级矿工可以根据自己的特定硬件配置优化其挖矿过程(这个后期有时间的话会专门写一篇如何优化)。
 
-
+4. Lotus 还提供了`Pond UI` 作为CLI的替代，这对于那些不熟悉命令行操作的同学是非常友好的，直接通过图形界面完成上述操作。（如果有必要的话，后期也会专门一篇如何使用 Pond 的教程）。
 
