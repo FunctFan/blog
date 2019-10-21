@@ -133,7 +133,7 @@ lotus-storage-miner init --actor=t0394 -owner=t3qtzwoevzlzzfbnovoj3gf3l62rlhx3el
 
 这条命令把矿工相应的信息提交到区块链，如果上链成功的话(这个过程将花费 30-60s)，此命令应成功返回。
 
-下图是执行过程，主要是获取存储正面的参数到本地(/var/tmp/filecoin-proof-parameters)。
+下图是执行过程，主要是获取用于生成 `PoSts` 的参数到本地(/var/tmp/filecoin-proof-parameters)。
 
 <img src="/images/1px.png" data-src="http://blog.img.r9it.com/image-559eb9d287d7ae977c13b74d4f957a4d.png" class="img-view" alt="" />
 
@@ -246,15 +246,47 @@ Pending Sectors:	 0
 Failed Sectors:	 0
 ```
 
+下面我们简单分析一下 Lotus 挖矿的整个过程，由于 `lotus-storage-miner run` 打印了详细的日志信息，因此我们通过分析日志就可以清晰的知道整个挖矿的流程，具体做了哪些事情。
+
+```bash
+2019-10-20T07:06:05.288+0800	INFO	storageminer	storage/miner.go:122	committing sector
+2019-10-20T07:08:22.128+0800	WARN	storageminer	storage/post.go:35	PoSts already running 8468
+2019-10-20T07:12:50.288+0800	INFO	storageminer	storage/miner.go:122	committing sector
+2019-10-20T07:16:03.681+0800	WARN	storageminer	storage/post.go:35	PoSts already running 8468
+2019-10-20T07:19:45.438+0800	INFO	storageminer	storage/miner.go:122	committing sector
+2019-10-20T07:21:49.554+0800	WARN	storageminer	storage/post.go:35	PoSts already running 8468
+2019-10-20T07:21:49.556+0800	INFO	storageminer	storage/post.go:121	running PoSt	{"delayed-by": 0, "chain-random": "hRnfQ1MxjBRgWC99bvtufOEiMxt50/VB5jGOnartsNBVRqlTyGWWdmYcOYgkN8ahCDAh1EtjvvQhJiHn1tawX2JSVIUtc0LOJlSCm6C4ds5IhsCs5OvQfNO6XnBNERaI", "ppe": 8468, "height": 8448}
+2019-10-20T07:21:49.558+0800	WARN	storageminer	storage/post.go:35	PoSts already running 8468
+2019-10-20T07:24:16.683+0800	INFO	storageminer	storage/post.go:133	submitting PoSt	{"pLen": 192, "elapsed": 147.127304159}
+2019-10-20T07:24:16.683+0800	INFO	storageminer	storage/post.go:155	mpush
+2019-10-20T07:24:16.704+0800	INFO	storageminer	storage/post.go:162	Waiting for post bafy2bzaced7iklxtorijackxgnnv7kwvgocz473sgcostj2i4ocretlm2z6f6 to appear on chain
+...
+```
+
+1. 矿工接收到客户端发送过来的数据包之后立即进行封包(sealing) 操作，完成封包之后进行 `committing sector` (提交打包好的 sector)
+2. 运行时空证明(`running PoSts`)
+3. 请求将 PoSts 上链(`Waiting for post bafxxx to appear on chain`)
+4. 上链成功，返回上链区块高度(`"height": 8448`)
+
+下面截图可以让你看到一些更详细的信息
+
+<img src="/images/1px.png" data-src="http://blog.img.r9it.com/image-e5190c44ac9c3eee428f864154bb1dc4.png" class="img-view" />
+
+**而且从日志中我们可以看出，我当前笔记本的封包速度大概是4分钟一个。** 这个速度一般，而且我 8 核的 CPU 资源几乎全被 Lotus 占满了。
+
+<img src="/images/1px.png" data-src="http://blog.img.r9it.com/image-f9eef3c3dc0278ea746892b5b97312bf.png" class="img-view" />
+
 # 总结
 
-同步速度
+总体来说个人觉得 Lotus 的整体挖矿体验比 `go-filecoin` 要好一个档次，可能是因为它是 `轻量级` 实现，整个流程你体验下来不会有卡壳。
+所以 Lotus 作为 Filecoin 的备用网络，让我对 Filecoin 网络的健壮性又多了一些信心。
 
-密封速度，4分钟/sector
+1. Lotus 的 API 完善程度很高，你几乎不用通过统计页面，直接通过命令行工具就可以获取整个网络你想要知道的信息。
 
-API 的完善度
+2. Lotus 实现了多种扇区大小，因此具有许多不同存储配置的矿工都可以在网络上进行挖矿。我的笔记本之前在测试 `go-filecoin` 的时候每 30 分钟才能完成一个 `sector`，Lotus 只需要 4 分钟。因为 Lotus 扇区
+小一些。也正因为如此，你能在很短时间内体验一次整个挖矿流程。
 
-整体的体验
+3. Lotus 的存储挖矿功能是作为一个单独的模块(lotus-storage-miner)实现的，因此高级矿工可以根据自己的特定硬件配置优化其挖矿过程(这个后期有时间的话会专门写一篇如何优化)。
 
 
 
